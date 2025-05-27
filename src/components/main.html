@@ -3,11 +3,102 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./main.css" />
     <title>main</title>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const albumList = document.querySelector('.album-list');
+        const scrollAmount = 200;
+
+        document.querySelector('.scroll-btn-left').addEventListener('click', () => {
+          albumList.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+
+        document.querySelector('.scroll-btn-right').addEventListener('click', () => {
+          albumList.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+      });
+    </script>
   </head>
   <body>
     <section class="main">
-      <li></li>
+      <h2>PlayList</h2>
+      <div class="scroll-wrapper">
+        <button class="scroll-btn-left" aria-label="왼쪽으로 스크롤">&#8592;</button>
+        <ul class="album-list">
+          <li class="album-card">
+            <article>
+              <img src="../assets/album-example.png" alt="앨범명" class="album-cover" />
+              <h3 class="album-title">Peaceful Piano</h3>
+              <p class="album-info">Relax and indulge with beautiful piano pieces</p>
+            </article>
+          </li>
+          <li class="album-card">
+            <article>
+              <img src="../assets/album-example.png" alt="앨범명" class="album-cover" />
+              <h3 class="album-title">Peaceful Piano</h3>
+              <p class="album-info">Relax and indulge with beautiful piano pieces</p>
+            </article>
+          </li>
+          <li class="album-card">
+            <article>
+              <img src="../assets/album-example.png" alt="앨범명" class="album-cover" />
+              <h3 class="album-title">Peaceful Piano</h3>
+              <p class="album-info">Relax and indulge with beautiful piano pieces</p>
+            </article>
+          </li>
+          <li class="album-card">
+            <article>
+              <img src="../assets/album-example.png" alt="앨범명" class="album-cover" />
+              <h3 class="album-title">Peaceful Piano</h3>
+              <p class="album-info">Relax and indulge with beautiful piano pieces</p>
+            </article>
+          </li>
+          <li class="album-card">
+            <article>
+              <img src="../assets/album-example.png" alt="앨범명" class="album-cover" />
+              <h3 class="album-title">Peaceful Piano</h3>
+              <p class="album-info">Relax and indulge with beautiful piano pieces</p>
+            </article>
+          </li>
+          <li class="album-card">
+            <article>
+              <img src="../assets/album-example.png" alt="앨범명" class="album-cover" />
+              <h3 class="album-title">Peaceful Piano</h3>
+              <p class="album-info">Relax and indulge with beautiful piano pieces</p>
+            </article>
+          </li>
+          <li class="album-card">
+            <article>
+              <img src="../assets/album-example.png" alt="앨범명" class="album-cover" />
+              <h3 class="album-title">Peaceful Piano</h3>
+              <p class="album-info">Relax and indulge with beautiful piano pieces</p>
+            </article>
+          </li>
+          <li class="album-card">
+            <article>
+              <img src="../assets/album-example.png" alt="앨범명" class="album-cover" />
+              <h3 class="album-title">Peaceful Piano</h3>
+              <p class="album-info">Relax and indulge with beautiful piano pieces</p>
+            </article>
+          </li>
+          <li class="album-card">
+            <article>
+              <img src="../assets/album-example.png" alt="앨범명" class="album-cover" />
+              <h3 class="album-title">Peaceful Piano</h3>
+              <p class="album-info">Relax and indulge with beautiful piano pieces</p>
+            </article>
+          </li>
+          <li class="album-card">
+            <article>
+              <img src="../assets/album-example.png" alt="앨범명" class="album-cover" />
+              <h3 class="album-title">Peaceful Piano</h3>
+              <p class="album-info">Relax and indulge with beautiful piano pieces</p>
+            </article>
+          </li>
+        </ul>
+        <button class="scroll-btn-right" aria-label="오른쪽으로 스크롤">&#8592;</button>
+      </div>
     </section>
   </body>
 </html>
