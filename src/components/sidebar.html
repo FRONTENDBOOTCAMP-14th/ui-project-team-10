@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>사이드바</title>
+    <link rel="icon" href="/vite.svg" />
+    <link rel="preload" as="font" href="/font/woff2/PretendardVariable.woff2" crossorigin="anonymous" /> 
+    <link rel="stylesheet" as="style" href="/font/pretendardvariable.css" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="stylesheet" href="/src/components/sidebar.css">
+  </head>
+  <body>
+    <a href="/index.html">메인 페이지 이동</a>
+    <br />
+    <h1>사이드바</h1>
+    <nav class="sidebar white-text">
+      <div class="sidebar-logo">
+        <a href="/" aria-label="홈으로 이동">
+          <img src="/icons/spotify-logo.svg" alt="Spotify 로고" style="fill: currentColor;">
+        </a>
+      </div>
+      <ul class="sidebar-menu">
+        <li class="sidebar-item sidebar-item-active">
+          <a href="#" class="sidebar-link">
+            <span class="sidebar-icon"></span>
+            <span class="sidebar-text">홈</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="#" class="sidebar-link">
+            <span class="sidebar-icon"></span>
+            <span class="sidebar-text">검색하기</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="#" class="sidebar-link">
+            <span class="sidebar-icon"></span>
+            <span class="sidebar-text">내 라이브러리</span>
+          </a>
+        </li>
+      </ul>
+      <div class="sidebar-playlists">
+        <h2 class="sidebar-title sr-only">플레이리스트</h2>
+        <ul class="sidebar-playlist-list">
+          <li class="sidebar-playlist-item">
+            <a href="#" class="sidebar-playlist-link">좋아하는 곡</a>
+          </li>
+          <li class="sidebar-playlist-item">
+            <a href="#" class="sidebar-playlist-link">최근 재생</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </body>
+</html>
