@@ -5,20 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./main.css" />
     <title>main</title>
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const albumList = document.querySelector('.album-list');
-        const scrollAmount = 200;
-
-        document.querySelector('.scroll-btn-left').addEventListener('click', () => {
-          albumList.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-        });
-
-        document.querySelector('.scroll-btn-right').addEventListener('click', () => {
-          albumList.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-        });
-      });
-    </script>
+    <script></script>
+    <script src="./main.js"></script>
   </head>
   <body>
     <section class="main">
@@ -98,6 +86,11 @@
           </li>
         </ul>
         <button class="scroll-btn-right" aria-label="오른쪽으로 스크롤">&#8592;</button>
+      </div>
+    </section>
+    <section class="main">
+      <div class="scroll-wrapper">
+        <ul class="album-list" id="list"></ul>
       </div>
     </section>
   </body>
