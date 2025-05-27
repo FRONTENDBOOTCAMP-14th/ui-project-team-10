@@ -1,0 +1,125 @@
+:root {
+  --footer-bg: #181818;
+  --footer-fg: #fff;
+  --footer-fg-light: #b3b3b3;
+  --footer-divider: #232323;
+  --footer-link-hover: #8081b9;
+  --footer-social-bg: #222;
+  --footer-social-hover: #333;
+  --footer-radius: 50%;
+  --footer-spacing-lg: 40px;
+  --footer-spacing-md: 24px;
+  --footer-spacing-sm: 16px;
+  --footer-spacing-xs: 8px;
+}
+
+footer {
+  background: var(--footer-bg);
+  color: var(--footer-fg);
+  padding: var(--footer-spacing-lg) 0 0 0;
+  border-top: 1px solid var(--footer-divider);
+  font-size: 15px;
+}
+
+.footer-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--footer-spacing-lg);
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: var(--footer-spacing-lg);
+}
+
+.footer-column {
+  min-width: 160px;
+  flex: 1 1 0;
+}
+
+.footer-column h4 {
+  font-size: 15px;
+  color: var(--footer-fg);
+  margin-bottom: var(--footer-spacing-sm);
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column li {
+  margin-bottom: var(--footer-spacing-xs);
+}
+
+.footer-column a {
+  color: var(--footer-fg-light);
+  text-decoration: none;
+  transition: color 0.2s;
+  font-size: 14px;
+}
+
+.footer-column a:hover {
+  color: var(--footer-link-hover);
+}
+
+/* 소셜 아이콘 영역 */
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-left: 32px;
+}
+
+.footer-social a {
+  width: 32px;
+  height: 32px;
+  background: var(--footer-social-bg);
+  border-radius: var(--footer-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--footer-fg-light);
+  transition: background 0.2s;
+}
+
+.footer-social a:hover {
+  background: var(--footer-social-hover);
+}
+
+.footer-social svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--footer-fg-light);
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--footer-divider);
+  padding: 20px 0;
+  text-align: left;
+  color: var(--footer-fg-light);
+  font-size: 13px;
+}
+
+/* 반응형 처리
+@media (max-width: 800px) {
+  .footer-columns {
+    flex-direction: column;
+    gap: var(--footer-spacing-md);
+    align-items: stretch;
+  }
+  .footer-social {
+    margin: 0 0 0 0;
+    justify-content: flex-start;
+  }
+  .footer-bottom {
+    text-align: center;
+  }
+} */
