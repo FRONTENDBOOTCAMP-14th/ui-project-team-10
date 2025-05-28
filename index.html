@@ -12,37 +12,80 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" as="style" href="/font/pretendardvariable.css" />
+    <link rel="stylesheet" href="/src/common/index.css" />
     <script type="module" src="/src/main.js"></script>
   </head>
   <body>
-    <h1>프사친 - 프론트엔드 사자 친구</h1>
-    <p>
-      멋쟁이 사자처럼 프론트엔드 부트캠프 14기 UI 프로젝트 10조 프론드엔드 사자
-      친구입니다!
-    </p>
-    <h2>공통 컴포넌트</h2>
-    <ul>
-      <li><a href="/src/components/button.html">버튼</a></li>
-      <li><a href="/src/components/navigation-bar.html">네비게이션 바</a></li>
-      <li><a href="/src/components/album-card.html">앨범 카드</a></li>
-      <li><a href="/src/components/player-control.html">플레이어 컨트롤</a></li>
-      <li><a href="/src/components/search-input.html">검색 입력창</a></li>
-      <li><a href="/src/components/playlist-item.html">플레이리스트 아이템</a></li>
-    </ul>
-    <h2>페이지 컴포넌트</h2>
-    <ul>
-      <li><a href="/src/components/header.html">헤더</a></li>
-      <li><a href="/src/components/main.html">메인</a></li>
-      <li><a href="/src/components/sidebar.html">사이드바</a></li>
-      <li><a href="/src/components/footer.html">푸터</a></li>
-    </ul>
-    <h2>기능 컴포넌트</h2>
-    <ul>
-      <li><a href="/src/components/album.html">앨범</a></li>
-      <li><a href="/src/components/player.html">플레이어</a></li>
-      <li><a href="/src/components/playlist.html">플레이리스트</a></li>
-      <li><a href="/src/components/search.html">검색</a></li>
-      <li><a href="/src/components/user-profile.html">사용자 프로필</a></li>
-    </ul>
+    <header>
+      <h1>프사친 - 프론트엔드 사자 친구</h1>
+      <p>
+        멋쟁이 사자처럼 프론트엔드 부트캠프 14기 UI 프로젝트 10조 프론드엔드 사자
+        친구입니다!
+      </p>
+      <a href="/src/pages/home.html" class="rounded-btn">시안 페이지로</a>
+      <ul class="profile-list">
+        <li class="profile">
+          <img class="profile-img" src="" alt="">
+          <p class="name">석정일</p>
+          <p class="roll">조장</p>
+          <a class="github" href="https://github.com/but212"><img src="/icons/github.svg" alt=""></a>
+        </li>
+        <li class="profile">
+          <img class="profile-img" src="" alt="">
+          <p class="name"></p>
+          <p class="roll"></p>
+          <a class="github" href=""></a>
+        </li>
+        <li class="profile">
+          <img class="profile-img" src="" alt="">
+          <p class="name"></p>
+          <p class="roll"></p>
+          <a class="github" href=""></a>
+        </li>
+        <li class="profile">
+          <img class="profile-img" src="" alt="">
+          <p class="name"></p>
+          <p class="roll"></p>
+          <a class="github" href=""></a>
+        </li>
+      </ul>
+    </header>
+    <main>
+      <h2>공통 컴포넌트</h2>
+      <ul>
+        <li><a href="/src/components/button.html">버튼</a></li>
+        <li><a href="/src/components/navigation-bar.html">네비게이션 바</a></li>
+        <li><a href="/src/components/album-card.html">앨범 카드</a></li>
+        <li><a href="/src/components/player-control.html">플레이어 컨트롤</a></li>
+        <li><a href="/src/components/search-input.html">검색 입력창</a></li>
+        <li><a href="/src/components/playlist-item.html">플레이리스트 아이템</a></li>
+      </ul>
+      <h2>페이지 컴포넌트</h2>
+      <ul>
+        <li><a href="/src/components/header.html">헤더</a></li>
+        <li><a href="/src/components/main.html">메인</a></li>
+        <li><a href="/src/components/sidebar.html">사이드바</a></li>
+        <li><a href="/src/components/footer.html">푸터</a></li>
+      </ul>
+      <h2>기능 컴포넌트</h2>
+      <ul>
+        <li><a href="/src/components/album.html">앨범</a></li>
+        <li><a href="/src/components/player.html">플레이어</a></li>
+        <li><a href="/src/components/playlist.html">플레이리스트</a></li>
+        <li><a href="/src/components/search.html">검색</a></li>
+        <li><a href="/src/components/user-profile.html">사용자 프로필</a></li>
+      </ul>
+      <section class="retrospect-container">
+        <h2>회고록</h2>
+      </section>
+      <section class="proceedings-container">
+        <h2>스크럼 회의록</h2>
+      </section>
+    </main>
+    <footer>
+      <p>이 프로젝트는 교육용 시안입니다.</p>
+      <a href="https://github.com/but212/ui-project-team-10">GitHub</a>
+      <a href="https://www.notion.so/10-1ff73873401a809890ecdc729743dffa">Notion</a>
+    </footer>
   </body>
 </html>
