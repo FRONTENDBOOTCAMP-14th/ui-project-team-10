@@ -1,0 +1,256 @@
+:root {
+  --button-bg-color: #1f1f1f;
+  --button-hover-color: #2a2a2a;
+  --font-color: #b3b3b3;
+  --button-size: 48px;
+  --svg-size: 24px;
+}
+
+body {
+  margin: 20px;
+  background: #323030;
+  width: 100vw;
+  color: white;
+}
+
+.sr-only {
+  display: none;
+}
+
+.reset-style {
+  appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+/* 검색창 */
+.search-box {
+  position: relative;
+
+  /* 열린 검색창 */
+  .container {
+    background: var(--button-bg-color);
+    max-width: 474px;
+    min-width: var(--button-size);
+    height: var(--button-size);
+    border-radius: var(--button-size);
+    box-sizing: border-box;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: start;
+    align-items: center;
+
+    /* 검색 버튼 */
+    .search-button {
+      margin: 0;
+      padding: 12px;
+
+      /* 검색 버튼 아이콘 */
+      .icon-search {
+        width: 24px;
+        height: 24px;
+        vertical-align: middle;
+      }
+    }
+
+    /* 검색박스 */
+    input {
+      background: none;
+      width: 78.6919%;
+      border: none;
+      appearance: none;
+      outline: none;
+      color: rgb(255, 255, 255);
+      font-size: 1rem;
+      line-height: 40px;
+    }
+
+    /* 중간바(세로선) */
+    .icon-break-line {
+      min-height: 24px;
+    }
+
+    /* 둘러보기 링크 */
+    .icon-browse-link {
+      width: var(--svg-size);
+      aspect-ratio: 1;
+      padding: 12px;
+
+      /* 둘러보기 아이콘 */
+      svg {
+        vertical-align: middle;
+        path {
+          fill: var(--font-color);
+        }
+        &:hover path {
+          fill: white;
+        }
+      }
+    }
+
+    /* 전체 박스 호버설정 */
+    &:hover {
+      background: var(--button-hover-color);
+      .icon-search {
+        fill: white;
+      }
+    }
+
+    /* 전체 박스 포커스 설정 */
+    &:has(input:focus) {
+      outline: 2px solid white;
+    }
+  }
+
+  /* 닫힌상태 검색창 */
+  .clossing-search-bar {
+    background: var(--button-bg-color);
+    width: var(--button-size);
+    aspect-ratio: 1;
+    text-align: center;
+    align-content: center;
+    border-radius: var(--button-size);
+    position: absolute;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+
+    /* 검색 토글 버튼 */
+    .search-toggle-btn {
+      padding: 0px;
+      width: 100%;
+      height: 100%;
+      border-radius: var(--button-size);
+    }
+
+    /* 검색 토글 버튼 아이콘 */
+    .icon-search {
+      vertical-align: middle;
+    }
+
+    /* 검색창 호버시 전체 배경 및 돋보기 아이콘 색 변경 */
+    .search-box:has(&):hover & {
+      background: var(--button-hover-color);
+      .icon-search {
+        fill: white;
+      }
+    }
+  }
+
+  @media (width<850px) {
+    .hidden {
+      display: none;
+    }
+  }
+}
+
+/* spotify 로고 */
+.header .logo {
+  display: inline-block;
+
+  svg {
+    vertical-align: middle;
+  }
+}
+
+/* home 링크버튼 */
+.home-link {
+  background-color: var(--button-bg-color);
+  display: inline-block;
+  width: var(--button-size);
+  aspect-ratio: 1;
+  text-align: center;
+  align-content: center;
+  border-radius: var(--button-size);
+  a {
+    height: 24px;
+    display: inline-block;
+    svg {
+      vertical-align: text-bottom;
+    }
+  }
+
+  &:hover {
+    background-color: var(--button-hover-color);
+  }
+}
+
+/* 프리미엄, 지원, 다운링크 모음 */
+.link-more-group {
+  color: var(--font-color);
+  display: inline-block;
+  width: 247px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 0;
+
+  a {
+    margin-right: 8px;
+    text-decoration: none;
+    color: currentColor;
+    font-size: 16px;
+    font-weight: bold;
+
+    &:hover {
+      color: white;
+    }
+  }
+}
+
+/* 로그인, 회원가입, 앱설치 메뉴 */
+.link-login-group {
+  height: 48px;
+  font-size: 14px;
+
+  row-gap: 30px;
+  align-items: center;
+  a {
+    text-decoration: none;
+    font-weight: 700;
+    color: var(--font-color);
+
+    &:hover {
+      color: white;
+      svg path {
+        fill: white;
+      }
+    }
+
+    &:nth-child(1) {
+      margin-inline-end: 8px;
+      text-align: center;
+      position: relative;
+      padding: 4px 16px 4px 32px;
+      width: 118.83px;
+      height: 32px;
+      box-sizing: border-box;
+      font-size: 13px;
+      svg {
+        left: 10px;
+        top: 5px;
+        position: absolute;
+        vertical-align: sub;
+      }
+    }
+
+    &:nth-child(2) {
+      padding: 4px 16px 4px 8px;
+    }
+
+    &:nth-child(3) {
+      background: white;
+      color: black;
+      width: 137.61px;
+      height: 48px;
+
+      text-align: center;
+      align-content: center;
+      border-radius: var(--button-size);
+    }
+  }
+}
