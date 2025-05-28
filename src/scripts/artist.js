@@ -76,20 +76,20 @@ const artistIds = [
   init();
 })();
 
-// document.addEventListener("DOMContentLoaded", () => {
-//   const albumList = document.querySelector(".album-list");
+document.addEventListener("DOMContentLoaded", () => {
+  const artistList = document.querySelector(".artist-list");
 
-//   document.querySelector(".scroll-btn-left").addEventListener("click", () => {
-//     albumList.scrollTo({
-//       left: 0,
-//       behavior: "smooth",
-//     });
-//   });
+  document.querySelector(".scroll-btn-left").addEventListener("click", () => {
+    artistList.scrollTo({
+      left: 0,
+      behavior: "smooth",
+    });
+  });
 
-//   document.querySelector(".scroll-btn-right").addEventListener("click", () => {
-//     albumList.scrollTo({
-//       left: albumList.scrollWidth,
-//       behavior: "smooth",
-//     });
-//   });
-// });
+  document.querySelector(".scroll-btn-right").addEventListener("click", () => {
+    artistList.scrollTo({
+      left: artistList.scrollWidth,
+      behavior: "smooth",
+    });
+  });
+});
