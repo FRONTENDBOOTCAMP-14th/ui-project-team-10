@@ -10,14 +10,19 @@
   </head>
   <body>
     <section class="artist">
-      <h2>Artist</h2>
+      <div class="artist-header">
+        <h2>Artist</h2>
+        <button class="show-all-button">Show all</button>
+      </div>
       <div class="scroll-wrapper">
-        <button class="scroll-btn-left" aria-label="왼쪽으로 스크롤"></button>
+        <div class="scroll-btn">
+          <button class="scroll-btn-left" aria-label="왼쪽으로 스크롤"></button>
+          <button
+            class="scroll-btn-right"
+            aria-label="오른쪽으로 스크롤"
+          ></button>
+        </div>
         <ul class="artist-list"></ul>
-        <button
-          class="scroll-btn-right"
-          aria-label="오른쪽으로 스크롤"
-        ></button>
       </div>
     </section>
   </body>

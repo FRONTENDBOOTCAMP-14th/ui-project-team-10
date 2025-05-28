@@ -17,98 +17,97 @@ const artistIds = [
   "2QM5S4yO6xHgnNvF0nbZZq",
 ].join(",");
 
-(async function () {
-  async function getToken() {
-    const res = await fetch("https://accounts.spotify.com/api/token", {
-      method: "POST",
+async function getToken() {
+  const res = await fetch("https://accounts.spotify.com/api/token", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      Authorization: "Basic " + btoa(`${clientId}:${clientSecret}`),
+    },
+    body: "grant_type=client_credentials",
+  });
+  const data = await res.json();
+  return data.access_token;
+}
+
+async function getArtists(token) {
+  const res = await fetch(
+    `https://api.spotify.com/v1/artists/?ids=${artistIds}&market=KR`,
+    {
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: "Basic " + btoa(`${clientId}:${clientSecret}`),
+        Authorization: `Bearer ${token}`,
       },
-      body: "grant_type=client_credentials",
-    });
+    }
+  );
+  const data = await res.json();
+  return data.artists;
+}
 
-    const data = await res.json();
-    return data.access_token;
-  }
+function renderArtists(artists) {
+  const artistList = document.querySelector(".artist-list");
+  artistList.innerHTML = "";
 
-  async function getNewReleases(token) {
-    const res = await fetch(
-      `https://api.spotify.com/v1/artists/?ids=${artistIds}&market=KR`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    const data = await res.json();
-    console.log(data);
-    return data.artists;
-  }
+  artists.forEach((artist) => {
+    const artistCard = document.createElement("li");
+    artistCard.className = "artist-card";
 
-  function renderArtists(artists) {
-    const artistList = document.querySelector(".artist-list");
-    artistList.innerHTML = "";
-
-    console.log(artists);
-
-    artists.forEach((artist) => {
-      const artistCard = document.createElement("li");
-      artistCard.className = "artist-card";
-
-      artistCard.innerHTML = `
-        <a href="${artist.external_urls.spotify}" target="_blank">
-          <article>
-            <div class="artist-cover">
-                <img src="${artist.images[0]?.url || ""}" alt="${
-        artist.name
-      }" class="artist-profile" />
-                <img src="../assets/play.png" class="artist-play-button"/>
-            </div>
-              <h3 class="artist-name">${artist.name}</h3>
-              <p class="artist-info">Artist</p>       
-          </article>
-        </a>
+    artistCard.innerHTML = `
+      <a href="${artist.external_urls.spotify}" target="_blank">
+        <article>
+          <div class="artist-cover">
+            <img src="${artist.images[0]?.url || ""}" alt="${
+      artist.name
+    }" class="artist-profile" />
+            <img src="../assets/play.png" class="artist-play-button"/>
+          </div>
+          <h3 class="artist-name">${artist.name}</h3>
+          <p class="artist-info">Artist</p>       
+        </article>
+      </a>
     `;
+    artistList.appendChild(artistCard);
+  });
+}
 
-      artistList.appendChild(artistCard);
+function toggleScrollButtons(show) {
+  document
+    .querySelectorAll(".scroll-btn-left, .scroll-btn-right")
+    .forEach((btn) => {
+      btn.style.display = show ? "block" : "none";
     });
-  }
+}
 
-  async function init() {
-    const token = await getToken();
-    const artists = await getNewReleases(token);
-    console.log(artists);
-    renderArtists(artists);
-  }
+async function init() {
+  const token = await getToken();
+  const artists = await getArtists(token);
+  renderArtists(artists);
+}
 
-  init();
-})();
-
-document.addEventListener("DOMContentLoaded", () => {
+function setupEventListeners() {
   const scrollWrapper = document.querySelector(".scroll-wrapper");
   const artistList = document.querySelector(".artist-list");
+  const showAllBtn = document.querySelector(".show-all-button");
 
   artistList.addEventListener("scroll", () => {
-    console.log("a");
-    if (artistList.scrollLeft > 10) {
-      scrollWrapper.classList.add("scrolled");
-    } else {
-      scrollWrapper.classList.remove("scrolled");
-    }
+    scrollWrapper.classList.toggle("scrolled", artistList.scrollLeft > 10);
+  });
+
+  showAllBtn.addEventListener("click", () => {
+    const isGrid = artistList.classList.toggle("grid-mode");
+    showAllBtn.textContent = isGrid ? "Hide" : "Show All";
+    toggleScrollButtons(!isGrid);
   });
 
   document.querySelector(".scroll-btn-left").addEventListener("click", () => {
-    artistList.scrollTo({
-      left: 0,
-      behavior: "smooth",
-    });
+    artistList.scrollTo({ left: 0, behavior: "smooth" });
   });
 
   document.querySelector(".scroll-btn-right").addEventListener("click", () => {
-    artistList.scrollTo({
-      left: artistList.scrollWidth,
-      behavior: "smooth",
-    });
+    artistList.scrollTo({ left: artistList.scrollWidth, behavior: "smooth" });
   });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  init();
+  setupEventListeners();
 });
