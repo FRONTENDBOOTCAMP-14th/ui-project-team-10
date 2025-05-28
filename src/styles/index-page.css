@@ -119,10 +119,18 @@ main li {
   color: var(--spotify-white);
 }
 
-main li a {
+main li a,
+main li button {
   display: block;
   color: var(--spotify-white);
   text-decoration: none;
+}
+
+main li button {
+  background: var(--spotify-dark-gray);
+  border: 0;
+  width: 100%;
+  text-align: start;
 }
 
 footer {
