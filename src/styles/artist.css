@@ -18,6 +18,8 @@ body {
 }
 
 .artist-list {
+  margin: 0;
+  padding: 0;
   display: flex;
   overflow: hidden;
   scroll-behavior: smooth;
@@ -38,6 +40,7 @@ body {
     .artist-play-button {
       opacity: 1;
       pointer-events: none;
+      transform: translateY(-4px);
     }
   }
 
@@ -60,7 +63,7 @@ body {
       width: 3rem;
       aspect-ratio: 1 / 1;
       pointer-events: none;
-      transition: opacity 0.2s ease;
+      transition: opacity 0.3s ease, transform 0.3s ease;
     }
   }
 
@@ -79,10 +82,17 @@ body {
 }
 
 .scroll-wrapper {
-  width: 30rem;
+  box-sizing: border-box;
+  width: 100vw;
+  padding: 0 2rem;
   position: relative;
   display: flex;
   align-items: center;
+  transition: padding 0.2s ease;
+}
+
+.scroll-wrapper.scrolled {
+  padding: 0;
 }
 
 .scroll-btn-left,
@@ -101,10 +111,10 @@ body {
 }
 
 .scroll-btn-left {
-  left: 0;
+  left: 2rem;
 }
 .scroll-btn-right {
-  right: 0;
+  right: 2rem;
 }
 
 .scroll-wrapper:hover .scroll-btn-left,

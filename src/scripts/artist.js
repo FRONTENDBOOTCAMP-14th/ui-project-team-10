@@ -6,6 +6,15 @@ const artistIds = [
   "5TnQc2N1iKlFjYD7CPGvFc",
   "6YVMFz59CuY7ngCxTxjpxE",
   "6zn0ihyAApAYV51zpXxdEp",
+  "6mEQK9m2krja6X1cfsAjfl",
+  "3eVa5w3URK5duf6eyVDbu9",
+  "4gzpq5DPGxSnKTe4SA8HAU",
+  "5wVJpXzuKV6Xj7Yhsf2uYx",
+  "6lESE9VeLV05vQBw8TB4YA",
+  "0dBTTLuseszs4BqgyXCrC8",
+  "4XDi67ZENZcbfKnvMnTYsI",
+  "6UbmqUEgjLA6jAcXwbM1Z9",
+  "2QM5S4yO6xHgnNvF0nbZZq",
 ].join(",");
 
 (async function () {
@@ -77,7 +86,17 @@ const artistIds = [
 })();
 
 document.addEventListener("DOMContentLoaded", () => {
+  const scrollWrapper = document.querySelector(".scroll-wrapper");
   const artistList = document.querySelector(".artist-list");
+
+  artistList.addEventListener("scroll", () => {
+    console.log("a");
+    if (artistList.scrollLeft > 10) {
+      scrollWrapper.classList.add("scrolled");
+    } else {
+      scrollWrapper.classList.remove("scrolled");
+    }
+  });
 
   document.querySelector(".scroll-btn-left").addEventListener("click", () => {
     artistList.scrollTo({
