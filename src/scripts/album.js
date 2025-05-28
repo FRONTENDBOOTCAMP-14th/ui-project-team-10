@@ -1,4 +1,9 @@
-async function main() {
+const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
+const clientSecret = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET;
+console.log(clientId);
+const album_url = '5NUuj9AlcNI1khPYJJAVtV,6ZG5lRT77aJ3btmArcykra,3j7aiYai9ezbvxVCgrd2mb,2oCAY48bhZvQte0l7apmYC,28GiIRNu9nEugqnUci3aIC,3T4tUhGYeRNVUGevb0wThu,7pH8F7IVHTp2ZYKG0xN1CE,32n91KG3YeLMLJ9e64EfXy';
+
+(async function () {
   async function getToken() {
     const res = await fetch('https://accounts.spotify.com/api/token', {
       method: 'POST',
@@ -14,14 +19,13 @@ async function main() {
   }
 
   async function getNewReleases(token) {
-    const res = await fetch('https://api.spotify.com/v1/browse/new-releases?limit=10', {
+    const res = await fetch(`https://api.spotify.com/v1/albums?ids=${album_url}&market=KR`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
     const data = await res.json();
-    console.log(data);
-    return data.albums.items;
+    return data.albums;
   }
 
   function renderAlbums(albums) {
@@ -33,11 +37,14 @@ async function main() {
       albumCard.className = 'album-card';
 
       albumCard.innerHTML = `
-        <article>
-            <img src="${album.images[0]?.url || ''}" alt="${album.name}" class="album-cover" />
-            <h3 class="album-title">${album.name}</h3>
-            <p class="album-info">${album.artists.map((artist) => artist.name).join(', ')}</p>
-        </article>
+        <a href="${album.external_urls.spotify}" target="_blank">
+          <article>
+              <img src="${album.images[0]?.url || ''}" alt="${album.name}" class="album-cover" />
+              <h3 class="album-title">${album.name}</h3>
+              <p class="album-info">${album.artists.map((artist) => artist.name).join(', ')}</p>
+              <img src="../assets/play.png" class="album-play-button"/>
+          </article>
+        </a>
     `;
 
       albumList.appendChild(albumCard);
@@ -51,21 +58,22 @@ async function main() {
   }
 
   init();
-}
-
-document.addEventListener('DOMContentLoaded', main);
+})();
 
 document.addEventListener('DOMContentLoaded', () => {
   const albumList = document.querySelector('.album-list');
-  const scrollAmount = 200;
 
   document.querySelector('.scroll-btn-left').addEventListener('click', () => {
-    albumList.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-    console.log('left');
+    albumList.scrollTo({
+      left: 0,
+      behavior: 'smooth',
+    });
   });
 
   document.querySelector('.scroll-btn-right').addEventListener('click', () => {
-    albumList.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    console.log('right');
+    albumList.scrollTo({
+      left: albumList.scrollWidth,
+      behavior: 'smooth',
+    });
   });
 });
