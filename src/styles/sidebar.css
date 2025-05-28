@@ -4,14 +4,11 @@ body {
   color: var(--spotify-white);
   font-family: "Pretendard Variable", sans-serif;
   background: var(--spotify-dark-gray);
-}
-
-main {
   position: relative;
   display: grid;
   grid-template-areas: "left-sidebar main";
   grid-template-columns: auto 1fr;
-  grid-template-rows: auto;
+  grid-template-rows: auto 1fr auto;
   width: 100%;
   gap: 0.5rem;
 }
@@ -30,14 +27,11 @@ main {
   font-weight: 600;
   font-size: 13px;
   background: var(--spotify-black);
+  grid-area: left-sidebar;
 }
 
 span {
   color: var(--spotify-white);
-}
-
-.main {
-  padding: 4rem;
 }
 
 .sidebar .sidebar-menu > *,
@@ -144,6 +138,11 @@ span {
   flex-wrap: wrap;
   gap: 1rem;
   font-weight: 300;
+}
+
+main {
+  grid-area: main;
+  padding: 2rem;
 }
 
 .language-select {
