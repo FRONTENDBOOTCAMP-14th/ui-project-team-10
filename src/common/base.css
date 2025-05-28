@@ -1,1 +1,5 @@
 /* 기본 스타일링 */
+a {
+    text-decoration: none;
+    color: inherit;
+}
