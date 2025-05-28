@@ -53,7 +53,7 @@ header p {
   justify-content: flex-start;
 }
 
-.profile {
+.profile-card {
   min-width: 220px;
   border-radius: 8px;
   padding: 1.5rem;
@@ -70,7 +70,7 @@ header p {
   background: var(--spotify-white);
 }
 
-.profile p {
+.profile-card p {
   color: var(--spotify-white);
 }
 
