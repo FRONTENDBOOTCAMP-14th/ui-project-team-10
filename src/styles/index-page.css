@@ -1,0 +1,142 @@
+@import "/src/common/index.css";
+
+body {
+  background-color: var(--spotify-black);
+  color: var(--spotify-white);
+  font-family: "Pretendard Variable", sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  padding: 2rem 2rem 4rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--spotify-black);
+  color: var(--spotify-white);
+}
+
+header h1 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin: 0 0 1rem;
+  color: var(--spotify-green);
+}
+
+header p {
+  font-size: 1rem;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  color: var(--spotify-light-gray);
+}
+
+.rounded-btn-green {
+  background-color: var(--spotify-green);
+  color: var(--spotify-black);
+  font-weight: 700;
+  padding: 0.8rem 2rem;
+  border-radius: 500px;
+  letter-spacing: 1px;
+  margin: 1rem 0;
+}
+
+.profile-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 2rem 0;
+  max-width: 1200px;
+  margin: 2rem auto 0;
+  justify-content: flex-start;
+}
+
+.profile {
+  min-width: 220px;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  background: var(--spotify-dark-gray);
+}
+
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 1rem;
+  background: var(--spotify-white);
+}
+
+.profile p {
+  color: var(--spotify-white);
+}
+
+.name {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.roll {
+  font-size: 0.8rem;
+  margin: 0.25rem 0 1rem;
+}
+
+.github img {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) invert(1);
+}
+
+main {
+  max-width: 1200px;
+  margin: -2rem auto 0;
+  padding: 0 2rem 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+main h2 {
+  color: var(--spotify-white);
+  font-size: 1.8rem;
+  margin: 3rem 0 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--spotify-gray);
+}
+
+main ul {
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  margin: 0 0 2rem;
+}
+
+main li {
+  padding: 1rem;
+  background-color: var(--spotify-dark-gray);
+  color: var(--spotify-white);
+}
+
+main li a {
+  display: block;
+  color: var(--spotify-white);
+  text-decoration: none;
+}
+
+footer {
+  padding: 2rem;
+  text-align: center;
+  color: var(--spotify-light-gray);
+  font-size: 0.9rem;
+  background-color: var(--spotify-dark-gray);
+  margin-top: 2rem;
+}
+
+footer a {
+  color: var(--spotify-light-gray);
+  margin: 0 1rem;
+}
