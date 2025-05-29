@@ -1,60 +1,52 @@
 .btn {
   font-weight: 700;
-  padding: 0.8rem 2rem;
-  border-radius: 500px;
-  border: none;
   cursor: pointer;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   letter-spacing: 1px;
-  display: inline-block;
+  min-width: 7.5rem;
+  min-height: 2.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  text-decoration: none;
+  box-sizing: border-box;
 }
 
-.bg-green {
-  background-color: var(--spotify-green);
+.rounded-btn {
+  border-radius: 500px;
 }
 
-.bg-gray {
-  background-color: var(--spotify-gray);
-}
-
-.bg-black {
-  background-color: var(--spotify-black);
-}
-
-.white-text {
-  color: var(--spotify-white);
-}
-
-.black-text {
-  color: var(--spotify-black);
-}
-
-.btn-section {
+/* 시안 페이지에는 안 넣고 컴포넌트 페이지에만 있는 컴포넌트트 */
+.btn-section-no-page {
   margin-bottom: 2rem;
-
   ul {
     display: flex;
     gap: 1rem;
+    margin-bottom: 1rem;
   }
 }
 
 .gray-outline-style {
   background-color: transparent;
-  color: var(--spotify-black);
   border: 2px solid var(--spotify-gray);
 }
 
-.btn.btn-large {
-  padding: 1rem 2.5rem;
+.rounded-btn.btn-large {
   font-size: 1rem;
+  padding: 1rem 3rem;
 }
 
-.btn.btn-small {
-  padding: 0.5rem 1.5rem;
+.rounded-btn.btn-small {
   font-size: 0.8rem;
 }
 
-.btn.btn-long {
-  padding: 1rem 6rem;
+.rounded-btn.btn-long {
   font-size: 1rem;
+  padding: 1rem 6rem;
+}
+
+.sidebar-btn {
   width: 100%;
 }
