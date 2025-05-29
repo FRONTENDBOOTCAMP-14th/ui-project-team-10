@@ -78,9 +78,15 @@ function toggleScrollButtons(show) {
 }
 
 async function init() {
-  const token = await getToken();
-  const artists = await getArtists(token);
-  renderArtists(artists);
+  try {
+    const token = await getToken();
+    const artists = await getArtists(token);
+    renderArtists(artists);
+  } catch (e) {
+    console.error("아티스트 정보를 불러오는 데 실패했습니다.", e);
+    document.querySelector(".artist-list").innerHTML =
+      "<li>데이터를 불러오지 못했습니다.</li>";
+  }
 }
 
 function setupEventListeners() {
