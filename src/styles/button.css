@@ -24,6 +24,10 @@
   margin-bottom: 2rem;
 }
 
+.margin-bottom-2rem {
+  margin-bottom: 2rem;
+}
+
 .btn-section-no-page ul {
   display: flex;
   gap: 1rem;

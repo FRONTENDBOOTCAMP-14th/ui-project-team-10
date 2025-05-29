@@ -2,6 +2,33 @@ body {
   line-height: 1.6;
 }
 
+.index-pages-btn {
+  font-weight: 400;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 7.5rem;
+  min-height: 2.5rem;
+  padding: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  box-sizing: border-box;
+  border-radius: 500px;
+  border: 2px solid var(--spotify-gray);
+  background-color: var(--spotify-dark-gray);
+  color: var(--spotify-white);
+  transition: all 0.5s ease-in-out;
+}
+
+.index-pages-btn:hover {
+  background-color: var(--spotify-white);
+  color: var(--spotify-black);
+  transform: scale(1.05);
+}
+
 header {
   padding: 2rem 2rem 4rem;
   text-align: center;
@@ -20,11 +47,6 @@ header p {
   font-size: 1rem;
   max-width: 800px;
   margin: 0 auto 2rem;
-}
-
-.github img {
-  width: 24px;
-  height: 24px;
 }
 
 .profile-list {
@@ -60,6 +82,11 @@ header p {
   margin: 0.5rem 0;
 }
 
+.roll {
+  font-size: 0.8rem;
+  margin: 0.25rem 0 1rem;
+}
+
 .github {
   display: flex;
   align-items: center;
@@ -67,9 +94,9 @@ header p {
   gap: 0.5rem;
 }
 
-.roll {
-  font-size: 0.8rem;
-  margin: 0.25rem 0 1rem;
+.github img {
+  width: 24px;
+  height: 24px;
 }
 
 main {
