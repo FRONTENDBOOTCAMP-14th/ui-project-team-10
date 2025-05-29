@@ -55,14 +55,17 @@ const albumIds = [
       albumCard.innerHTML = `
         <a href="${album.external_urls.spotify}" target="_blank">
           <article>
-              <img src="${album.images[0]?.url || "default.jpg"}" alt="${
+              <div class="album-cover">
+                <img src="${album.images[0]?.url || "default.jpg"}" alt="${
         album.name
-      }" class="album-cover" />
+      }" class="album-img" />
+                <img src="../assets/play.png" class="album-play-button"/>
+              </div>
               <h3 class="album-title">${album.name}</h3>
               <p class="album-info">${album.artists
                 .map((artist) => artist.name)
                 .join(", ")}</p>
-              <img src="../assets/play.png" class="album-play-button"/>
+              
           </article>
         </a>
     `;
