@@ -1,5 +1,3 @@
-@import "/src/common/index.css";
-
 body {
   background-color: var(--spotify-black);
   color: var(--spotify-white);
@@ -31,6 +29,11 @@ header p {
   max-width: 800px;
   margin: 0 auto 2rem;
   color: var(--spotify-light-gray);
+}
+
+.github img {
+  width: 24px;
+  height: 24px;
 }
 
 .rounded-btn-green {
@@ -85,12 +88,6 @@ header p {
   margin: 0.25rem 0 1rem;
 }
 
-.github img {
-  width: 24px;
-  height: 24px;
-  filter: brightness(0) invert(1);
-}
-
 main {
   max-width: 1200px;
   margin: -2rem auto 0;
@@ -115,34 +112,15 @@ main ul {
 
 main li {
   padding: 1rem;
-  background-color: var(--spotify-dark-gray);
-  color: var(--spotify-white);
-}
-
-main li a,
-main li button {
-  display: block;
-  color: var(--spotify-white);
-  text-decoration: none;
-}
-
-main li button {
-  background: var(--spotify-dark-gray);
-  border: 0;
-  width: 100%;
-  text-align: start;
 }
 
 footer {
   padding: 2rem;
   text-align: center;
-  color: var(--spotify-light-gray);
   font-size: 0.9rem;
-  background-color: var(--spotify-dark-gray);
   margin-top: 2rem;
 }
 
 footer a {
-  color: var(--spotify-light-gray);
   margin: 0 1rem;
 }

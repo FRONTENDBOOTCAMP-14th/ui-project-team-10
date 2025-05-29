@@ -1,6 +1,7 @@
 /* CSS 스타일을 작성해 주세요. */
 @import "/src/styles/colors.css";
 @import "/src/styles/button.css";
+@import "/src/styles/sidebar.css";
 
 body {
   background-color: var(--spotify-dark-gray);

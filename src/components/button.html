@@ -88,33 +88,74 @@
         </ul>
       </section>
 
-      <section class="btn-section-sidebar">
-        <h2>사이드바 링크버튼</h2>
-        <a href="#" class="sidebar-btn btn white-text">사이드바 버튼</a>
-      </section>
-
-      <section class="btn-section-sidebar">
-        <h2>아이콘 사이드바 버튼</h2>
-        <button class="sidebar-btn btn bg-black white-text btn-long">
-          <img
-            class="btn-icon svg-img-white"
-            src="/icons/spotify-logo-symbol.svg"
-            alt=""
-          />
-          Spotify
-        </button>
-        <button class="sidebar-btn btn bg-white black-text btn-long">
-          <img
-            class="btn-icon svg-img-black"
-            src="/icons/bookmark.svg"
-            alt=""
-          />
-          내 라이브러리리
-        </button>
-        <button class="sidebar-btn btn bg-gray white-text btn-long">
-          <img class="btn-icon svg-img-white" src="/icons/heart.svg" alt="" />
-          좋아요
-        </button>
+      <section class="btn-section-no-page">
+        <ul class="sidebar-menu">
+          <li class="sidebar-item sidebar-item-active">
+            <a href="/src/pages/home.html" class="sidebar-link home">
+              <span class="sidebar-icon"></span>
+              <span class="sidebar-text">홈</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a href="" class="sidebar-link search">
+              <span class="sidebar-icon"></span>
+              <span class="sidebar-text">검색하기</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a href="/src/pages/library.html" class="sidebar-link library">
+              <span class="sidebar-icon"> </span>
+              <span class="sidebar-text">내 라이브러리</span>
+            </a>
+          </li>
+        </ul>
+        <section class="sidebar-playlist">
+          <h2>사이드바 버튼 요소</h2>
+          <ul class="sidebar-menu">
+            <li class="sidebar-playlist-item">
+              <a href="#" class="sidebar-playlist-link create-playlist">
+                <div class="sidebar-icon rounded-icon-box">
+                  <img src="/icons/plus.svg" alt="" />
+                </div>
+                <span class="sidebar-text">플레이리스트 만들기</span>
+              </a>
+            </li>
+            <li class="sidebar-playlist-item">
+              <a href="#" class="sidebar-playlist-link favorite-playlist">
+                <div class="sidebar-icon rounded-icon-box">
+                  <img src="/icons/heart.svg" alt="" />
+                </div>
+                <span class="sidebar-text">좋아하는 곡</span>
+              </a>
+            </li>
+          </ul>
+        </section>
+        <section class="sidebar-footer">
+          <ul class="sidebar-footer-links">
+            <li class="sidebar-footer-link">
+              <a href="#">법적 고지 / 법률</a>
+            </li>
+            <li class="sidebar-footer-link">
+              <a href="#">개인정보 센터</a>
+            </li>
+            <li class="sidebar-footer-link">
+              <a href="#">개인정보 처리방침</a>
+            </li>
+            <li class="sidebar-footer-link">
+              <a href="#">쿠키</a>
+            </li>
+            <li class="sidebar-footer-link">
+              <a href="#">광고 정보</a>
+            </li>
+          </ul>
+          <button
+            type="button"
+            class="btn gray-outline-style rounded-btn language-select"
+          >
+            <img src="/icons/globe.svg" alt="" class="btn-icon" />
+            <span>언어선택</span>
+          </button>
+        </section>
       </section>
 
       <a class="rounded-btn btn bg-green black-text btn-long" href="/index.html"
