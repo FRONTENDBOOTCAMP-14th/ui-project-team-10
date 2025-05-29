@@ -1,0 +1,60 @@
+.btn {
+  font-weight: 700;
+  padding: 0.8rem 2rem;
+  border-radius: 500px;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 1px;
+  display: inline-block;
+}
+
+.bg-green {
+  background-color: var(--spotify-green);
+}
+
+.bg-gray {
+  background-color: var(--spotify-gray);
+}
+
+.bg-black {
+  background-color: var(--spotify-black);
+}
+
+.white-text {
+  color: var(--spotify-white);
+}
+
+.black-text {
+  color: var(--spotify-black);
+}
+
+.btn-section {
+  margin-bottom: 2rem;
+
+  ul {
+    display: flex;
+    gap: 1rem;
+  }
+}
+
+.gray-outline-style {
+  background-color: transparent;
+  color: var(--spotify-black);
+  border: 2px solid var(--spotify-gray);
+}
+
+.btn.btn-large {
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+}
+
+.btn.btn-small {
+  padding: 0.5rem 1.5rem;
+  font-size: 0.8rem;
+}
+
+.btn.btn-long {
+  padding: 1rem 6rem;
+  font-size: 1rem;
+  width: 100%;
+}
