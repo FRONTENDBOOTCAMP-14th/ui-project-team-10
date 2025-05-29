@@ -4,22 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../styles/album.css" />
+    <link rel="stylesheet" href="../styles/main.css" />
     <title>album</title>
     <script></script>
     <script type="module" src="../scripts/album.js"></script>
   </head>
   <body>
-    <section class="album">
-      <div class="album-header">
+    <section class="list-component">
+      <div class="list-header">
         <h2>Album</h2>
       </div>
       <div class="scroll-wrapper">
-        <button class="scroll-btn-left" aria-label="왼쪽으로 스크롤"></button>
+        <div class="scroll-btn">
+          <button
+            class="album-scroll-btn-left scroll-btn-left"
+            aria-label="왼쪽으로 스크롤"
+          >
+            ◀
+          </button>
+          <button
+            class="album-scroll-btn-right scroll-btn-right"
+            aria-label="오른쪽으로 스크롤"
+          >
+            ▶
+          </button>
+        </div>
         <ul class="album-list" id="list"></ul>
-        <button
-          class="scroll-btn-right"
-          aria-label="오른쪽으로 스크롤"
-        ></button>
       </div>
     </section>
   </body>

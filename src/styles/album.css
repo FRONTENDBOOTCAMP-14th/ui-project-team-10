@@ -1,99 +1,41 @@
-body {
-  margin: 0;
-  padding: 0;
-  background: #121212;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-use-select: none;
-  user-select: none;
-}
-.album {
-  display: flex;
-  flex-direction: column;
-  max-width: 1200px;
+@import "../styles/main.css";
 
-  .album-header {
-    margin-bottom: 1rem;
-
-    h2 {
-      color: #fff;
-      margin: 0;
-    }
-  }
-
-  .scroll-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-  }
-
-  .album-list {
-    display: flex;
-    overflow-x: auto;
-    padding: 0;
-    scroll-behavior: smooth;
-    list-style: none;
-    margin: 0;
-    overflow: hidden;
-  }
-  .album-title {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  a {
-    text-decoration: none;
-  }
-
-  .scroll-btn-left,
-  .scroll-btn-right {
-    z-index: 1;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    position: absolute;
-    color: #fff;
-    width: 32px;
-    height: 32px;
-    background-color: #2a2a2a;
-    border-radius: 100%;
-    border: 0;
-  }
-
-  .scroll-btn-left {
-    left: 0;
-  }
-  .scroll-btn-right {
-    right: 0;
-  }
-
-  .scroll-wrapper:hover .scroll-btn-left,
-  .scroll-wrapper:hover .scroll-btn-right {
-    opacity: 1;
-    pointer-events: auto;
-  }
-}
-
-.album-card {
-  cursor: pointer;
-  list-style-type: none;
-  flex: 0 0 auto;
+.album-list {
   width: 100%;
-  max-width: 160px;
-  padding: 1rem;
-  height: auto;
-  scroll-snap-align: start;
-  border-radius: 0.5rem;
+  display: flex;
+  overflow-x: auto;
+  padding: 0;
+  scroll-behavior: smooth;
+  list-style: none;
+  margin: 0;
+  overflow: hidden;
+  column-gap: 0;
 }
 
-.album-card:hover {
-  background-color: #1f1f1f;
-  .album-play-button {
-    opacity: 1;
-    pointer-events: none;
-    transform: translateY(-4px);
-  }
+.album-list.grid-mode {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 180px);
+  justify-content: start;
+  overflow: visible;
+  row-gap: 1rem;
+  column-gap: 0;
+}
+
+.album-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.album a {
+  text-decoration: none;
+}
+
+.album-card:hover .play-button {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-4px);
 }
 
 .album-card article {
@@ -105,34 +47,10 @@ body {
   position: relative;
   border-radius: 0.5rem;
   margin-bottom: 12px;
-
-  .album-img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-  }
-
-  .album-play-button {
-    width: 2rem;
-    aspect-ratio: 1 / 1;
-    opacity: 0;
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    cursor: pointer;
-    pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
 }
 
-.album-title {
-  font-size: 1rem;
-  margin: 0 0 0.25rem;
-  font-weight: 600;
-}
-
-.album-info {
-  font-size: 0.8rem;
-  color: #a7a7a7;
-  margin: 0;
+.album-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
 }

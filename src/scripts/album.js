@@ -26,7 +26,8 @@ const albumIds = [
     return data.access_token;
   }
 
-  async function getNewReleases(token) {
+  // ✅ 앨범 API
+  async function getAlbums(token) {
     const res = await fetch(
       `https://api.spotify.com/v1/albums?ids=${albumIds}&market=KR`,
       {
@@ -37,7 +38,7 @@ const albumIds = [
     );
 
     if (!res.ok) {
-      throw new Error("Failed to fetch token");
+      throw new Error("앨범 데이터를 불러오지 못했습니다.");
     }
 
     const data = await res.json();
@@ -50,26 +51,24 @@ const albumIds = [
 
     albums.forEach((album) => {
       const albumCard = document.createElement("li");
-      albumCard.className = "album-card";
+      albumCard.className = "list-card";
 
       albumCard.innerHTML = `
-        <a href="${album.external_urls.spotify}" target="_blank">
-          <article>
-              <div class="album-cover">
-                <img src="${album.images[0]?.url || "default.jpg"}" alt="${
+      <a href="${album.external_urls.spotify}" target="_blank">
+        <article>
+          <div class="album-cover">
+            <img src="${album.images[0]?.url || "default.jpg"}" alt="${
         album.name
       }" class="album-img" />
-                <img src="../assets/play.png" class="album-play-button"/>
-              </div>
-              <h3 class="album-title">${album.name}</h3>
-              <p class="album-info">${album.artists
-                .map((artist) => artist.name)
-                .join(", ")}</p>
-              
-          </article>
-        </a>
+            <img src="../assets/play.png" class="play-button"/>
+          </div>
+          <h3 class="card-title">${album.name}</h3>
+          <p class="card-info">${album.artists
+            .map((a) => a.name)
+            .join(", ")}</p>
+        </article>
+      </a>
     `;
-
       albumList.appendChild(albumCard);
     });
   }
@@ -77,7 +76,7 @@ const albumIds = [
   async function init() {
     try {
       const token = await getToken();
-      const albums = await getNewReleases(token);
+      const albums = await getAlbums(token);
       renderAlbums(albums);
     } catch (error) {
       console.error("Error initializing app:", error);

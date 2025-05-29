@@ -8,18 +8,25 @@
     <script type="module" src="../scripts/artist.js"></script>
   </head>
   <body>
-    <section class="artist">
-      <div class="artist-header">
+    <section class="list-component">
+      <div class="list-header">
         <h2>Artist</h2>
         <button class="show-all-button">Show all</button>
       </div>
       <div class="scroll-wrapper">
         <div class="scroll-btn">
-          <button class="scroll-btn-left" aria-label="왼쪽으로 스크롤"></button>
           <button
-            class="scroll-btn-right"
+            class="artist-scroll-btn-left scroll-btn-left"
+            aria-label="왼쪽으로 스크롤"
+          >
+            ◀
+          </button>
+          <button
+            class="artist-scroll-btn-right scroll-btn-right"
             aria-label="오른쪽으로 스크롤"
-          ></button>
+          >
+            ▶
+          </button>
         </div>
         <ul class="artist-list"></ul>
       </div>
