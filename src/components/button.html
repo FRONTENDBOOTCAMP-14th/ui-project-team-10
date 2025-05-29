@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>버튼</title>
+    <link rel="icon" href="/icons/spotify-logo-symbol-green.svg" />
+    <link
+      rel="preload"
+      as="font"
+      href="/font/woff2/PretendardVariable.woff2"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" as="style" href="/font/pretendardvariable.css" />
+    <link rel="stylesheet" href="/src/common/index.css" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <main>
+      <h1>버튼 컴포넌트</h1>
+
+      <section class="btn-section-no-page">
+        <h2>기본 버튼</h2>
+        <ul>
+          <li>
+            <button class="rounded-btn btn bg-green black-text">
+              기본 버튼
+            </button>
+          </li>
+          <li>
+            <button class="rounded-btn btn gray-outline-style black-text">
+              변형 버튼1
+            </button>
+          </li>
+          <li>
+            <button class="rounded-btn btn bg-black white-text">
+              변형 버튼2
+            </button>
+          </li>
+          <li>
+            <button class="rounded-btn btn bg-blue white-text">
+              변형 버튼3
+            </button>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <a href="#" class="rounded-btn btn bg-green black-text"
+              >기본 버튼</a
+            >
+          </li>
+          <li>
+            <a href="#" class="rounded-btn btn gray-outline-style black-text"
+              >변형 버튼1</a
+            >
+          </li>
+          <li>
+            <a href="#" class="rounded-btn btn bg-black white-text"
+              >변형 버튼2</a
+            >
+          </li>
+          <li>
+            <a href="#" class="rounded-btn btn bg-blue white-text"
+              >변형 버튼3</a
+            >
+          </li>
+        </ul>
+      </section>
+
+      <section class="btn-section-no-page">
+        <h2>크기 변형</h2>
+        <ul>
+          <li>
+            <button class="rounded-btn btn btn-large bg-green black-text">
+              큰 버튼
+            </button>
+          </li>
+          <li>
+            <button class="rounded-btn btn btn-small bg-green black-text">
+              작은 버튼
+            </button>
+          </li>
+          <li>
+            <button class="rounded-btn btn btn-long bg-green black-text">
+              긴 버튼
+            </button>
+          </li>
+        </ul>
+      </section>
+
+      <section class="btn-section-sidebar">
+        <h2>사이드바 링크버튼</h2>
+        <a href="#" class="sidebar-btn btn white-text">사이드바 버튼</a>
+      </section>
+
+      <section class="btn-section-sidebar">
+        <h2>아이콘 사이드바 버튼</h2>
+        <button class="sidebar-btn btn bg-black white-text btn-long">
+          <img
+            class="btn-icon svg-img-white"
+            src="/icons/spotify-logo-symbol.svg"
+            alt=""
+          />
+          Spotify
+        </button>
+        <button class="sidebar-btn btn bg-white black-text btn-long">
+          <img
+            class="btn-icon svg-img-black"
+            src="/icons/bookmark.svg"
+            alt=""
+          />
+          내 라이브러리리
+        </button>
+        <button class="sidebar-btn btn bg-gray white-text btn-long">
+          <img class="btn-icon svg-img-white" src="/icons/heart.svg" alt="" />
+          좋아요
+        </button>
+      </section>
+
+      <a class="rounded-btn btn bg-green black-text btn-long" href="/index.html"
+        >메인 페이지로 돌아가기</a
+      >
+    </main>
+  </body>
+</html>

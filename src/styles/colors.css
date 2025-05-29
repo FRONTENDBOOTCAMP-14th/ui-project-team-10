@@ -1,0 +1,31 @@
+.bg-green {
+  background-color: var(--spotify-green);
+}
+
+.bg-gray {
+  background-color: var(--spotify-gray);
+}
+
+.bg-black {
+  background-color: var(--spotify-black);
+}
+
+.bg-blue {
+  background-color: var(--spotify-blue);
+}
+
+.white-text {
+  color: var(--spotify-white);
+}
+
+.black-text {
+  color: var(--spotify-black);
+}
+
+.svg-img-white {
+  filter: brightness(1);
+}
+
+.svg-img-black {
+  filter: brightness(0);
+}
