@@ -21,3 +21,11 @@
 .black-text {
   color: var(--spotify-black);
 }
+
+.svg-img-white {
+  filter: brightness(1);
+}
+
+.svg-img-black {
+  filter: brightness(0);
+}
