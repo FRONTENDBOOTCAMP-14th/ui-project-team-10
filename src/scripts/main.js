@@ -278,13 +278,33 @@ function setupEventListeners() {
       });
     });
 
+  // Show all toggle (for album)
+  const albumShowAllBtn = document.querySelector(".album-show-all");
+  if (albumShowAllBtn) {
+    albumShowAllBtn.addEventListener("click", () => {
+      const isGrid = albumList.classList.toggle("grid-mode");
+      albumShowAllBtn.textContent = isGrid ? "Hide" : "Show All";
+      toggleScrollButtons("album", !isGrid);
+    });
+  }
+
   // Show all toggle (for artist)
-  const showAllBtn = document.querySelector(".show-all-button");
-  if (showAllBtn) {
-    showAllBtn.addEventListener("click", () => {
+  const artistShowAllBtn = document.querySelector(".artist-show-all");
+  if (artistShowAllBtn) {
+    artistShowAllBtn.addEventListener("click", () => {
       const isGrid = artistList.classList.toggle("grid-mode");
-      showAllBtn.textContent = isGrid ? "Hide" : "Show All";
+      artistShowAllBtn.textContent = isGrid ? "Hide" : "Show All";
       toggleScrollButtons("artist", !isGrid);
+    });
+  }
+
+  // Show all toggle (for playlist)
+  const playlistShowAllBtn = document.querySelector(".playlist-show-all");
+  if (playlistShowAllBtn) {
+    playlistShowAllBtn.addEventListener("click", () => {
+      const isGrid = playlistList.classList.toggle("grid-mode");
+      playlistShowAllBtn.textContent = isGrid ? "Hide" : "Show All";
+      toggleScrollButtons("playlist", !isGrid);
     });
   }
 }
@@ -293,6 +313,7 @@ function toggleScrollButtons(type, show) {
   const selectors = {
     artist: [".artist-scroll-btn-left", ".artist-scroll-btn-right"],
     album: [".album-scroll-btn-left", ".album-scroll-btn-right"],
+    playlist: [".playlist-scroll-btn-left", ".playlist-scroll-btn-right"],
   };
 
   selectors[type].forEach((selector) => {

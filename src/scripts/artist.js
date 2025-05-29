@@ -30,9 +30,10 @@ async function getToken() {
   return data.access_token;
 }
 
+// ✅ 아티스트 API
 async function getArtists(token) {
   const res = await fetch(
-    `https://api.spotify.com/v1/artists/?ids=${artistIds}&market=KR`,
+    `https://api.spotify.com/v1/artists?ids=${artistIds}&market=KR`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -49,7 +50,7 @@ function renderArtists(artists) {
 
   artists.forEach((artist) => {
     const artistCard = document.createElement("li");
-    artistCard.className = "artist-card";
+    artistCard.className = "list-card";
 
     artistCard.innerHTML = `
       <a href="${artist.external_urls.spotify}" target="_blank">
@@ -58,10 +59,10 @@ function renderArtists(artists) {
             <img src="${artist.images[0]?.url || ""}" alt="${
       artist.name
     }" class="artist-profile" />
-            <img src="../assets/play.png" class="artist-play-button"/>
+            <img src="../assets/play.png" class="play-button"/>
           </div>
-          <h3 class="artist-name">${artist.name}</h3>
-          <p class="artist-info">Artist</p>       
+          <h3 class="card-title">${artist.name}</h3>
+          <p class="card-info">Artist</p>
         </article>
       </a>
     `;
