@@ -62,7 +62,7 @@ footer {
 .footer-column a {
   color: var(--footer-fg-light);
   text-decoration: none;
-  transition: color 0.2s;
+  transition: color;
   font-size: 14px;
 }
 
