@@ -1,42 +1,21 @@
-:root {
-  --button-bg-color: #1f1f1f;
-  --button-hover-color: #2a2a2a;
-  --font-color: #b3b3b3;
-  --button-size: 48px;
-  --svg-size: 24px;
-}
-
-body {
-  margin: 20px;
-  background: #323030;
-  width: 100vw;
+body{
+  margin-top:70px;
+  height: 100vh;
+  background: rgb(33, 33, 33);
   color: white;
-}
-
-.sr-only {
-  display: none;
-}
-
-.reset-style {
-  appearance: none;
-  background: none;
-  border: none;
-  outline: none;
 }
 
 /* 검색창 */
 .search-box {
   position: relative;
+  /* min-width: 0; */
 
   /* 열린 검색창 */
   .container {
     background: var(--button-bg-color);
     max-width: 474px;
-    min-width: var(--button-size);
     height: var(--button-size);
     border-radius: var(--button-size);
-    box-sizing: border-box;
-
     display: flex;
     flex-flow: row nowrap;
     justify-content: start;
@@ -56,15 +35,26 @@ body {
     }
 
     /* 검색박스 */
-    input {
-      background: none;
-      width: 78.6919%;
-      border: none;
-      appearance: none;
-      outline: none;
+    input#search-box {
+      /* width: 78.6919%; */
+      width: 1px;
+      line-height: 2;
       color: rgb(255, 255, 255);
       font-size: 1rem;
       line-height: 40px;
+      flex-shrink: 1;
+      flex-grow: 1;
+
+      /* placehoder 가려지는 부분 설정 */
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      &::placeholder {
+        color: rgb(193, 193, 193);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
     }
 
     /* 중간바(세로선) */
@@ -74,10 +64,9 @@ body {
 
     /* 둘러보기 링크 */
     .icon-browse-link {
-      width: var(--svg-size);
-      aspect-ratio: 1;
+      max-width: 100%;
       padding: 12px;
-
+      aspect-ratio: 1;
       /* 둘러보기 아이콘 */
       svg {
         vertical-align: middle;
@@ -100,6 +89,7 @@ body {
 
     /* 전체 박스 포커스 설정 */
     &:has(input:focus) {
+      /* box-sizing: border-box; */
       outline: 2px solid white;
     }
   }
@@ -112,10 +102,15 @@ body {
     text-align: center;
     align-content: center;
     border-radius: var(--button-size);
-    position: absolute;
     border-radius: 50%;
     top: 0;
     left: 0;
+    svg {
+      transform: translateY(0.6px);
+    }
+    &.absolute {
+      position: absolute;
+    }
 
     /* 검색 토글 버튼 */
     .search-toggle-btn {
@@ -139,7 +134,7 @@ body {
     }
   }
 
-  @media (width<850px) {
+  @media (width<1078px) {
     .hidden {
       display: none;
     }
@@ -149,7 +144,7 @@ body {
 /* spotify 로고 */
 .header .logo {
   display: inline-block;
-
+  padding: 20px;
   svg {
     vertical-align: middle;
   }
@@ -180,25 +175,42 @@ body {
 /* 프리미엄, 지원, 다운링크 모음 */
 .link-more-group {
   color: var(--font-color);
-  display: inline-block;
-  width: 247px;
+  min-width: 208.7px;
   display: flex;
-  flex-flow: row nowrap;
+  flex-direction: row;
+  /* flex-flow: row nowrap; */
   justify-content: space-between;
   align-items: center;
-
   font-size: 0;
+  flex-shrink: 0;
+  column-gap: 8px;
 
+  /* 앵커태그 전체 선택자 */
   a {
-    margin-right: 8px;
     text-decoration: none;
     color: currentColor;
     font-size: 16px;
     font-weight: bold;
+    line-height: 1;
 
+    display: flex;
+    flex-flow: row nowrap;
+
+    /* 프리미엄 링크 */
+    &.premium-link {
+      font-size: 15px;
+      width: 67px;
+      transform: translateY(-1px);
+    }
+
+    /* 링크 모음 호버상태 */
     &:hover {
       color: white;
     }
+  }
+
+  .icon-break-line {
+    margin: 16px 24px 16px 16px;
   }
 }
 
@@ -206,14 +218,16 @@ body {
 .link-login-group {
   height: 48px;
   font-size: 14px;
-
-  row-gap: 30px;
+  display: flex;
+  flex-flow: row nowrap;
+  column-gap: 8px;
   align-items: center;
+
   a {
     text-decoration: none;
     font-weight: 700;
     color: var(--font-color);
-
+    align-content: center;
     &:hover {
       color: white;
       svg path {
@@ -221,36 +235,143 @@ body {
       }
     }
 
-    &:nth-child(1) {
-      margin-inline-end: 8px;
-      text-align: center;
-      position: relative;
-      padding: 4px 16px 4px 32px;
+    /* 앱 설치하기 링크 */
+    &.install-link {
       width: 118.83px;
       height: 32px;
-      box-sizing: border-box;
-      font-size: 13px;
+      line-height: 0;
+      padding: 4px 16px 4px 32px;
+      text-align: center;
+      position: relative;
+      font-size: 14px;
+      flex-shrink: 0;
+      word-spacing: -1px;
+      transform: translateX(1.5px);
+
       svg {
+        width: 16px;
+        height: 16px;
         left: 10px;
-        top: 5px;
+        top: 8px;
         position: absolute;
         vertical-align: sub;
+        scale: 0.95;
       }
     }
+  }
 
-    &:nth-child(2) {
+  div {
+    /* 가입하기 링크 */
+    /* display: contents; */
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    .sign-link {
+      height: 32px;
+      /* margin-left: 5.5px; */
       padding: 4px 16px 4px 8px;
+      flex-shrink: 0;
+      line-height: 0;
+      /* background: green; */
     }
 
-    &:nth-child(3) {
+    /* 로그인버튼 */
+    .login-link {
       background: white;
       color: black;
-      width: 137.61px;
+      width: 137.54px;
       height: 48px;
-
+      flex-shrink: 0;
       text-align: center;
       align-content: center;
       border-radius: var(--button-size);
+      font-size: 16px;
+    }
+  }
+
+  /* 햄버거바 기본상태 */
+  @media (width>850px) {
+    button {
+      display: none;
+    }
+  }
+}
+
+/* 해더 전체 마크업 */
+.header-box {
+  background: black;
+  width: 100%;
+  min-width: 800px;
+  height: 64px;
+  padding: 8px;
+  margin: 0;
+
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+
+  .wide-screen-box {
+    display: contents;
+  }
+  li {
+    list-style-type: none;
+    row-gap: 8px;
+
+    &:nth-child(2) {
+      margin-left: 8px;
+    }
+    &:nth-child(3) {
+      flex-grow: 1;
+      padding-inline: 8px;
+    }
+    &:nth-child(4) {
+      /* flex-grow: 1; */
+      justify-content: end;
+    }
+    &:nth-child(5) {
+      /* flex-grow: 1; */
+      justify-content: end;
+    }
+  }
+
+  /* 미디어 설정 */
+  /* 850px 이하 추가메뉴바 삭제 */
+  @media (width<850px) {
+    li {
+      &:nth-child(2) {
+        margin-left: 8px;
+      }
+
+      /* 850px 이하 햄버거바 보이기 */
+      .hamburger-bar {
+        width: 20px;
+        height: 32px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' data-encore-id='icon' role='img' aria-hidden='true' class='e-9921-icon e-9921-baseline' viewBox='0 0 16 16' fill='white' %3E%3Cpath d='M15.5 13.5H.5V12h15v1.5zm0-4.75H.5v-1.5h15v1.5zm0-4.75H.5V2.5h15V4z' %3E%3C/path%3E%3C/svg%3E");
+        background-size: 16px;
+        background-repeat: no-repeat;
+        background-position: center;
+        margin-inline-start: 8px;
+      }
+    }
+
+    /* 햄버거바  */
+    .remove {
+      display: none;
+    }
+  }
+
+  @media (width>1742px) {
+    li {
+      &:nth-child(2) {
+        flex-grow: 1;
+        text-align: end;
+        justify-content: end;
+      }
     }
   }
 }

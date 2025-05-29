@@ -9,3 +9,10 @@
   white-space: nowrap;
   border-width: 0;
 }
+
+.reset-style {
+  appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+}
