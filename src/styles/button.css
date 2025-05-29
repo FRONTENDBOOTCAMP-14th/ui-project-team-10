@@ -13,6 +13,7 @@
   text-decoration: none;
   box-sizing: border-box;
   gap: 0.5rem;
+  transition: all 0.3s ease-in-out;
 }
 
 .rounded-btn {
@@ -39,6 +40,23 @@
   padding-block: 1rem;
 }
 
+.hover-bg-green:hover {
+  background-color: var(--spotify-green);
+}
+
+.hover-bg-white:hover {
+  background-color: var(--spotify-white);
+  color: var(--spotify-black);
+}
+
+.hover-size-grow:hover {
+  transform: scale(1.05);
+}
+
+.hover-bg-blue:hover {
+  background-color: var(--spotify-blue);
+}
+
 .rounded-btn.btn-small {
   min-width: 5rem;
   min-height: 2rem;
@@ -50,7 +68,8 @@
 .rounded-btn.btn-long {
   font-size: 1rem;
   padding-inline: 5rem;
-  max-width: 20rem;
+  max-width: 30rem;
+  min-width: 15rem;
 }
 
 .sidebar-btn {

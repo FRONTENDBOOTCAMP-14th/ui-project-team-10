@@ -18,6 +18,10 @@
   color: var(--spotify-white);
 }
 
+.green-text {
+  color: var(--spotify-green);
+}
+
 .gray-text {
   color: var(--spotify-gray);
 }
