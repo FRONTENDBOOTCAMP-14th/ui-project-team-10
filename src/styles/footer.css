@@ -108,18 +108,32 @@ footer {
   font-size: 13px;
 }
 
-/* 반응형 처리
-@media (max-width: 800px) {
+/* 반응형 처리 */
+
+@media (max-width: 1000px) {
   .footer-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--footer-spacing-md);
+  }
+  .footer-column {
+    min-width: 0;
+  }
+  .footer-social {
+    grid-column: 1 / -1;
+    margin-top: var(--footer-spacing-sm);
+    justify-content: flex-start;
+  }
+}
+@media (max-width: 768px) {
+  .footer-columns {
+    display: flex;
     flex-direction: column;
     gap: var(--footer-spacing-md);
     align-items: stretch;
   }
   .footer-social {
-    margin: 0 0 0 0;
+    margin: 0;
     justify-content: flex-start;
   }
-  .footer-bottom {
-    text-align: center;
-  }
-} */
+}
