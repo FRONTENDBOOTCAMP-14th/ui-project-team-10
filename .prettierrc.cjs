@@ -1,6 +1,6 @@
 module.exports = {
-  arrowParens: 'always',
-  htmlWhitespaceSensitivity: 'css',
+  arrowParens: "always",
+  htmlWhitespaceSensitivity: "css",
   bracketSameLine: false,
   bracketSpacing: true,
   printWidth: 80,
@@ -8,7 +8,7 @@ module.exports = {
   quoteProps: "as-needed",
   semi: true,
   tabWidth: 2,
-  trailingComma: 'es5',
+  trailingComma: "es5",
   useTabs: false,
   overrides: [
     {
