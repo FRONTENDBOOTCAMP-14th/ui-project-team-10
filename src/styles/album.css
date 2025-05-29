@@ -7,7 +7,6 @@ body {
   -ms-use-select: none;
   user-select: none;
 }
-
 .album {
   display: flex;
   flex-direction: column;
