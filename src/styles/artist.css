@@ -2,6 +2,10 @@ body {
   margin: 0;
   padding: 0;
   background: #121212;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-use-select: none;
+  user-select: none;
 }
 
 .artist {
