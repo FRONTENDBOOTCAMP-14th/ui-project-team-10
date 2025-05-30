@@ -15,12 +15,12 @@
   flex-direction: column;
   min-height: 100%;
   width: 100%;
-  max-width: 26.25rem;
-  min-width: 22.5rem;
-  padding: 2rem;
-  gap: 3rem;
-  font-weight: 600;
-  font-size: 13px;
+  max-width: var(--sidebar-max-width);
+  min-width: var(--sidebar-min-width);
+  padding: var(--spacing-lg);
+  gap: var(--spacing-lg);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-xs);
   background: var(--spotify-black);
   color: var(--spotify-white);
   box-sizing: border-box;
@@ -61,7 +61,7 @@
 }
 
 .sidebar ul li {
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--spacing-lg);
 }
 
 .sidebar a {
@@ -84,7 +84,7 @@
 .sidebar-playlist-link {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: var(--spacing-xs);
   color: var(--spotify-white);
 }
 
@@ -141,17 +141,17 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: var(--spacing-xs);
   font-weight: 300;
 }
 
 .sidebar-component-container-no-page main {
   grid-area: main;
-  padding: 2rem;
+  padding: var(--spacing-lg);
 }
 
 .language-select {
-  margin-top: 0.5rem;
+  margin-top: var(--spacing-xs);
   width: 6rem;
   height: 2rem;
   border: 1px solid var(--spotify-light-gray);
@@ -166,5 +166,5 @@
 }
 
 .sidebar-footer-link {
-  margin-bottom: 0.5rem !important;
+  margin-bottom: var(--spacing-xs) !important;
 }
