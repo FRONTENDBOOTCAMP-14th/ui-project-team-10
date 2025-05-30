@@ -7,10 +7,20 @@
   --spotify-white: #ffffff;
   --spotify-blue: #1d75de;
 
+  /* font size */
+  --spotify-bace-font: 14px;
+
   /* Hader */
   --button-bg-color: #1f1f1f;
   --button-hover-color: #2a2a2a;
   --font-color: #b3b3b3;
   --button-size: 48px;
   --svg-size: 24px;
+
+  /* components-common.css */
+  --background-gray-200: #1f1f1f;
+  --background-base: #121212;
+  --background-press: #000;
+  --background-elevated-highlight: #2a2a2a;
+  --background-elevated-press: #191919;
 }
