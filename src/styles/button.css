@@ -30,6 +30,21 @@
   padding-block: 1rem;
 }
 
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--button-size);
+  aspect-ratio: 1;
+  border-radius: var(--button-size);
+  img,
+  svg {
+    max-width: var(--svg-size);
+    max-height: var(--svg-size);
+    vertical-align: middle;
+  }
+}
+
 .rounded-btn.btn-small {
   min-width: 5rem;
   min-height: 2rem;

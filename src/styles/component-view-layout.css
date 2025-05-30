@@ -1,5 +1,6 @@
 body {
-  padding: 2rem;
+  padding: 2rem 10rem;
+  background: var(--spotify-dark-gray);
 }
 
 h1 {
@@ -8,18 +9,17 @@ h1 {
 
 main {
   max-width: 1200px;
-  margin: 0 auto;
 }
 
-.btn-section-no-page {
-  margin-bottom: 2rem;
+p {
+  color: var(--spotify-white);
 }
 
 .margin-bottom-2rem {
   margin-bottom: 2rem;
 }
 
-.btn-section-no-page ul {
+.component-section-view > * {
   display: flex;
   gap: 1rem;
   margin-bottom: 1rem;
@@ -33,4 +33,46 @@ main {
 
 .sidebar-playlist {
   margin-top: 1rem;
+}
+
+/* Footer styles */
+.footer {
+  padding: 1rem 0;
+  color: var(--spotify-white);
+}
+
+.footer-heading {
+  color: var(--spotify-white);
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.footer-links {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-links li {
+  list-style: none;
+  display: inline-block;
+}
+
+.footer-links a {
+  color: var(--spotify-gray);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--spotify-gray);
+}
+
+.copyright {
+  margin-top: 1rem;
+  color: var(--spotify-gray);
+  font-size: 0.8rem;
 }
