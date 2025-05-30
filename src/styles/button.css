@@ -20,20 +20,6 @@
   border-radius: 500px;
 }
 
-.btn-section-no-page {
-  margin-bottom: 2rem;
-}
-
-.margin-bottom-2rem {
-  margin-bottom: 2rem;
-}
-
-.btn-section-no-page ul {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
 .gray-outline-style {
   background-color: transparent;
   border: 2px solid var(--spotify-gray);
@@ -42,6 +28,21 @@
 .rounded-btn.btn-large {
   font-size: 1rem;
   padding-block: 1rem;
+}
+
+.rounded-btn.btn-small {
+  min-width: 5rem;
+  min-height: 2rem;
+  font-size: 0.75rem;
+  padding-block: 0.25rem;
+  padding-inline: 0.5rem;
+}
+
+.rounded-btn.btn-long {
+  font-size: 1rem;
+  padding-inline: 5rem;
+  max-width: 30rem;
+  min-width: 15rem;
 }
 
 .hover-bg-green:hover {
@@ -61,36 +62,10 @@
   background-color: var(--spotify-blue);
 }
 
-.rounded-btn.btn-small {
-  min-width: 5rem;
-  min-height: 2rem;
-  font-size: 0.75rem;
-  padding-block: 0.25rem;
-  padding-inline: 0.5rem;
-}
-
-.rounded-btn.btn-long {
-  font-size: 1rem;
-  padding-inline: 5rem;
-  max-width: 30rem;
-  min-width: 15rem;
-}
-
-.sidebar-btn {
-  width: 100%;
-}
-
 .btn .btn-icon {
   max-height: 1rem;
 }
 
-.btn-section-sidebar {
-  margin-bottom: 2rem;
-}
-
-.btn-section-sidebar ul {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 1rem;
+.sidebar-btn {
+  width: 100%;
 }

@@ -1,0 +1,36 @@
+body {
+  padding: 2rem;
+}
+
+h1 {
+  margin-bottom: 2rem;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.btn-section-no-page {
+  margin-bottom: 2rem;
+}
+
+.margin-bottom-2rem {
+  margin-bottom: 2rem;
+}
+
+.btn-section-no-page ul {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  width: 280px;
+}
+
+.sidebar-playlist {
+  margin-top: 1rem;
+}
