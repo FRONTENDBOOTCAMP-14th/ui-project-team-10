@@ -7,7 +7,7 @@ body {
 /* 제목 */
 h1 {
   color: var(--spotify-green);
-  background: rgba(12, 155, 43, 0.388);
+  /* background: rgba(12, 155, 43, 0.388); */
   width: fit-content;
   margin: 30px;
   padding: 10px 20px 10px 20px;
@@ -51,11 +51,11 @@ section {
     margin: 20px;
   }
 
-  &::after {
+  span {
     content: "";
     position: absolute;
     right: 30px;
-    bottom: 15px;
+    bottom: 10px;
     display: block;
     background-color: var(--spotify-green);
     width: 50px;
@@ -68,15 +68,15 @@ section {
     box-shadow: 0 0.5em 0.5em -0.1em rgba(9, 9, 9, 0.643);
     opacity: 0;
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
   }
 
   &:hover {
     background: var(--button-hover-color);
 
-    &:hover::after {
+    &:hover span {
       opacity: 1;
-      transform: translateY(-5px);
+      transform: translateY(-10px);
     }
   }
 }
