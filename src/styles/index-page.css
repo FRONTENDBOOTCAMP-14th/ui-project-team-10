@@ -18,10 +18,11 @@ body {
   text-decoration: none;
   box-sizing: border-box;
   border-radius: var(--button-border-radius);
-  border: 2px solid var(--spotify-gray);
+  /* border: 2px solid var(--spotify-gray); */
   background-color: var(--spotify-dark-gray);
   color: var(--spotify-white);
   transition: var(--button-transition);
+  box-shadow: var(--button-shadow);
 }
 
 .index-pages-btn:hover {

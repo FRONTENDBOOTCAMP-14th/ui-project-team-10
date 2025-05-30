@@ -19,6 +19,7 @@
   --svg-size: 24px;
   --button-border-radius: 500px;
   --button-transition: all 0.2s ease-in-out;
+  --button-shadow: 0 0.3em 0.3em -0.1em var(--spotify-black);
 
   --spacing-8xl: 192px;
   --spacing-7xl: 160px;
