@@ -8,11 +8,11 @@
   letter-spacing: 1px;
   min-width: 7.5rem;
   min-height: 2.5rem;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-base);
   text-decoration: none;
   box-sizing: border-box;
-  gap: 0.5rem;
+  gap: var(--spacing-xs);
   transition: all 0.3s ease-in-out;
 }
 
@@ -26,8 +26,8 @@
 }
 
 .rounded-btn.btn-large {
-  font-size: 1rem;
-  padding-block: 1rem;
+  font-size: var(--font-size-base);
+  padding-block: var(--spacing-sm);
 }
 
 .icon-btn {
@@ -48,14 +48,14 @@
 .rounded-btn.btn-small {
   min-width: 5rem;
   min-height: 2rem;
-  font-size: 0.75rem;
-  padding-block: 0.25rem;
-  padding-inline: 0.5rem;
+  font-size: var(--font-size-xs);
+  padding-block: var(--spacing-xs);
+  padding-inline: var(--spacing-sm);
 }
 
 .rounded-btn.btn-long {
-  font-size: 1rem;
-  padding-inline: 5rem;
+  font-size: var(--font-size-base);
+  padding-inline: var(--spacing-xxl);
   max-width: 30rem;
   min-width: 15rem;
 }
@@ -78,7 +78,7 @@
 }
 
 .btn .btn-icon {
-  max-height: 1rem;
+  max-height: var(--svg-size);
 }
 
 .sidebar-btn {

@@ -13,7 +13,7 @@
   max-width: 100%;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   overflow: visible;
-  row-gap: 1rem;
+  row-gap: var(--spacing-md);
 }
 
 .artist a {
@@ -21,7 +21,7 @@
 }
 
 .artist-card:hover {
-  background-color: #1f1f1f;
+  background-color: var(--spotify-black);
 }
 
 .artist-card:hover .play-button {
@@ -32,12 +32,12 @@
 
 .artist-cover {
   position: relative;
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-md);
 }
 
 .artist-profile {
   width: 10rem;
-  border-radius: 50%;
+  border-radius: var(--border-radius-round);
   aspect-ratio: 1 / 1;
   object-fit: cover;
 }

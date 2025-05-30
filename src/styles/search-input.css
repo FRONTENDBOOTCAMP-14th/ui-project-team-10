@@ -30,18 +30,18 @@
       border: none;
       appearance: none;
       outline: none;
-      color: rgb(255, 255, 255);
-      font-size: 1rem;
-      line-height: 40px;
+      color: var(--spotify-white);
+      font-size: var(--font-size-base);
+      line-height: var(--spacing-lg);
     }
 
     .icon-break-line {
-      min-height: 24px;
+      min-height: var(--spacing-md);
     }
     .icon-browse-link {
       width: var(--svg-size);
       aspect-ratio: 1;
-      padding: 12px;
+      padding: var(--spacing-sm);
 
       svg {
         vertical-align: middle;
@@ -49,7 +49,7 @@
           fill: var(--spotify-light-gray);
         }
         &:hover path {
-          fill: white;
+          fill: var(--spotify-white);
         }
       }
     }
@@ -57,12 +57,12 @@
     &:hover {
       background: var(--spotify-gray);
       .icon-search {
-        fill: white;
+        fill: var(--spotify-white);
       }
     }
 
     &:has(input:focus) {
-      outline: 2px solid white;
+      outline: 2px solid var(--spotify-white);
     }
   }
 
@@ -91,12 +91,12 @@
     .search-box:has(&):hover & {
       background: var(--spotify-gray);
       .icon-search {
-        fill: white;
+        fill: var(--spotify-white);
       }
     }
   }
 
-  transition: all 0.5s ease-in-out;
+  transition: var(--button-transition);
 
   @media (width<850px) {
     .hidden {

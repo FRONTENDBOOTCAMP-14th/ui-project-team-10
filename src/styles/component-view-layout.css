@@ -1,10 +1,10 @@
 body {
-  padding: 2rem 10rem;
+  padding: var(--spacing-lg) var(--spacing-7xl);
   background: var(--spotify-dark-gray);
 }
 
 h1 {
-  margin-bottom: 2rem;
+  margin-bottom: var(--spacing-lg);
 }
 
 main {
@@ -21,8 +21,8 @@ p {
 
 .component-section-view > * {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
 }
 
 .sidebar-menu {
@@ -32,19 +32,19 @@ p {
 }
 
 .sidebar-playlist {
-  margin-top: 1rem;
+  margin-top: var(--spacing-sm);
 }
 
 /* Footer styles */
 .footer {
-  padding: 1rem 0;
+  padding: var(--spacing-sm) 0;
   color: var(--spotify-white);
 }
 
 .footer-heading {
   color: var(--spotify-white);
   display: inline-block;
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--spacing-xs);
   font-weight: bold;
 }
 
@@ -53,7 +53,7 @@ p {
   margin: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: var(--spacing-sm);
 }
 
 .footer-links li {
@@ -72,7 +72,7 @@ p {
 }
 
 .copyright {
-  margin-top: 1rem;
+  margin-top: var(--spacing-sm);
   color: var(--spotify-gray);
-  font-size: 0.8rem;
+  font-size: var(--font-size-xs);
 }

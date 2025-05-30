@@ -18,7 +18,7 @@
   grid-template-columns: repeat(auto-fill, 180px);
   justify-content: start;
   overflow: visible;
-  row-gap: 1rem;
+  row-gap: var(--spacing-md);
   column-gap: 0;
 }
 
@@ -40,13 +40,13 @@
 
 .album-card article {
   padding: 0;
-  color: #fff;
+  color: var(--spotify-white);
 }
 
 .album-cover {
   position: relative;
-  border-radius: 0.5rem;
-  margin-bottom: 12px;
+  border-radius: var(--border-radius-md);
+  margin-bottom: var(--spacing-md);
 }
 
 .album-img {

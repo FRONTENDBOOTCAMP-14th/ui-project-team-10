@@ -12,15 +12,15 @@ body {
   width: 100%;
   min-width: 7.5rem;
   min-height: 2.5rem;
-  padding: 1rem;
+  padding: var(--spacing-sm);
   cursor: pointer;
   text-decoration: none;
   box-sizing: border-box;
-  border-radius: 500px;
+  border-radius: var(--button-border-radius);
   border: 2px solid var(--spotify-gray);
   background-color: var(--spotify-dark-gray);
   color: var(--spotify-white);
-  transition: all 0.5s ease-in-out;
+  transition: var(--button-transition);
 }
 
 .index-pages-btn:hover {
@@ -30,7 +30,7 @@ body {
 }
 
 header {
-  padding: 2rem 2rem 4rem;
+  padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -38,31 +38,31 @@ header {
 }
 
 header h1 {
-  font-size: 3.5rem;
-  font-weight: 900;
-  margin: 0 0 1rem;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-boldest);
+  margin: 0 0 var(--spacing-md);
 }
 
 header p {
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   max-width: 800px;
-  margin: 0 auto 2rem;
+  margin: 0 auto var(--spacing-lg);
 }
 
 .profile-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
-  padding: 2rem 0;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-lg) 0;
   max-width: 1200px;
-  margin: 2rem auto 0;
+  margin: var(--spacing-lg) auto 0;
   justify-content: flex-start;
 }
 
 .profile-card {
   min-width: 220px;
-  border-radius: 8px;
-  padding: 1.5rem;
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-md);
   text-align: center;
   background: var(--spotify-dark-gray);
 }
@@ -70,28 +70,28 @@ header p {
 .profile-img {
   width: 150px;
   height: 150px;
-  border-radius: 50%;
+  border-radius: var(--border-radius-round);
   object-fit: cover;
-  margin: 0 auto 1rem;
+  margin: 0 auto var(--spacing-md);
   background: var(--spotify-white);
 }
 
 .name {
-  font-weight: 700;
-  font-size: 1.2rem;
-  margin: 0.5rem 0;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-base);
+  margin: 0 0 var(--spacing-xs);
 }
 
 .roll {
-  font-size: 0.8rem;
-  margin: 0.25rem 0 1rem;
+  font-size: var(--font-size-xs);
+  margin: 0 0 var(--spacing-md);
 }
 
 .github {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: var(--spacing-xs);
 }
 
 .github img {
@@ -102,14 +102,14 @@ header p {
 main {
   max-width: 1200px;
   margin: -2rem auto 0;
-  padding: 0 2rem 4rem;
+  padding: 0 var(--spacing-lg) var(--spacing-lg);
 }
 
 main h2 {
   color: var(--spotify-white);
-  font-size: 1.8rem;
-  margin: 3rem 0 1.5rem;
-  padding-bottom: 0.5rem;
+  font-size: var(--font-size-base);
+  margin: var(--spacing-lg) 0 var(--spacing-md);
+  padding-bottom: var(--spacing-xs);
   border-bottom: 1px solid var(--spotify-gray);
 }
 
@@ -117,17 +117,16 @@ main ul {
   padding: 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1rem;
-  margin: 0 0 2rem;
+  gap: var(--spacing-md);
+  margin: 0 0 var(--spacing-lg);
 }
 
 footer {
-  padding: 2rem;
+  padding: var(--spacing-lg);
   text-align: center;
-  font-size: 0.9rem;
-  margin-top: 2rem;
+  font-size: var(--font-size-xs);
 }
 
 footer a {
-  margin: 0 1rem;
+  margin: 0 var(--spacing-xs);
 }
