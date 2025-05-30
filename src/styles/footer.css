@@ -111,6 +111,49 @@ footer {
   font-size: 13px;
 }
 
+/* 클릭시 코드 볼수 있게 처리한 부분 */
+.code-viewer {
+  margin: 40px auto 0 auto;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.code-btn {
+  padding: 8px 20px;
+  background: #232323;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  margin-right: 8px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.code-btn:hover {
+  background: var(--gray-text);
+  color: var(--white-text);
+}
+
+.code-box {
+  width: 100%;
+  max-width: 1200px;
+  background: #111;
+  color: var(--white-text);
+  border-radius: 8px;
+  padding: 20px;
+  font-size: 13px;
+  font-family: "Fira Mono", "Consolas", monospace;
+  overflow-x: auto;
+  margin-top: 8px;
+  border: 1px solid #292929;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+  white-space: pre-wrap;
+}
+
 /* 반응형 처리 */
 
 @media (max-width: 1000px) {
