@@ -1,0 +1,71 @@
+body {
+  background: var(--spotify-black);
+  color: var(--spotify-white);
+  width: 100vw;
+  height: 100vh;
+}
+
+.preview-container {
+  background-image: linear-gradient(90deg, #af2896, #509bf5);
+  min-width: 800px;
+  min-height: 66.74px;
+  padding: 11px 24px 7px 15px;
+  cursor: pointer;
+
+  /* 포지션 하단 고정 */
+  position: fixed;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+
+  /* flex 설정 */
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 24px;
+  div {
+    word-spacing: -1px;
+    h1 {
+      font-size: 14px;
+      font-weight: 700;
+      height: 21px;
+      align-content: center;
+
+      span {
+        font-size: 13.3px;
+      }
+    }
+    p {
+      min-height: 23.81px;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.5;
+      align-content: end;
+    }
+  }
+
+  a {
+    background: var(--spotify-white);
+    color: rgb(45, 45, 45);
+    max-width: 169.78px;
+    min-width: 147.2px;
+    height: var(--button-size);
+    flex-shrink: 1;
+    flex-grow: 1;
+
+    text-align: center;
+    align-content: center;
+    border-radius: var(--button-size);
+
+    font-size: 1rem;
+    font-weight: 800;
+    word-spacing: -1px;
+    flex-shrink: 0;
+
+    transition: all 0.05s ease-in-out;
+    &:hover {
+      transform: scale(1.04);
+    }
+  }
+}
