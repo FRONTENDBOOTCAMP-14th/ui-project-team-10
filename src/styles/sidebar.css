@@ -1,0 +1,172 @@
+@import "/src/common/index.css";
+
+body {
+  color: var(--spotify-white);
+  font-family: "Pretendard Variable", sans-serif;
+  background: var(--spotify-dark-gray);
+  position: relative;
+  display: grid;
+  grid-template-areas: "left-sidebar main";
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr auto;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.sidebar {
+  position: relative;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 26.25rem;
+  min-width: 22.5rem;
+  padding: 2rem;
+  gap: 3rem;
+  font-weight: 600;
+  font-size: 13px;
+  background: var(--spotify-black);
+  grid-area: left-sidebar;
+}
+
+span {
+  color: var(--spotify-white);
+}
+
+.sidebar .sidebar-menu > *,
+.sidebar .sidebar-footer > * {
+  opacity: 0.7;
+}
+
+.sidebar .sidebar-menu .sidebar-item-active,
+.sidebar .sidebar-logo,
+.sidebar-footer .language-select {
+  opacity: 1;
+}
+
+.sidebar .sidebar-menu .sidebar-item-active *,
+.sidebar .sidebar-logo *,
+.sidebar-footer .language-select * {
+  opacity: 1;
+}
+
+.sidebar-logo {
+  max-height: 2.5rem;
+}
+
+.sidebar-logo img {
+  height: 100%;
+}
+
+.sidebar ul li {
+  margin-bottom: 1.5rem;
+}
+
+.sidebar a {
+  width: 100%;
+}
+
+.home .sidebar-icon {
+  mask-image: url("/icons/home.svg");
+}
+
+.search .sidebar-icon {
+  mask-image: url("/icons/find.svg");
+}
+
+.library .sidebar-icon {
+  mask-image: url("/icons/bookmark.svg");
+}
+
+.sidebar-link,
+.sidebar-playlist-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--spotify-light-gray);
+}
+
+.sidebar-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 1rem;
+  background-color: var(--spotify-white);
+  mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
+}
+
+.rounded-icon-box {
+  border-radius: 6px;
+}
+
+.favorite-playlist .sidebar-icon,
+.create-playlist .sidebar-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.favorite-playlist .sidebar-icon {
+  background: linear-gradient(135deg, #450af5 0%, #c4efd9 100%);
+}
+
+.create-playlist .sidebar-icon {
+  background-color: var(--spotify-white);
+}
+
+.favorite-playlist .sidebar-icon img,
+.create-playlist .sidebar-icon img {
+  width: 50%;
+}
+
+.create-playlist .sidebar-icon img {
+  filter: brightness(0);
+}
+
+.sidebar-footer {
+  position: fixed;
+  bottom: 2rem;
+  width: 100%;
+  max-width: 280px;
+}
+
+.sidebar-footer-links {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-weight: 300;
+}
+
+main {
+  grid-area: main;
+  padding: 2rem;
+}
+
+.language-select {
+  margin-top: 0.5rem;
+  display: flex;
+  width: 6rem;
+  height: 2rem;
+  gap: 0.25rem;
+  border: 1px solid var(--spotify-light-gray);
+  background: transparent;
+  align-items: center;
+  justify-content: center;
+}
+
+.language-select img {
+  width: 1rem;
+  height: 1rem;
+}
+
+.rounded-btn {
+  border-radius: 500px;
+  cursor: pointer;
+}
+
+.sidebar-footer-link {
+  margin-bottom: 0.5rem !important;
+}

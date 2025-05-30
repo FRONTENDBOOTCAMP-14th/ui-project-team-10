@@ -1,0 +1,18 @@
+/* 접근성 관련 CSS */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.reset-style {
+  appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+}

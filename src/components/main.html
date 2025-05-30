@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Main</title>
+    <link rel="stylesheet" href="../styles/main.css" />
+    <script type="module" src="../scripts/main.js"></script>
+  </head>
+  <body>
+    <main class="main-component">
+      <section class="list-component">
+        <div class="list-header">
+          <h2>Album</h2>
+          <button class="album-show-all">Show all</button>
+        </div>
+        <div class="scroll-wrapper">
+          <div class="scroll-btn">
+            <button
+              class="album-scroll-btn-left scroll-btn-left"
+              aria-label="왼쪽으로 스크롤"
+            >
+              <img src="../../public/icons/arrow-left.svg" alt="왼쪽 화살표" />
+            </button>
+            <button
+              class="album-scroll-btn-right scroll-btn-right"
+              aria-label="오른쪽으로 스크롤"
+            >
+              <img
+                src="../../public/icons/arrow-right.svg"
+                alt="오른쪽 화살표"
+              />
+            </button>
+          </div>
+          <ul class="album-list" id="list"></ul>
+        </div>
+      </section>
+      <section class="list-component">
+        <div class="list-header">
+          <h2>Artist</h2>
+          <button class="artist-show-all">Show all</button>
+        </div>
+        <div class="scroll-wrapper">
+          <div class="scroll-btn">
+            <button
+              class="artist-scroll-btn-left scroll-btn-left"
+              aria-label="왼쪽으로 스크롤"
+            >
+              <img src="../../public/icons/arrow-left.svg" alt="왼쪽 화살표" />
+            </button>
+            <button
+              class="artist-scroll-btn-right scroll-btn-right"
+              aria-label="오른쪽으로 스크롤"
+            >
+              <img
+                src="../../public/icons/arrow-right.svg"
+                alt="오른쪽 화살표"
+              />
+            </button>
+          </div>
+          <ul class="artist-list"></ul>
+        </div>
+      </section>
+      <section class="list-component">
+        <div class="list-header">
+          <h2>Playlists</h2>
+          <button class="playlist-show-all">Show all</button>
+        </div>
+        <div class="scroll-wrapper">
+          <div class="scroll-btn">
+            <button
+              class="playlist-scroll-btn-left scroll-btn-left"
+              aria-label="왼쪽으로 스크롤"
+            >
+              <img src="../../public/icons/arrow-left.svg" alt="왼쪽 화살표" />
+            </button>
+            <button
+              class="playlist-scroll-btn-right scroll-btn-right"
+              aria-label="오른쪽으로 스크롤"
+            >
+              <img
+                src="../../public/icons/arrow-right.svg"
+                alt="오른쪽 화살표"
+              />
+            </button>
+          </div>
+          <ul class="playlist-list"></ul>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

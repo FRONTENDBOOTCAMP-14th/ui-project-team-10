@@ -1,24 +1,112 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko-KR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>UI 프로젝트 - CSS</title>
-    <link rel="icon" href="/vite.svg" />
-    <link rel="preload" as="font" href="/font/woff2/PretendardVariable.woff2" crossorigin="anonymous" /> 
+    <link rel="icon" href="/icons/spotify-logo-symbol-green.svg" />
+    <link
+      rel="preload"
+      as="font"
+      href="/font/woff2/PretendardVariable.woff2"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" as="style" href="/font/pretendardvariable.css" />
-		<script type="module" src="/src/main.js"></script>
+    <link rel="stylesheet" href="/src/common/index.css" />
+    <link rel="stylesheet" href="/src/styles/index-page.css" />
+    <script type="module" src="/src/main.js"></script>
   </head>
   <body>
-		<h1>Vite + CSS</h1>
-    <ul>
-      <li>컴포넌트를 분리해서 구현해주세요.</li>
-      <li>컴포넌트의 코드 리뷰를 AI를 통해 받은 후 개선해보세요.</li>
-      <li>개선점을 문서화하여 정리해 보세요</li>
-      <li>구현한 컴포넌트를 기반으로 페이지를 만들어주세요.</li>
-      <li>접근성과 성능을 신경써주세요</li>
-      <li>소통하고 화합하며 프로젝트 즐겨주세요.</li>
-      <li>결과보다 과정이 중요합니다.‼️</li>
-    </ul>
+    <header>
+      <h1>프사친 - 프론트엔드 사자 친구</h1>
+      <p>
+        멋쟁이 사자처럼 프론트엔드 부트캠프 14기 UI 프로젝트 10조 프론드엔드
+        사자 친구입니다!
+      </p>
+      <a href="/src/pages/home.html" class="rounded-btn-green">시안 페이지로</a>
+      <ul class="profile-list" aria-label="프로젝트 구성원">
+        <li class="profile-card">
+          <img class="profile-img" src="" alt="" />
+          <p class="name">석정일</p>
+          <p class="roll">조장</p>
+          <a class="github" href="https://github.com/but212"
+            ><img src="/icons/github.svg" alt="깃허브 아이콘"
+          /></a>
+        </li>
+        <li class="profile-card">
+          <img class="profile-img" src="" alt="" />
+          <p class="name">김동규</p>
+          <p class="roll">조원</p>
+          <a class="github" href="https://github.com/cit1566"
+            ><img src="/icons/github.svg" alt="깃허브 아이콘"
+          /></a>
+        </li>
+        <li class="profile-card">
+          <img class="profile-img" src="" alt="" />
+          <p class="name">오경태</p>
+          <p class="roll">조원</p>
+          <a class="github" href="https://github.com/Dowap2"
+            ><img src="/icons/github.svg" alt="깃허브 아이콘"
+          /></a>
+        </li>
+        <li class="profile-card">
+          <img class="profile-img" src="" alt="" />
+          <p class="name">고우현</p>
+          <p class="roll">조원</p>
+          <a class="github" href="https://github.com/woohyeun15"
+            ><img src="/icons/github.svg" alt="깃허브 아이콘"
+          /></a>
+        </li>
+      </ul>
+    </header>
+    <main>
+      <h2>공통 컴포넌트</h2>
+      <ul>
+        <li><a href="/src/components/button.html">버튼</a></li>
+        <li><a href="/src/components/header-com.html">네비게이션 바</a></li>
+        <li><a href="/src/components/album-card.html">앨범 카드</a></li>
+        <li>
+          <a href="/src/components/player-control.html">플레이어 컨트롤</a>
+        </li>
+        <li><a href="/src/components/search-input.html">검색 입력창</a></li>
+        <li>
+          <a href="/src/components/playlist-item.html">플레이리스트 아이템</a>
+        </li>
+      </ul>
+      <h2>페이지 컴포넌트</h2>
+      <ul>
+        <li><a href="/src/components/header.html">헤더</a></li>
+        <li><a href="/src/components/main.html">메인</a></li>
+        <li><a href="/src/components/sidebar.html">사이드바</a></li>
+        <li><a href="/src/components/footer.html">푸터</a></li>
+      </ul>
+      <h2>기능 컴포넌트</h2>
+      <ul>
+        <li><a href="/src/components/album.html">앨범</a></li>
+        <li><a href="/src/components/artist.html">아티스트</a></li>
+        <li><a href="/src/components/player.html">플레이어</a></li>
+        <li><a href="/src/components/playlist.html">플레이리스트</a></li>
+        <li><a href="/src/components/search.html">검색</a></li>
+        <li><a href="/src/components/user-profile.html">사용자 프로필</a></li>
+      </ul>
+      <section class="retrospect-container">
+        <h2>회고록</h2>
+        <ul class="retrospect-list"></ul>
+      </section>
+      <section class="proceedings-container">
+        <h2>스크럼 회의록</h2>
+        <ul class="proceedings-list"></ul>
+      </section>
+    </main>
+    <footer>
+      <p>이 프로젝트는 교육용 시안입니다.</p>
+      <p>&copy; 2025 프사친</p>
+      <div class="footer-links">
+        <a href="https://github.com/but212/ui-project-team-10">GitHub</a>
+        <a href="https://www.notion.so/10-1ff73873401a809890ecdc729743dffa"
+          >Notion</a
+        >
+      </div>
+    </footer>
   </body>
-</html> 
+</html>

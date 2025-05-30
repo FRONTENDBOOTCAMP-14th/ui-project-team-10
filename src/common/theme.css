@@ -1,0 +1,16 @@
+:root {
+  --spotify-black: #121212;
+  --spotify-gray: #535353;
+  --spotify-dark-gray: #282828;
+  --spotify-light-gray: #b3b3b3;
+  --spotify-green: #1ed760;
+  --spotify-white: #ffffff;
+  --spotify-blue: #1d75de;
+
+  /* Hader */
+  --button-bg-color: #1f1f1f;
+  --button-hover-color: #2a2a2a;
+  --font-color: #b3b3b3;
+  --button-size: 48px;
+  --svg-size: 24px;
+}
