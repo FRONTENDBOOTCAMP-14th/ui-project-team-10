@@ -3,7 +3,7 @@
   --footer-fg: #fff;
   --footer-fg-light: #b3b3b3;
   --footer-divider: #232323;
-  --footer-link-hover: #8081b9;
+  --footer-link-hover: #6df843;
   --footer-social-bg: #222;
   --footer-social-hover: #333;
   --footer-radius: 50%;
@@ -62,7 +62,7 @@ footer {
 .footer-column a {
   color: var(--footer-fg-light);
   text-decoration: none;
-  transition: color 0.2s;
+  transition: color;
   font-size: 14px;
 }
 
@@ -92,11 +92,12 @@ footer {
 
 .footer-social a:hover {
   background: var(--footer-social-hover);
+  box-shadow: 0 0 0 1px var(--footer-link-hover);
 }
 
 .footer-social svg {
-  width: 18px;
-  height: 18px;
+  width: auto;
+  height: auto;
   fill: var(--footer-fg-light);
 }
 
