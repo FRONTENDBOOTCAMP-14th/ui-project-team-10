@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko-KR">
   <head>
     <meta charset="UTF-8" />
@@ -14,91 +14,187 @@
     <link rel="stylesheet" as="style" href="/font/pretendardvariable.css" />
     <link rel="stylesheet" href="/src/common/index.css" />
     <link rel="stylesheet" href="/src/styles/index-page.css" />
+    <link rel="stylesheet" href="/src/style.css" />
     <script type="module" src="/src/main.js"></script>
   </head>
   <body>
-    <header>
-      <h1>프사친 - 프론트엔드 사자 친구</h1>
+    <header class="bg-black">
+      <h1 class="green-text">프사친 - 프론트엔드 사자 친구</h1>
       <p>
         멋쟁이 사자처럼 프론트엔드 부트캠프 14기 UI 프로젝트 10조 프론드엔드
         사자 친구입니다!
       </p>
-      <a href="/src/pages/home.html" class="rounded-btn-green">시안 페이지로</a>
+      <a href="/src/pages/home.html" class="btn rounded-btn bg-green black-text"
+        >시안 페이지로</a
+      >
       <ul class="profile-list" aria-label="프로젝트 구성원">
         <li class="profile-card">
-          <img class="profile-img" src="" alt="" />
-          <p class="name">석정일</p>
-          <p class="roll">조장</p>
-          <a class="github" href="https://github.com/but212"
-            ><img src="/icons/github.svg" alt="깃허브 아이콘"
-          /></a>
+          <img class="profile-img" src="/image/sji.jpg" alt="" />
+          <p class="name green-text">석정일</p>
+          <p class="roll light-gray-text">조장</p>
+          <a class="github light-gray-text" href="https://github.com/but212">
+            <img src="/icons/github-white.svg" alt="깃헙 링크" />but212
+          </a>
         </li>
         <li class="profile-card">
-          <img class="profile-img" src="" alt="" />
-          <p class="name">김동규</p>
-          <p class="roll">조원</p>
-          <a class="github" href="https://github.com/cit1566"
-            ><img src="/icons/github.svg" alt="깃허브 아이콘"
-          /></a>
+          <img class="profile-img" src="/image/kdg.jpg" alt="" />
+          <p class="name green-text">김동규</p>
+          <p class="roll light-gray-text">조원</p>
+          <a class="github light-gray-text" href="https://github.com/cit1566">
+            <img src="/icons/github-white.svg" alt="깃헙 링크" />cit1566
+          </a>
         </li>
         <li class="profile-card">
-          <img class="profile-img" src="" alt="" />
-          <p class="name">오경태</p>
-          <p class="roll">조원</p>
-          <a class="github" href="https://github.com/Dowap2"
-            ><img src="/icons/github.svg" alt="깃허브 아이콘"
-          /></a>
+          <img class="profile-img" src="/image/ogt.jpg" alt="" />
+          <p class="name green-text">오경태</p>
+          <p class="roll light-gray-text">조원</p>
+          <a class="github light-gray-text" href="https://github.com/Dowap2">
+            <img src="/icons/github-white.svg" alt="깃헙 링크" />Dowap2
+          </a>
         </li>
         <li class="profile-card">
-          <img class="profile-img" src="" alt="" />
-          <p class="name">고우현</p>
-          <p class="roll">조원</p>
-          <a class="github" href="https://github.com/woohyeun15"
-            ><img src="/icons/github.svg" alt="깃허브 아이콘"
-          /></a>
+          <img class="profile-img" src="/image/kwh.jpg" alt="" />
+          <p class="name green-text">고우현</p>
+          <p class="roll light-gray-text">조원</p>
+          <a
+            class="github light-gray-text"
+            href="https://github.com/woohyeun15"
+          >
+            <img src="/icons/github-white.svg" alt="깃헙 링크" />woohyeun15
+          </a>
         </li>
       </ul>
     </header>
     <main>
       <h2>공통 컴포넌트</h2>
       <ul>
-        <li><a href="/src/components/button.html">버튼</a></li>
-        <li><a href="/src/components/header-com.html">네비게이션 바</a></li>
-        <li><a href="/src/components/album-card.html">앨범 카드</a></li>
         <li>
-          <a href="/src/components/player-control.html">플레이어 컨트롤</a>
+          <a class="index-pages-btn" href="/src/components/button.html">버튼</a>
         </li>
-        <li><a href="/src/components/search-input.html">검색 입력창</a></li>
         <li>
-          <a href="/src/components/playlist-item.html">플레이리스트 아이템</a>
+          <a class="index-pages-btn" href="/src/components/header-com.html"
+            >네비게이션 바</a
+          >
+        </li>
+        <li>
+          <a class="index-pages-btn" href="/src/components/album-card.html">
+            앨범 카드
+          </a>
+        </li>
+        <li>
+          <a class="index-pages-btn" href="/src/components/player-control.html">
+            플레이어 컨트롤
+          </a>
+        </li>
+        <li>
+          <a class="index-pages-btn" href="/src/components/search-input.html">
+            검색 입력창
+          </a>
+        </li>
+        <li>
+          <a class="index-pages-btn" href="/src/components/playlist-item.html">
+            플레이리스트 아이템
+          </a>
         </li>
       </ul>
       <h2>페이지 컴포넌트</h2>
       <ul>
-        <li><a href="/src/components/header.html">헤더</a></li>
-        <li><a href="/src/components/main.html">메인</a></li>
-        <li><a href="/src/components/sidebar.html">사이드바</a></li>
-        <li><a href="/src/components/footer.html">푸터</a></li>
+        <li>
+          <a class="index-pages-btn" href="/src/components/header.html">헤더</a>
+        </li>
+        <li>
+          <a class="index-pages-btn" href="/src/components/main.html">메인</a>
+        </li>
+        <li>
+          <a class="index-pages-btn" href="/src/components/sidebar.html">
+            사이드바
+          </a>
+        </li>
+        <li>
+          <a class="index-pages-btn" href="/src/components/footer.html">푸터</a>
+        </li>
       </ul>
       <h2>기능 컴포넌트</h2>
       <ul>
-        <li><a href="/src/components/album.html">앨범</a></li>
-        <li><a href="/src/components/artist.html">아티스트</a></li>
-        <li><a href="/src/components/player.html">플레이어</a></li>
-        <li><a href="/src/components/playlist.html">플레이리스트</a></li>
-        <li><a href="/src/components/search.html">검색</a></li>
-        <li><a href="/src/components/user-profile.html">사용자 프로필</a></li>
+        <li>
+          <a class="index-pages-btn" href="/src/components/album.html">앨범</a>
+        </li>
+        <li>
+          <a class="index-pages-btn" href="/src/components/artist.html"
+            >아티스트</a
+          >
+        </li>
+        <li>
+          <a class="index-pages-btn" href="/src/components/player.html"
+            >플레이어</a
+          >
+        </li>
+        <li>
+          <a class="index-pages-btn" href="/src/components/playlist.html"
+            >플레이리스트</a
+          >
+        </li>
+        <li>
+          <a class="index-pages-btn" href="/src/components/search.html">검색</a>
+        </li>
+        <li>
+          <a class="index-pages-btn" href="/src/components/user-profile.html"
+            >사용자 프로필</a
+          >
+        </li>
       </ul>
       <section class="retrospect-container">
         <h2>회고록</h2>
-        <ul class="retrospect-list"></ul>
+        <ul class="retrospect-list">
+          <details>
+            <summary>석정일</summary>
+            <p>회고록 내용</p>
+          </details>
+          <details>
+            <summary>김동규</summary>
+            <p>회고록 내용</p>
+          </details>
+          <details>
+            <summary>오경태</summary>
+            <p>회고록 내용</p>
+          </details>
+          <details>
+            <summary>고우현</summary>
+            <p>회고록 내용</p>
+          </details>
+        </ul>
       </section>
       <section class="proceedings-container">
         <h2>스크럼 회의록</h2>
-        <ul class="proceedings-list"></ul>
+        <ul class="proceedings-list">
+          <li>
+            <details>
+              <summary>05-26</summary>
+              <p>회의록 내용</p>
+            </details>
+          </li>
+          <li>
+            <details>
+              <summary>05-27</summary>
+              <p>회의록 내용</p>
+            </details>
+          </li>
+          <li>
+            <details>
+              <summary>05-28</summary>
+              <p>회의록 내용</p>
+            </details>
+          </li>
+          <li>
+            <details>
+              <summary>05-29</summary>
+              <p>회의록 내용</p>
+            </details>
+          </li>
+        </ul>
       </section>
     </main>
-    <footer>
+    <footer class="light-gray-text">
       <p>이 프로젝트는 교육용 시안입니다.</p>
       <p>&copy; 2025 프사친</p>
       <div class="footer-links">
