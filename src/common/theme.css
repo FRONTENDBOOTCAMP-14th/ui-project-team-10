@@ -6,6 +6,7 @@
   --spotify-green: #1ed760;
   --spotify-white: #ffffff;
   --spotify-blue: #1d75de;
+  --spotify-card-bg: #282828f3;
 
   /* font size */
   --spotify-base-font-size: 14px;
@@ -17,7 +18,7 @@
   --button-size: 48px;
   --svg-size: 24px;
   --button-border-radius: 500px;
-  --button-transition: all 0.5s ease-in-out;
+  --button-transition: all 0.2s ease-in-out;
 
   --spacing-8xl: 192px;
   --spacing-7xl: 160px;
