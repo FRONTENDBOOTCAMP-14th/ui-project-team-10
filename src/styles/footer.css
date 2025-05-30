@@ -69,7 +69,7 @@ footer {
 }
 
 .footer-column a:hover {
-  color: var(--bg-green);
+  color: white;
 }
 
 /* 소셜 아이콘 영역 */
@@ -94,7 +94,7 @@ footer {
 
 .footer-social a:hover {
   background: var(--footer-social-hover);
-  box-shadow: 0 0 0 1px var(--bg-green);
+  box-shadow: 0 0 0 1px white;
 }
 
 .footer-social svg {
