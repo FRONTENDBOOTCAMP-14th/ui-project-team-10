@@ -26,11 +26,11 @@ async function getToken() {
     },
     body: "grant_type=client_credentials",
   });
+
   const data = await res.json();
   return data.access_token;
 }
 
-// ✅ 아티스트 API
 async function getArtists(token) {
   const res = await fetch(
     `https://api.spotify.com/v1/artists?ids=${artistIds}&market=KR`,
@@ -59,7 +59,7 @@ function renderArtists(artists) {
             <img src="${artist.images[0]?.url || ""}" alt="${
       artist.name
     }" class="artist-profile" />
-            <img src="../assets/play.png" class="play-button"/>
+            <img src="/icons/play.png" class="play-button"/>
           </div>
           <h3 class="card-title">${artist.name}</h3>
           <p class="card-info">Artist</p>
@@ -70,51 +70,64 @@ function renderArtists(artists) {
   });
 }
 
-function toggleScrollButtons(show) {
-  document
-    .querySelectorAll(".scroll-btn-left, .scroll-btn-right")
-    .forEach((btn) => {
-      btn.style.display = show ? "block" : "none";
-    });
-}
-
 async function init() {
   try {
     const token = await getToken();
+
+    // Fetch and render artists
     const artists = await getArtists(token);
     renderArtists(artists);
   } catch (e) {
-    console.error("아티스트 정보를 불러오는 데 실패했습니다.", e);
+    console.error("데이터를 불러오는 데 실패했습니다.", e);
     document.querySelector(".artist-list").innerHTML =
-      "<li>데이터를 불러오지 못했습니다.</li>";
+      "<li>아티스트 정보를 불러오지 못했습니다.</li>";
   }
-}
-
-function setupEventListeners() {
-  const scrollWrapper = document.querySelector(".scroll-wrapper");
-  const artistList = document.querySelector(".artist-list");
-  const showAllBtn = document.querySelector(".show-all-button");
-
-  artistList.addEventListener("scroll", () => {
-    scrollWrapper.classList.toggle("scrolled", artistList.scrollLeft > 10);
-  });
-
-  showAllBtn.addEventListener("click", () => {
-    const isGrid = artistList.classList.toggle("grid-mode");
-    showAllBtn.textContent = isGrid ? "Hide" : "Show All";
-    toggleScrollButtons(!isGrid);
-  });
-
-  document.querySelector(".scroll-btn-left").addEventListener("click", () => {
-    artistList.scrollTo({ left: 0, behavior: "smooth" });
-  });
-
-  document.querySelector(".scroll-btn-right").addEventListener("click", () => {
-    artistList.scrollTo({ left: artistList.scrollWidth, behavior: "smooth" });
-  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   init();
   setupEventListeners();
 });
+
+function setupEventListeners() {
+  // Artist Scroll
+  const artistList = document.querySelector(".artist-list");
+  const artistWrapper = document.querySelector(".artist-section");
+
+  artistList.addEventListener("scroll", () => {
+    artistWrapper.classList.toggle("scrolled", artistList.scrollLeft > 10);
+  });
+
+  document
+    .querySelector(".artist-scroll-btn-left")
+    .addEventListener("click", () => {
+      artistList.scrollTo({ left: 0, behavior: "smooth" });
+    });
+
+  document
+    .querySelector(".artist-scroll-btn-right")
+    .addEventListener("click", () => {
+      artistList.scrollTo({ left: artistList.scrollWidth, behavior: "smooth" });
+    });
+
+  // Show all toggle (for artist)
+  const artistShowAllBtn = document.querySelector(".artist-show-all");
+  if (artistShowAllBtn) {
+    artistShowAllBtn.addEventListener("click", () => {
+      const isGrid = artistList.classList.toggle("grid-mode");
+      artistShowAllBtn.textContent = isGrid ? "Hide" : "Show All";
+      toggleScrollButtons("artist", !isGrid);
+    });
+  }
+
+  function toggleScrollButtons(type, show) {
+    const selectors = {
+      artist: [".artist-scroll-btn-left", ".artist-scroll-btn-right"],
+    };
+
+    selectors[type].forEach((selector) => {
+      const btn = document.querySelector(selector);
+      if (btn) btn.style.display = show ? "block" : "none";
+    });
+  }
+}
