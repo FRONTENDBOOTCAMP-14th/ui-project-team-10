@@ -16,6 +16,123 @@
     <link rel="stylesheet" href="/src/styles/index-page.css" />
     <link rel="stylesheet" href="/src/style.css" />
     <script type="module" src="/src/main.js"></script>
+    <style>
+      body {
+        line-height: 1.6;
+      }
+
+      header {
+        padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      header h1 {
+        font-size: var(--font-size-lg);
+        font-weight: var(--font-weight-boldest);
+        margin: 0 0 var(--spacing-md);
+      }
+
+      header p {
+        font-size: var(--font-size-base);
+        max-width: 800px;
+        margin: 0 auto var(--spacing-lg);
+      }
+
+      .profile-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--spacing-lg);
+        padding: var(--spacing-lg) 0;
+        max-width: 1200px;
+        margin: var(--spacing-lg) auto 0;
+        justify-content: flex-start;
+      }
+
+      .profile-card {
+        min-width: 220px;
+        border-radius: var(--border-radius-md);
+        padding: var(--spacing-md);
+        text-align: center;
+        background: var(--spotify-dark-gray);
+      }
+
+      .profile-img {
+        width: 150px;
+        height: 150px;
+        border-radius: var(--border-radius-round);
+        object-fit: cover;
+        margin: 0 auto var(--spacing-md);
+        background: var(--spotify-white);
+      }
+
+      .name {
+        font-weight: var(--font-weight-bold);
+        font-size: var(--font-size-base);
+        margin: 0 0 var(--spacing-xs);
+      }
+
+      .roll {
+        font-size: var(--font-size-xs);
+        margin: 0 0 var(--spacing-md);
+      }
+
+      .github {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacing-xs);
+      }
+
+      .github img {
+        width: 24px;
+        height: 24px;
+      }
+
+      main {
+        max-width: 1200px;
+        margin: -2rem auto 0;
+        padding: 0 var(--spacing-lg) var(--spacing-lg);
+      }
+
+      main h2 {
+        color: var(--spotify-white);
+        font-size: var(--font-size-base);
+        margin: var(--spacing-lg) 0 var(--spacing-md);
+        padding-bottom: var(--spacing-xs);
+        border-bottom: 1px solid var(--spotify-gray);
+      }
+
+      main ul {
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: var(--spacing-md);
+        margin: 0 0 var(--spacing-lg);
+      }
+
+      main ul li {
+        width: 90%;
+        display: block;
+      }
+
+      main ul li link-component {
+        display: block;
+        width: 90%;
+      }
+
+      footer {
+        padding: var(--spacing-lg);
+        text-align: center;
+        font-size: var(--font-size-xs);
+      }
+
+      footer a {
+        margin: 0 var(--spacing-xs);
+      }
+    </style>
   </head>
   <body>
     <header class="bg-black">
@@ -24,8 +141,8 @@
         멋쟁이 사자처럼 프론트엔드 부트캠프 14기 UI 프로젝트 10조 프론드엔드
         사자 친구입니다!
       </p>
-      <a href="/src/pages/home.html" class="btn rounded-btn bg-green black-text"
-        >시안 페이지로</a
+      <link-component href="#" button-style variant="primary" rounded
+        >시안 페이지로</link-component
       >
       <ul class="profile-list" aria-label="프로젝트 구성원">
         <li class="profile-card">
@@ -37,7 +154,11 @@
           </a>
         </li>
         <li class="profile-card">
-          <img class="profile-img" src="/image/KakaoTalk_20250402_233422836.jpg" alt="" />
+          <img
+            class="profile-img"
+            src="/image/KakaoTalk_20250402_233422836.jpg"
+            alt=""
+          />
           <p class="name green-text">김동규</p>
           <p class="roll light-gray-text">조원</p>
           <a class="github light-gray-text" href="https://github.com/cit1566">
@@ -73,82 +194,145 @@
       <h2>원자 컴포넌트</h2>
       <ul>
         <li>
-          <a class="index-pages-btn" href="/src/components/button.html">버튼</a>
-        </li>
-        <li>
-          <a class="index-pages-btn" href="/src/components/header-com.html"
-            >네비게이션 바</a
+          <link-component
+            href="/src/components/button.html"
+            button-style
+            full-width
+            >버튼</link-component
           >
         </li>
         <li>
-          <a class="index-pages-btn" href="/src/components/album-card.html">
-            앨범 카드
-          </a>
+          <link-component
+            href="/src/components/header-com.html"
+            button-style
+            full-width
+            >네비게이션 바</link-component
+          >
         </li>
         <li>
-          <a class="index-pages-btn" href="/src/components/player-control.html">
-            플레이어 컨트롤
-          </a>
+          <link-component
+            href="/src/components/album-card.html"
+            button-style
+            full-width
+            >앨범 카드</link-component
+          >
         </li>
         <li>
-          <a class="index-pages-btn" href="/src/components/search-input.html">
-            검색 입력창
-          </a>
+          <link-component
+            href="/src/components/player-control.html"
+            button-style
+            full-width
+            >플레이어 컨트롤</link-component
+          >
         </li>
         <li>
-          <a class="index-pages-btn" href="/src/components/playlist-item.html">
-            플레이리스트 아이템
-          </a>
+          <link-component
+            href="/src/components/search-input.html"
+            button-style
+            full-width
+            >검색 입력창</link-component
+          >
+        </li>
+        <li>
+          <link-component
+            href="/src/components/playlist-item.html"
+            button-style
+            full-width
+            >플레이리스트 아이템</link-component
+          >
         </li>
       </ul>
       <h2>페이지 컴포넌트</h2>
       <ul>
         <li>
-          <a class="index-pages-btn" href="/src/components/header.html">헤더</a>
+          <link-component
+            href="/src/components/header.html"
+            button-style
+            full-width
+            >헤더</link-component
+          >
         </li>
         <li>
-          <a class="index-pages-btn" href="/src/components/main.html">메인</a>
+          <link-component
+            href="/src/components/main.html"
+            button-style
+            full-width
+            >메인</link-component
+          >
         </li>
         <li>
-          <a class="index-pages-btn" href="/src/components/sidebar.html">
-            사이드바
-          </a>
+          <link-component
+            href="/src/components/sidebar.html"
+            button-style
+            full-width
+            >사이드바</link-component
+          >
         </li>
         <li>
-          <a class="index-pages-btn" href="/src/components/footer.html">푸터</a>
+          <link-component
+            href="/src/components/footer.html"
+            button-style
+            full-width
+            >푸터</link-component
+          >
         </li>
       </ul>
       <h2>기능 컴포넌트</h2>
       <ul>
         <li>
-          <a class="index-pages-btn" href="/src/components/album.html">앨범</a>
-        </li>
-        <li>
-          <a class="index-pages-btn" href="/src/components/artist.html"
-            >아티스트</a
+          <link-component
+            href="/src/components/album.html"
+            button-style
+            full-width
+            >앨범</link-component
           >
         </li>
         <li>
-          <a class="index-pages-btn" href="/src/components/player.html"
-            >플레이어</a
+          <link-component
+            href="/src/components/artist.html"
+            button-style
+            full-width
+            >아티스트</link-component
           >
         </li>
         <li>
-          <a class="index-pages-btn" href="/src/components/playlist.html"
-            >플레이리스트</a
+          <link-component
+            href="/src/components/player.html"
+            button-style
+            full-width
+            >플레이어</link-component
           >
         </li>
         <li>
-          <a class="index-pages-btn" href="/src/components/search.html">검색</a>
-        </li>
-        <li>
-          <a class="index-pages-btn" href="/src/components/user-profile.html"
-            >사용자 프로필</a
+          <link-component
+            href="/src/components/playlist.html"
+            button-style
+            full-width
+            >플레이리스트</link-component
           >
         </li>
         <li>
-          <a class="index-pages-btn" href="/src/components/preview.html"
-            >무료 가입</a
+          <link-component
+            href="/src/components/search.html"
+            button-style
+            full-width
+            >검색</link-component
+          >
+        </li>
+        <li>
+          <link-component
+            href="/src/components/user-profile.html"
+            button-style
+            full-width
+            >사용자 프로필</link-component
+          >
+        </li>
+        <li>
+          <link-component
+            href="/src/components/preview.html"
+            button-style
+            full-width
+            >무료 가입</link-component
           >
         </li>
       </ul>
