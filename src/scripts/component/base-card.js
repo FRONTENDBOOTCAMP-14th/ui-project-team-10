@@ -3,6 +3,12 @@
  *
  * 모든 카드 컴포넌트(아티스트, 앨범, 플레이리스트)의 공통 기능을 제공하는 베이스 클래스입니다.
  * 이 클래스는 직접 사용하기보다는 다른 카드 컴포넌트들이 상속받아 사용합니다.
+ * 
+ * 접근성 기능:
+ * - 키보드 탐색 지원 (Tab, Enter, Space)
+ * - ARIA 속성 및 역할
+ * - 스크린 리더 호환성
+ * - 색상 대비 개선
  *
  * @class BaseCard
  * @extends HTMLElement
@@ -47,6 +53,15 @@ export class BaseCard extends HTMLElement {
     const card = this.shadowRoot.querySelector(".list-card");
     if (card) {
       card.addEventListener("click", this.handleClick.bind(this));
+      
+      // 키보드 접근성 지원 추가
+      card.addEventListener("keydown", (event) => {
+        // Enter 또는 Space 키를 누르면 클릭 이벤트와 동일하게 처리
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          this.handleClick(event);
+        }
+      });
     }
   }
 
@@ -84,14 +99,33 @@ export class BaseCard extends HTMLElement {
         background-color: #181818;
         border-radius: 6px;
         padding: 16px;
-        transition: background-color 0.3s;
+        transition: background-color 0.3s, outline 0.2s;
         cursor: pointer;
         height: 100%;
         box-sizing: border-box;
+        /* 접근성: 탭 초점 지원 */
+        tabindex: 0;
+        outline: none;
+      }
+      
+      /* 접근성: 키보드 초점 상태에 시각적 표시 */
+      .list-card:focus {
+        outline: 2px solid #1db954;
+        outline-offset: 2px;
       }
       
       .list-card:hover {
         background-color: #282828;
+      }
+      
+      /* 접근성: 높은 대비 모드 지원 */
+      @media (forced-colors: active) {
+        .list-card {
+          border: 1px solid CanvasText;
+        }
+        .list-card:focus {
+          outline: 2px solid Highlight;
+        }
       }
       
       .card-img-container {
@@ -155,6 +189,16 @@ export class BaseCard extends HTMLElement {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+      }
+      
+      /* 접근성: 높은 대비 모드에서 텍스트 가독성 보장 */
+      @media (forced-colors: active) {
+        .card-title {
+          color: CanvasText;
+        }
+        .card-description {
+          color: CanvasText;
+        }
       }
     `;
   }

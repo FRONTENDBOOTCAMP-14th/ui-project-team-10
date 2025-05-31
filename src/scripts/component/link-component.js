@@ -2,6 +2,13 @@
  * Custom link web component
  * Reusable link with various styles, sizes, and options
  * Can be styled as a regular link or as a button
+ * 
+ * 접근성 기능:
+ * - 키보드 탐색 지원 (Tab, Enter, Space)
+ * - ARIA 속성 및 역할
+ * - 스크린 리더 호환성
+ * - 높은 대비 모드 지원
+ * - 포커스 관리
  */
 class LinkComponent extends HTMLElement {
   constructor() {
@@ -43,12 +50,26 @@ class LinkComponent extends HTMLElement {
   addEventListeners() {
     const link = this.shadowRoot.querySelector("a");
     link.addEventListener("click", this.handleClick.bind(this));
+    link.addEventListener("keydown", (event) => {
+      // 링크에 대한 Enter 및 Space 키 지원 추가
+      if ((event.key === "Enter" || event.key === " ") && !this.disabled) {
+        event.preventDefault();
+        this.handleClick(event);
+      }
+    });
   }
 
   removeEventListeners() {
     const link = this.shadowRoot.querySelector("a");
     if (link) {
       link.removeEventListener("click", this.handleClick.bind(this));
+      link.removeEventListener("keydown", (event) => {
+        // 링크에 대한 Enter 및 Space 키 지원 추가
+        if ((event.key === "Enter" || event.key === " ") && !this.disabled) {
+          event.preventDefault();
+          this.handleClick(event);
+        }
+      });
     }
   }
 
@@ -479,6 +500,44 @@ class LinkComponent extends HTMLElement {
         pointer-events: none;
       }
       
+      /* 접근성: 키보드 포커스 시각적 표시 */
+      .link:focus,
+      .btn:focus {
+        outline: 2px solid #1db954;
+        outline-offset: 2px;
+      }
+      
+      /* 접근성: 높은 대비 모드 지원 */
+      @media (forced-colors: active) {
+        .link {
+          color: LinkText;
+        }
+        .link:visited {
+          color: VisitedText;
+        }
+        .btn, .link-btn {
+          border: 1px solid ButtonText;
+        }
+        .link:focus,
+        .btn:focus,
+        .link-btn:focus {
+          outline: 2px solid Highlight;
+        }
+        .disabled {
+          opacity: 1;
+          color: GrayText;
+          border-color: GrayText;
+        }
+        .btn-primary, .link-btn-primary {
+          background-color: Highlight;
+          color: HighlightText;
+        }
+        .btn-secondary, .link-btn-secondary {
+          background-color: ButtonFace;
+          color: ButtonText;
+        }
+      }
+      
       /* Reset for possible nested interactive elements */
       .link-text {
         display: inline-block;
@@ -489,6 +548,24 @@ class LinkComponent extends HTMLElement {
   render() {
     const linkClasses = this.getLinkClasses();
     const content = this.getLinkContent();
+    const ariaLabel = this.getAttribute('aria-label') || this.textContent || 'Link';
+    const ariaExpanded = this.hasAttribute('aria-expanded') ? this.getAttribute('aria-expanded') : null;
+    const ariaControls = this.getAttribute('aria-controls') || null;
+    const ariaHaspopup = this.hasAttribute('aria-haspopup') ? this.getAttribute('aria-haspopup') : null;
+    
+    // 접근성 속성 구성
+    let ariaAttributes = `
+      aria-label="${ariaLabel}"
+      aria-disabled="${this.disabled}"
+    `;
+    
+    // 조건부 ARIA 속성 추가
+    if (ariaExpanded) ariaAttributes += ` aria-expanded="${ariaExpanded}"`;
+    if (ariaControls) ariaAttributes += ` aria-controls="${ariaControls}"`;
+    if (ariaHaspopup) ariaAttributes += ` aria-haspopup="${ariaHaspopup}"`;
+    
+    // 버튼 스타일의 링크일 경우 role="button" 추가
+    const role = this.buttonStyle ? 'role="button"' : '';
 
     this.shadowRoot.innerHTML = `
       <style>${this.getStyles()}</style>
@@ -496,7 +573,9 @@ class LinkComponent extends HTMLElement {
          href="${this.disabled ? "javascript:void(0)" : this.href}" 
          target="${this.target}"
          part="link"
-         aria-disabled="${this.disabled}">
+         ${role}
+         ${ariaAttributes}
+         tabindex="${this.disabled ? '-1' : '0'}">
         ${content}
       </a>
     `;

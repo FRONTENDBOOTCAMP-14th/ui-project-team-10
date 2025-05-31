@@ -56,6 +56,15 @@ class AlbumCard extends BaseCard {
       })
     );
   }
+  
+  /**
+   * 접근성 구현을 위한 고유 ID 생성
+   * 각 요소에 고유한 ID를 제공하여 스크린 리더가 요소를 식별하는 데 도움을 줍니다.
+   * @returns {string} 고유 ID 문자열
+   */
+  generateUniqueId() {
+    return Math.random().toString(36).substring(2, 10);
+  }
 
   render() {
     // 기본값이 있는 속성 값 가져오기
@@ -84,12 +93,28 @@ class AlbumCard extends BaseCard {
           transform: scale(1.05);
         }
         
+        .list-card:focus {
+          transform: scale(1.05);
+        }
+        
         .card-img-container {
           border-radius: 8px;
+          position: relative;
         }
         
         .card-img {
           border-radius: 8px;
+        }
+        
+        /* 접근성: 높은 대비 모드 지원 */
+        @media (forced-colors: active) {
+          .play-button {
+            background-color: ButtonFace;
+            border: 1px solid ButtonText;
+          }
+          .play-icon {
+            fill: ButtonText;
+          }
         }
         
         @media (max-width: 768px) {
@@ -98,15 +123,19 @@ class AlbumCard extends BaseCard {
           }
         }
       </style>
-      <article class="list-card">
-        <div class="card-img-container">
-          <img src="${albumCover}" alt="${albumTitle}" class="card-img" />
-          <div class="play-button">
-            <img src="/icons/play.svg" class="play-icon" alt="Play" />
+      <article 
+        class="list-card" 
+        role="button" 
+        tabindex="0" 
+        aria-label="${albumTitle} by ${albumArtist}">
+        <div class="card-img-container" aria-hidden="true">
+          <img src="${albumCover}" alt="${albumTitle} album cover" class="card-img" />
+          <div class="play-button" aria-label="Play ${albumTitle}">
+            <img src="/icons/play.svg" class="play-icon" alt="" />
           </div>
         </div>
-        <h3 class="card-title">${albumTitle}</h3>
-        <p class="card-description">${albumArtist}</p>
+        <h3 class="card-title" id="album-title-${this.generateUniqueId()}">${albumTitle}</h3>
+        <p class="card-description" id="album-artist-${this.generateUniqueId()}">${albumArtist}</p>
       </article>
     `;
   }

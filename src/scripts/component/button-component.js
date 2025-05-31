@@ -1,6 +1,13 @@
 /**
  * Custom button web component
  * Reusable button with various styles, sizes, and options
+ * 
+ * 접근성 기능:
+ * - 키보드 탐색 지원 (Tab, Enter, Space)
+ * - ARIA 속성 및 역할
+ * - 스크린 리더 호환성
+ * - 높은 대비 모드 지원
+ * - 포커스 관리
  */
 class ButtonComponent extends HTMLElement {
   constructor() {
@@ -359,6 +366,35 @@ class ButtonComponent extends HTMLElement {
         cursor: not-allowed;
       }
       
+      /* 접근성: 키보드 포커스 시각적 표시 */
+      .btn:focus {
+        outline: 2px solid #1db954;
+        outline-offset: 2px;
+      }
+      
+      /* 접근성: 높은 대비 모드 지원 */
+      @media (forced-colors: active) {
+        .btn {
+          border: 1px solid ButtonText;
+        }
+        .btn:focus {
+          outline: 2px solid Highlight;
+        }
+        .disabled {
+          opacity: 1;
+          color: GrayText;
+          border-color: GrayText;
+        }
+        .btn-primary {
+          background-color: Highlight;
+          color: HighlightText;
+        }
+        .btn-secondary {
+          background-color: ButtonFace;
+          color: ButtonText;
+        }
+      }
+      
       /* Reset for possible nested interactive elements */
       .btn-text {
         display: inline-block;
@@ -369,12 +405,30 @@ class ButtonComponent extends HTMLElement {
   render() {
     const buttonClasses = this.getButtonClasses();
     const content = this.getButtonContent();
+    const ariaLabel = this.getAttribute('aria-label') || this.textContent || 'Button';
+    const ariaPressed = this.hasAttribute('aria-pressed') ? this.getAttribute('aria-pressed') : null;
+    const ariaExpanded = this.hasAttribute('aria-expanded') ? this.getAttribute('aria-expanded') : null;
+    const ariaControls = this.getAttribute('aria-controls') || null;
+    
+    // 접근성 속성 구성
+    let ariaAttributes = `
+      aria-label="${ariaLabel}"
+      ${this.disabled ? 'aria-disabled="true"' : ''}
+    `;
+    
+    // 조건부 ARIA 속성 추가
+    if (ariaPressed) ariaAttributes += ` aria-pressed="${ariaPressed}"`;
+    if (ariaExpanded) ariaAttributes += ` aria-expanded="${ariaExpanded}"`;
+    if (ariaControls) ariaAttributes += ` aria-controls="${ariaControls}"`;
 
     this.shadowRoot.innerHTML = `
       <style>${this.getStyles()}</style>
-      <button class="${buttonClasses}" part="button" ?disabled="${
-      this.disabled
-    }">
+      <button 
+        class="${buttonClasses}" 
+        part="button" 
+        ?disabled="${this.disabled}"
+        ${ariaAttributes}
+      >
         ${content}
       </button>
     `;

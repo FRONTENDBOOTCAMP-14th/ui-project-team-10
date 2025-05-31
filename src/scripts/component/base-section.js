@@ -11,6 +11,11 @@
  * - 상태 관리 (StateManager 활용)
  * - 이벤트 기반 업데이트
  * - 표준화된 이벤트 처리
+ * - 접근성 기능:
+ *   - 키보드 탐색 지원 (Tab, Enter, Space, 화살표 키)
+ *   - ARIA 속성 및 역할 (랜드마크, 타이틀, 레이블 등)
+ *   - 스크린 리더 호환성
+ *   - 높은 대비 모드 지원
  */
 import { StateManager, globalEventBus } from "../utils/state-manager.js";
 import {
@@ -375,6 +380,23 @@ export class BaseSection extends HTMLElement {
 
     if (!scrollLeftBtn || !scrollRightBtn || !container) return;
 
+    // 접근성: 스크롤 버튼에 ARIA 속성 추가
+    scrollLeftBtn.setAttribute("aria-label", "왼쪽으로 스크롤");
+    scrollLeftBtn.setAttribute(
+      "aria-controls",
+      `${this.sectionName}-container`
+    );
+    scrollRightBtn.setAttribute("aria-label", "오른쪽으로 스크롤");
+    scrollRightBtn.setAttribute(
+      "aria-controls",
+      `${this.sectionName}-container`
+    );
+
+    // 접근성: 스크롤 영역에 역할 추가
+    container.setAttribute("role", "region");
+    container.setAttribute("aria-label", `${this.titleText} 목록`);
+    container.setAttribute("tabindex", "0"); // 키보드 탐색 가능하게 설정
+
     // 초기 버튼 상태 설정
     this.toggleScrollButtons();
 
@@ -386,6 +408,190 @@ export class BaseSection extends HTMLElement {
         this.toggleScrollButtons();
       }, 100)
     );
+
+    // 접근성: 키보드 이벤트 추가
+    this.eventManager.addListener(container, "keydown", (event) => {
+      // 좌우 화살표로 스크롤 제어
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        this.scrollContainer(container, -300);
+        this.eventManager.publish(`${this.sectionName}:keyboardScrollLeft`, {
+          timestamp: new Date(),
+        });
+      } else if (event.key === "ArrowRight") {
+        event.preventDefault();
+        this.scrollContainer(container, 300);
+        this.eventManager.publish(`${this.sectionName}:keyboardScrollRight`, {
+          timestamp: new Date(),
+        });
+      }
+    });
+
+    // 왼쪽 스크롤 버튼
+    this.eventManager.addListener(scrollLeftBtn, "click", () => {
+      // 이벤트 발행: 스크롤 버튼 클릭
+      this.eventManager.publish(`${this.sectionName}:scrollLeft`, {
+        timestamp: new Date(),
+      });
+
+      container.scrollBy({
+        left: -300,
+        behavior: "smooth",
+      });
+    });
+
+    // 오른쪽 스크롤 버튼
+    this.eventManager.addListener(scrollRightBtn, "click", () => {
+      // 이벤트 발행: 스크롤 버튼 클릭
+      this.eventManager.publish(`${this.sectionName}:scrollRight`, {
+        timestamp: new Date(),
+      });
+
+      container.scrollBy({
+        left: 300,
+        behavior: "smooth",
+      });
+    });
+
+    // 이전 이벤트 리스너 제거 (Delegation 사용으로 바꾸기 전 정리)
+    this.cleanupItemEventListeners(itemList);
+
+    itemList.innerHTML = "";
+
+    // 배열이 비어있는지 검사
+    if (items.length === 0) {
+      // 빈 상태 UI 표시
+      const emptyMessage = document.createElement("div");
+      emptyMessage.className = "empty-message";
+      emptyMessage.textContent = `${this.titleText}에 표시할 항목이 없습니다.`;
+      itemList.appendChild(emptyMessage);
+
+      // 이벤트 발행: 빈 상태 렌더링
+      this.eventManager.publish(`${this.sectionName}:emptyState`, {
+        timestamp: new Date(),
+      });
+      return;
+    }
+
+    // 이벤트 위임 설정 - 모든 카드의 클릭 이벤트를 하나의 리스너로 처리
+    this.cardClickRemover = delegateEvent(
+      itemList,
+      ".list-card",
+      "click",
+      (event, targetElement) => {
+        const index = parseInt(targetElement.dataset.index, 10);
+        const item = items[index];
+        if (item) {
+          this.eventManager.publish(`${this.sectionName}:cardClick`, {
+            id: item.id,
+            index: index,
+            item: item,
+            timestamp: new Date(),
+          });
+        }
+      }
+    );
+
+    items.forEach((item, index) => {
+      // li 요소 생성
+      const listItem = document.createElement("li");
+      listItem.className = "list-card";
+      listItem.dataset.index = index; // 인덱스 저장
+      if (item.id) {
+        listItem.dataset.id = item.id; // 아이템 ID 저장
+      }
+
+      // 카드 요소 생성 (자식 클래스에서 구현)
+      const cardElement = this.createCardElement(item);
+
+      // 리스트 아이템에 카드 추가
+      listItem.appendChild(cardElement);
+      itemList.appendChild(listItem);
+    });
+
+    // 이벤트 발행: 렌더링 완료
+    this.eventManager.publish(
+      EventTypes.SECTION.RENDER_COMPLETE ||
+        `${this.sectionName}:renderComplete`,
+      {
+        sectionName: this.sectionName,
+        itemCount: items.length,
+        timestamp: new Date(),
+      }
+    );
+  }
+
+  /**
+   * 이전에 등록한 아이템 이벤트 리스너를 정리합니다.
+   * @param {HTMLElement} container - 아이템 컨테이너 요소
+   */
+  cleanupItemEventListeners(container) {
+    // 위임 이벤트 제거
+    if (this.cardClickRemover) {
+      this.cardClickRemover();
+      this.cardClickRemover = null;
+    }
+  }
+
+  /**
+   * 스크롤 버튼 설정
+   * 이벤트 관리자를 활용하여 이벤트 관리를 개선했습니다.
+   */
+  setupScrollButtons() {
+    const scrollLeftBtn = this.shadowRoot.querySelector(".scroll-left");
+    const scrollRightBtn = this.shadowRoot.querySelector(".scroll-right");
+    const container = this.shadowRoot.querySelector(
+      `.${this.sectionName}-container`
+    );
+
+    if (!scrollLeftBtn || !scrollRightBtn || !container) return;
+
+    // 접근성: 스크롤 버튼에 ARIA 속성 추가
+    scrollLeftBtn.setAttribute("aria-label", "왼쪽으로 스크롤");
+    scrollLeftBtn.setAttribute(
+      "aria-controls",
+      `${this.sectionName}-container`
+    );
+    scrollRightBtn.setAttribute("aria-label", "오른쪽으로 스크롤");
+    scrollRightBtn.setAttribute(
+      "aria-controls",
+      `${this.sectionName}-container`
+    );
+
+    // 접근성: 스크롤 영역에 역할 추가
+    container.setAttribute("role", "region");
+    container.setAttribute("aria-label", `${this.titleText} 목록`);
+    container.setAttribute("tabindex", "0"); // 키보드 탐색 가능하게 설정
+
+    // 초기 버튼 상태 설정
+    this.toggleScrollButtons();
+
+    // 스크롤 이벤트 리스너 - 스로틀링 적용
+    this.eventManager.addListener(
+      container,
+      "scroll",
+      throttle(() => {
+        this.toggleScrollButtons();
+      }, 100)
+    );
+
+    // 접근성: 키보드 이벤트 추가
+    this.eventManager.addListener(container, "keydown", (event) => {
+      // 좌우 화살표로 스크롤 제어
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        this.scrollContainer(container, -300);
+        this.eventManager.publish(`${this.sectionName}:keyboardScrollLeft`, {
+          timestamp: new Date(),
+        });
+      } else if (event.key === "ArrowRight") {
+        event.preventDefault();
+        this.scrollContainer(container, 300);
+        this.eventManager.publish(`${this.sectionName}:keyboardScrollRight`, {
+          timestamp: new Date(),
+        });
+      }
+    });
 
     // 왼쪽 스크롤 버튼
     this.eventManager.addListener(scrollLeftBtn, "click", () => {
@@ -415,51 +621,66 @@ export class BaseSection extends HTMLElement {
   }
 
   /**
-   * 스크롤 버튼 토글
-   * 스크롤 상태에 따라 버튼 표시를 관리하고 이벤트를 발행합니다.
+   * 스크롤 버튼 표시 상태 토글
    */
   toggleScrollButtons() {
     const container = this.shadowRoot.querySelector(
       `.${this.sectionName}-container`
     );
-    const leftBtn = this.shadowRoot.querySelector(".scroll-left");
-    const rightBtn = this.shadowRoot.querySelector(".scroll-right");
+    const scrollLeftBtn = this.shadowRoot.querySelector(".scroll-left");
+    const scrollRightBtn = this.shadowRoot.querySelector(".scroll-right");
 
-    if (!container || !leftBtn || !rightBtn) return;
+    if (!container || !scrollLeftBtn || !scrollRightBtn) return;
 
-    const hasLeftScroll = container.scrollLeft > 0;
-    const hasRightScroll =
-      container.scrollWidth > container.clientWidth &&
-      container.scrollLeft < container.scrollWidth - container.clientWidth;
+    // 스크롤 위치에 따라 버튼 표시 여부 결정
+    const isAtStart = container.scrollLeft <= 10;
+    const isAtEnd =
+      container.scrollLeft + container.clientWidth >=
+      container.scrollWidth - 10;
 
-    // 왼쪽 버튼 표시 여부
-    if (hasLeftScroll) {
-      leftBtn.style.display = "flex";
-    } else {
-      leftBtn.style.display = "none";
+    // 스크롤 버튼 표시 상태 업데이트
+    scrollLeftBtn.style.display = isAtStart ? "none" : "flex";
+    scrollRightBtn.style.display = isAtEnd ? "none" : "flex";
+
+    // 접근성: ARIA 속성 업데이트
+    scrollLeftBtn.setAttribute("aria-hidden", isAtStart ? "true" : "false");
+    scrollRightBtn.setAttribute("aria-hidden", isAtEnd ? "true" : "false");
+
+    // 접근성: 스크롤 위치에 대한 피드백 제공
+    const totalItems = this.items.length;
+    if (totalItems > 0) {
+      // 대략적인 현재 위치 계산 (전체 중 현재 보이는 부분)
+      const viewportRatio = container.clientWidth / container.scrollWidth;
+      const scrollRatio =
+        container.scrollLeft / (container.scrollWidth - container.clientWidth);
+      const approximatePosition = isAtStart
+        ? 1
+        : isAtEnd
+        ? totalItems
+        : Math.floor(scrollRatio * totalItems + 1);
+
+      container.setAttribute("aria-valuenow", approximatePosition);
+      container.setAttribute("aria-valuemin", 1);
+      container.setAttribute("aria-valuemax", totalItems);
     }
+  }
 
-    // 오른쪽 버튼 표시 여부
-    if (hasRightScroll) {
-      rightBtn.style.display = "flex";
-    } else {
-      rightBtn.style.display = "none";
-    }
+  /**
+   * 접근성: 키보드 키로 스크롤하는 헬퍼 함수
+   * @param {HTMLElement} container - 스크롤할 컨테이너
+   * @param {number} scrollAmount - 스크롤할 거리 (양수는 오른쪽, 음수는 왼쪽)
+   */
+  scrollContainer(container, scrollAmount) {
+    if (!container) return;
 
-    // 버튼 표시 상태가 변경되었을 때만 이벤트 발행
-    if (
-      this._prevLeftScroll !== hasLeftScroll ||
-      this._prevRightScroll !== hasRightScroll
-    ) {
-      this._prevLeftScroll = hasLeftScroll;
-      this._prevRightScroll = hasRightScroll;
+    // 부드럽게 스크롤
+    container.scrollBy({
+      left: scrollAmount,
+      behavior: "smooth",
+    });
 
-      this.eventManager.publish(`${this.sectionName}:scrollButtonsChanged`, {
-        canScrollLeft: hasLeftScroll,
-        canScrollRight: hasRightScroll,
-        timestamp: new Date(),
-      });
-    }
+    // 스크롤 버튼 상태 업데이트
+    setTimeout(() => this.toggleScrollButtons(), 300);
   }
 
   /**
@@ -468,130 +689,130 @@ export class BaseSection extends HTMLElement {
    */
   getBaseStyles() {
     return `
-      :host {
-        display: block;
-        width: 100%;
-      }
-      
-      .section-title {
-        font-size: 24px;
-        font-weight: 700;
-        margin: 24px 0 16px;
-      }
-      
-      .section-wrapper {
-        position: relative;
-        width: 100%;
-      }
-      
-      .${this.sectionName}-container {
-        width: 100%;
-        overflow-x: auto;
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-      }
-      
-      .${this.sectionName}-container::-webkit-scrollbar {
-        display: none;
-      }
-      
-      .${this.sectionName}-list {
-        display: flex;
-        gap: 16px;
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-      
+    :host {
+      display: block;
+      width: 100%;
+    }
+    
+    .section-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 24px 0 16px;
+    }
+    
+    .section-wrapper {
+      position: relative;
+      width: 100%;
+    }
+    
+    .${this.sectionName}-container {
+      width: 100%;
+      overflow-x: auto;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    
+    .${this.sectionName}-container::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .${this.sectionName}-list {
+      display: flex;
+      gap: 16px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .list-card {
+      flex: 0 0 auto;
+      width: 180px;
+    }
+    
+    .scroll-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 50%;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 1;
+      border: none;
+    }
+    
+    .scroll-left {
+      left: 10px;
+    }
+    
+    .scroll-right {
+      right: 10px;
+    }
+    
+    .scroll-icon {
+      width: 24px;
+      height: 24px;
+      fill: white;
+    }
+    
+    /* 로딩 인디케이터 스타일 */
+    .loading-indicator {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 150px;
+    }
+    
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 3px solid rgba(30, 215, 96, 0.3);
+      border-top-color: var(--spotify-green, #1ed760);
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* 에러 메시지 스타일 */
+    .error-message {
+      display: none;
+      color: #f15e6c;
+      text-align: center;
+      margin: 20px 0;
+      padding: 10px;
+      border-radius: 4px;
+      background-color: rgba(241, 94, 108, 0.1);
+      font-weight: 500;
+      font-size: 14px;
+    }
+    
+    /* 빈 상태 메시지 스타일 */
+    .empty-message {
+      display: block;
+      width: 100%;
+      text-align: center;
+      color: #b3b3b3;
+      padding: 40px 0;
+      font-size: 14px;
+      font-weight: 500;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+    }
+    
+    @media (max-width: 768px) {
       .list-card {
-        flex: 0 0 auto;
-        width: 180px;
+        width: 140px;
       }
-      
-      .scroll-btn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 40px;
-        height: 40px;
-        background-color: rgba(0, 0, 0, 0.7);
-        border-radius: 50%;
-        display: none;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        z-index: 1;
-        border: none;
-      }
-      
-      .scroll-left {
-        left: 10px;
-      }
-      
-      .scroll-right {
-        right: 10px;
-      }
-      
-      .scroll-icon {
-        width: 24px;
-        height: 24px;
-        fill: white;
-      }
-      
-      /* 로딩 인디케이터 스타일 */
-      .loading-indicator {
-        display: none;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 150px;
-      }
-      
-      .spinner {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        border: 3px solid rgba(30, 215, 96, 0.3);
-        border-top-color: var(--spotify-green, #1ed760);
-        animation: spin 1s linear infinite;
-      }
-      
-      @keyframes spin {
-        to { transform: rotate(360deg); }
-      }
-      
-      /* 에러 메시지 스타일 */
-      .error-message {
-        display: none;
-        color: #f15e6c;
-        text-align: center;
-        margin: 20px 0;
-        padding: 10px;
-        border-radius: 4px;
-        background-color: rgba(241, 94, 108, 0.1);
-        font-weight: 500;
-        font-size: 14px;
-      }
-      
-      /* 빈 상태 메시지 스타일 */
-      .empty-message {
-        display: block;
-        width: 100%;
-        text-align: center;
-        color: #b3b3b3;
-        padding: 40px 0;
-        font-size: 14px;
-        font-weight: 500;
-        background-color: rgba(255, 255, 255, 0.05);
-        border-radius: 4px;
-      }
-      
-      @media (max-width: 768px) {
-        .list-card {
-          width: 140px;
-        }
-      }
-    `;
+    }
+  `;
   }
 
   /**
@@ -600,37 +821,37 @@ export class BaseSection extends HTMLElement {
    */
   getTemplate() {
     return `
-      <h2 class="section-title">${this.titleText}</h2>
-      
-      <!-- 로딩 인디케이터 -->
-      <div class="loading-indicator">
-        <div class="spinner"></div>
+    <h2 class="section-title">${this.titleText}</h2>
+    
+    <!-- 로딩 인디케이터 -->
+    <div class="loading-indicator">
+      <div class="spinner"></div>
+    </div>
+    
+    <!-- 에러 메시지 -->
+    <div class="error-message">
+      데이터를 불러오는 데 오류가 발생했습니다.
+    </div>
+    
+    <!-- 콘텐츠 영역 -->
+    <div class="section-wrapper">
+      <button class="scroll-btn scroll-left">
+        <svg class="scroll-icon" viewBox="0 0 24 24">
+          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+        </svg>
+      </button>
+      <div class="${this.sectionName}-container">
+        <ul class="${this.sectionName}-list">
+          <li>데이터를 불러오는 중입니다...</li>
+        </ul>
       </div>
-      
-      <!-- 에러 메시지 -->
-      <div class="error-message">
-        데이터를 불러오는 데 오류가 발생했습니다.
-      </div>
-      
-      <!-- 콘텐츠 영역 -->
-      <div class="section-wrapper">
-        <button class="scroll-btn scroll-left">
-          <svg class="scroll-icon" viewBox="0 0 24 24">
-            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
-          </svg>
-        </button>
-        <div class="${this.sectionName}-container">
-          <ul class="${this.sectionName}-list">
-            <li>데이터를 불러오는 중입니다...</li>
-          </ul>
-        </div>
-        <button class="scroll-btn scroll-right">
-          <svg class="scroll-icon" viewBox="0 0 24 24">
-            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
-          </svg>
-        </button>
-      </div>
-    `;
+      <button class="scroll-btn scroll-right">
+        <svg class="scroll-icon" viewBox="0 0 24 24">
+          <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+        </svg>
+      </button>
+    </div>
+  `;
   }
 
   /**
@@ -638,11 +859,71 @@ export class BaseSection extends HTMLElement {
    */
   render() {
     this.shadowRoot.innerHTML = `
-      <style>
-        ${this.getBaseStyles()}
-      </style>
-      ${this.getTemplate()}
-    `;
+    <style>
+      ${this.getBaseStyles()}
+    </style>
+    ${this.getTemplate()}
+  `;
+
+    // 초기 UI 상태 설정
+    setTimeout(() => this.updateUI(), 0);
+  }
+
+  /**
+   * HTML 템플릿을 반환합니다
+   * @returns {string} HTML 템플릿 문자열
+   */
+  renderTemplate() {
+    // 컨테이너 및 기본 구조 생성
+    this.shadowRoot.innerHTML = `
+    <style>
+      ${this.getBaseStyles()}
+      ${this.getComponentStyles()}
+    </style>
+    <section class="${
+      this.sectionName
+    }-section" role="region" aria-labelledby="${this.sectionName}-title">
+      <div class="section-header">
+        <h2 class="section-title" id="${this.sectionName}-title">${
+      this.titleText
+    }</h2>
+        <div class="section-actions" aria-label="섹션 동작">
+          ${this.getHeaderActionButtons()}
+        </div>
+      </div>
+      
+      <div class="scrollable-container">
+        <button class="scroll-button scroll-left" tabindex="0" aria-label="왼쪽으로 스크롤" aria-controls="${
+          this.sectionName
+        }-container">
+          <img src="/icons/chevron-left.svg" alt="" aria-hidden="true" />
+        </button>
+        
+        <div class="${this.sectionName}-container" role="list" aria-label="${
+      this.titleText
+    } 아이템 목록" tabindex="0">
+          <div class="${this.sectionName}-list" role="presentation"></div>
+        </div>
+        
+        <button class="scroll-button scroll-right" tabindex="0" aria-label="오른쪽으로 스크롤" aria-controls="${
+          this.sectionName
+        }-container">
+          <img src="/icons/chevron-right.svg" alt="" aria-hidden="true" />
+        </button>
+      </div>
+      
+      <div class="loading-container" role="status" aria-live="polite">
+        <div class="loading-spinner" aria-hidden="true"></div>
+        <p>로딩 중...</p>
+      </div>
+      
+      <div class="error-container" role="alert" aria-live="assertive">
+        <div class="error-icon" aria-hidden="true">⚠️</div>
+        <p class="error-message">데이터를 불러오는 중 오류가 발생했습니다.</p>
+        <button class="retry-button" tabindex="0">다시 시도</button>
+      </div>
+    </section>
+  `;
 
     // 초기 UI 상태 설정
     setTimeout(() => this.updateUI(), 0);

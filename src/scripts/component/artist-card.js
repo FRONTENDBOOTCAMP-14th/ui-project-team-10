@@ -8,6 +8,12 @@
  * - 반응형 스타일링
  * - 클릭 시 커스텀 이벤트
  *
+ * 접근성 기능:
+ * - 키보드 탐색 지원 (Tab, Enter, Space)
+ * - ARIA 속성 및 역할
+ * - 스크린 리더 호환성
+ * - 고대비 모드 지원
+ *
  * @element artist-card
  * @attribute {string} artist-name - 아티스트 이름
  * @attribute {string} artist-type - 아티스트 유형 (예: "Artist")
@@ -29,6 +35,17 @@ class ArtistCard extends BaseCard {
   connectedCallback() {
     this.render();
     this.addEventListeners();
+
+    // 접근성: 키보드 이벤트 처리 추가
+    this.shadowRoot
+      .querySelector(".list-card")
+      .addEventListener("keydown", (e) => {
+        // Enter 또는 Space 키로 활성화
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          this.handleClick();
+        }
+      });
   }
 
   attributeChangedCallback() {
@@ -57,6 +74,15 @@ class ArtistCard extends BaseCard {
     );
   }
 
+  /**
+   * 접근성 구현을 위한 고유 ID 생성
+   * 각 요소에 고유한 ID를 제공하여 스크린 리더가 요소를 식별하는 데 도움을 줍니다.
+   * @returns {string} 고유 ID 문자열
+   */
+  generateUniqueId() {
+    return Math.random().toString(36).substring(2, 10);
+  }
+
   render() {
     // 기본값이 있는 속성 값 가져오기
     const artistName = this.getAttribute("artist-name") || "아티스트 이름";
@@ -64,7 +90,16 @@ class ArtistCard extends BaseCard {
     const artistImage =
       this.getAttribute("artist-image") || "/image/default-artist-image.png";
 
-    // HTML 콘텐츠 생성
+    // 접근성: 아티스트 카드에 고유 ID 생성
+    const titleId = `artist-title-${this.generateUniqueId()}`;
+    const typeId = `artist-type-${this.generateUniqueId()}`;
+    const cardId = this.id || `artist-card-${this.generateUniqueId()}`;
+
+    if (!this.id) {
+      this.setAttribute("id", cardId);
+    }
+
+    // HTML 콘텐츠 생성 (접근성 개선 포함)
     this.shadowRoot.innerHTML = `
       <style>
         ${this.getBaseStyles()}
@@ -78,18 +113,82 @@ class ArtistCard extends BaseCard {
           max-width: 180px;
           transition: transform 0.2s ease;
           padding: 0.5rem;
+          /* 접근성: 가독성을 위한 스타일 조정 */
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
         
         .list-card:hover {
           transform: scale(1.05);
         }
         
+        /* 접근성: 키보드 포커스 스타일 개선 */
+        .list-card:focus-visible {
+          outline: 2px solid #1db954;
+          outline-offset: 2px;
+          box-shadow: 0 0 0 4px rgba(29, 185, 84, 0.3);
+          transform: scale(1.05);
+        }
+        
         .card-img-container {
           border-radius: 50%;
+          overflow: hidden;
+          position: relative;
+          width: 100%;
+          max-width: 160px;
+          aspect-ratio: 1/1;
+        }
+        
+        .card-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
         
         .card-title, .card-description {
           text-align: center;
+          margin: 0.5rem 0 0.25rem;
+          width: 100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        
+        .card-title {
+          font-size: 1rem;
+          line-height: 1.2;
+        }
+        
+        .card-description {
+          font-size: 0.875rem;
+          line-height: 1.4;
+          color: #b3b3b3;
+        }
+        
+        /* 접근성: 고대비 모드 지원 */
+        @media (forced-colors: active) {
+          .list-card {
+            border: 1px solid ButtonText;
+          }
+          
+          .list-card:focus-visible {
+            outline: 3px solid Highlight;
+          }
+          
+          .card-title, .card-description {
+            color: ButtonText;
+          }
+          
+          .play-button {
+            border: 1px solid ButtonText;
+            background-color: ButtonFace;
+          }
+          
+          .play-icon {
+            forced-color-adjust: none;
+            fill: ButtonText;
+          }
         }
         
         @media (max-width: 768px) {
@@ -98,15 +197,20 @@ class ArtistCard extends BaseCard {
           }
         }
       </style>
-      <article class="list-card">
-        <div class="card-img-container">
-          <img src="${artistImage}" alt="${artistName}" class="card-img" />
-          <div class="play-button">
-            <img src="/icons/play.svg" class="play-icon" alt="play" />
+      <article 
+        class="list-card"
+        role="button"
+        tabindex="0"
+        aria-labelledby="${titleId} ${typeId}"
+        aria-label="아티스트: ${artistName}, 유형: ${artistType}">
+        <div class="card-img-container" aria-hidden="true">
+          <img src="${artistImage}" alt="" class="card-img" />
+          <div class="play-button" role="presentation">
+            <img src="/icons/play.svg" class="play-icon" alt="" />
           </div>
         </div>
-        <h3 class="card-title">${artistName}</h3>
-        <p class="card-description">${artistType}</p>
+        <h3 id="${titleId}" class="card-title">${artistName}</h3>
+        <p id="${typeId}" class="card-description">${artistType}</p>
       </article>
     `;
   }
