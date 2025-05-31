@@ -7,15 +7,21 @@
  * @attribute {string} playlist-owner - 플레이리스트 소유자
  * @attribute {string} playlist-cover - 플레이리스트 커버 이미지 URL
  * @fires {CustomEvent} playlist-click - 플레이리스트가 클릭되었을 때 발생하는 이벤트
- * 
+ *
  * 접근성 기능:
  * - 키보드 탐색 지원 (Tab, Enter, Space)
  * - ARIA 속성 및 역할 추가
  * - 스크린 리더 호환성 개선
  * - 고대비 모드 지원
+ *
+ * 반응형 기능:
+ * - 다양한 화면 크기에 최적화 (XS, S, M, LG, XL 브레이크포인트)
+ * - 터치 인터페이스 개선
+ * - 요소의 크기와 스타일을 장치에 따라 자동 조정
  */
 
 import { BaseCard } from "./base-card.js";
+import { BREAKPOINTS, isMobileDevice } from "../utils/responsive-utils.js";
 
 class PlaylistCard extends BaseCard {
   constructor() {
@@ -63,9 +69,11 @@ class PlaylistCard extends BaseCard {
     const playlistCover =
       this.getAttribute("playlist-cover") ||
       "/image/default-playlist-cover.png";
-      
+
     // 접근성 개선: 플레이리스트 카드에 고유 ID 생성
-    const playlistId = this.getAttribute("id") || `playlist-card-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`;
+    const playlistId =
+      this.getAttribute("id") ||
+      `playlist-card-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`;
     if (!this.getAttribute("id")) {
       this.setAttribute("id", playlistId);
     }
@@ -81,8 +89,8 @@ class PlaylistCard extends BaseCard {
         
         .list-card {
           max-width: 180px;
-          transition: transform 0.3s ease;
-          padding: 0.5rem;
+          transition: transform 0.3s ease, background-color 0.3s;
+          padding: 16px;
           /* 접근성: 가독성을 위한 스타일 조정 */
           position: relative;
           display: flex;
@@ -91,6 +99,7 @@ class PlaylistCard extends BaseCard {
         
         .list-card:hover {
           transform: scale(1.05);
+          background-color: #282828;
         }
         
         /* 접근성: 키보드 포커스 스타일 개선 */
@@ -102,39 +111,77 @@ class PlaylistCard extends BaseCard {
         
         .card-img-container {
           border-radius: 4px;
-          margin-bottom: 8px;
+          margin-bottom: 12px;
           position: relative;
+          overflow: hidden;
         }
         
         .card-img {
           border-radius: 4px;
           width: 100%;
           height: auto;
+          transition: transform 0.3s ease;
+        }
+        
+        .list-card:hover .card-img {
+          transform: scale(1.05);
         }
         
         .play-button {
-          background-color: var(--spotify-green, #1ed760);
-          /* 접근성: 표시 개선 */
+          position: absolute;
+          bottom: 8px;
+          right: 8px;
+          width: 40px;
+          height: 40px;
+          background-color: #1db954;
+          border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
+          opacity: 0;
+          transform: translateY(8px);
+          transition: all 0.3s ease;
+          box-shadow: 0 8px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .list-card:hover .play-button,
+        .list-card:focus-visible .play-button {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        
+        .play-button:hover {
+          transform: scale(1.1);
+          background-color: #1ed760;
+        }
+        
+        .play-icon {
+          width: 24px;
+          height: 24px;
         }
         
         .card-title {
           font-weight: 700;
-          margin-top: 0.5rem;
-          margin-bottom: 0.25rem;
+          margin-top: 0;
+          margin-bottom: 8px;
           /* 접근성: 가독성 개선 */
-          font-size: 1rem;
+          font-size: 16px;
           line-height: 1.2;
+          color: #fff;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         
         .card-description {
           color: #b3b3b3;
           margin: 0;
           /* 접근성: 가독성 개선 */
-          font-size: 0.875rem;
+          font-size: 14px;
           line-height: 1.4;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         
         /* 접근성: 키보드 포커스 아이콘 표시 */
@@ -158,6 +205,7 @@ class PlaylistCard extends BaseCard {
           }
           
           .play-button {
+            opacity: 1;
             border: 1px solid ButtonText;
             background-color: ButtonFace;
           }
@@ -168,9 +216,120 @@ class PlaylistCard extends BaseCard {
           }
         }
         
-        @media (max-width: 768px) {
+        /* 반응형 스타일: XS (800px 이하) - 모바일 */
+        @media (max-width: ${BREAKPOINTS.xs}px) {
+          .list-card {
+            max-width: 120px;
+            padding: 12px;
+          }
+          
+          .card-img-container {
+            margin-bottom: 8px;
+          }
+          
+          .card-title {
+            font-size: 14px;
+            margin-bottom: 4px;
+          }
+          
+          .card-description {
+            font-size: 12px;
+          }
+          
+          .play-button {
+            width: 36px;
+            height: 36px;
+            opacity: 0.9; /* 모바일에서는 항상 약간 보이게 */
+            bottom: 4px;
+            right: 4px;
+          }
+          
+          .play-icon {
+            width: 20px;
+            height: 20px;
+          }
+          
+          /* 터치 인터페이스 개선 */
+          .list-card {
+            -webkit-tap-highlight-color: rgba(29, 185, 84, 0.3); /* iOS 터치 하이라이트 */
+            touch-action: manipulation; /* 더 좋은 터치 반응성 */
+          }
+        }
+        
+        /* 반응형 스타일: S (801px - 850px) - 소형 태블릿 */
+        @media (min-width: ${BREAKPOINTS.xs + 1}px) and (max-width: ${
+      BREAKPOINTS.s
+    }px) {
           .list-card {
             max-width: 140px;
+            padding: 14px;
+          }
+          
+          .card-title {
+            font-size: 15px;
+          }
+          
+          .card-description {
+            font-size: 13px;
+          }
+        }
+        
+        /* 반응형 스타일: M (851px - 1078px) - 태블릿 및 소형 데스크톱 */
+        @media (min-width: ${BREAKPOINTS.s + 1}px) and (max-width: ${
+      BREAKPOINTS.m
+    }px) {
+          .list-card {
+            max-width: 160px;
+          }
+          
+          .play-button {
+            width: 42px;
+            height: 42px;
+          }
+          
+          .play-icon {
+            width: 22px;
+            height: 22px;
+          }
+        }
+        
+        /* 반응형 스타일: LG (1079px - 1742px) - 데스크톱 */
+        @media (min-width: ${BREAKPOINTS.m + 1}px) and (max-width: ${
+      BREAKPOINTS.lg
+    }px) {
+          .list-card {
+            max-width: 180px;
+          }
+        }
+        
+        /* 반응형 스타일: XL (1743px 이상) - 대형 디스플레이 */
+        @media (min-width: ${BREAKPOINTS.lg + 1}px) {
+          .list-card {
+            max-width: 200px;
+            padding: 20px;
+          }
+          
+          .card-img-container {
+            margin-bottom: 16px;
+          }
+          
+          .card-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+          }
+          
+          .card-description {
+            font-size: 16px;
+          }
+          
+          .play-button {
+            width: 48px;
+            height: 48px;
+          }
+          
+          .play-icon {
+            width: 28px;
+            height: 28px;
           }
         }
       </style>

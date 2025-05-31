@@ -17,13 +17,11 @@
  *   - 스크린 리더 호환성
  *   - 높은 대비 모드 지원
  */
-import { StateManager, globalEventBus } from "../utils/state-manager.js";
-import {
-  EventManager,
-  EventTypes,
-  throttle,
-  delegateEvent,
-} from "../utils/event-utils.js";
+import { StateManager } from "../utils/state-manager.js";
+import { EventManager } from "../utils/event-manager.js";
+import { GlobalEventBus } from "../utils/global-event-bus.js";
+import { EventTypes } from "../utils/event-utils.js";
+import { BREAKPOINTS, getResponsiveStyle } from "../utils/responsive-utils.js";
 
 export class BaseSection extends HTMLElement {
   constructor() {
@@ -684,49 +682,27 @@ export class BaseSection extends HTMLElement {
   }
 
   /**
-   * 공통 섹션 스타일을 반환합니다
-   * @returns {string} 스타일 문자열
+   * 기본 스타일을 반환합니다
+   * @returns {string} CSS 스타일 문자열
    */
   getBaseStyles() {
     return `
     :host {
       display: block;
-      width: 100%;
+      font-family: system-ui, -apple-system, sans-serif;
+      margin-bottom: 32px;
     }
     
     .section-title {
       font-size: 24px;
       font-weight: 700;
-      margin: 24px 0 16px;
+      margin-bottom: 16px;
+      color: #fff;
     }
     
     .section-wrapper {
       position: relative;
-      width: 100%;
-    }
-    
-    .${this.sectionName}-container {
-      width: 100%;
-      overflow-x: auto;
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-    
-    .${this.sectionName}-container::-webkit-scrollbar {
-      display: none;
-    }
-    
-    .${this.sectionName}-list {
-      display: flex;
-      gap: 16px;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    
-    .list-card {
-      flex: 0 0 auto;
-      width: 180px;
+      overflow: hidden;
     }
     
     .scroll-btn {
@@ -736,13 +712,26 @@ export class BaseSection extends HTMLElement {
       width: 40px;
       height: 40px;
       background-color: rgba(0, 0, 0, 0.7);
+      border: none;
       border-radius: 50%;
-      display: none;
-      justify-content: center;
-      align-items: center;
+      color: white;
       cursor: pointer;
       z-index: 1;
-      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.2s ease;
+      opacity: 0;
+    }
+    
+    .section-wrapper:hover .scroll-btn {
+      opacity: 1;
+    }
+    
+    .scroll-btn:focus-visible {
+      opacity: 1;
+      outline: 2px solid #1db954;
+      outline-offset: 2px;
     }
     
     .scroll-left {
@@ -751,6 +740,7 @@ export class BaseSection extends HTMLElement {
     
     .scroll-right {
       right: 10px;
+      transform: translateY(-50%) rotate(180deg);
     }
     
     .scroll-icon {
@@ -759,45 +749,68 @@ export class BaseSection extends HTMLElement {
       fill: white;
     }
     
-    /* 로딩 인디케이터 스타일 */
+    .${this.sectionName}-container {
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE and Edge */
+      scroll-behavior: smooth;
+      padding: 4px;
+    }
+    
+    .${this.sectionName}-container::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
+    }
+    
+    .${this.sectionName}-list {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 24px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    
     .loading-indicator {
       display: none;
       justify-content: center;
       align-items: center;
-      width: 100%;
-      height: 150px;
+      height: 100px;
+    }
+    
+    .loading-indicator.active {
+      display: flex;
     }
     
     .spinner {
       width: 40px;
       height: 40px;
+      border: 4px solid rgba(255, 255, 255, 0.3);
       border-radius: 50%;
-      border: 3px solid rgba(30, 215, 96, 0.3);
-      border-top-color: var(--spotify-green, #1ed760);
+      border-top-color: #1db954;
       animation: spin 1s linear infinite;
     }
     
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
     
-    /* 에러 메시지 스타일 */
     .error-message {
       display: none;
-      color: #f15e6c;
-      text-align: center;
-      margin: 20px 0;
-      padding: 10px;
+      padding: 16px;
+      background-color: rgba(220, 53, 69, 0.1);
+      color: #dc3545;
       border-radius: 4px;
-      background-color: rgba(241, 94, 108, 0.1);
-      font-weight: 500;
-      font-size: 14px;
+      margin-bottom: 16px;
+      text-align: center;
     }
     
-    /* 빈 상태 메시지 스타일 */
-    .empty-message {
+    .error-message.active {
       display: block;
-      width: 100%;
+    }
+    
+    .empty-message {
       text-align: center;
       color: #b3b3b3;
       padding: 40px 0;
@@ -807,9 +820,105 @@ export class BaseSection extends HTMLElement {
       border-radius: 4px;
     }
     
-    @media (max-width: 768px) {
+    /* 반응형 스타일: XS (800px 이하) - 모바일 */
+    @media (max-width: ${BREAKPOINTS.xs}px) {
+      .section-title {
+        font-size: 20px;
+        margin-bottom: 12px;
+        padding: 0 8px;
+      }
+      
+      .section-wrapper {
+        margin: 0 -8px; /* 모바일에서는 넘치는 느낌을 주기 위함 */
+      }
+      
+      .${this.sectionName}-list {
+        gap: 12px;
+        padding: 0 8px;
+      }
+      
+      .list-card {
+        width: 120px; /* 모바일에서는 더 작은 카드 */
+      }
+      
+      .scroll-btn {
+        width: 32px;
+        height: 32px;
+        opacity: 0.8; /* 모바일에서는 항상 보이도록 */
+      }
+      
+      .scroll-icon {
+        width: 18px;
+        height: 18px;
+      }
+      
+      /* 터치 인터페이스 개선 */
+      .scroll-btn {
+        touch-action: manipulation;
+      }
+      
+      .${this.sectionName}-container {
+        -webkit-overflow-scrolling: touch; /* iOS 원활한 스크롤 */
+        touch-action: pan-x; /* 가로 스와이프만 허용 */
+      }
+    }
+    
+    /* 반응형 스타일: S (801px - 850px) - 소형 태블릿 */
+    @media (min-width: ${BREAKPOINTS.xs + 1}px) and (max-width: ${
+      BREAKPOINTS.s
+    }px) {
+      .section-title {
+        font-size: 22px;
+      }
+      
+      .${this.sectionName}-list {
+        gap: 16px;
+      }
+      
       .list-card {
         width: 140px;
+      }
+    }
+    
+    /* 반응형 스타일: M (851px - 1078px) - 태블릿 및 소형 데스크톱 */
+    @media (min-width: ${BREAKPOINTS.s + 1}px) and (max-width: ${
+      BREAKPOINTS.m
+    }px) {
+      .${this.sectionName}-list {
+        gap: 20px;
+      }
+      
+      .list-card {
+        width: 160px;
+      }
+    }
+    
+    /* 반응형 스타일: LG (1079px - 1742px) - 데스크톱 */
+    @media (min-width: ${BREAKPOINTS.m + 1}px) and (max-width: ${
+      BREAKPOINTS.lg
+    }px) {
+      .${this.sectionName}-list {
+        gap: 24px;
+      }
+      
+      .list-card {
+        width: 180px;
+      }
+    }
+    
+    /* 반응형 스타일: XL (1743px 이상) - 대형 디스플레이 */
+    @media (min-width: ${BREAKPOINTS.lg + 1}px) {
+      .section-title {
+        font-size: 28px;
+        margin-bottom: 20px;
+      }
+      
+      .${this.sectionName}-list {
+        gap: 32px;
+      }
+      
+      .list-card {
+        width: 200px;
       }
     }
   `;

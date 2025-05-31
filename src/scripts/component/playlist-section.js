@@ -8,6 +8,11 @@
  * - ARIA 속성 및 역할 추가
  * - 스크린 리더 호환성 개선
  * - 고대비 모드 지원
+ * 
+ * 반응형 기능:
+ * - 다양한 화면 크기에 최적화 (XS, S, M, LG, XL 브레이크포인트)
+ * - 터치 인터페이스 개선
+ * - 화면 사이즈에 따른 요소 갰좌와 간격 자동 조정
  * @element playlist-section
  */
 
@@ -15,6 +20,7 @@ import { getToken, getPlaylists, playlistIds } from "../utils/spotify-api.js";
 import "./playlist-card.js";
 import { BaseSection } from "./base-section.js";
 import { globalEventBus } from "../utils/state-manager.js";
+import { BREAKPOINTS, isMobileDevice } from "../utils/responsive-utils.js";
 
 class PlaylistSection extends BaseSection {
   constructor() {
@@ -255,7 +261,7 @@ class PlaylistSection extends BaseSection {
 }
 
 /**
- * 접근성 관련 추가 스타일을 반환합니다.
+ * 접근성 및 반응형 스타일을 반환합니다.
  * 상위 클래스의 getComponentStyles를 확장합니다.
  * @returns {string} 컴포넌트 스타일 문자열
  */
@@ -269,17 +275,53 @@ PlaylistSection.prototype.getComponentStyles = function () {
   return `
     ${baseStyles}
     
+    /* 플레이리스트 섹션 고유 스타일 */
+    .playlist-section {
+      position: relative;
+    }
+    
+    .playlist-container {
+      position: relative;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch; /* iOS 스크롤 개선 */
+      scrollbar-width: thin; /* Firefox 스크롤바 스타일 */
+    }
+    
     /* 접근성: 키보드 포커스 스타일 */
     .playlist-container playlist-card:focus-visible {
       outline: 2px solid #1db954;
       outline-offset: 2px;
       border-radius: 4px;
+      box-shadow: 0 0 0 4px rgba(29, 185, 84, 0.3);
+      transform: scale(1.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      z-index: 1;
+    }
+    
+    /* 스크롤 버튼 스타일 개선 */
+    .scroll-button {
+      background-color: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+      z-index: 2;
+    }
+    
+    .scroll-button:hover, .scroll-button:focus-visible {
+      background-color: rgba(29, 185, 84, 0.8);
+      transform: scale(1.1);
+    }
+    
+    .scroll-button:focus-visible {
+      outline: 2px solid #1db954;
+      outline-offset: 2px;
     }
     
     /* 접근성: 고대비 모드 지원 */
     @media (forced-colors: active) {
       .playlist-container playlist-card:focus-visible {
-        outline: 3px solid HighlightText;
+        outline: 3px solid Highlight;
+        forced-color-adjust: none;
       }
       
       .playlist-container playlist-card {
@@ -292,6 +334,152 @@ PlaylistSection.prototype.getComponentStyles = function () {
       
       .scroll-button {
         border: 1px solid ButtonText;
+        background-color: ButtonFace;
+      }
+      
+      .scroll-button:hover, .scroll-button:focus-visible {
+        background-color: Highlight;
+      }
+      
+      .scroll-button svg {
+        fill: ButtonText;
+      }
+    }
+    
+    /* 반응형 스타일: XS (800px 이하) - 모바일 */
+    @media (max-width: ${BREAKPOINTS.xs}px) {
+      .playlist-section {
+        padding: 12px 16px;
+      }
+      
+      .playlist-section .section-title {
+        font-size: 18px;
+        margin-bottom: 12px;
+      }
+      
+      .playlist-container {
+        gap: 8px;
+        margin: 0 -8px;
+        padding: 4px 8px;
+      }
+      
+      .scroll-button {
+        width: 32px;
+        height: 32px;
+        top: calc(50% - 16px);
+      }
+      
+      .scroll-button.left {
+        left: 4px;
+      }
+      
+      .scroll-button.right {
+        right: 4px;
+      }
+      
+      /* 터치 화면에서 가로 스크롤 개선 */
+      .playlist-container {
+        touch-action: pan-x;
+        -webkit-tap-highlight-color: transparent;
+      }
+      
+      /* 모바일에서는 스크롤 버튼 가시성 조정 */
+      .scroll-button {
+        opacity: 0.5;
+        transform: scale(0.9);
+      }
+    }
+    
+    /* 반응형 스타일: S (801px - 850px) - 소형 태블릿 */
+    @media (min-width: ${BREAKPOINTS.xs + 1}px) and (max-width: ${BREAKPOINTS.s}px) {
+      .playlist-section {
+        padding: 16px 24px;
+      }
+      
+      .playlist-container {
+        gap: 12px;
+        margin: 0 -12px;
+        padding: 4px 12px;
+      }
+      
+      .scroll-button {
+        width: 36px;
+        height: 36px;
+        top: calc(50% - 18px);
+      }
+      
+      .scroll-button.left {
+        left: 8px;
+      }
+      
+      .scroll-button.right {
+        right: 8px;
+      }
+    }
+    
+    /* 반응형 스타일: M (851px - 1078px) - 태블릿 및 소형 데스크톱 */
+    @media (min-width: ${BREAKPOINTS.s + 1}px) and (max-width: ${BREAKPOINTS.m}px) {
+      .playlist-section {
+        padding: 20px 32px;
+      }
+      
+      .playlist-section .section-title {
+        font-size: 20px;
+        margin-bottom: 16px;
+      }
+      
+      .playlist-container {
+        gap: 16px;
+        margin: 0 -16px;
+        padding: 4px 16px;
+      }
+      
+      .scroll-button {
+        width: 40px;
+        height: 40px;
+        top: calc(50% - 20px);
+      }
+    }
+    
+    /* 반응형 스타일: LG (1079px - 1742px) - 데스크톱 */
+    @media (min-width: ${BREAKPOINTS.m + 1}px) and (max-width: ${BREAKPOINTS.lg}px) {
+      .playlist-section {
+        padding: 24px 40px;
+      }
+      
+      .playlist-section .section-title {
+        font-size: 22px;
+        margin-bottom: 18px;
+      }
+      
+      .playlist-container {
+        gap: 20px;
+        margin: 0 -20px;
+        padding: 4px 20px;
+      }
+    }
+    
+    /* 반응형 스타일: XL (1743px 이상) - 대형 디스플레이 */
+    @media (min-width: ${BREAKPOINTS.lg + 1}px) {
+      .playlist-section {
+        padding: 28px 48px;
+      }
+      
+      .playlist-section .section-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+      
+      .playlist-container {
+        gap: 24px;
+        margin: 0 -24px;
+        padding: 8px 24px;
+      }
+      
+      .scroll-button {
+        width: 48px;
+        height: 48px;
+        top: calc(50% - 24px);
       }
     }
   `;

@@ -5,7 +5,6 @@
  * - 사용자 지정 아티스트 이름 및 프로필 이미지
  * - 호버 효과 및 재생 버튼 오버레이
  * - 캡슐화를 위한 Shadow DOM
- * - 반응형 스타일링
  * - 클릭 시 커스텀 이벤트
  *
  * 접근성 기능:
@@ -13,6 +12,12 @@
  * - ARIA 속성 및 역할
  * - 스크린 리더 호환성
  * - 고대비 모드 지원
+ *
+ * 반응형 기능:
+ * - 다양한 화면 크기에 최적화 (XS, S, M, LG, XL 브레이크포인트)
+ * - 터치 인터페이스 개선
+ * - 원형 이미지 및 컨텐츠 크기 자동 조정
+ * - 화면 크기별 적절한 여백과 폰트 크기 적용
  *
  * @element artist-card
  * @attribute {string} artist-name - 아티스트 이름
@@ -22,6 +27,7 @@
  */
 
 import { BaseCard } from "./base-card.js";
+import { BREAKPOINTS, isMobileDevice } from "../utils/responsive-utils.js";
 
 class ArtistCard extends BaseCard {
   constructor() {
@@ -111,17 +117,19 @@ class ArtistCard extends BaseCard {
         
         .list-card {
           max-width: 180px;
-          transition: transform 0.2s ease;
-          padding: 0.5rem;
+          transition: transform 0.3s ease, background-color 0.3s;
+          padding: 16px;
           /* 접근성: 가독성을 위한 스타일 조정 */
           position: relative;
           display: flex;
           flex-direction: column;
           align-items: center;
+          border-radius: 8px;
         }
         
         .list-card:hover {
           transform: scale(1.05);
+          background-color: #282828;
         }
         
         /* 접근성: 키보드 포커스 스타일 개선 */
@@ -130,6 +138,7 @@ class ArtistCard extends BaseCard {
           outline-offset: 2px;
           box-shadow: 0 0 0 4px rgba(29, 185, 84, 0.3);
           transform: scale(1.05);
+          background-color: #282828;
         }
         
         .card-img-container {
@@ -139,31 +148,82 @@ class ArtistCard extends BaseCard {
           width: 100%;
           max-width: 160px;
           aspect-ratio: 1/1;
+          margin-bottom: 12px;
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .list-card:hover .card-img-container {
+          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+          transform: translateY(-4px);
         }
         
         .card-img {
           width: 100%;
           height: 100%;
           object-fit: cover;
+          transition: transform 0.3s ease;
+        }
+        
+        .list-card:hover .card-img {
+          transform: scale(1.05);
+        }
+        
+        .play-button {
+          position: absolute;
+          bottom: 8%;
+          right: 8%;
+          width: 40px;
+          height: 40px;
+          background-color: #1db954;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          opacity: 0;
+          transform: translateY(8px);
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+          z-index: 1;
+        }
+        
+        .list-card:hover .play-button,
+        .list-card:focus-visible .play-button {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        
+        .play-button:hover {
+          transform: scale(1.1);
+          background-color: #1ed760;
+        }
+        
+        .play-icon {
+          width: 24px;
+          height: 24px;
         }
         
         .card-title, .card-description {
           text-align: center;
-          margin: 0.5rem 0 0.25rem;
           width: 100%;
           overflow: hidden;
           text-overflow: ellipsis;
+          white-space: nowrap;
         }
         
         .card-title {
-          font-size: 1rem;
+          font-size: 16px;
+          font-weight: 700;
           line-height: 1.2;
+          margin: 12px 0 4px;
+          color: #fff;
         }
         
         .card-description {
-          font-size: 0.875rem;
+          font-size: 14px;
           line-height: 1.4;
           color: #b3b3b3;
+          margin: 0 0 8px;
         }
         
         /* 접근성: 고대비 모드 지원 */
@@ -174,13 +234,19 @@ class ArtistCard extends BaseCard {
           
           .list-card:focus-visible {
             outline: 3px solid Highlight;
+            forced-color-adjust: none;
           }
           
           .card-title, .card-description {
             color: ButtonText;
           }
           
+          .card-img-container {
+            border: 1px solid ButtonText;
+          }
+          
           .play-button {
+            opacity: 1;
             border: 1px solid ButtonText;
             background-color: ButtonFace;
           }
@@ -191,9 +257,145 @@ class ArtistCard extends BaseCard {
           }
         }
         
-        @media (max-width: 768px) {
+        /* 반응형 스타일: XS (800px 이하) - 모바일 */
+        @media (max-width: ${BREAKPOINTS.xs}px) {
           .list-card {
+            max-width: 130px;
+            padding: 12px;
+          }
+          
+          .card-img-container {
+            max-width: 110px;
+            margin-bottom: 8px;
+          }
+          
+          .card-title {
+            font-size: 14px;
+            margin: 8px 0 2px;
+          }
+          
+          .card-description {
+            font-size: 12px;
+            margin: 0 0 4px;
+          }
+          
+          .play-button {
+            width: 32px;
+            height: 32px;
+            opacity: 0.9; /* 모바일에서는 항상 약간 보이게 */
+          }
+          
+          .play-icon {
+            width: 18px;
+            height: 18px;
+          }
+          
+          /* 터치 인터페이스 개선 */
+          .list-card {
+            -webkit-tap-highlight-color: rgba(29, 185, 84, 0.3); /* iOS 터치 하이라이트 */
+            touch-action: manipulation; /* 더 좋은 터치 반응성 */
+          }
+        }
+        
+        /* 반응형 스타일: S (801px - 850px) - 소형 태블릿 */
+        @media (min-width: ${BREAKPOINTS.xs + 1}px) and (max-width: ${
+      BREAKPOINTS.s
+    }px) {
+          .list-card {
+            max-width: 150px;
+            padding: 14px;
+          }
+          
+          .card-img-container {
+            max-width: 130px;
+            margin-bottom: 10px;
+          }
+          
+          .card-title {
+            font-size: 15px;
+          }
+          
+          .card-description {
+            font-size: 13px;
+          }
+          
+          .play-button {
+            width: 36px;
+            height: 36px;
+          }
+          
+          .play-icon {
+            width: 20px;
+            height: 20px;
+          }
+        }
+        
+        /* 반응형 스타일: M (851px - 1078px) - 태블릿 및 소형 데스크톱 */
+        @media (min-width: ${BREAKPOINTS.s + 1}px) and (max-width: ${
+      BREAKPOINTS.m
+    }px) {
+          .list-card {
+            max-width: 160px;
+          }
+          
+          .card-img-container {
             max-width: 140px;
+          }
+          
+          .play-button {
+            width: 38px;
+            height: 38px;
+          }
+          
+          .play-icon {
+            width: 22px;
+            height: 22px;
+          }
+        }
+        
+        /* 반응형 스타일: LG (1079px - 1742px) - 데스크톱 */
+        @media (min-width: ${BREAKPOINTS.m + 1}px) and (max-width: ${
+      BREAKPOINTS.lg
+    }px) {
+          .list-card {
+            max-width: 180px;
+          }
+          
+          .card-img-container {
+            max-width: 160px;
+          }
+        }
+        
+        /* 반응형 스타일: XL (1743px 이상) - 대형 디스플레이 */
+        @media (min-width: ${BREAKPOINTS.lg + 1}px) {
+          .list-card {
+            max-width: 200px;
+            padding: 20px;
+          }
+          
+          .card-img-container {
+            max-width: 180px;
+            margin-bottom: 16px;
+          }
+          
+          .card-title {
+            font-size: 18px;
+            margin: 14px 0 6px;
+          }
+          
+          .card-description {
+            font-size: 16px;
+            margin: 0 0 10px;
+          }
+          
+          .play-button {
+            width: 44px;
+            height: 44px;
+          }
+          
+          .play-icon {
+            width: 26px;
+            height: 26px;
           }
         }
       </style>
