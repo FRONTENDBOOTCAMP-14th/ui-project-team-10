@@ -1,5 +1,6 @@
 body {
   line-height: 1.6;
+  background: linear-gradient(to top, var(--spotify-black), #113318);
 }
 
 .index-pages-btn {
@@ -17,10 +18,11 @@ body {
   text-decoration: none;
   box-sizing: border-box;
   border-radius: var(--button-border-radius);
-  border: 2px solid var(--spotify-gray);
+  /* border: 2px solid var(--spotify-gray); */
   background-color: var(--spotify-dark-gray);
   color: var(--spotify-white);
   transition: var(--button-transition);
+  box-shadow: var(--button-shadow);
 }
 
 .index-pages-btn:hover {
@@ -35,6 +37,14 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 800px;
+
+  /* 배경이미지 1 */
+  background-image: url(/image/main-background-img.jpg);
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 header h1 {
@@ -64,7 +74,9 @@ header p {
   border-radius: var(--border-radius-md);
   padding: var(--spacing-md);
   text-align: center;
-  background: var(--spotify-dark-gray);
+  background: var(--spotify-card-bg);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 0.5em 1em -0.1em var(--spotify-black);
 }
 
 .profile-img {
@@ -101,7 +113,7 @@ header p {
 
 main {
   max-width: 1200px;
-  margin: -2rem auto 0;
+  margin: -1rem auto 0;
   padding: 0 var(--spacing-lg) var(--spacing-lg);
 }
 
