@@ -18,6 +18,22 @@
   color: var(--spotify-white);
 }
 
+.green-text {
+  color: var(--spotify-green);
+}
+
+.gray-text {
+  color: var(--spotify-gray);
+}
+
+.light-gray-text {
+  color: var(--spotify-light-gray);
+}
+
+.dark-gray-text {
+  color: var(--spotify-dark-gray);
+}
+
 .black-text {
   color: var(--spotify-black);
 }

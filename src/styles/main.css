@@ -1,6 +1,4 @@
 @import "/src/common/index.css";
-@import "../styles/album.css";
-@import "../styles/artist.css";
 
 body {
   margin: 0;
@@ -9,7 +7,12 @@ body {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-use-select: none;
+  -ms-overflow-style: none;
   user-select: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 .main-component {
@@ -32,7 +35,7 @@ body {
     align-items: flex-end;
     margin-bottom: 1rem;
     h2 {
-      color: #fff;
+      color: var(--spotify-white);
       margin: 0;
     }
     button {
@@ -41,9 +44,14 @@ body {
       padding: 0;
       margin: 0;
       cursor: pointer;
-      color: #b3b3b3;
+      color: var(--font-color);
       font-weight: bold;
       font-size: 0.825rem;
+    }
+    button:active,
+    button:focus {
+      border: none;
+      box-shadow: none;
     }
   }
 
@@ -56,13 +64,33 @@ body {
     padding: 1rem;
     scroll-snap-align: start;
     border-radius: 0.5rem;
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  .artist-cover,
+  .album-cover {
+    position: relative;
+    border-radius: 0.5rem;
+    margin-bottom: 12px;
+    aspect-ratio: 1 / 1;
   }
 
   .list-card:hover {
-    background-color: #1f1f1f;
+    background-color: var(--button-hover-color);
   }
 
-  .playlist-list {
+  .list-card:hover .play-button {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(-4px);
+  }
+
+  .playlist-list,
+  .album-list,
+  .artist-list {
     display: flex;
     overflow-x: auto;
     padding: 0;
@@ -71,7 +99,10 @@ body {
     margin: 0;
     overflow: hidden;
   }
-  .playlist-list.grid-mode {
+
+  .playlist-list.grid-mode,
+  .album-list.grid-mode,
+  .artist-list.grid-mode {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, 180px);
@@ -106,9 +137,14 @@ body {
   color: #fff;
   width: 32px;
   height: 32px;
-  background-color: #2a2a2a;
+  background-color: var(--button-bg-color);
   border-radius: 100%;
   border: 0;
+}
+
+.scroll-btn-left:hover,
+.scroll-btn-right:hover {
+  background-color: var(--button-hover-color);
 }
 
 .scroll-btn-left {
@@ -150,9 +186,220 @@ body {
   margin-bottom: 0.25rem;
 }
 
+.component-item {
+  margin: 2rem;
+
+  h1 {
+    color: var(--spotify-white);
+    margin-bottom: 2rem;
+  }
+}
+
+.album-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background-color: var(--spotify-gray);
+}
+
+.artist-profile {
+  width: 10rem;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
 .card-info {
   margin: 0;
   padding: 0;
   font-size: 0.825rem;
-  color: #b3b3b3;
+  color: var(--font-color);
 }
+/* 하단부 CSS */
+
+:root {
+  /* 공통 색상 */
+  --bg-dark-gray: #181818;
+  --white-text: #fff;
+  --gray-text: #b3b3b3;
+  --footer-divider: #232323;
+  --bg-green: #6df843;
+  /* 푸터 전용 색상 */
+  --footer-social-bg: #222;
+  --footer-social-hover: #333;
+  --footer-radius: 50%;
+  --footer-spacing-lg: 40px;
+  --footer-spacing-md: 24px;
+  --footer-spacing-sm: 16px;
+  --footer-spacing-xs: 8px;
+}
+
+footer {
+  background: var(--spotify-black);
+  color: var(--white-text);
+  padding: var(--footer-spacing-lg) 0 0 0;
+  border-top: 1px solid var(--footer-divider);
+  font-size: 15px;
+}
+
+.footer-container {
+  width: 100%;
+
+  margin: 0 auto;
+}
+
+.footer-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--footer-spacing-lg);
+  justify-content: space-evenly;
+  align-items: flex-start;
+  padding-bottom: var(--footer-spacing-lg);
+}
+
+.footer-column {
+  min-width: 160px;
+  flex: 1 1 0;
+}
+
+.footer-column h4 {
+  font-size: 15px;
+  color: var(--white-text);
+  margin-bottom: var(--footer-spacing-sm);
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column li {
+  margin-bottom: var(--footer-spacing-xs);
+}
+
+.footer-column a {
+  color: var(--gray-text);
+  text-decoration: none;
+  transition: color;
+  font-size: 14px;
+}
+
+.footer-column a:hover {
+  color: white;
+}
+
+/* 소셜 아이콘 영역 */
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-left: 32px;
+}
+
+.footer-social a {
+  width: 32px;
+  height: 32px;
+  background: var(--footer-social-bg);
+  border-radius: var(--footer-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-text);
+  transition: background 0.2s;
+}
+
+.footer-social a:hover {
+  background: var(--footer-social-hover);
+  box-shadow: 0 0 0 1px white;
+}
+
+.footer-social svg {
+  width: auto;
+  height: auto;
+  fill: var(--gray-text);
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--footer-divider);
+  padding: 20px 0;
+  text-align: left;
+  color: var(--gray-text);
+  font-size: 13px;
+}
+
+/* 클릭시 하단부 코드 볼수 있게 처리한 부분 (필요시 주석 해제)
+.code-viewer {
+  margin: 40px auto 0 auto;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.code-btn {
+  padding: 8px 20px;
+  background: #232323;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  margin-right: 8px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.code-btn:hover {
+  background: var(--gray-text);
+  color: var(--white-text);
+}
+
+.code-box {
+  width: 100%;
+  max-width: 1200px;
+  background: #111;
+  color: var(--white-text);
+  border-radius: 8px;
+  padding: 20px;
+  font-size: 13px;
+  font-family: "Fira Mono", "Consolas", monospace;
+  overflow-x: auto;
+  margin-top: 8px;
+  border: 1px solid #292929;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+  white-space: pre-wrap;
+} */
+
+/* 반응형 처리 */
+
+@media (max-width: 1000px) {
+  .footer-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--footer-spacing-md);
+  }
+  .footer-column {
+    min-width: 0;
+  }
+  .footer-social {
+    grid-column: 1 / -1;
+    margin-top: var(--footer-spacing-sm);
+    justify-content: flex-start;
+  }
+}
+@media (max-width: 768px) {
+  .footer-columns {
+    display: flex;
+    flex-direction: column;
+    gap: var(--footer-spacing-md);
+    align-items: stretch;
+  }
+  .footer-social {
+    margin: 0;
+    justify-content: flex-start;
+  }
+}
+/* 하단부 CSS 끝 */

@@ -3,33 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../styles/artist.css" />
+    <link rel="stylesheet" href="/src/styles/main.css" />
     <title>artist</title>
-    <script type="module" src="../scripts/artist.js"></script>
+    <script type="module" src="/src/scripts/artist.js"></script>
   </head>
   <body>
-    <section class="list-component">
-      <div class="list-header">
-        <h2>Artist</h2>
-        <button class="show-all-button">Show all</button>
-      </div>
-      <div class="scroll-wrapper">
-        <div class="scroll-btn">
-          <button
-            class="artist-scroll-btn-left scroll-btn-left"
-            aria-label="왼쪽으로 스크롤"
-          >
-            ◀
-          </button>
-          <button
-            class="artist-scroll-btn-right scroll-btn-right"
-            aria-label="오른쪽으로 스크롤"
-          >
-            ▶
-          </button>
+    <div class="component-item">
+      <h1>아티스트 컴포넌트</h1>
+      <section class="list-component">
+        <div class="list-header">
+          <h2>Artist</h2>
+          <button class="artist-show-all">Show all</button>
         </div>
-        <ul class="artist-list"></ul>
-      </div>
-    </section>
+        <div class="scroll-wrapper">
+          <div class="scroll-btn">
+            <button
+              class="artist-scroll-btn-left scroll-btn-left"
+              aria-label="왼쪽으로 스크롤"
+            >
+              <img src="/public/icons/arrow-left.svg" alt="왼쪽 화살표" />
+            </button>
+            <button
+              class="artist-scroll-btn-right scroll-btn-right"
+              aria-label="오른쪽으로 스크롤"
+            >
+              <img src="/public/icons/arrow-right.svg" alt="오른쪽 화살표" />
+            </button>
+          </div>
+          <ul class="artist-list"></ul>
+        </div>
+      </section>
+    </div>
   </body>
 </html>
