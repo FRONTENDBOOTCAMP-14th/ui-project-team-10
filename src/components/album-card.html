@@ -5,23 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>album-card</title>
     <link rel="stylesheet" href="/src/styles/main.css" />
+    <link rel="icon" href="/icons/spotify-logo-symbol-green.svg" />
+    <script src="/src/scripts/component/album-card.js"></script>
   </head>
   <body>
     <div class="component-item">
       <h1>앨범 카드 컴포넌트</h1>
       <div class="list-component">
-        <article class="list-card">
-          <div class="album-cover">
-            <img
-              src="/image/default-album-cover.png"
-              alt="앨범"
-              class="album-img"
-            />
-            <img src="/icons/play.png" class="play-button" />
-          </div>
-          <h3 class="card-title">앨범 이름</h3>
-          <p class="card-info">아티스트</p>
-        </article>
+        <album-card
+          album-title="앨범 이름"
+          album-artist="아티스트"
+          album-cover="/image/default-album-cover.png"
+        >
+        </album-card>
       </div>
     </div>
   </body>
