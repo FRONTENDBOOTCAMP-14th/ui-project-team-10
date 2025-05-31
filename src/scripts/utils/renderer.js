@@ -4,9 +4,9 @@
  * 아티스트, 앨범, 플레이리스트 등의 데이터를 렌더링하는 공통 함수들을 모아둔 모듈
  */
 
-import "../component/artist-card.js";
-import "../component/album-card.js";
-import "../component/playlist-card.js";
+import "/src/scripts/component/artist-card.js";
+import "/src/scripts/component/album-card.js";
+import "/src/scripts/component/playlist-card.js";
 
 /**
  * 아티스트 정보를 화면에 렌더링합니다.

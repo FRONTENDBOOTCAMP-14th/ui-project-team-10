@@ -5,9 +5,9 @@
  */
 
 // 섹션 컴포넌트 가져오기
-import "./component/artist-section.js";
-import "./component/album-section.js";
-import "./component/playlist-section.js";
+import "/src/scripts/component/artist-section.js";
+import "/src/scripts/component/album-section.js";
+import "/src/scripts/component/playlist-section.js";
 
 /**
  * 플레이리스트 ID로 해당 플레이리스트 정보를 가져옵니다.
