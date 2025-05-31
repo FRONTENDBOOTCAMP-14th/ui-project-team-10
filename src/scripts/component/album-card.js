@@ -1,18 +1,25 @@
 /**
- * Album Card Custom Element
+ * 앨범 카드 커스텀 엘리먼트
  *
- * A reusable web component for displaying album cards with:
- * - Customizable album title, artist name, and cover image
- * - Hover effects and play button overlay
- * - Shadow DOM for encapsulation
- * - Responsive styling
- * - Custom event when clicked
+ * 다음 기능을 갖춤 앨범 카드를 표시하는 재사용 가능한 웹 컴포넌트:
+ * - 사용자 지정 앨범 제목, 아티스트 이름 및 커버 이미지
+ * - 호버 효과 및 재생 버튼 오버레이
+ * - 캡슐화를 위한 Shadow DOM
+ * - 반응형 스타일링
+ * - 클릭 시 커스텀 이벤트
+ *
+ * @element album-card
+ * @attribute {string} album-title - 앨범 제목
+ * @attribute {string} album-artist - 앨범 아티스트
+ * @attribute {string} album-cover - 앨범 커버 이미지 URL
+ * @fires {CustomEvent} album-click - 앨범 카드가 클릭되었을 때 발생하는 이벤트
  */
-class AlbumCard extends HTMLElement {
+
+import { BaseCard } from "./base-card.js";
+
+class AlbumCard extends BaseCard {
   constructor() {
-    super();
-    // Create a shadow DOM
-    this.attachShadow({ mode: "open" });
+    super(); // BaseCard에서 이미 Shadow DOM을 생성합니다
   }
 
   static get observedAttributes() {
@@ -31,102 +38,60 @@ class AlbumCard extends HTMLElement {
     }
   }
 
-  addEventListeners() {
-    const card = this.shadowRoot.querySelector(".list-card");
-    card.addEventListener("click", () => {
-      // Dispatch custom event when album card is clicked
-      this.dispatchEvent(
-        new CustomEvent("album-click", {
-          bubbles: true,
-          composed: true,
-          detail: {
-            title: this.getAttribute("album-title"),
-            artist: this.getAttribute("album-artist"),
-            cover: this.getAttribute("album-cover"),
-          },
-        })
-      );
-    });
+  /**
+   * 클릭 이벤트 핸들러를 구현합니다.
+   * BaseCard의 addEventListeners에서 이 메서드를 호출합니다.
+   */
+  handleClick() {
+    // 앨범 카드가 클릭되면 커스텀 이벤트 발생
+    this.dispatchEvent(
+      new CustomEvent("album-click", {
+        bubbles: true,
+        composed: true,
+        detail: {
+          title: this.getAttribute("album-title"),
+          artist: this.getAttribute("album-artist"),
+          cover: this.getAttribute("album-cover"),
+        },
+      })
+    );
   }
 
   render() {
-    // Get attribute values with fallbacks
+    // 기본값이 있는 속성 값 가져오기
     const albumTitle = this.getAttribute("album-title") || "앨범 이름";
     const albumArtist = this.getAttribute("album-artist") || "아티스트";
     const albumCover =
       this.getAttribute("album-cover") || "/image/default-album-cover.png";
 
-    // Create the HTML content
+    // HTML 콘텐츠 생성
     this.shadowRoot.innerHTML = `
       <style>
+        ${this.getBaseStyles()}
+        
+        /* 앨범 카드 고유 스타일 */
         :host {
-          display: block;
           font-family: system-ui, -apple-system, sans-serif;
         }
-
+        
         .list-card {
-          width: 100%;
           max-width: 180px;
-          cursor: pointer;
           transition: transform 0.2s ease;
           padding: 0.5rem;
-          box-sizing: border-box;
         }
-
+        
         .list-card:hover {
           transform: scale(1.05);
         }
-
-        .album-cover {
-          position: relative;
-          border-radius: 8px;
-          overflow: hidden;
-          aspect-ratio: 1/1;
-        }
-
-        .album-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
+        
+        .card-img-container {
           border-radius: 8px;
         }
-
-        .play-button {
-          position: absolute;
-          bottom: 10px;
-          right: 10px;
-          width: 40px;
-          height: 40px;
-          opacity: 0;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: opacity 0.3s ease;
+        
+        .card-img {
+          border-radius: 8px;
         }
-
-        .album-cover:hover .play-button {
-          opacity: 1;
-        }
-
-        .card-title {
-          margin: 0.5rem 0 0.25rem 0;
-          font-size: 14px;
-          font-weight: 600;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-
-        .card-info {
-          margin: 0;
-          font-size: 12px;
-          color: #6c757d;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-
+        
         @media (max-width: 768px) {
           .list-card {
             max-width: 140px;
@@ -134,12 +99,14 @@ class AlbumCard extends HTMLElement {
         }
       </style>
       <article class="list-card">
-        <div class="album-cover">
-          <img src="${albumCover}" alt="${albumTitle}" class="album-img" />
-          <img src="/icons/play.png" class="play-button" />
+        <div class="card-img-container">
+          <img src="${albumCover}" alt="${albumTitle}" class="card-img" />
+          <div class="play-button">
+            <img src="/icons/play.svg" class="play-icon" alt="Play" />
+          </div>
         </div>
         <h3 class="card-title">${albumTitle}</h3>
-        <p class="card-info">${albumArtist}</p>
+        <p class="card-description">${albumArtist}</p>
       </article>
     `;
   }

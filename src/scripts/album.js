@@ -1,78 +1,17 @@
-const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
-const clientSecret = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET;
+import {
+  getToken,
+  getAlbums,
+  toggleScrollButtons,
+} from "./utils/spotify-api.js";
 
-const albumIds = [
-  "5NUuj9AlcNI1khPYJJAVtV,6ZG5lRT77aJ3btmArcykra",
-  "3j7aiYai9ezbvxVCgrd2mb",
-  "2oCAY48bhZvQte0l7apmYC",
-  "28GiIRNu9nEugqnUci3aIC",
-  "3T4tUhGYeRNVUGevb0wThu",
-  "7pH8F7IVHTp2ZYKG0xN1CE",
-  "32n91KG3YeLMLJ9e64EfXy",
-].join(",");
+// 렌더링 함수 가져오기
+import { renderAlbums } from "./utils/renderer.js";
 
-async function getToken() {
-  const res = await fetch("https://accounts.spotify.com/api/token", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-      Authorization: "Basic " + btoa(`${clientId}:${clientSecret}`),
-    },
-    body: "grant_type=client_credentials",
-  });
-
-  const data = await res.json();
-  return data.access_token;
-}
-
-// ✅ 앨범 API
-async function getAlbums(token) {
-  const res = await fetch(
-    `https://api.spotify.com/v1/albums?ids=${albumIds}&market=KR`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-
-  if (!res.ok) {
-    throw new Error("앨범 데이터를 불러오지 못했습니다.");
-  }
-
-  const data = await res.json();
-  return data.albums;
-}
-
-function renderAlbums(albums) {
-  const albumList = document.querySelector(".album-list");
-  albumList.innerHTML = "";
-
-  albums.forEach((album) => {
-    const albumCard = document.createElement("li");
-    albumCard.className = "list-card";
-
-    albumCard.innerHTML = `
-      <a href="${album.external_urls.spotify}" target="_blank">
-        <article>
-          <div class="album-cover">
-            <img src="${album.images[0]?.url || "default.jpg"}" alt="${
-      album.name
-    }" class="album-img" />
-            <img src="/icons/play.png" class="play-button"/>
-          </div>
-          <h3 class="card-title">${album.name}</h3>
-          <p class="card-info">${album.artists
-            .map((a) => a.name)
-            .join(", ")}</p>
-        </article>
-      </a>
-    `;
-    albumList.appendChild(albumCard);
-  });
-}
-
-// ✅ 공통 초기화 함수
+/**
+ * 앨범 데이터를 초기화하고 가져오는 함수
+ * @async
+ * @throws {Error} 데이터 로드 실패 시 에러 발생
+ */
 async function init() {
   try {
     const token = await getToken();
@@ -92,6 +31,10 @@ document.addEventListener("DOMContentLoaded", () => {
   setupEventListeners();
 });
 
+/**
+ * 이벤트 리스너를 설정하는 함수
+ * 스크롤 버튼과 Show All 토글 기능 설정
+ */
 function setupEventListeners() {
   // Album Scroll
   const albumList = document.querySelector(".album-list");
@@ -117,17 +60,4 @@ function setupEventListeners() {
       toggleScrollButtons("album", !isGrid);
     });
   }
-}
-
-function toggleScrollButtons(type, show) {
-  const selectors = {
-    artist: [".artist-scroll-btn-left", ".artist-scroll-btn-right"],
-    album: [".album-scroll-btn-left", ".album-scroll-btn-right"],
-    playlist: [".playlist-scroll-btn-left", ".playlist-scroll-btn-right"],
-  };
-
-  selectors[type].forEach((selector) => {
-    const btn = document.querySelector(selector);
-    if (btn) btn.style.display = show ? "block" : "none";
-  });
 }

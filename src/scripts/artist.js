@@ -1,75 +1,16 @@
-const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
-const clientSecret = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET;
+import {
+  getToken,
+  getArtists,
+  toggleScrollButtons,
+} from "./utils/spotify-api.js";
 
-const artistIds = [
-  "30b9WulBM8sFuBo17nNq9c",
-  "5TnQc2N1iKlFjYD7CPGvFc",
-  "6YVMFz59CuY7ngCxTxjpxE",
-  "6zn0ihyAApAYV51zpXxdEp",
-  "6mEQK9m2krja6X1cfsAjfl",
-  "3eVa5w3URK5duf6eyVDbu9",
-  "4gzpq5DPGxSnKTe4SA8HAU",
-  "5wVJpXzuKV6Xj7Yhsf2uYx",
-  "6lESE9VeLV05vQBw8TB4YA",
-  "0dBTTLuseszs4BqgyXCrC8",
-  "4XDi67ZENZcbfKnvMnTYsI",
-  "6UbmqUEgjLA6jAcXwbM1Z9",
-  "2QM5S4yO6xHgnNvF0nbZZq",
-].join(",");
+// 렌더링 함수 가져오기
+import { renderArtists } from "./utils/renderer.js";
 
-async function getToken() {
-  const res = await fetch("https://accounts.spotify.com/api/token", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-      Authorization: "Basic " + btoa(`${clientId}:${clientSecret}`),
-    },
-    body: "grant_type=client_credentials",
-  });
-
-  const data = await res.json();
-  return data.access_token;
-}
-
-async function getArtists(token) {
-  const res = await fetch(
-    `https://api.spotify.com/v1/artists?ids=${artistIds}&market=KR`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  const data = await res.json();
-  return data.artists;
-}
-
-function renderArtists(artists) {
-  const artistList = document.querySelector(".artist-list");
-  artistList.innerHTML = "";
-
-  artists.forEach((artist) => {
-    const artistCard = document.createElement("li");
-    artistCard.className = "list-card";
-
-    artistCard.innerHTML = `
-      <a href="${artist.external_urls.spotify}" target="_blank">
-        <article>
-          <div class="artist-cover">
-            <img src="${artist.images[0]?.url || ""}" alt="${
-      artist.name
-    }" class="artist-profile" />
-            <img src="/icons/play.png" class="play-button"/>
-          </div>
-          <h3 class="card-title">${artist.name}</h3>
-          <p class="card-info">Artist</p>
-        </article>
-      </a>
-    `;
-    artistList.appendChild(artistCard);
-  });
-}
-
+/**
+ * 페이지 초기화 함수. API에서 아티스트 정보를 가져와 화면에 표시합니다.
+ * @async
+ */
 async function init() {
   try {
     const token = await getToken();
@@ -89,6 +30,11 @@ document.addEventListener("DOMContentLoaded", () => {
   setupEventListeners();
 });
 
+/**
+ * 아티스트 섹션의 이벤트 리스너를 설정합니다.
+ * - 스크롤 버튼 동작
+ * - 그리드 모드 토글 기능
+ */
 function setupEventListeners() {
   // Artist Scroll
   const artistList = document.querySelector(".artist-list");
@@ -117,17 +63,6 @@ function setupEventListeners() {
       const isGrid = artistList.classList.toggle("grid-mode");
       artistShowAllBtn.textContent = isGrid ? "Hide" : "Show All";
       toggleScrollButtons("artist", !isGrid);
-    });
-  }
-
-  function toggleScrollButtons(type, show) {
-    const selectors = {
-      artist: [".artist-scroll-btn-left", ".artist-scroll-btn-right"],
-    };
-
-    selectors[type].forEach((selector) => {
-      const btn = document.querySelector(selector);
-      if (btn) btn.style.display = show ? "block" : "none";
     });
   }
 }
