@@ -20,8 +20,8 @@
  * - 요소의 크기와 스타일을 장치에 따라 자동 조정
  */
 
-import { BaseCard } from "./base-card.js";
-import { BREAKPOINTS, isMobileDevice } from "../utils/responsive-utils.js";
+import { BaseCard } from "/src/scripts/component/base-card.js";
+import { BREAKPOINTS } from "/src/scripts/utils/responsive-utils.js";
 
 class PlaylistCard extends BaseCard {
   constructor() {
@@ -156,8 +156,8 @@ class PlaylistCard extends BaseCard {
         }
         
         .play-icon {
-          width: 24px;
-          height: 24px;
+          width: 18px;
+          height: 18px;
         }
         
         .card-title {
@@ -328,22 +328,21 @@ class PlaylistCard extends BaseCard {
           }
           
           .play-icon {
-            width: 28px;
-            height: 28px;
+            width: 22px;
+            height: 22px;
           }
         }
       </style>
       
       <article class="list-card" 
         role="button"
-        tabindex="0"
         aria-label="플레이리스트: ${playlistTitle}, 제작자: ${playlistOwner}"
         aria-describedby="${playlistId}-title ${playlistId}-owner">
         
         <div class="card-img-container">
           <img src="${playlistCover}" alt="플레이리스트 ${playlistTitle} 커버 이미지" class="card-img" />
           <div class="play-button" role="presentation" aria-hidden="true">
-            <img src="/icons/play.svg" alt="" class="play-icon" />
+            <img src="/icons/play-arrow-only.svg" alt="" class="play-icon" />
           </div>
         </div> 
         <h3 id="${playlistId}-title" class="card-title">${playlistTitle}</h3>

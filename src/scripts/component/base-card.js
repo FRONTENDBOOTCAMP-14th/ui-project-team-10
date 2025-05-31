@@ -19,7 +19,7 @@
  * @extends HTMLElement
  */
 
-import { BREAKPOINTS } from "../utils/responsive-utils.js";
+import { BREAKPOINTS } from "/src/scripts/utils/responsive-utils.js";
 export class BaseCard extends HTMLElement {
   constructor() {
     super();
@@ -110,8 +110,6 @@ export class BaseCard extends HTMLElement {
         cursor: pointer;
         height: 100%;
         box-sizing: border-box;
-        /* 접근성: 탭 초점 지원 */
-        tabindex: 0;
         outline: none;
         position: relative;
       }

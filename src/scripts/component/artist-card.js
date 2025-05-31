@@ -26,8 +26,8 @@
  * @fires {CustomEvent} artist-click - 아티스트 카드가 클릭되었을 때 발생하는 이벤트
  */
 
-import { BaseCard } from "./base-card.js";
-import { BREAKPOINTS, isMobileDevice } from "../utils/responsive-utils.js";
+import { BaseCard } from "/src/scripts/component/base-card.js";
+import { BREAKPOINTS } from "/src/scripts/utils/responsive-utils.js";
 
 class ArtistCard extends BaseCard {
   constructor() {
@@ -199,8 +199,8 @@ class ArtistCard extends BaseCard {
         }
         
         .play-icon {
-          width: 24px;
-          height: 24px;
+          width: 18px;
+          height: 18px;
         }
         
         .card-title, .card-description {
@@ -394,21 +394,20 @@ class ArtistCard extends BaseCard {
           }
           
           .play-icon {
-            width: 26px;
-            height: 26px;
+            width: 20px;
+            height: 20px;
           }
         }
       </style>
       <article 
         class="list-card"
         role="button"
-        tabindex="0"
         aria-labelledby="${titleId} ${typeId}"
         aria-label="아티스트: ${artistName}, 유형: ${artistType}">
         <div class="card-img-container" aria-hidden="true">
           <img src="${artistImage}" alt="" class="card-img" />
           <div class="play-button" role="presentation">
-            <img src="/icons/play.svg" class="play-icon" alt="" />
+            <img src="/icons/play-arrow-only.svg" class="play-icon" alt="" />
           </div>
         </div>
         <h3 id="${titleId}" class="card-title">${artistName}</h3>

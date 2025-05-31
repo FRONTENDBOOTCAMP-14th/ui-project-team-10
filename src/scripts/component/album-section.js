@@ -16,11 +16,10 @@
  * @element album-section
  */
 
-import { getToken, getAlbums } from "../utils/spotify-api.js";
-import "./album-card.js";
-import { BaseSection } from "./base-section.js";
-import { EventTypes } from "../utils/event-utils.js";
-import { BREAKPOINTS, isMobileDevice } from "../utils/responsive-utils.js";
+import { getToken, getAlbums } from "/src/scripts/utils/spotify-api.js";
+import "/src/scripts/component/album-card.js";
+import { BaseSection } from "/src/scripts/component/base-section.js";
+import { BREAKPOINTS } from "/src/scripts/utils/responsive-utils.js";
 
 class AlbumSection extends BaseSection {
   constructor() {
@@ -271,8 +270,9 @@ class AlbumSection extends BaseSection {
 AlbumSection.prototype.getComponentStyles = function () {
   // 기본 스타일(상위 클래스에서 정의된 경우 호출)
   const baseStyles =
-    super.getComponentStyles && typeof super.getComponentStyles === "function"
-      ? super.getComponentStyles()
+    BaseSection.prototype.getComponentStyles &&
+    typeof BaseSection.prototype.getComponentStyles === "function"
+      ? BaseSection.prototype.getComponentStyles.call(this)
       : "";
 
   return `
@@ -394,7 +394,9 @@ AlbumSection.prototype.getComponentStyles = function () {
     }
     
     /* 반응형 스타일: S (801px - 850px) - 소형 태블릿 */
-    @media (min-width: ${BREAKPOINTS.xs + 1}px) and (max-width: ${BREAKPOINTS.s}px) {
+    @media (min-width: ${BREAKPOINTS.xs + 1}px) and (max-width: ${
+    BREAKPOINTS.s
+  }px) {
       .album-section {
         padding: 16px 24px;
       }
@@ -421,7 +423,9 @@ AlbumSection.prototype.getComponentStyles = function () {
     }
     
     /* 반응형 스타일: M (851px - 1078px) - 태블릿 및 소형 데스크톱 */
-    @media (min-width: ${BREAKPOINTS.s + 1}px) and (max-width: ${BREAKPOINTS.m}px) {
+    @media (min-width: ${BREAKPOINTS.s + 1}px) and (max-width: ${
+    BREAKPOINTS.m
+  }px) {
       .album-section {
         padding: 20px 32px;
       }
@@ -445,7 +449,9 @@ AlbumSection.prototype.getComponentStyles = function () {
     }
     
     /* 반응형 스타일: LG (1079px - 1742px) - 데스크톱 */
-    @media (min-width: ${BREAKPOINTS.m + 1}px) and (max-width: ${BREAKPOINTS.lg}px) {
+    @media (min-width: ${BREAKPOINTS.m + 1}px) and (max-width: ${
+    BREAKPOINTS.lg
+  }px) {
       .album-section {
         padding: 24px 40px;
       }

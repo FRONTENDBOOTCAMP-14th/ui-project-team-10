@@ -2,7 +2,7 @@
  * Custom link web component
  * Reusable link with various styles, sizes, and options
  * Can be styled as a regular link or as a button
- * 
+ *
  * 접근성 기능:
  * - 키보드 탐색 지원 (Tab, Enter, Space)
  * - ARIA 속성 및 역할
@@ -548,24 +548,29 @@ class LinkComponent extends HTMLElement {
   render() {
     const linkClasses = this.getLinkClasses();
     const content = this.getLinkContent();
-    const ariaLabel = this.getAttribute('aria-label') || this.textContent || 'Link';
-    const ariaExpanded = this.hasAttribute('aria-expanded') ? this.getAttribute('aria-expanded') : null;
-    const ariaControls = this.getAttribute('aria-controls') || null;
-    const ariaHaspopup = this.hasAttribute('aria-haspopup') ? this.getAttribute('aria-haspopup') : null;
-    
+    const ariaLabel =
+      this.getAttribute("aria-label") || this.textContent || "Link";
+    const ariaExpanded = this.hasAttribute("aria-expanded")
+      ? this.getAttribute("aria-expanded")
+      : null;
+    const ariaControls = this.getAttribute("aria-controls") || null;
+    const ariaHaspopup = this.hasAttribute("aria-haspopup")
+      ? this.getAttribute("aria-haspopup")
+      : null;
+
     // 접근성 속성 구성
     let ariaAttributes = `
       aria-label="${ariaLabel}"
       aria-disabled="${this.disabled}"
     `;
-    
+
     // 조건부 ARIA 속성 추가
     if (ariaExpanded) ariaAttributes += ` aria-expanded="${ariaExpanded}"`;
     if (ariaControls) ariaAttributes += ` aria-controls="${ariaControls}"`;
     if (ariaHaspopup) ariaAttributes += ` aria-haspopup="${ariaHaspopup}"`;
-    
+
     // 버튼 스타일의 링크일 경우 role="button" 추가
-    const role = this.buttonStyle ? 'role="button"' : '';
+    const role = this.buttonStyle ? 'role="button"' : "";
 
     this.shadowRoot.innerHTML = `
       <style>${this.getStyles()}</style>
@@ -575,7 +580,7 @@ class LinkComponent extends HTMLElement {
          part="link"
          ${role}
          ${ariaAttributes}
-         tabindex="${this.disabled ? '-1' : '0'}">
+         tabindex="${this.disabled ? "-1" : "0"}">
         ${content}
       </a>
     `;

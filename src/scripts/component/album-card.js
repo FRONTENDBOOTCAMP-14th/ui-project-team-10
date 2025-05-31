@@ -25,8 +25,8 @@
  * @fires {CustomEvent} album-click - 앨범 카드가 클릭되었을 때 발생하는 이벤트
  */
 
-import { BaseCard } from "./base-card.js";
-import { BREAKPOINTS, isMobileDevice } from "../utils/responsive-utils.js";
+import { BaseCard } from "/src/scripts/component/base-card.js";
+import { BREAKPOINTS } from "/src/scripts/utils/responsive-utils.js";
 
 class AlbumCard extends BaseCard {
   constructor() {
@@ -290,8 +290,8 @@ class AlbumCard extends BaseCard {
           }
           
           .play-icon {
-            width: 22px;
-            height: 22px;
+            width: 18px;
+            height: 18px;
           }
         }
         
@@ -330,20 +330,19 @@ class AlbumCard extends BaseCard {
           }
           
           .play-icon {
-            width: 28px;
-            height: 28px;
+            width: 22px;
+            height: 22px;
           }
         }
       </style>
       <article 
         class="list-card" 
         role="button" 
-        tabindex="0" 
         aria-label="${albumTitle} by ${albumArtist}">
         <div class="card-img-container" aria-hidden="true">
           <img src="${albumCover}" alt="${albumTitle} album cover" class="card-img" />
           <div class="play-button" aria-label="Play ${albumTitle}">
-            <img src="/icons/play.svg" class="play-icon" alt="" />
+            <img src="/icons/play-arrow-only.svg" class="play-icon" alt="" />
           </div>
         </div>
         <h3 class="card-title" id="album-title-${this.generateUniqueId()}">${albumTitle}</h3>

@@ -2,10 +2,10 @@ import {
   getToken,
   getArtists,
   toggleScrollButtons,
-} from "./utils/spotify-api.js";
+} from "/src/scripts/utils/spotify-api.js";
 
 // 렌더링 함수 가져오기
-import { renderArtists } from "./utils/renderer.js";
+import { renderArtists } from "/src/scripts/utils/renderer.js";
 
 /**
  * 페이지 초기화 함수. API에서 아티스트 정보를 가져와 화면에 표시합니다.

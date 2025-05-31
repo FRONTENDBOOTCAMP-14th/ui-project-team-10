@@ -17,11 +17,9 @@
  *   - 스크린 리더 호환성
  *   - 높은 대비 모드 지원
  */
-import { StateManager } from "../utils/state-manager.js";
-import { EventManager } from "../utils/event-manager.js";
-import { GlobalEventBus } from "../utils/global-event-bus.js";
-import { EventTypes } from "../utils/event-utils.js";
-import { BREAKPOINTS, getResponsiveStyle } from "../utils/responsive-utils.js";
+import { StateManager } from "/src/scripts/utils/state-manager.js";
+import { EventManager } from "/src/scripts/utils/event-utils.js";
+import { BREAKPOINTS } from "/src/scripts/utils/responsive-utils.js";
 
 export class BaseSection extends HTMLElement {
   constructor() {

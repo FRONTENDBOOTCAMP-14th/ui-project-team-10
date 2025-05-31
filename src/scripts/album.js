@@ -2,10 +2,10 @@ import {
   getToken,
   getAlbums,
   toggleScrollButtons,
-} from "./utils/spotify-api.js";
+} from "/src/scripts/utils/spotify-api.js";
 
 // 렌더링 함수 가져오기
-import { renderAlbums } from "./utils/renderer.js";
+import { renderAlbums } from "/src/scripts/utils/renderer.js";
 
 /**
  * 앨범 데이터를 초기화하고 가져오는 함수

@@ -16,11 +16,10 @@
  * @element artist-section
  */
 
-import { getToken, getArtists } from "../utils/spotify-api.js";
-import "./artist-card.js";
-import { BaseSection } from "./base-section.js";
-import { EventTypes } from "../utils/event-utils.js";
-import { BREAKPOINTS, isMobileDevice } from "../utils/responsive-utils.js";
+import { getToken, getArtists } from "/src/scripts/utils/spotify-api.js";
+import "/src/scripts/component/artist-card.js";
+import { BaseSection } from "/src/scripts/component/base-section.js";
+import { BREAKPOINTS } from "/src/scripts/utils/responsive-utils.js";
 
 class ArtistSection extends BaseSection {
   constructor() {
@@ -252,8 +251,9 @@ class ArtistSection extends BaseSection {
 ArtistSection.prototype.getComponentStyles = function () {
   // 기본 스타일(상위 클래스에서 정의된 경우 호출)
   const baseStyles =
-    super.getComponentStyles && typeof super.getComponentStyles === "function"
-      ? super.getComponentStyles()
+    BaseSection.prototype.getComponentStyles &&
+    typeof BaseSection.prototype.getComponentStyles === "function"
+      ? BaseSection.prototype.getComponentStyles.call(this)
       : "";
 
   return `

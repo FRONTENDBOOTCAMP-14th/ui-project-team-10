@@ -4,7 +4,7 @@
  * 이 모듈은 컴포넌트 간 이벤트 통신을 표준화하고
  * 이벤트 리스너 관리를 개선하기 위한 유틸리티 함수들을 제공합니다.
  */
-import { globalEventBus } from "./state-manager.js";
+import { globalEventBus } from "/src/scripts/utils/state-manager.js";
 
 /**
  * 표준화된 이벤트 이름 포맷

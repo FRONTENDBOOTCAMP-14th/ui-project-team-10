@@ -8,7 +8,7 @@
  * - ARIA 속성 및 역할 추가
  * - 스크린 리더 호환성 개선
  * - 고대비 모드 지원
- * 
+ *
  * 반응형 기능:
  * - 다양한 화면 크기에 최적화 (XS, S, M, LG, XL 브레이크포인트)
  * - 터치 인터페이스 개선
@@ -16,11 +16,15 @@
  * @element playlist-section
  */
 
-import { getToken, getPlaylists, playlistIds } from "../utils/spotify-api.js";
-import "./playlist-card.js";
-import { BaseSection } from "./base-section.js";
-import { globalEventBus } from "../utils/state-manager.js";
-import { BREAKPOINTS, isMobileDevice } from "../utils/responsive-utils.js";
+import {
+  getToken,
+  getPlaylists,
+  playlistIds,
+} from "/src/scripts/utils/spotify-api.js";
+import "/src/scripts/component/playlist-card.js";
+import { BaseSection } from "/src/scripts/component/base-section.js";
+import { globalEventBus } from "/src/scripts/utils/state-manager.js";
+import { BREAKPOINTS } from "/src/scripts/utils/responsive-utils.js";
 
 class PlaylistSection extends BaseSection {
   constructor() {
@@ -268,8 +272,9 @@ class PlaylistSection extends BaseSection {
 PlaylistSection.prototype.getComponentStyles = function () {
   // 기본 스타일(상위 클래스에서 정의된 경우 호출)
   const baseStyles =
-    super.getComponentStyles && typeof super.getComponentStyles === "function"
-      ? super.getComponentStyles()
+    BaseSection.prototype.getComponentStyles &&
+    typeof BaseSection.prototype.getComponentStyles === "function"
+      ? BaseSection.prototype.getComponentStyles.call(this)
       : "";
 
   return `
@@ -391,7 +396,9 @@ PlaylistSection.prototype.getComponentStyles = function () {
     }
     
     /* 반응형 스타일: S (801px - 850px) - 소형 태블릿 */
-    @media (min-width: ${BREAKPOINTS.xs + 1}px) and (max-width: ${BREAKPOINTS.s}px) {
+    @media (min-width: ${BREAKPOINTS.xs + 1}px) and (max-width: ${
+    BREAKPOINTS.s
+  }px) {
       .playlist-section {
         padding: 16px 24px;
       }
@@ -418,7 +425,9 @@ PlaylistSection.prototype.getComponentStyles = function () {
     }
     
     /* 반응형 스타일: M (851px - 1078px) - 태블릿 및 소형 데스크톱 */
-    @media (min-width: ${BREAKPOINTS.s + 1}px) and (max-width: ${BREAKPOINTS.m}px) {
+    @media (min-width: ${BREAKPOINTS.s + 1}px) and (max-width: ${
+    BREAKPOINTS.m
+  }px) {
       .playlist-section {
         padding: 20px 32px;
       }
@@ -442,7 +451,9 @@ PlaylistSection.prototype.getComponentStyles = function () {
     }
     
     /* 반응형 스타일: LG (1079px - 1742px) - 데스크톱 */
-    @media (min-width: ${BREAKPOINTS.m + 1}px) and (max-width: ${BREAKPOINTS.lg}px) {
+    @media (min-width: ${BREAKPOINTS.m + 1}px) and (max-width: ${
+    BREAKPOINTS.lg
+  }px) {
       .playlist-section {
         padding: 24px 40px;
       }

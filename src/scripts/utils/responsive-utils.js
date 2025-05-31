@@ -1,6 +1,6 @@
 /**
  * 반응형 디자인 유틸리티
- * 
+ *
  * 웹 컴포넌트에서 사용할 수 있는 반응형 미디어 쿼리 및 유틸리티 함수를 제공합니다.
  */
 
@@ -16,7 +16,7 @@ export const BREAKPOINTS = {
   xs: 800,
   s: 850,
   m: 1078,
-  lg: 1742
+  lg: 1742,
 };
 
 /**
@@ -44,7 +44,9 @@ export function isMinWidth(minWidth) {
  * @returns {boolean} 현재 뷰포트가 주어진 범위 내에 있는 경우 true
  */
 export function isWidthBetween(minWidth, maxWidth) {
-  return window.matchMedia(`(min-width: ${minWidth}px) and (max-width: ${maxWidth}px)`).matches;
+  return window.matchMedia(
+    `(min-width: ${minWidth}px) and (max-width: ${maxWidth}px)`
+  ).matches;
 }
 
 /**
@@ -53,15 +55,15 @@ export function isWidthBetween(minWidth, maxWidth) {
  */
 export function getDeviceType() {
   if (isMaxWidth(BREAKPOINTS.xs)) {
-    return 'mobile';
+    return "mobile";
   } else if (isMaxWidth(BREAKPOINTS.s)) {
-    return 'small-tablet';
+    return "small-tablet";
   } else if (isMaxWidth(BREAKPOINTS.m)) {
-    return 'tablet';
+    return "tablet";
   } else if (isMaxWidth(BREAKPOINTS.lg)) {
-    return 'desktop';
+    return "desktop";
   } else {
-    return 'large-desktop';
+    return "large-desktop";
   }
 }
 
@@ -71,28 +73,30 @@ export function getDeviceType() {
  * @param {string} type - 미디어 쿼리 타입 ('max', 'min', 'only')
  * @returns {string} CSS 미디어 쿼리 문자열
  */
-export function getMediaQueryString(breakpoint, type = 'max') {
+export function getMediaQueryString(breakpoint, type = "max") {
   const bpValue = BREAKPOINTS[breakpoint];
-  
+
   if (!bpValue) {
     console.error(`유효하지 않은 브레이크포인트: ${breakpoint}`);
-    return '';
+    return "";
   }
-  
-  if (type === 'max') {
+
+  if (type === "max") {
     return `@media (max-width: ${bpValue}px)`;
-  } else if (type === 'min') {
+  } else if (type === "min") {
     return `@media (min-width: ${bpValue + 1}px)`;
-  } else if (type === 'only') {
+  } else if (type === "only") {
     const nextBreakpoint = getNextBreakpoint(breakpoint);
     if (nextBreakpoint) {
-      return `@media (min-width: ${bpValue + 1}px) and (max-width: ${BREAKPOINTS[nextBreakpoint]}px)`;
+      return `@media (min-width: ${bpValue + 1}px) and (max-width: ${
+        BREAKPOINTS[nextBreakpoint]
+      }px)`;
     } else {
       return `@media (min-width: ${bpValue + 1}px)`;
     }
   }
-  
-  return '';
+
+  return "";
 }
 
 /**
@@ -103,11 +107,11 @@ export function getMediaQueryString(breakpoint, type = 'max') {
 function getNextBreakpoint(breakpoint) {
   const breakpoints = Object.keys(BREAKPOINTS);
   const currentIndex = breakpoints.indexOf(breakpoint);
-  
+
   if (currentIndex === -1 || currentIndex === breakpoints.length - 1) {
     return null;
   }
-  
+
   return breakpoints[currentIndex + 1];
 }
 
@@ -118,7 +122,7 @@ function getNextBreakpoint(breakpoint) {
  * @param {string} type - 미디어 쿼리 타입 ('max', 'min', 'only')
  * @returns {string} 미디어 쿼리 템플릿 문자열
  */
-export function getResponsiveStyle(breakpoint, cssContent, type = 'max') {
+export function getResponsiveStyle(breakpoint, cssContent, type = "max") {
   const mediaQuery = getMediaQueryString(breakpoint, type);
   return `${mediaQuery} {
     ${cssContent}
@@ -130,7 +134,7 @@ export function getResponsiveStyle(breakpoint, cssContent, type = 'max') {
  * @returns {boolean} 가로 모드인 경우 true
  */
 export function isLandscape() {
-  return window.matchMedia('(orientation: landscape)').matches;
+  return window.matchMedia("(orientation: landscape)").matches;
 }
 
 /**
@@ -138,7 +142,16 @@ export function isLandscape() {
  * @returns {boolean} 세로 모드인 경우 true
  */
 export function isPortrait() {
-  return window.matchMedia('(orientation: portrait)').matches;
+  return window.matchMedia("(orientation: portrait)").matches;
+}
+
+/**
+ * 현재 기기가 모바일 장치인지 확인합니다.
+ * 모바일 기기는 BREAKPOINTS.xs 이하의 화면 크기를 가지는 기기로 정의합니다.
+ * @returns {boolean} 모바일 기기인 경우 true
+ */
+export function isMobileDevice() {
+  return isMaxWidth(BREAKPOINTS.xs);
 }
 
 /**
@@ -149,16 +162,16 @@ export function isPortrait() {
 export function setupResponsiveAttributes(component, updateCallback) {
   // 초기 설정
   updateCallback(getDeviceType());
-  
+
   // 리사이즈 이벤트에서 속성 업데이트
   const resizeObserver = new ResizeObserver(() => {
     updateCallback(getDeviceType());
   });
-  
+
   resizeObserver.observe(document.body);
-  
+
   // 컴포넌트가 DOM에서 제거될 때 옵저버 해제
-  component.addEventListener('disconnected', () => {
+  component.addEventListener("disconnected", () => {
     resizeObserver.disconnect();
   });
 }
