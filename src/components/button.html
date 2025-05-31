@@ -15,151 +15,239 @@
     <link rel="stylesheet" href="/src/common/index.css" />
     <link rel="stylesheet" href="/src/style.css" />
     <link rel="stylesheet" href="/src/styles/component-view-layout.css" />
+    <script
+      type="module"
+      src="/src/scripts/component/button-component.js"
+    ></script>
+    <script
+      type="module"
+      src="/src/scripts/component/link-component.js"
+    ></script>
+    <style>
+      .component-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin: 1rem 0;
+        align-items: center;
+      }
+
+      .variant-label {
+        min-width: 100px;
+        font-weight: bold;
+        color: #b3b3b3;
+      }
+
+      .component-section-view {
+        margin-bottom: 2rem;
+        padding: 1rem;
+        border: 1px solid #444;
+        border-radius: 8px;
+      }
+    </style>
   </head>
   <body>
     <main>
       <h1>버튼 컴포넌트</h1>
 
       <section class="component-section-view">
-        <h2 class="margin-bottom-2rem">기본 버튼</h2>
-        <ul>
-          <li>
-            <button class="rounded-btn btn bg-green black-text">
-              기본 버튼
-            </button>
-          </li>
-          <li>
-            <button class="rounded-btn btn gray-outline-style black-text">
-              변형 버튼1
-            </button>
-          </li>
-          <li>
-            <button class="rounded-btn btn bg-black white-text">
-              변형 버튼2
-            </button>
-          </li>
-          <li>
-            <button class="rounded-btn btn bg-blue white-text">
-              변형 버튼3
-            </button>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <a href="#" class="rounded-btn btn bg-green black-text"
-              >기본 버튼</a
-            >
-          </li>
-          <li>
-            <a href="#" class="rounded-btn btn gray-outline-style black-text"
-              >변형 버튼1</a
-            >
-          </li>
-          <li>
-            <a href="#" class="rounded-btn btn bg-black white-text"
-              >변형 버튼2</a
-            >
-          </li>
-          <li>
-            <a href="#" class="rounded-btn btn bg-blue white-text"
-              >변형 버튼3</a
-            >
-          </li>
-        </ul>
+        <h2>기본 버튼 변형</h2>
+
+        <div class="component-row">
+          <span class="variant-label">기본:</span>
+          <button-component>기본 버튼</button-component>
+        </div>
+
+        <div class="component-row">
+          <span class="variant-label">Primary:</span>
+          <button-component variant="primary">Primary 버튼</button-component>
+        </div>
+
+        <div class="component-row">
+          <span class="variant-label">Secondary:</span>
+          <button-component variant="secondary"
+            >Secondary 버튼</button-component
+          >
+        </div>
+
+        <div class="component-row">
+          <span class="variant-label">Transparent:</span>
+          <button-component variant="transparent"
+            >Transparent 버튼</button-component
+          >
+        </div>
+
+        <div class="component-row">
+          <span class="variant-label">Outline:</span>
+          <button-component variant="outline">Outline 버튼</button-component>
+        </div>
+
+        <h3>링크 버튼</h3>
+        <div class="component-row">
+          <span class="variant-label">기본:</span>
+          <link-component href="#" button-style>기본 링크 버튼</link-component>
+        </div>
+
+        <div class="component-row">
+          <span class="variant-label">Primary:</span>
+          <link-component href="#" button-style variant="primary"
+            >Primary 링크 버튼</link-component
+          >
+        </div>
+
+        <div class="component-row">
+          <span class="variant-label">Secondary:</span>
+          <link-component href="#" button-style variant="secondary"
+            >Secondary 링크 버튼</link-component
+          >
+        </div>
+
+        <div class="component-row">
+          <span class="variant-label">Transparent:</span>
+          <link-component href="#" button-style variant="transparent"
+            >Transparent 링크 버튼</link-component
+          >
+        </div>
       </section>
 
       <section class="component-section-view">
-        <h2 class="margin-bottom-2rem">크기 변형</h2>
-        <ul>
-          <li>
-            <button class="rounded-btn btn btn-large bg-green black-text">
-              큰 버튼
-            </button>
-          </li>
-          <li>
-            <button class="rounded-btn btn btn-small bg-green black-text">
-              작은 버튼
-            </button>
-          </li>
-          <li>
-            <button class="rounded-btn btn btn-long bg-green black-text">
-              긴 버튼
-            </button>
-          </li>
-        </ul>
+        <h2>크기 변형</h2>
+
+        <div class="component-row">
+          <span class="variant-label">Small:</span>
+          <button-component size="small">작은 버튼</button-component>
+          <link-component href="#" button-style size="small"
+            >작은 링크 버튼</link-component
+          >
+        </div>
+
+        <div class="component-row">
+          <span class="variant-label">Medium:</span>
+          <button-component size="medium">중간 버튼</button-component>
+          <link-component href="#" button-style size="medium"
+            >중간 링크 버튼</link-component
+          >
+        </div>
+
+        <div class="component-row">
+          <span class="variant-label">Large:</span>
+          <button-component size="large">큰 버튼</button-component>
+          <link-component href="#" button-style size="large"
+            >큰 링크 버튼</link-component
+          >
+        </div>
       </section>
 
-      <section class="component-section-view">
-        <h2 class="margin-bottom-2rem">사이드바 버튼 요소</h2>
-        <ul class="sidebar-menu">
-          <li class="sidebar-item sidebar-item-active">
-            <a href="/src/pages/home.html" class="sidebar-link home">
-              <span class="sidebar-icon"></span>
-              <span class="sidebar-text">홈</span>
-            </a>
-          </li>
-          <li class="sidebar-item">
-            <a href="" class="sidebar-link search">
-              <span class="sidebar-icon"></span>
-              <span class="sidebar-text">검색하기</span>
-            </a>
-          </li>
-          <li class="sidebar-item">
-            <a href="/src/pages/library.html" class="sidebar-link library">
-              <span class="sidebar-icon"> </span>
-              <span class="sidebar-text">내 라이브러리</span>
-            </a>
-          </li>
-        </ul>
-        <section class="sidebar-playlist component-section-view">
-          <ul class="sidebar-menu">
-            <li class="sidebar-playlist-item">
-              <a href="#" class="sidebar-playlist-link create-playlist">
-                <div class="sidebar-icon rounded-icon-box">
-                  <img src="/icons/plus.svg" alt="" />
-                </div>
-                <span class="sidebar-text">플레이리스트 만들기</span>
-              </a>
-            </li>
-            <li class="sidebar-playlist-item">
-              <a href="#" class="sidebar-playlist-link favorite-playlist">
-                <div class="sidebar-icon rounded-icon-box">
-                  <img src="/icons/heart.svg" alt="" />
-                </div>
-                <span class="sidebar-text">좋아하는 곡</span>
-              </a>
-            </li>
-          </ul>
-        </section>
-      </section>
-      <hr />
       <section class="component-section-view">
         <h2>아이콘 버튼</h2>
-        <ul>
-          <li>
-            <a href="#" class="icon-btn rounded-btn bg-green">
-              <img src="/icons/heart.svg" alt="" />
-            </a>
-          </li>
-          <li>
-            <a href="#" class="icon-btn rounded-btn bg-blue">
-              <img src="/icons/facebook-filed.svg" alt="" />
-            </a>
-          </li>
-          <li>
-            <a href="#" class="icon-btn rounded-btn bg-black">
-              <img src="/icons/spotify-logo-symbol.svg" alt="" />
-            </a>
-          </li>
-        </ul>
+
+        <div class="component-row">
+          <span class="variant-label">왼쪽 아이콘:</span>
+          <button-component icon="home" icon-position="left">
+            홈
+          </button-component>
+          <link-component href="#" button-style icon="home" icon-position="left"
+            >홈</link-component
+          >
+        </div>
+
+        <div class="component-row">
+          <span class="variant-label">오른쪽 아이콘:</span>
+          <button-component icon="play" icon-position="right">
+            재생
+          </button-component>
+          <link-component
+            href="#"
+            button-style
+            icon="download"
+            icon-position="right"
+          >
+            다운로드
+          </link-component>
+        </div>
+
+        <div class="component-row">
+          <span class="variant-label">아이콘만:</span>
+          <button-component size="small" icon="home"></button-component>
+          <button-component
+            icon="download"
+            variant="secondary"
+            size="large"
+          ></button-component>
+          <link-component
+            href="#"
+            button-style
+            size="large"
+            icon="browse"
+          ></link-component>
+          <link-component
+            href="#"
+            button-style
+            icon="search"
+            variant="primary"
+            size="large"
+          ></link-component>
+        </div>
       </section>
       <hr />
-      <a
-        class="rounded-btn btn bg-green black-text btn-long"
-        href="/index.html"
-      >
-        메인 페이지로 돌아가기
-      </a>
+      <section class="component-section-view">
+        <h2>둥근 아이콘 버튼</h2>
+        <div class="component-row">
+          <span class="variant-label">둥근 버튼:</span>
+          <button-component rounded icon="search"></button-component>
+          <button-component
+            rounded
+            variant="primary"
+            icon="home"
+          ></button-component>
+          <button-component
+            rounded
+            variant="secondary"
+            icon="download"
+          ></button-component>
+          <button-component
+            icon="browse"
+            variant="outline"
+            rounded
+          ></button-component>
+        </div>
+      </section>
+
+      <section class="component-section-view">
+        <h2>비활성화 버튼</h2>
+        <div class="component-row">
+          <span class="variant-label">비활성화:</span>
+          <button-component disabled>비활성화 버튼</button-component>
+          <link-component href="#" disabled>비활성화 링크</link-component>
+          <link-component href="#" button-style disabled
+            >비활성화 링크 버튼</link-component
+          >
+        </div>
+      </section>
+
+      <hr />
+
+      <div style="margin: 2rem 0">
+        <link-component
+          href="/index.html"
+          button-style
+          variant="primary"
+          size="large"
+        >
+          메인 페이지로 돌아가기
+        </link-component>
+      </div>
+
+      <!-- JavaScript 이벤트 리스너 -->
+      <script>
+        document.addEventListener("button-click", (e) => {
+          console.log("Button clicked:", e.detail);
+        });
+
+        document.addEventListener("link-click", (e) => {
+          console.log("Link clicked:", e.detail);
+        });
+      </script>
     </main>
   </body>
 </html>
