@@ -19,12 +19,12 @@
  * @extends HTMLElement
  */
 
-import { BREAKPOINTS } from "/src/scripts/utils/responsive-utils.js";
 import {
   EventManager,
   formatEventName,
   throttle,
 } from "/src/scripts/utils/event-utils.js";
+import { getCardBaseStyles } from "/src/scripts/utils/shared-component-styles.js";
 
 export class BaseCard extends HTMLElement {
   constructor() {
@@ -150,221 +150,10 @@ export class BaseCard extends HTMLElement {
 
   /**
    * 기본 카드 스타일을 반환합니다.
+   * 공통 스타일 모듈에서 가져온 스타일을 사용합니다.
    * @returns {string} 카드의 기본 CSS 스타일
    */
   getBaseStyles() {
-    return `
-      :host {
-        display: block;
-        width: 100%;
-      }
-
-      .list-card {
-        background-color: #181818;
-        border-radius: 6px;
-        padding: 16px;
-        transition: background-color 0.3s, outline 0.2s, transform 0.2s;
-        cursor: pointer;
-        height: 100%;
-        box-sizing: border-box;
-        outline: none;
-        position: relative;
-      }
-
-      /* 접근성: 키보드 초점 상태에 시각적 표시 */
-      .list-card:focus-visible {
-        outline: 2px solid #1db954;
-        outline-offset: 2px;
-        transform: scale(1.05);
-      }
-
-      .list-card:hover {
-        background-color: #282828;
-      }
-
-      /* 접근성: 높은 대비 모드 지원 */
-      @media (forced-colors: active) {
-        .list-card {
-          border: 1px solid CanvasText;
-        }
-        .list-card:focus-visible {
-          outline: 2px solid Highlight;
-        }
-      }
-
-      .card-img-container {
-        position: relative;
-        width: 100%;
-        padding-top: 100%;
-        margin-bottom: 16px;
-        border-radius: 4px;
-        overflow: hidden;
-      }
-
-      .card-img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .play-button {
-        position: absolute;
-        bottom: 8px;
-        right: 8px;
-        width: 36px;
-        height: 36px;
-        background-color: #1db954;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        transform: translateY(8px);
-        transition: all 0.3s ease;
-        box-shadow: 0 8px 8px rgba(0, 0, 0, 0.3);
-      }
-
-      .list-card:hover .play-button,
-      .list-card:focus-visible .play-button {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      .play-button:hover {
-        transform: scale(1.1);
-        background-color: #1ed760;
-      }
-
-      .play-icon {
-        width: 40%;
-        height: 40%;
-      }
-
-      /* 접근성: 높은 대비 모드에서 플레이 버튼 스타일 조정 */
-      @media (forced-colors: active) {
-        .play-button {
-          opacity: 1;
-          background-color: ButtonFace;
-          border: 1px solid ButtonText;
-        }
-
-        .play-icon {
-          fill: ButtonText;
-          forced-color-adjust: none;
-        }
-      }
-
-      /* 반응형 스타일: XS (800px 이하) - 모바일 */
-      @media (max-width: ${BREAKPOINTS.xs}px) {
-        .list-card {
-          padding: 12px;
-        }
-
-        .card-img-container {
-          margin-bottom: 12px;
-        }
-
-        .card-title {
-          font-size: 14px;
-          margin-bottom: 4px;
-        }
-
-        .card-description {
-          font-size: 12px;
-        }
-
-        .play-button {
-          width: 32px;
-          height: 32px;
-          opacity: 0.9; /* 모바일에서 항상 약간 보이게 */
-        }
-
-        .play-icon {
-          width: 40%;
-          height: 40%;
-        }
-
-        /* 터치 인터페이스 개선 */
-        .list-card {
-          -webkit-tap-highlight-color: rgba(29, 185, 84, 0.3); /* iOS 터치 하이라이트 */
-          touch-action: manipulation; /* 더 좋은 터치 반응성 */
-        }
-
-        .play-button {
-          /* 터치 자연스럽게 하기 위해 터치 타겟 크기 증가 */
-          bottom: 4px;
-          right: 4px;
-        }
-      }
-
-      /* 반응형 스타일: S (801px - 850px) - 소형 태블릿 */
-      @media (min-width: ${BREAKPOINTS.xs + 1}px) and (max-width: ${
-      BREAKPOINTS.s
-    }px) {
-        .list-card {
-          padding: 14px;
-        }
-
-        .card-title {
-          font-size: 15px;
-        }
-
-        .card-description {
-          font-size: 13px;
-        }
-      }
-
-      /* 반응형 스타일: XL (1743px 이상) - 대형 디스플레이 */
-      @media (min-width: ${BREAKPOINTS.lg + 1}px) {
-        .list-card {
-          padding: 20px;
-        }
-
-        .card-img-container {
-          margin-bottom: 20px;
-        }
-
-        .card-title {
-          font-size: 18px;
-          margin-bottom: 10px;
-        }
-
-        .card-description {
-          font-size: 16px;
-        }
-
-        .play-button {
-          width: 40px;
-          height: 40px;
-        }
-
-        .play-icon {
-          width: 40%;
-          height: 40%;
-        }
-      }
-
-      .card-title {
-        font-weight: 700;
-        font-size: 16px;
-        margin: 0 0 8px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        color: #fff;
-      }
-
-      .card-description {
-        font-size: 14px;
-        margin: 0;
-        color: #b3b3b3;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    `;
+    return getCardBaseStyles();
   }
 }

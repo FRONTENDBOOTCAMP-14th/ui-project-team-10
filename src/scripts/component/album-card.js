@@ -26,12 +26,8 @@
  */
 
 import { BaseCard } from "/src/scripts/component/base-card.js";
-import { BREAKPOINTS } from "/src/scripts/utils/responsive-utils.js";
-import {
-  EventManager,
-  formatEventName,
-  throttle,
-} from "/src/scripts/utils/event-utils.js";
+import { formatEventName } from "/src/scripts/utils/event-utils.js";
+import { getAlbumCardStyles } from "/src/scripts/utils/shared-component-styles.js";
 
 class AlbumCard extends BaseCard {
   constructor() {
@@ -141,64 +137,8 @@ class AlbumCard extends BaseCard {
     this.shadowRoot.innerHTML = `
       <style>
         ${this.getBaseStyles()}
-        
-        /* 앨범 카드 고유 스타일 */
-        :host {
-          font-family: system-ui, -apple-system, sans-serif;
-        }
-        
-        .list-card {
-          max-width: 180px;
-          transition: transform 0.3s ease, background-color 0.3s;
-          padding: 16px;
-          /* 접근성: 가독성을 위한 스타일 조정 */
-          position: relative;
-          display: flex;
-          flex-direction: column;
-        }
-        
-        .list-card:hover {
-          transform: scale(1.05);
-          background-color: #282828;
-        }
-        
-        /* 접근성: 키보드 포커스 스타일 개선 */
-        .list-card:focus-visible {
-          outline: 2px solid #1db954;
-          outline-offset: 2px;
-          transform: scale(1.05);
-          box-shadow: 0 0 0 4px rgba(29, 185, 84, 0.3);
-        }
-        
-        .card-img-container {
-          border-radius: 8px;
-          margin-bottom: 12px;
-          position: relative;
-          overflow: hidden;
-        }
-        
-        .card-img {
-          border-radius: 8px;
-          width: 100%;
-          height: auto;
-          transition: transform 0.3s ease;
-        }
-        
-        .list-card:hover .card-img {
-          transform: scale(1.05);
-        }
-        
-        .play-button {
-          position: absolute;
-          bottom: 8px;
-          right: 8px;
-          width: 36px;
-          height: 36px;
-          background-color: #1db954;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+        ${getAlbumCardStyles()}
+
           opacity: 0;
           transform: translateY(8px);
           transition: all 0.3s ease;
@@ -405,5 +345,5 @@ class AlbumCard extends BaseCard {
   }
 }
 
-// Register the custom element
+// 커스텀 요소 정의
 customElements.define("album-card", AlbumCard);

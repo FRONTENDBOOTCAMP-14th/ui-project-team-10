@@ -32,6 +32,7 @@ import {
   EventManager,
   formatEventName,
 } from "/src/scripts/utils/event-utils.js";
+import { getArtistCardStyles } from "/src/scripts/utils/shared-component-styles.js";
 
 class ArtistCard extends BaseCard {
   constructor() {
@@ -158,23 +159,7 @@ class ArtistCard extends BaseCard {
     this.shadowRoot.innerHTML = `
       <style>
         ${this.getBaseStyles()}
-        
-        /* 아티스트 카드 고유 스타일 */
-        :host {
-          font-family: system-ui, -apple-system, sans-serif;
-        }
-        
-        .list-card {
-          max-width: 180px;
-          transition: transform 0.3s ease, background-color 0.3s;
-          padding: 16px;
-          /* 접근성: 가독성을 위한 스타일 조정 */
-          position: relative;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          border-radius: 8px;
-        }
+        ${getArtistCardStyles()}
         
         .list-card:hover {
           transform: scale(1.05);
@@ -191,13 +176,13 @@ class ArtistCard extends BaseCard {
         }
         
         .card-img-container {
-          border-radius: 50%;
-          overflow: hidden;
+          margin-bottom: 12px;
           position: relative;
+          overflow: hidden;
+          border-radius: 50%;
           width: 100%;
           max-width: 160px;
           aspect-ratio: 1/1;
-          margin-bottom: 12px;
           box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
           transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -209,8 +194,7 @@ class ArtistCard extends BaseCard {
         
         .card-img {
           width: 100%;
-          height: 100%;
-          object-fit: cover;
+          height: auto;
           transition: transform 0.3s ease;
         }
         

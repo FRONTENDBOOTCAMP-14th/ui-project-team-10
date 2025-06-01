@@ -11,7 +11,10 @@
  * - 포커스 관리
  */
 import { sharedIconMap } from "/src/scripts/utils/shared-component-styles.js";
-import { EventManager, formatEventName } from "/src/scripts/utils/event-utils.js";
+import {
+  EventManager,
+  formatEventName,
+} from "/src/scripts/utils/event-utils.js";
 
 class LinkComponent extends HTMLElement {
   constructor() {
@@ -56,7 +59,7 @@ class LinkComponent extends HTMLElement {
     if (link) {
       // EventManager를 사용하여 클릭 이벤트 등록
       this.eventManager.addListener(link, "click", this.handleClick.bind(this));
-      
+
       // 키보드 접근성 이벤트 처리 개선
       this.eventManager.addListener(link, "keydown", (event) => {
         if ((event.key === "Enter" || event.key === " ") && !this.disabled) {
@@ -64,22 +67,32 @@ class LinkComponent extends HTMLElement {
           this.handleClick(event);
         }
       });
-      
+
       // 터치 이벤트 최적화
-      if ('ontouchstart' in window) {
-        const throttledTouchHandler = this.eventManager.throttle(this.handleClick.bind(this), 300);
-        this.eventManager.addListener(link, "touchstart", throttledTouchHandler, { passive: true });
+      if ("ontouchstart" in window) {
+        const throttledTouchHandler = this.eventManager.throttle(
+          this.handleClick.bind(this),
+          300
+        );
+        this.eventManager.addListener(
+          link,
+          "touchstart",
+          throttledTouchHandler,
+          { passive: true }
+        );
       }
-      
+
       // 호버 이벤트 최적화 (디바운스 적용)
       const debouncedHoverHandler = this.eventManager.debounce(() => {
-        this.dispatchEvent(new CustomEvent("link-hover", {
-          bubbles: true,
-          composed: true,
-          detail: { href: this.href, buttonStyle: this.buttonStyle }
-        }));
+        this.dispatchEvent(
+          new CustomEvent("link-hover", {
+            bubbles: true,
+            composed: true,
+            detail: { href: this.href, buttonStyle: this.buttonStyle },
+          })
+        );
       }, 150);
-      
+
       this.eventManager.addListener(link, "mouseenter", debouncedHoverHandler);
     }
   }
@@ -91,9 +104,9 @@ class LinkComponent extends HTMLElement {
     }
 
     // 표준화된 이벤트 이름 생성
-    const eventName = formatEventName('link', 'click');
+    const eventName = formatEventName("link", "click");
     const eventData = {
-      component: 'link-component',
+      component: "link-component",
       href: this.href,
       variant: this.variant,
       size: this.size,
@@ -101,7 +114,7 @@ class LinkComponent extends HTMLElement {
       buttonStyle: this.buttonStyle,
       target: this.target,
       originalEvent: e,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
 
     // 1. 기존 호환성을 위한 이벤트 발생
@@ -109,10 +122,10 @@ class LinkComponent extends HTMLElement {
       new CustomEvent("link-click", {
         bubbles: true,
         composed: true,
-        detail: eventData
+        detail: eventData,
       })
     );
-    
+
     // 2. 이벤트 매니저를 통한 표준화된 이벤트 발행
     this.eventManager.publish(eventName, eventData);
   }
@@ -186,7 +199,7 @@ class LinkComponent extends HTMLElement {
   }
 
   getLinkClasses() {
-    // Base classes that apply to both link and button styles
+    // 링크와 버튼 스타일 모두에 적용되는 기본 클래스
     const baseClasses = [
       this.icon ? "with-icon" : "",
       this.iconPosition === "right" ? "icon-right" : "",
@@ -195,7 +208,7 @@ class LinkComponent extends HTMLElement {
       this.fullWidth ? "full-width" : "",
     ];
 
-    // Button-style specific classes
+    // 버튼 스타일에 특화된 클래스
     if (this.buttonStyle) {
       return [
         "btn",
@@ -208,7 +221,7 @@ class LinkComponent extends HTMLElement {
         .filter(Boolean)
         .join(" ");
     }
-    // Regular link style classes
+    // 정규 링크 스타일 클래스
     else {
       return [
         "link",
@@ -600,5 +613,5 @@ class LinkComponent extends HTMLElement {
   }
 }
 
-// Define the custom element
+// 커스텀 요소 정의
 customElements.define("link-component", LinkComponent);

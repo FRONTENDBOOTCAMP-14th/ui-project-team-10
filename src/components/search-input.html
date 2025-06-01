@@ -120,16 +120,16 @@
         EventManager,
       } from "/src/scripts/utils/event-utils.js";
 
-      // Initialize event manager
+      // 이벤트 매니저 초기화
       const eventManager = new EventManager();
 
-      // DOM elements
+      // DOM 요소
       const extendSearchBar = document.querySelector(".container");
       const toggleSearchBtn = document.querySelector(".search-toggle-btn");
       const searchInput = document.getElementById("search-box");
       const clossingSearchBar = document.querySelector(".clossing-search-bar");
 
-      // Toggle search bar function
+      // 검색창 토글 함수
       const toggleSearchBar = () => {
         const viewportWidth = window.visualViewport.width;
         if (viewportWidth < 1078) {
@@ -141,7 +141,7 @@
         }
       };
 
-      // Handle window resize
+      // 창 크기 변경 처리
       const handleResize = () => {
         const viewportWidth = window.innerWidth;
         if (viewportWidth >= 1078) {
@@ -153,7 +153,7 @@
         }
       };
 
-      // Initialize search bar based on viewport
+      // 뷰포트 기반 검색창 초기화
       const initSearchBar = () => {
         const viewportWidth = window.innerWidth;
         if (viewportWidth >= 1078) {
@@ -162,37 +162,37 @@
         }
       };
 
-      // Set up event listeners using event-utils
+      // event-utils를 사용한 이벤트 리스너 설정
       const setupEventListeners = () => {
-        // Toggle search button click
+        // 검색 버튼 클릭 토글
         eventManager.addListener(toggleSearchBtn, "click", toggleSearchBar);
 
-        // Window resize
+        // 창 크기 변경
         window.addEventListener("resize", handleResize);
 
-        // Initial setup
+        // 초기 설정
         window.addEventListener("load", initSearchBar);
       };
 
-      // Set up component events
+      // 컴포넌트 이벤트 설정
       const cleanupButtonEvents = setupComponentEvents(
         "button",
         (eventData) => {
-          console.log("Button clicked:", eventData);
+          console.log("버튼 클릭됨:", eventData);
         }
       );
 
       const cleanupLinkEvents = setupComponentEvents("link", (eventData) => {
-        console.log("Link clicked:", eventData);
+        console.log("링크 클릭됨:", eventData);
       });
 
-      // Initialize everything when DOM is loaded
+      // DOM이 로드되면 모든 것을 초기화
       document.addEventListener("DOMContentLoaded", () => {
         setupEventListeners();
         initSearchBar();
       });
 
-      // Clean up event listeners when the page unloads
+      // 페이지 언로드 시 이벤트 리스너 정리
       window.addEventListener("unload", () => {
         eventManager.removeAllListeners();
         cleanupButtonEvents();
