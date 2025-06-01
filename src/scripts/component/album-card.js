@@ -1,60 +1,48 @@
 /**
- * 앨범 카드 커스텀 엘리먼트
+ * 앨범 카드 컴포넌트
  *
- * 다음 기능을 갖춤 앨범 카드를 표시하는 재사용 가능한 웹 컴포넌트:
- * - 사용자 지정 앨범 제목, 아티스트 이름 및 커버 이미지
- * - 호버 효과 및 재생 버튼 오버레이
- * - 캡슐화를 위한 Shadow DOM
- * - 클릭 시 커스텀 이벤트
+ * 앨범 정보를 표시하는 웹 컴포넌트입니다.
+ * @element album-card
+ * @attribute {string} album-title - 앨범 제목
+ * @attribute {string} album-artist - 앨범 아티스트
+ * @attribute {string} album-cover - 앨범 커버 이미지 URL
+ * @fires {CustomEvent} album-click - 앨범이 클릭되었을 때 발생하는 이벤트
  *
  * 접근성 기능:
  * - 키보드 탐색 지원 (Tab, Enter, Space)
- * - ARIA 속성 및 역할
- * - 스크린 리더 호환성
+ * - ARIA 속성 및 역할 추가
+ * - 스크린 리더 호환성 개선
  * - 고대비 모드 지원
  *
  * 반응형 기능:
  * - 다양한 화면 크기에 최적화 (XS, S, M, LG, XL 브레이크포인트)
  * - 터치 인터페이스 개선
  * - 요소의 크기와 스타일을 장치에 따라 자동 조정
- *
- * @element album-card
- * @attribute {string} album-title - 앨범 제목
- * @attribute {string} album-artist - 앨범 아티스트
- * @attribute {string} album-cover - 앨범 커버 이미지 URL
- * @fires {CustomEvent} album-click - 앨범 카드가 클릭되었을 때 발생하는 이벤트
  */
 
 import { BaseCard } from "/src/scripts/component/base-card.js";
-import { formatEventName } from "/src/scripts/utils/event-utils.js";
-import { getAlbumCardStyles } from "/src/scripts/utils/shared-component-styles.js";
+import { BREAKPOINTS } from "/src/scripts/utils/responsive-utils.js";
+import {
+  EventManager,
+  formatEventName,
+} from "/src/scripts/utils/event-utils.js";
+import {
+  getAlbumCardStyles,
+  dispatchCustomEvent,
+} from "/src/scripts/utils/shared-component-styles.js";
 
 class AlbumCard extends BaseCard {
   constructor() {
-    super(); // BaseCard에서 이미 Shadow DOM과 EventManager를 생성합니다
-
-    // 메서드 바인딩은 이미 BaseCard에서 처리되므로 추가로 필요한 바인딩만 수행
-    // album-card 고유의 이벤트 핸들러가 있다면 여기서 바인딩
+    super(); // BaseCard에서 Shadow DOM 생성
+    this.eventManager = new EventManager();
   }
 
   static get observedAttributes() {
     return ["album-title", "album-artist", "album-cover"];
   }
 
-  connectedCallback() {
-    this.render();
-    this.addEventListeners();
-  }
-
-  disconnectedCallback() {
-    // 컴포넌트가 DOM에서 제거될 때 이벤트 정리
-    // BaseCard의 disconnectedCallback을 호출하여 이벤트 정리
-    super.disconnectedCallback();
-  }
-
-  attributeChangedCallback() {
-    // Re-render when attributes change
-    if (this.shadowRoot.innerHTML !== "") {
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (oldValue !== newValue && this.shadowRoot.innerHTML !== "") {
       this.render();
     }
   }
@@ -62,19 +50,17 @@ class AlbumCard extends BaseCard {
   /**
    * 클릭 이벤트 핸들러를 구현합니다.
    * BaseCard의 addEventListeners에서 이 메서드를 호출합니다.
-   * @param {Event} event - 클릭 이벤트
    */
-  handleClick(event) {
-    // event-utils를 사용하여 표준화된 이벤트 이름 생성 및 이벤트 발행
+  handleClick() {
+    // 표준화된 이벤트 이름 생성 및 이벤트 데이터 구성
     const eventName = formatEventName("album", "click");
     const eventData = {
-      title: this.getAttribute("album-title"),
-      artist: this.getAttribute("album-artist"),
-      cover: this.getAttribute("album-cover"),
+      albumTitle: this.getAttribute("album-title"),
+      albumArtist: this.getAttribute("album-artist"),
+      albumCover: this.getAttribute("album-cover"),
       component: "album-card",
       timestamp: new Date().toISOString(),
-      originalEvent: event, // 원본 이벤트 객체 저장
-      cardType: "album", // 카드 타입 명시
+      originalEvent: "album-click",
     };
 
     // 1. 레거시 지원을 위한 기존 이벤트 방식 유지
@@ -90,55 +76,96 @@ class AlbumCard extends BaseCard {
     this.eventManager.publish(eventName, eventData);
   }
 
+  connectedCallback() {
+    this.render();
+    this.addEventListeners();
+  }
+
+  disconnectedCallback() {
+    // 컴포넌트가 DOM에서 제거될 때 이벤트 정리
+    this.eventManager.cleanup();
+  }
+
   /**
-   * 키보드 이벤트 핸들러
-   * BaseCard의 기본 구현을 확장하여 앨범 카드에 특화된 처리 추가
-   * @param {KeyboardEvent} event - 키보드 이벤트
+   * 이벤트 리스너를 추가합니다.
    */
-  handleKeyDown(event) {
-    // Enter 또는 Space 키를 누르면 클릭 이벤트와 동일하게 처리
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      this.handleClick(event);
+  addEventListeners() {
+    const card = this.shadowRoot.querySelector(".list-card");
+
+    // EventManager를 사용하여 이벤트 리스너 등록
+    this.eventManager.addListener(card, "click", this.handleClick.bind(this));
+
+    // 키보드 접근성 이벤트
+    this.eventManager.addListener(card, "keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        this.handleClick();
+      }
+    });
+
+    // 터치 이벤트 최적화 (모바일 디바이스용)
+    if ("ontouchstart" in window) {
+      // 터치 이벤트에 스로틀 적용
+      const throttledTouchHandler = this.eventManager.throttle(() => {
+        this.handleClick();
+      }, 300);
+
+      this.eventManager.addListener(
+        card,
+        "touchstart",
+        (e) => {
+          // 스크롤 방지를 위해 터치 이벤트 처리
+          if (e.touches.length === 1) {
+            e.preventDefault();
+            throttledTouchHandler();
+          }
+        },
+        { passive: false }
+      );
     }
-
-    // 앨범 카드에 특화된 추가 키보드 단축키가 있다면 여기서 처리
-  }
-
-  /**
-   * 터치 이벤트 핸들러
-   * 모바일 기기에서 터치 이벤트 처리 최적화
-   * @param {TouchEvent} event - 터치 이벤트
-   */
-  handleTouchStart(event) {
-    // 앨범 카드에 특화된 터치 처리가 필요하면 여기서 구현
-    // 기본적으로 클릭 이벤트와 유사하게 동작
-    // 이 이벤트는 생성자에서 throttle로 래핑되어 있어 연속 호출 방지됨
-    this.handleClick(event);
-  }
-
-  /**
-   * 접근성 구현을 위한 고유 ID 생성
-   * 각 요소에 고유한 ID를 제공하여 스크린 리더가 요소를 식별하는 데 도움을 줍니다.
-   * @returns {string} 고유 ID 문자열
-   */
-  generateUniqueId() {
-    return Math.random().toString(36).substring(2, 10);
   }
 
   render() {
-    // 기본값이 있는 속성 값 가져오기
-    const albumTitle = this.getAttribute("album-title") || "앨범 이름";
-    const albumArtist = this.getAttribute("album-artist") || "아티스트";
+    const albumTitle = this.getAttribute("album-title") || "Unknown Album";
+    const albumArtist = this.getAttribute("album-artist") || "Unknown Artist";
     const albumCover =
       this.getAttribute("album-cover") || "/image/default-album-cover.png";
 
-    // HTML 콘텐츠 생성
+    // 접근성 개선: 앨범 카드에 고유 ID 생성
+    const albumId =
+      this.getAttribute("id") ||
+      `album-card-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`;
+    if (!this.getAttribute("id")) {
+      this.setAttribute("id", albumId);
+    }
+
     this.shadowRoot.innerHTML = `
       <style>
         ${this.getBaseStyles()}
-        ${getAlbumCardStyles()}
-
+        ${getAlbumCardStyles ? getAlbumCardStyles() : ""}
+        
+        .card-img {
+          border-radius: 4px;
+          width: 100%;
+          height: auto;
+          transition: transform 0.3s ease;
+        }
+        
+        .list-card:hover .card-img {
+          transform: scale(1.05);
+        }
+        
+        .play-button {
+          position: absolute;
+          bottom: 8px;
+          right: 8px;
+          width: 36px;
+          height: 36px;
+          background-color: #1db954;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           opacity: 0;
           transform: translateY(8px);
           transition: all 0.3s ease;
@@ -185,7 +212,13 @@ class AlbumCard extends BaseCard {
           text-overflow: ellipsis;
         }
         
-        /* 접근성: 높은 대비 모드 지원 */
+        /* 접근성: 키보드 포커스 아이콘 표시 */
+        .play-button:focus-visible {
+          outline: 2px solid white;
+          border-radius: 50%;
+        }
+        
+        /* 접근성: 고대비 모드 지원 */
         @media (forced-colors: active) {
           .list-card {
             border: 1px solid ButtonText;
@@ -328,22 +361,23 @@ class AlbumCard extends BaseCard {
           }
         }
       </style>
-      <article 
-        class="list-card" 
-        role="button" 
-        aria-label="${albumTitle} by ${albumArtist}">
-        <div class="card-img-container" aria-hidden="true">
-          <img src="${albumCover}" alt="${albumTitle} album cover" class="card-img" />
-          <div class="play-button" aria-label="Play ${albumTitle}">
-            <img src="/icons/play-arrow-only.svg" class="play-icon" alt="" />
+      
+      <article class="list-card" 
+        role="button"
+        aria-label="앨범: ${albumTitle}, 아티스트: ${albumArtist}"
+        aria-describedby="${albumId}-title ${albumId}-artist">
+        
+        <div class="card-img-container">
+          <img src="${albumCover}" alt="앨범 ${albumTitle} 커버 이미지" class="card-img" />
+          <div class="play-button" role="presentation" aria-hidden="true">
+            <img src="/icons/play-arrow-only.svg" alt="" class="play-icon" />
           </div>
-        </div>
-        <h3 class="card-title" id="album-title-${this.generateUniqueId()}">${albumTitle}</h3>
-        <p class="card-description" id="album-artist-${this.generateUniqueId()}">${albumArtist}</p>
+        </div> 
+        <h3 id="${albumId}-title" class="card-title">${albumTitle}</h3>
+        <p id="${albumId}-artist" class="card-description">${albumArtist}</p>
       </article>
     `;
   }
 }
 
-// 커스텀 요소 정의
 customElements.define("album-card", AlbumCard);
