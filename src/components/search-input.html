@@ -114,15 +114,24 @@
       </li>
     </ul>
 
-    <script>
+    <script type="module">
+      import {
+        setupComponentEvents,
+        EventManager,
+      } from "/src/scripts/utils/event-utils.js";
+
+      // Initialize event manager
+      const eventManager = new EventManager();
+
+      // DOM elements
       const extendSearchBar = document.querySelector(".container");
       const toggleSearchBtn = document.querySelector(".search-toggle-btn");
       const searchInput = document.getElementById("search-box");
       const clossingSearchBar = document.querySelector(".clossing-search-bar");
 
-      toggleSearchBtn.addEventListener("click", function () {
+      // Toggle search bar function
+      const toggleSearchBar = () => {
         const viewportWidth = window.visualViewport.width;
-        console.log("click");
         if (viewportWidth < 1078) {
           extendSearchBar.classList.toggle("hidden");
           clossingSearchBar.classList.toggle("absolute");
@@ -130,11 +139,11 @@
         } else {
           searchInput.focus();
         }
-      });
+      };
 
-      window.addEventListener("resize", function () {
+      // Handle window resize
+      const handleResize = () => {
         const viewportWidth = window.innerWidth;
-        console.log(viewportWidth);
         if (viewportWidth >= 1078) {
           extendSearchBar.classList.remove("hidden");
           clossingSearchBar.classList.add("absolute");
@@ -142,15 +151,52 @@
           extendSearchBar.classList.add("hidden");
           clossingSearchBar.classList.remove("absolute");
         }
-      });
+      };
 
-      window.addEventListener("DOMContentLoaded", function () {
+      // Initialize search bar based on viewport
+      const initSearchBar = () => {
         const viewportWidth = window.innerWidth;
-
         if (viewportWidth >= 1078) {
           extendSearchBar.classList.remove("hidden");
           clossingSearchBar.classList.add("absolute");
         }
+      };
+
+      // Set up event listeners using event-utils
+      const setupEventListeners = () => {
+        // Toggle search button click
+        eventManager.addListener(toggleSearchBtn, "click", toggleSearchBar);
+
+        // Window resize
+        window.addEventListener("resize", handleResize);
+
+        // Initial setup
+        window.addEventListener("load", initSearchBar);
+      };
+
+      // Set up component events
+      const cleanupButtonEvents = setupComponentEvents(
+        "button",
+        (eventData) => {
+          console.log("Button clicked:", eventData);
+        }
+      );
+
+      const cleanupLinkEvents = setupComponentEvents("link", (eventData) => {
+        console.log("Link clicked:", eventData);
+      });
+
+      // Initialize everything when DOM is loaded
+      document.addEventListener("DOMContentLoaded", () => {
+        setupEventListeners();
+        initSearchBar();
+      });
+
+      // Clean up event listeners when the page unloads
+      window.addEventListener("unload", () => {
+        eventManager.removeAllListeners();
+        cleanupButtonEvents();
+        cleanupLinkEvents();
       });
     </script>
 

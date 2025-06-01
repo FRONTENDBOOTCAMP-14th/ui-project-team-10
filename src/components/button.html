@@ -239,13 +239,26 @@
       </div>
 
       <!-- JavaScript 이벤트 리스너 -->
-      <script>
-        document.addEventListener("button-click", (e) => {
-          console.log("Button clicked:", e.detail);
+      <script type="module">
+        import { setupComponentEvents } from "/src/scripts/utils/event-utils.js";
+
+        // 버튼 클릭 이벤트 설정
+        const removeButtonEvents = setupComponentEvents(
+          "button",
+          (eventData) => {
+            console.log("Button clicked with data:", eventData);
+          }
+        );
+
+        // 링크 클릭 이벤트 설정
+        const removeLinkEvents = setupComponentEvents("link", (eventData) => {
+          console.log("Link clicked with data:", eventData);
         });
 
-        document.addEventListener("link-click", (e) => {
-          console.log("Link clicked:", e.detail);
+        // 페이지 언로드 시 이벤트 리스너 정리
+        window.addEventListener("unload", () => {
+          removeButtonEvents();
+          removeLinkEvents();
         });
       </script>
     </main>

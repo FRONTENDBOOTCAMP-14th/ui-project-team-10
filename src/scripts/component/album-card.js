@@ -27,10 +27,18 @@
 
 import { BaseCard } from "/src/scripts/component/base-card.js";
 import { BREAKPOINTS } from "/src/scripts/utils/responsive-utils.js";
+import {
+  EventManager,
+  formatEventName,
+  throttle,
+} from "/src/scripts/utils/event-utils.js";
 
 class AlbumCard extends BaseCard {
   constructor() {
-    super(); // BaseCard에서 이미 Shadow DOM을 생성합니다
+    super(); // BaseCard에서 이미 Shadow DOM과 EventManager를 생성합니다
+
+    // 메서드 바인딩은 이미 BaseCard에서 처리되므로 추가로 필요한 바인딩만 수행
+    // album-card 고유의 이벤트 핸들러가 있다면 여기서 바인딩
   }
 
   static get observedAttributes() {
@@ -40,6 +48,12 @@ class AlbumCard extends BaseCard {
   connectedCallback() {
     this.render();
     this.addEventListeners();
+  }
+
+  disconnectedCallback() {
+    // 컴포넌트가 DOM에서 제거될 때 이벤트 정리
+    // BaseCard의 disconnectedCallback을 호출하여 이벤트 정리
+    super.disconnectedCallback();
   }
 
   attributeChangedCallback() {
@@ -52,20 +66,59 @@ class AlbumCard extends BaseCard {
   /**
    * 클릭 이벤트 핸들러를 구현합니다.
    * BaseCard의 addEventListeners에서 이 메서드를 호출합니다.
+   * @param {Event} event - 클릭 이벤트
    */
-  handleClick() {
-    // 앨범 카드가 클릭되면 커스텀 이벤트 발생
+  handleClick(event) {
+    // event-utils를 사용하여 표준화된 이벤트 이름 생성 및 이벤트 발행
+    const eventName = formatEventName("album", "click");
+    const eventData = {
+      title: this.getAttribute("album-title"),
+      artist: this.getAttribute("album-artist"),
+      cover: this.getAttribute("album-cover"),
+      component: "album-card",
+      timestamp: new Date().toISOString(),
+      originalEvent: event, // 원본 이벤트 객체 저장
+      cardType: "album", // 카드 타입 명시
+    };
+
+    // 1. 레거시 지원을 위한 기존 이벤트 방식 유지
     this.dispatchEvent(
       new CustomEvent("album-click", {
         bubbles: true,
         composed: true,
-        detail: {
-          title: this.getAttribute("album-title"),
-          artist: this.getAttribute("album-artist"),
-          cover: this.getAttribute("album-cover"),
-        },
+        detail: eventData,
       })
     );
+
+    // 2. 이벤트 매니저를 통한 표준화된 이벤트 발행
+    this.eventManager.publish(eventName, eventData);
+  }
+
+  /**
+   * 키보드 이벤트 핸들러
+   * BaseCard의 기본 구현을 확장하여 앨범 카드에 특화된 처리 추가
+   * @param {KeyboardEvent} event - 키보드 이벤트
+   */
+  handleKeyDown(event) {
+    // Enter 또는 Space 키를 누르면 클릭 이벤트와 동일하게 처리
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      this.handleClick(event);
+    }
+
+    // 앨범 카드에 특화된 추가 키보드 단축키가 있다면 여기서 처리
+  }
+
+  /**
+   * 터치 이벤트 핸들러
+   * 모바일 기기에서 터치 이벤트 처리 최적화
+   * @param {TouchEvent} event - 터치 이벤트
+   */
+  handleTouchStart(event) {
+    // 앨범 카드에 특화된 터치 처리가 필요하면 여기서 구현
+    // 기본적으로 클릭 이벤트와 유사하게 동작
+    // 이 이벤트는 생성자에서 throttle로 래핑되어 있어 연속 호출 방지됨
+    this.handleClick(event);
   }
 
   /**

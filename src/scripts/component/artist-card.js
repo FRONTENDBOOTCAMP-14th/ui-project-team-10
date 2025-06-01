@@ -28,10 +28,15 @@
 
 import { BaseCard } from "/src/scripts/component/base-card.js";
 import { BREAKPOINTS } from "/src/scripts/utils/responsive-utils.js";
+import {
+  EventManager,
+  formatEventName,
+} from "/src/scripts/utils/event-utils.js";
 
 class ArtistCard extends BaseCard {
   constructor() {
     super(); // BaseCard에서 이미 Shadow DOM을 생성합니다
+    this.eventManager = new EventManager();
   }
 
   static get observedAttributes() {
@@ -41,17 +46,50 @@ class ArtistCard extends BaseCard {
   connectedCallback() {
     this.render();
     this.addEventListeners();
+  }
 
-    // 접근성: 키보드 이벤트 처리 추가
-    this.shadowRoot
-      .querySelector(".list-card")
-      .addEventListener("keydown", (e) => {
-        // Enter 또는 Space 키로 활성화
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          this.handleClick();
-        }
-      });
+  disconnectedCallback() {
+    // 컴포넌트가 DOM에서 제거될 때 이벤트 정리
+    this.eventManager.cleanup();
+  }
+
+  /**
+   * 이벤트 리스너를 추가합니다.
+   */
+  addEventListeners() {
+    const card = this.shadowRoot.querySelector(".list-card");
+
+    // EventManager를 사용하여 이벤트 리스너 등록
+    this.eventManager.addListener(card, "click", this.handleClick.bind(this));
+
+    // 키보드 접근성 이벤트
+    this.eventManager.addListener(card, "keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        this.handleClick();
+      }
+    });
+
+    // 추가: 터치 이벤트 최적화 (모바일 디바이스용)
+    if ("ontouchstart" in window) {
+      // 터치 이벤트에 스로틀 적용
+      const throttledTouchHandler = this.eventManager.throttle(() => {
+        this.handleClick();
+      }, 300);
+
+      this.eventManager.addListener(
+        card,
+        "touchstart",
+        (e) => {
+          // 스크롤 방지를 위해 터치 이벤트 처리
+          if (e.touches.length === 1) {
+            e.preventDefault();
+            throttledTouchHandler();
+          }
+        },
+        { passive: false }
+      );
+    }
   }
 
   attributeChangedCallback() {
@@ -66,18 +104,29 @@ class ArtistCard extends BaseCard {
    * BaseCard의 addEventListeners에서 이 메서드를 호출합니다.
    */
   handleClick() {
-    // 아티스트 카드가 클릭되면 커스텀 이벤트 발생
+    // event-utils를 사용하여 표준화된 이벤트 이름 생성 및 이벤트 발행
+    const eventName = formatEventName("artist", "click");
+    const eventData = {
+      name: this.getAttribute("artist-name"),
+      type: this.getAttribute("artist-type"),
+      image: this.getAttribute("artist-image"),
+      component: "artist-card",
+      timestamp: new Date().toISOString(),
+      // 호환성을 위해 원래 이벤트 이름으로도 전송
+      originalEvent: "artist-click",
+    };
+
+    // 1. 레거시 지원을 위한 기존 이벤트 방식 유지
     this.dispatchEvent(
       new CustomEvent("artist-click", {
         bubbles: true,
         composed: true,
-        detail: {
-          name: this.getAttribute("artist-name"),
-          type: this.getAttribute("artist-type"),
-          image: this.getAttribute("artist-image"),
-        },
+        detail: eventData,
       })
     );
+
+    // 2. 이벤트 매니저를 통한 표준화된 이벤트 발행
+    this.eventManager.publish(eventName, eventData);
   }
 
   /**

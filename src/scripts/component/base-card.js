@@ -20,10 +20,24 @@
  */
 
 import { BREAKPOINTS } from "/src/scripts/utils/responsive-utils.js";
+import {
+  EventManager,
+  formatEventName,
+  throttle,
+} from "/src/scripts/utils/event-utils.js";
+
 export class BaseCard extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
+
+    // EventManager 초기화
+    this.eventManager = new EventManager();
+
+    // 이벤트 핸들러 바인딩
+    this.handleClick = this.handleClick.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleTouchStart = throttle(this.handleTouchStart.bind(this), 300);
   }
 
   /**
@@ -32,6 +46,15 @@ export class BaseCard extends HTMLElement {
   connectedCallback() {
     this.render();
     this.addEventListeners();
+  }
+
+  /**
+   * 컴포넌트가 DOM에서 제거될 때 호출됩니다.
+   * 이벤트 리스너를 정리하여 메모리 누수를 방지합니다.
+   */
+  disconnectedCallback() {
+    // 모든 이벤트 리스너 제거
+    this.eventManager.removeAllListeners();
   }
 
   /**
@@ -54,22 +77,42 @@ export class BaseCard extends HTMLElement {
 
   /**
    * 이벤트 리스너를 추가합니다.
-   * 이 메서드는 하위 클래스에서 오버라이드해야 합니다.
+   * 이 메서드는 하위 클래스에서 필요에 따라 확장할 수 있습니다.
    */
   addEventListeners() {
     const card = this.shadowRoot.querySelector(".list-card");
     if (card) {
-      card.addEventListener("click", this.handleClick.bind(this));
+      // EventManager를 사용하여 이벤트 리스너 등록
+      this.eventManager.addListener(card, "click", this.handleClick);
 
-      // 키보드 접근성 지원 추가
-      card.addEventListener("keydown", (event) => {
-        // Enter 또는 Space 키를 누르면 클릭 이벤트와 동일하게 처리
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          this.handleClick(event);
-        }
-      });
+      // 키보드 접근성 지원
+      this.eventManager.addListener(card, "keydown", this.handleKeyDown);
+
+      // 터치 이벤트 지원 - 쓰롬틀링으로 성능 최적화
+      this.eventManager.addListener(card, "touchstart", this.handleTouchStart);
     }
+  }
+
+  /**
+   * 키보드 이벤트 핸들러
+   * @param {KeyboardEvent} event - 키보드 이벤트
+   */
+  handleKeyDown(event) {
+    // Enter 또는 Space 키를 누르면 클릭 이벤트와 동일하게 처리
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      this.handleClick(event);
+    }
+  }
+
+  /**
+   * 터치 이벤트 핸들러
+   * @param {TouchEvent} event - 터치 이벤트
+   */
+  handleTouchStart(event) {
+    // 터치 이벤트에 대한 추가 처리가 필요한 경우 여기서 구현
+    // 기본적으로 클릭 이벤트와 동일한 기능 제공
+    // 이 이벤트는 쓰롬틀링되어 있어 중복 발생 방지
   }
 
   /**
@@ -78,8 +121,22 @@ export class BaseCard extends HTMLElement {
    * @param {Event} event - 클릭 이벤트
    */
   handleClick(event) {
-    // 기본 구현은 아무 작업도 수행하지 않습니다.
-    // 하위 클래스에서 오버라이드하여 구현해야 합니다.
+    // 기본 구현 - 일반적인 카드 클릭 이벤트 발생
+    // 표준화된 이벤트 이름 생성
+    const eventName = formatEventName("card", "click");
+
+    // 기본 이벤트 데이터 구성
+    const eventData = {
+      component: this.tagName.toLowerCase(),
+      timestamp: new Date().toISOString(),
+      originalEvent: event,
+      cardType: "base",
+    };
+
+    // 표준화된 이벤트 발행
+    this.eventManager.publish(eventName, eventData);
+
+    // 하위 클래스에서 오버라이드하여 추가 기능 구현 가능
   }
 
   /**
@@ -101,7 +158,7 @@ export class BaseCard extends HTMLElement {
         display: block;
         width: 100%;
       }
-      
+
       .list-card {
         background-color: #181818;
         border-radius: 6px;
@@ -113,18 +170,18 @@ export class BaseCard extends HTMLElement {
         outline: none;
         position: relative;
       }
-      
+
       /* 접근성: 키보드 초점 상태에 시각적 표시 */
       .list-card:focus-visible {
         outline: 2px solid #1db954;
         outline-offset: 2px;
         transform: scale(1.05);
       }
-      
+
       .list-card:hover {
         background-color: #282828;
       }
-      
+
       /* 접근성: 높은 대비 모드 지원 */
       @media (forced-colors: active) {
         .list-card {
@@ -134,7 +191,7 @@ export class BaseCard extends HTMLElement {
           outline: 2px solid Highlight;
         }
       }
-      
+
       .card-img-container {
         position: relative;
         width: 100%;
@@ -143,7 +200,7 @@ export class BaseCard extends HTMLElement {
         border-radius: 4px;
         overflow: hidden;
       }
-      
+
       .card-img {
         position: absolute;
         top: 0;
@@ -152,7 +209,7 @@ export class BaseCard extends HTMLElement {
         height: 100%;
         object-fit: cover;
       }
-      
+
       .play-button {
         position: absolute;
         bottom: 8px;
@@ -169,23 +226,23 @@ export class BaseCard extends HTMLElement {
         transition: all 0.3s ease;
         box-shadow: 0 8px 8px rgba(0, 0, 0, 0.3);
       }
-      
+
       .list-card:hover .play-button,
       .list-card:focus-visible .play-button {
         opacity: 1;
         transform: translateY(0);
       }
-      
+
       .play-button:hover {
         transform: scale(1.1);
         background-color: #1ed760;
       }
-      
+
       .play-icon {
         width: 40%;
         height: 40%;
       }
-      
+
       /* 접근성: 높은 대비 모드에서 플레이 버튼 스타일 조정 */
       @media (forced-colors: active) {
         .play-button {
@@ -193,56 +250,56 @@ export class BaseCard extends HTMLElement {
           background-color: ButtonFace;
           border: 1px solid ButtonText;
         }
-        
+
         .play-icon {
           fill: ButtonText;
           forced-color-adjust: none;
         }
       }
-      
+
       /* 반응형 스타일: XS (800px 이하) - 모바일 */
       @media (max-width: ${BREAKPOINTS.xs}px) {
         .list-card {
           padding: 12px;
         }
-        
+
         .card-img-container {
           margin-bottom: 12px;
         }
-        
+
         .card-title {
           font-size: 14px;
           margin-bottom: 4px;
         }
-        
+
         .card-description {
           font-size: 12px;
         }
-        
+
         .play-button {
           width: 32px;
           height: 32px;
           opacity: 0.9; /* 모바일에서 항상 약간 보이게 */
         }
-        
+
         .play-icon {
           width: 40%;
           height: 40%;
         }
-        
+
         /* 터치 인터페이스 개선 */
         .list-card {
           -webkit-tap-highlight-color: rgba(29, 185, 84, 0.3); /* iOS 터치 하이라이트 */
           touch-action: manipulation; /* 더 좋은 터치 반응성 */
         }
-        
+
         .play-button {
           /* 터치 자연스럽게 하기 위해 터치 타겟 크기 증가 */
           bottom: 4px;
           right: 4px;
         }
       }
-      
+
       /* 반응형 스타일: S (801px - 850px) - 소형 태블릿 */
       @media (min-width: ${BREAKPOINTS.xs + 1}px) and (max-width: ${
       BREAKPOINTS.s
@@ -250,46 +307,46 @@ export class BaseCard extends HTMLElement {
         .list-card {
           padding: 14px;
         }
-        
+
         .card-title {
           font-size: 15px;
         }
-        
+
         .card-description {
           font-size: 13px;
         }
       }
-      
+
       /* 반응형 스타일: XL (1743px 이상) - 대형 디스플레이 */
       @media (min-width: ${BREAKPOINTS.lg + 1}px) {
         .list-card {
           padding: 20px;
         }
-        
+
         .card-img-container {
           margin-bottom: 20px;
         }
-        
+
         .card-title {
           font-size: 18px;
           margin-bottom: 10px;
         }
-        
+
         .card-description {
           font-size: 16px;
         }
-        
+
         .play-button {
           width: 40px;
           height: 40px;
         }
-        
+
         .play-icon {
           width: 40%;
           height: 40%;
         }
       }
-      
+
       .card-title {
         font-weight: 700;
         font-size: 16px;
@@ -299,7 +356,7 @@ export class BaseCard extends HTMLElement {
         text-overflow: ellipsis;
         color: #fff;
       }
-      
+
       .card-description {
         font-size: 14px;
         margin: 0;

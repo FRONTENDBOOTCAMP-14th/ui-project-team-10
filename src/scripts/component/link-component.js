@@ -11,11 +11,13 @@
  * - 포커스 관리
  */
 import { sharedIconMap } from "/src/scripts/utils/shared-component-styles.js";
+import { EventManager, formatEventName } from "/src/scripts/utils/event-utils.js";
 
 class LinkComponent extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
+    this.eventManager = new EventManager();
   }
 
   static get observedAttributes() {
@@ -46,32 +48,39 @@ class LinkComponent extends HTMLElement {
   }
 
   disconnectedCallback() {
-    this.removeEventListeners();
+    this.eventManager.cleanup();
   }
 
   addEventListeners() {
     const link = this.shadowRoot.querySelector("a");
-    link.addEventListener("click", this.handleClick.bind(this));
-    link.addEventListener("keydown", (event) => {
-      // 링크에 대한 Enter 및 Space 키 지원 추가
-      if ((event.key === "Enter" || event.key === " ") && !this.disabled) {
-        event.preventDefault();
-        this.handleClick(event);
-      }
-    });
-  }
-
-  removeEventListeners() {
-    const link = this.shadowRoot.querySelector("a");
     if (link) {
-      link.removeEventListener("click", this.handleClick.bind(this));
-      link.removeEventListener("keydown", (event) => {
-        // 링크에 대한 Enter 및 Space 키 지원 추가
+      // EventManager를 사용하여 클릭 이벤트 등록
+      this.eventManager.addListener(link, "click", this.handleClick.bind(this));
+      
+      // 키보드 접근성 이벤트 처리 개선
+      this.eventManager.addListener(link, "keydown", (event) => {
         if ((event.key === "Enter" || event.key === " ") && !this.disabled) {
           event.preventDefault();
           this.handleClick(event);
         }
       });
+      
+      // 터치 이벤트 최적화
+      if ('ontouchstart' in window) {
+        const throttledTouchHandler = this.eventManager.throttle(this.handleClick.bind(this), 300);
+        this.eventManager.addListener(link, "touchstart", throttledTouchHandler, { passive: true });
+      }
+      
+      // 호버 이벤트 최적화 (디바운스 적용)
+      const debouncedHoverHandler = this.eventManager.debounce(() => {
+        this.dispatchEvent(new CustomEvent("link-hover", {
+          bubbles: true,
+          composed: true,
+          detail: { href: this.href, buttonStyle: this.buttonStyle }
+        }));
+      }, 150);
+      
+      this.eventManager.addListener(link, "mouseenter", debouncedHoverHandler);
     }
   }
 
@@ -81,13 +90,31 @@ class LinkComponent extends HTMLElement {
       return;
     }
 
+    // 표준화된 이벤트 이름 생성
+    const eventName = formatEventName('link', 'click');
+    const eventData = {
+      component: 'link-component',
+      href: this.href,
+      variant: this.variant,
+      size: this.size,
+      disabled: this.disabled,
+      buttonStyle: this.buttonStyle,
+      target: this.target,
+      originalEvent: e,
+      timestamp: new Date().toISOString()
+    };
+
+    // 1. 기존 호환성을 위한 이벤트 발생
     this.dispatchEvent(
       new CustomEvent("link-click", {
         bubbles: true,
         composed: true,
-        detail: { originalEvent: e },
+        detail: eventData
       })
     );
+    
+    // 2. 이벤트 매니저를 통한 표준화된 이벤트 발행
+    this.eventManager.publish(eventName, eventData);
   }
 
   get href() {

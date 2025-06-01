@@ -10,11 +10,13 @@
  * - 포커스 관리
  */
 import { sharedIconMap } from "/src/scripts/utils/shared-component-styles.js";
+import { EventManager, formatEventName } from "/src/scripts/utils/event-utils.js";
 
 class ButtonComponent extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
+    this.eventManager = new EventManager();
   }
 
   static get observedAttributes() {
@@ -42,30 +44,55 @@ class ButtonComponent extends HTMLElement {
   }
 
   disconnectedCallback() {
-    this.removeEventListeners();
+    this.eventManager.cleanup();
   }
 
   addEventListeners() {
     const button = this.shadowRoot.querySelector("button");
-    button.addEventListener("click", this.handleClick.bind(this));
-  }
-
-  removeEventListeners() {
-    const button = this.shadowRoot.querySelector("button");
     if (button) {
-      button.removeEventListener("click", this.handleClick.bind(this));
+      // EventManager를 사용하여 클릭 이벤트 등록
+      this.eventManager.addListener(button, "click", this.handleClick.bind(this));
+      
+      // 키보드 접근성 개선을 위한 이벤트 등록
+      this.eventManager.addListener(button, "keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          this.handleClick(e);
+        }
+      });
+      
+      // 터치 디바이스 지원 강화
+      if ('ontouchstart' in window) {
+        const throttledTouchHandler = this.eventManager.throttle(this.handleClick.bind(this), 300);
+        this.eventManager.addListener(button, "touchstart", throttledTouchHandler, { passive: true });
+      }
     }
   }
 
   handleClick(e) {
     if (!this.disabled) {
+      // 표준화된 이벤트 이름 생성
+      const eventName = formatEventName('button', 'click');
+      const eventData = {
+        component: 'button-component',
+        variant: this.variant,
+        size: this.size,
+        disabled: this.disabled,
+        originalEvent: e,
+        timestamp: new Date().toISOString()
+      };
+      
+      // 1. 기존 호환성을 위한 이벤트 발생
       this.dispatchEvent(
         new CustomEvent("button-click", {
           bubbles: true,
           composed: true,
-          detail: { originalEvent: e },
+          detail: eventData
         })
       );
+      
+      // 2. 이벤트 매니저를 통한 표준화된 이벤트 발행
+      this.eventManager.publish(eventName, eventData);
     }
   }
 
