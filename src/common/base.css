@@ -5,7 +5,7 @@ a {
 }
 
 body {
-  font-family: "Pretendard Variable", sans-serif;
+  font-family: var(--font-family, sans-serif);
   background-color: var(--spotify-dark-gray);
   color: var(--spotify-white);
 }
