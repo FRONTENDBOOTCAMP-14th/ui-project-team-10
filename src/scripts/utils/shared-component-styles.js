@@ -1,7 +1,10 @@
 /**
  * 컴포넌트 간에 공유되는 스타일 및 유틸리티
- * 버튼과 링크 컴포넌트에서 사용하는 공통 스타일, 아이콘, 유틸리티 함수
+ * 모든 컴포넌트에서 사용하는 공통 스타일, 아이콘, 유틸리티 함수
+ * 여기에는 아티스트, 앨범, 플레이리스트 카드의 공통 스타일도 포함됩니다.
  */
+
+import { BREAKPOINTS } from "./responsive-utils.js";
 
 /**
  * 공통 아이콘 맵을 가져옵니다.
@@ -32,6 +35,212 @@ export const sharedIconMap = {
   external:
     '<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M1.75 2h5.5a.75.75 0 0 1 0 1.5h-5.5A.25.25 0 0 0 1.5 3.75v10.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-5.5a.75.75 0 0 1 1.5 0v5.5A1.75 1.75 0 0 1 12.25 16H1.75A1.75 1.75 0 0 1 0 14.25V3.75C0 2.784.784 2 1.75 2zM7.5 1.75a.75.75 0 0 1 .75-.75h6a.75.75 0 0 1 .75.75v6a.75.75 0 0 1-1.5 0V3.56L7.28 9.78a.75.75 0 0 1-1.06-1.06l6.22-6.22H8.25a.75.75 0 0 1-.75-.75z" fill="currentColor"/></svg>',
 };
+
+/**
+ * 공통 카드 컴포넌트 스타일
+ * 모든 카드 컴포넌트에서 사용할 수 있는 기본 스타일
+ * @returns {string} 공통 카드 CSS 스타일
+ */
+export function getCardBaseStyles() {
+  return `
+    :host {
+      display: block;
+      width: 100%;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .list-card {
+      background-color: #181818;
+      border-radius: 6px;
+      transition: background-color 0.3s, outline 0.2s, transform 0.2s;
+      cursor: pointer;
+      height: 100%;
+      box-sizing: border-box;
+      outline: none;
+      position: relative;
+      max-width: 180px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 접근성: 키보드 초점 상태에 시각적 표시 */
+    .list-card:focus-visible {
+      outline: 2px solid #1db954;
+      outline-offset: 2px;
+      transform: scale(1.05);
+      box-shadow: 0 0 0 4px rgba(29, 185, 84, 0.3);
+    }
+
+    .list-card:hover {
+      background-color: #282828;
+      transform: scale(1.05);
+    }
+
+    /* 접근성: 높은 대비 모드 지원 */
+    @media (forced-colors: active) {
+      .list-card {
+        border: 1px solid CanvasText;
+      }
+      .list-card:focus-visible {
+        outline: 2px solid Highlight;
+      }
+    }
+
+    .card-img-container {
+      position: relative;
+      width: 100%;
+      margin-bottom: 16px;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .card-img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      transition: transform 0.3s ease;
+    }
+
+    .list-card:hover .card-img {
+      transform: scale(1.05);
+    }
+
+    .play-button {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      width: 36px;
+      height: 36px;
+      background-color: #1db954;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.3s, transform 0.3s;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      z-index: 1;
+    }
+
+    .list-card:hover .play-button,
+    .list-card:focus-visible .play-button {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .play-button svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+    }
+
+    .card-title {
+      font-weight: 700;
+      font-size: 14px;
+      margin: 0 0 4px;
+      color: white;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .card-subtitle {
+      font-size: 12px;
+      color: #b3b3b3;
+      margin: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* 반응형 스타일 */
+    @media (max-width: ${BREAKPOINTS.SM}px) {
+      .list-card {
+        max-width: 140px;
+        padding: 12px;
+      }
+      .card-title {
+        font-size: 12px;
+      }
+      .card-subtitle {
+        font-size: 10px;
+      }
+      .play-button {
+        width: 32px;
+        height: 32px;
+      }
+      .play-button svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    @media (max-width: ${BREAKPOINTS.XS}px) {
+      .list-card {
+        max-width: 120px;
+        padding: 8px;
+      }
+    }
+  `;
+}
+
+/**
+ * 앨범 카드 특화 스타일
+ * @returns {string} 앨범 카드 CSS 스타일
+ */
+export function getAlbumCardStyles() {
+  return `
+    .card-img-container {
+      border-radius: 4px;
+      aspect-ratio: 1/1;
+    }
+  `;
+}
+
+/**
+ * 아티스트 카드 특화 스타일
+ * @returns {string} 아티스트 카드 CSS 스타일
+ */
+export function getArtistCardStyles() {
+  return `
+    .card-img-container {
+      border-radius: 50%;
+      aspect-ratio: 1/1;
+    }
+    .card-img {
+      border-radius: 50%;
+    }
+    .card-title {
+      text-align: center;
+    }
+    .card-subtitle {
+      text-align: center;
+    }
+  `;
+}
+
+/**
+ * 플레이리스트 카드 특화 스타일
+ * @returns {string} 플레이리스트 카드 CSS 스타일
+ */
+export function getPlaylistCardStyles() {
+  return `
+    .card-img-container {
+      border-radius: 4px;
+      aspect-ratio: 1/1;
+    }
+    .card-owner {
+      font-size: 12px;
+      color: #b3b3b3;
+      margin: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  `;
+}
 
 /**
  * 공통 사용자 정의 이벤트 디스패치 헬퍼
