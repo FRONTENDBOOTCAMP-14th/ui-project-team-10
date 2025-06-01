@@ -139,8 +139,8 @@ class AlbumCard extends BaseCard {
           position: absolute;
           bottom: 8px;
           right: 8px;
-          width: 40px;
-          height: 40px;
+          width: 36px;
+          height: 36px;
           background-color: #1db954;
           border-radius: 50%;
           display: flex;
@@ -164,8 +164,8 @@ class AlbumCard extends BaseCard {
         }
         
         .play-icon {
-          width: 24px;
-          height: 24px;
+          width: 40%;
+          height: 40%;
         }
         
         .card-title {
@@ -239,16 +239,16 @@ class AlbumCard extends BaseCard {
           }
           
           .play-button {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             opacity: 0.9; /* 모바일에서는 항상 약간 보이게 */
             bottom: 4px;
             right: 4px;
           }
           
           .play-icon {
-            width: 20px;
-            height: 20px;
+            width: 40%;
+            height: 40%;
           }
           
           /* 터치 인터페이스 개선 */
@@ -285,13 +285,13 @@ class AlbumCard extends BaseCard {
           }
           
           .play-button {
-            width: 42px;
-            height: 42px;
+            width: 36px;
+            height: 36px;
           }
           
           .play-icon {
-            width: 18px;
-            height: 18px;
+            width: 40%;
+            height: 40%;
           }
         }
         
@@ -325,13 +325,13 @@ class AlbumCard extends BaseCard {
           }
           
           .play-button {
-            width: 48px;
-            height: 48px;
+            width: 40px;
+            height: 40px;
           }
           
           .play-icon {
-            width: 22px;
-            height: 22px;
+            width: 40%;
+            height: 40%;
           }
         }
       </style>

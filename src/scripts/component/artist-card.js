@@ -173,8 +173,8 @@ class ArtistCard extends BaseCard {
           position: absolute;
           bottom: 8%;
           right: 8%;
-          width: 40px;
-          height: 40px;
+          width: 36px;
+          height: 36px;
           background-color: #1db954;
           border-radius: 50%;
           display: flex;
@@ -199,8 +199,8 @@ class ArtistCard extends BaseCard {
         }
         
         .play-icon {
-          width: 18px;
-          height: 18px;
+          width: 40%;
+          height: 40%;
         }
         
         .card-title, .card-description {
@@ -286,8 +286,8 @@ class ArtistCard extends BaseCard {
           }
           
           .play-icon {
-            width: 18px;
-            height: 18px;
+            width: 40%;
+            height: 40%;
           }
           
           /* 터치 인터페이스 개선 */
@@ -325,8 +325,8 @@ class ArtistCard extends BaseCard {
           }
           
           .play-icon {
-            width: 20px;
-            height: 20px;
+            width: 40%;
+            height: 40%;
           }
         }
         
@@ -348,8 +348,8 @@ class ArtistCard extends BaseCard {
           }
           
           .play-icon {
-            width: 22px;
-            height: 22px;
+            width: 40%;
+            height: 40%;
           }
         }
         
@@ -389,13 +389,13 @@ class ArtistCard extends BaseCard {
           }
           
           .play-button {
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
           }
           
           .play-icon {
-            width: 20px;
-            height: 20px;
+            width: 40%;
+            height: 40%;
           }
         }
       </style>

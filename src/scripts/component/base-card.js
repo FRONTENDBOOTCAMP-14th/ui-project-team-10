@@ -157,8 +157,8 @@ export class BaseCard extends HTMLElement {
         position: absolute;
         bottom: 8px;
         right: 8px;
-        width: 40px;
-        height: 40px;
+        width: 36px;
+        height: 36px;
         background-color: #1db954;
         border-radius: 50%;
         display: flex;
@@ -182,8 +182,8 @@ export class BaseCard extends HTMLElement {
       }
       
       .play-icon {
-        width: 24px;
-        height: 24px;
+        width: 40%;
+        height: 40%;
       }
       
       /* 접근성: 높은 대비 모드에서 플레이 버튼 스타일 조정 */
@@ -220,14 +220,14 @@ export class BaseCard extends HTMLElement {
         }
         
         .play-button {
-          width: 36px;
-          height: 36px;
+          width: 32px;
+          height: 32px;
           opacity: 0.9; /* 모바일에서 항상 약간 보이게 */
         }
         
         .play-icon {
-          width: 20px;
-          height: 20px;
+          width: 40%;
+          height: 40%;
         }
         
         /* 터치 인터페이스 개선 */
@@ -280,13 +280,13 @@ export class BaseCard extends HTMLElement {
         }
         
         .play-button {
-          width: 48px;
-          height: 48px;
+          width: 40px;
+          height: 40px;
         }
         
         .play-icon {
-          width: 28px;
-          height: 28px;
+          width: 40%;
+          height: 40%;
         }
       }
       
