@@ -4,6 +4,48 @@
  * 이 모듈은 컴포넌트 간 이벤트 통신을 표준화하고
  * 이벤트 리스너 관리를 개선하기 위한 유틸리티 함수들을 제공합니다.
  */
+
+/**
+ * 컴포넌트 이벤트 핸들러 설정
+ * @param {string} component - 컴포넌트 이름 (예: 'button', 'link')
+ * @param {Function} [callback] - 이벤트 발생 시 실행할 콜백 함수
+ * @returns {Function} 이벤트 핸들러 제거 함수
+ */
+export function setupComponentEvents(component, callback) {
+  if (typeof component !== 'string') {
+    throw new Error('Component name must be a string');
+  }
+
+  const eventName = `${component}-click`;
+  const eventHandler = (e) => {
+    const target = e.detail?.originalEvent?.target || e.target;
+    const eventData = {
+      component,
+      target,
+      timestamp: new Date().toISOString(),
+      ...e.detail
+    };
+
+    // 이벤트 로깅
+    logEvent(eventName, eventData);
+
+    // 콜백 함수가 제공된 경우 실행
+    if (typeof callback === 'function') {
+      callback(eventData);
+    }
+
+    // 전역 이벤트 버스로 이벤트 전파
+    globalEventBus.emit(eventName, eventData);
+  };
+
+  // 이벤트 리스너 등록
+  document.addEventListener(eventName, eventHandler);
+
+  // 이벤트 리스너 제거 함수 반환
+  return () => {
+    document.removeEventListener(eventName, eventHandler);
+  };
+}
 import { globalEventBus } from "/src/scripts/utils/state-manager.js";
 
 /**
