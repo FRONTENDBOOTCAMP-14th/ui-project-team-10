@@ -18,8 +18,8 @@ h1 {
 /* 컴포넌트 박스 */
 section {
   margin-left: 30px;
-  padding: 20px;
-  border-radius: 30px;
+  padding: 20px 25px;
+  border-radius: 2rem;
   max-width: 900px;
   display: flex;
   flex-flow: row nowrap;
@@ -28,11 +28,12 @@ section {
   background-color: var(--background-gray-200);
   position: relative;
   transition: all 0.3s ease-in-out;
+  margin-bottom: 2rem;
 
   & > div {
     background: var(--spotify-black);
     padding: 30px;
-    border-radius: 10px;
+    border-radius: 1.5rem;
     align-content: center;
     box-shadow: 0 0.3em 0.3em -0.1em rgb(21, 21, 21);
   }
@@ -42,7 +43,7 @@ section {
     color: var(--spotify-white);
     order: 2;
     flex-grow: 1;
-    text-align: center;
+    text-align: left;
   }
 
   ul {
@@ -51,7 +52,7 @@ section {
     margin: 20px;
   }
 
-  span {
+  span.play-btn {
     content: "";
     position: absolute;
     right: 30px;
@@ -74,7 +75,7 @@ section {
   &:hover {
     background: var(--button-hover-color);
 
-    &:hover span {
+    &:hover span.play-btn {
       opacity: 1;
       transform: translateY(-10px);
     }

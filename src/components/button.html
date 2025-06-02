@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>버튼</title>
     <link rel="icon" href="/icons/spotify-logo-symbol-green.svg" />
+    <link rel="stylesheet" href="/font/pretendardvariable.css" />
+    <link rel="stylesheet" href="../common/index.css" />
+    <link rel="stylesheet" href="../styles/common/components-common.css" />
     <link
       rel="preload"
       as="font"
@@ -12,154 +15,214 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" as="style" href="/font/pretendardvariable.css" />
-    <link rel="stylesheet" href="/src/common/index.css" />
-    <link rel="stylesheet" href="/src/style.css" />
-    <link rel="stylesheet" href="/src/styles/component-view-layout.css" />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../styles/sidebar.css" />
   </head>
   <body>
-    <main>
-      <h1>버튼 컴포넌트</h1>
+    <h1>버튼</h1>
+    <section>
+      <div>
+        <button
+          class="rounded-btn btn bg-green black-text hover-grow"
+          type="button"
+        >
+          기본 버튼
+        </button>
+      </div>
+      <ul>
+        <h2>기본 버튼</h2>
+        <br />
+        <li>
+          기본버튼은 초록색 배경에 검은색 텍스트를 가지며, 호버시 버튼이
+          커집니다.
+        </li>
+      </ul>
+      <span class="play-btn"></span>
+    </section>
 
-      <section class="component-section-view">
-        <h2 class="margin-bottom-2rem">기본 버튼</h2>
-        <ul>
-          <li>
-            <button class="rounded-btn btn bg-green black-text">
-              기본 버튼
-            </button>
-          </li>
-          <li>
-            <button class="rounded-btn btn gray-outline-style black-text">
-              변형 버튼1
-            </button>
-          </li>
-          <li>
-            <button class="rounded-btn btn bg-black white-text">
-              변형 버튼2
-            </button>
-          </li>
-          <li>
-            <button class="rounded-btn btn bg-blue white-text">
-              변형 버튼3
-            </button>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <a href="#" class="rounded-btn btn bg-green black-text"
-              >기본 버튼</a
-            >
-          </li>
-          <li>
-            <a href="#" class="rounded-btn btn gray-outline-style black-text"
-              >변형 버튼1</a
-            >
-          </li>
-          <li>
-            <a href="#" class="rounded-btn btn bg-black white-text"
-              >변형 버튼2</a
-            >
-          </li>
-          <li>
-            <a href="#" class="rounded-btn btn bg-blue white-text"
-              >변형 버튼3</a
-            >
-          </li>
-        </ul>
-      </section>
+    <section>
+      <div>
+        <button
+          class="rounded-btn btn bg-black white-text hover-grow"
+          type="button"
+        >
+          변형 버튼2
+        </button>
+      </div>
+      <ul>
+        <h2>변형 버튼2</h2>
+        <br />
+        <li>
+          기본버튼은 검은색 배경에 흰색 텍스트를 가지며, 호버시 버튼이 커집니다.
+        </li>
+      </ul>
+      <span class="play-btn"></span>
+    </section>
 
-      <section class="component-section-view">
-        <h2 class="margin-bottom-2rem">크기 변형</h2>
-        <ul>
-          <li>
-            <button class="rounded-btn btn btn-large bg-green black-text">
-              큰 버튼
-            </button>
-          </li>
-          <li>
-            <button class="rounded-btn btn btn-small bg-green black-text">
-              작은 버튼
-            </button>
-          </li>
-          <li>
-            <button class="rounded-btn btn btn-long bg-green black-text">
-              긴 버튼
-            </button>
-          </li>
-        </ul>
-      </section>
+    <section>
+      <div>
+        <button
+          class="rounded-btn btn bg-blue white-text hover-grow"
+          type="button"
+        >
+          변형 버튼3
+        </button>
+      </div>
+      <ul>
+        <h2>변형 버튼3</h2>
+        <br />
+        <li>
+          기본버튼은 파란색 배경에 흰색 텍스트를 가지며, 호버시 버튼이 커집니다.
+        </li>
+      </ul>
+      <span class="play-btn"></span>
+    </section>
 
-      <section class="component-section-view">
-        <h2 class="margin-bottom-2rem">사이드바 버튼 요소</h2>
-        <ul class="sidebar-menu">
-          <li class="sidebar-item sidebar-item-active">
-            <a href="/src/pages/home.html" class="sidebar-link home">
-              <span class="sidebar-icon"></span>
-              <span class="sidebar-text">홈</span>
-            </a>
-          </li>
-          <li class="sidebar-item">
-            <a href="" class="sidebar-link search">
-              <span class="sidebar-icon"></span>
-              <span class="sidebar-text">검색하기</span>
-            </a>
-          </li>
-          <li class="sidebar-item">
-            <a href="/src/pages/library.html" class="sidebar-link library">
-              <span class="sidebar-icon"> </span>
-              <span class="sidebar-text">내 라이브러리</span>
-            </a>
-          </li>
-        </ul>
-        <section class="sidebar-playlist component-section-view">
-          <ul class="sidebar-menu">
-            <li class="sidebar-playlist-item">
-              <a href="#" class="sidebar-playlist-link create-playlist">
-                <div class="sidebar-icon rounded-icon-box">
-                  <img src="/icons/plus.svg" alt="" />
-                </div>
-                <span class="sidebar-text">플레이리스트 만들기</span>
-              </a>
-            </li>
-            <li class="sidebar-playlist-item">
-              <a href="#" class="sidebar-playlist-link favorite-playlist">
-                <div class="sidebar-icon rounded-icon-box">
-                  <img src="/icons/heart.svg" alt="" />
-                </div>
-                <span class="sidebar-text">좋아하는 곡</span>
-              </a>
-            </li>
-          </ul>
-        </section>
-      </section>
-      <hr />
-      <section class="component-section-view">
-        <h2>아이콘 버튼</h2>
-        <ul>
-          <li>
-            <a href="#" class="icon-btn rounded-btn bg-green">
-              <img src="/icons/heart.svg" alt="" />
-            </a>
-          </li>
-          <li>
-            <a href="#" class="icon-btn rounded-btn bg-blue">
-              <img src="/icons/facebook-filed.svg" alt="" />
-            </a>
-          </li>
-          <li>
-            <a href="#" class="icon-btn rounded-btn bg-black">
-              <img src="/icons/spotify-logo-symbol.svg" alt="" />
-            </a>
-          </li>
-        </ul>
-      </section>
-      <hr />
+    <section>
+      <div class="bg-white">
+        <button
+          class="rounded-btn btn gray-outline-style white-text hover-grow"
+          type="button"
+        >
+          변형 버튼4
+        </button>
+      </div>
+      <ul>
+        <h2>변형 버튼4</h2>
+        <br />
+        <li>
+          기본버튼은 검은색 테두리와 텍스트를 가지며, 호버시 버튼이 커집니다.
+        </li>
+      </ul>
+      <span class="play-btn"></span>
+    </section>
+    <br />
+    <h1>링크 버튼</h1>
+    <section>
+      <div>
+        <a href="#" class="rounded-btn btn bg-green black-text hover-grow">
+          기본 버튼
+        </a>
+      </div>
+      <ul>
+        <h2>기본 버튼</h2>
+        <br />
+        <li>
+          기본버튼은 초록색 배경에 검은색 텍스트를 가지며, 호버시 버튼이
+          커집니다.
+        </li>
+      </ul>
+      <span class="play-btn"></span>
+    </section>
+
+    <section>
+      <div>
+        <a href="#" class="rounded-btn btn bg-black white-text hover-grow">
+          변형 버튼2
+        </a>
+      </div>
+      <ul>
+        <h2>변형 버튼2</h2>
+        <br />
+        <li>
+          기본버튼은 검은색 배경에 흰색 텍스트를 가지며, 호버시 버튼이 커집니다.
+        </li>
+      </ul>
+      <span class="play-btn"></span>
+    </section>
+
+    <section>
+      <div>
+        <a href="#" class="rounded-btn btn bg-blue white-text hover-grow">
+          변형 버튼3
+        </a>
+      </div>
+      <ul>
+        <h2>변형 버튼3</h2>
+        <br />
+        <li>
+          기본버튼은 파란색 배경에 흰색 텍스트를 가지며, 호버시 버튼이 커집니다.
+        </li>
+      </ul>
+      <span class="play-btn"></span>
+    </section>
+
+    <section>
+      <div>
+        <a
+          href="#"
+          class="rounded-btn btn gray-outline-style white-text hover-grow"
+        >
+          변형 버튼4
+        </a>
+      </div>
+      <ul>
+        <h2>변형 버튼4</h2>
+        <br />
+        <li>기본버튼은 테두리와 텍스트를 가지며, 호버시 버튼이 커집니다.</li>
+      </ul>
+      <span class="play-btn"></span>
+    </section>
+
+    <h1>사이드바 버튼</h1>
+    <section>
+      <div>
+        <a
+          href="/src/pages/home.html"
+          class="sidebar-link home sidebar-item-active"
+        >
+          <span class="sidebar-icon"></span>
+          <span class="sidebar-text">홈</span>
+        </a>
+      </div>
+      <ul>
+        <h2>사이드바 버튼 요소(선택됨)</h2>
+        <br />
+        <li>사이드바 버튼(선택됨)은 아이콘과 텍스트를 가집니다.</li>
+      </ul>
+      <span class="play-btn"></span>
+    </section>
+    <section>
+      <div class="sidebar-item-active">
+        <a href="/src/pages/library.html" class="sidebar-link library">
+          <span class="sidebar-icon"> </span>
+          <span class="sidebar-text">내 라이브러리</span>
+        </a>
+      </div>
+      <ul>
+        <h2>사이드바 버튼 요소(선택되지 않음)</h2>
+        <br />
+        <li>
+          사이드바 버튼(선택되지 않음)은 아이콘과 텍스트를 가지며 선택되지
+          않았기에 투명도가 있습니다.
+        </li>
+      </ul>
+      <span class="play-btn"></span>
+    </section>
+    <section>
+      <div>
+        <a href="#" class="sidebar-playlist-link favorite-playlist">
+          <div class="sidebar-icon rounded-icon-box">
+            <img src="/icons/heart.svg" alt="" />
+          </div>
+          <span class="sidebar-text">좋아하는 곡</span>
+        </a>
+      </div>
+      <ul>
+        <h2>사이드바 버튼 요소(플레이리스트)</h2>
+        <br />
+        <li>사이드바 버튼(플레이리스트)은 아이콘과 텍스트를 가집니다.</li>
+      </ul>
+      <span class="play-btn"></span>
+    </section>
+    <br />
+    <section>
       <a
-        class="rounded-btn btn bg-green black-text btn-long"
+        class="rounded-btn btn bg-green black-text hover-grow btn-long"
         href="/index.html"
       >
         메인 페이지로 돌아가기
       </a>
-    </main>
+    </section>
   </body>
 </html>

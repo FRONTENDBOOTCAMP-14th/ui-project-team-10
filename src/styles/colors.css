@@ -10,6 +10,10 @@
   background-color: var(--spotify-black);
 }
 
+.bg-transparent {
+  background-color: transparent;
+}
+
 .bg-blue {
   background-color: var(--spotify-blue);
 }

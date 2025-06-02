@@ -62,6 +62,7 @@
 
 .hover-bg-green:hover {
   background-color: var(--spotify-green);
+  color: var(--spotify-black);
 }
 
 .hover-bg-white:hover {
@@ -75,6 +76,11 @@
 
 .hover-bg-blue:hover {
   background-color: var(--spotify-blue);
+  color: var(--spotify-white);
+}
+
+.hover-grow:hover {
+  transform: scale(1.05);
 }
 
 .btn .btn-icon {
