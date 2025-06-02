@@ -7,8 +7,8 @@
     <link rel="icon" href="/icons/spotify-logo-symbol-green.svg" />
     <link rel="stylesheet" href="/font/pretendardvariable.css" />
     <link rel="stylesheet" href="../common/index.css" />
-    <link rel="stylesheet" href="../styles/header-com.css" />
     <link rel="stylesheet" href="../styles/common/components-common.css" />
+    <link rel="stylesheet" href="../styles/header-com.css" />
   </head>
   <body>
     <h1>Header 컴포넌트</h1>
@@ -19,7 +19,7 @@
       <div>
         <header class="header">
           <h1 class="sr-only">Spotify</h1>
-          <a href="https://open.spotify.com/" class="logo">
+          <a href="https://open.spotify.com/" class="logo" aria-label="spotify">
             <svg
               role="img"
               viewBox="0 0 24 24"
@@ -39,14 +39,14 @@
         </header>
       </div>
       <!-- hover 재생 버튼 -->
-      <span></span>
+      <span class="play-btn"></span>
     </section>
 
     <section>
       <h2>home로고 링크 버튼</h2>
       <!-- home로고 링크버튼 -->
       <div>
-        <div class="home-link">
+        <div class="home-link" role="navigation" aria-label="">
           <a href="/">
             <svg
               data-encore-id="icon"
@@ -67,7 +67,7 @@
       </div>
 
       <!-- hover 재생 버튼 -->
-      <span></span>
+      <span class="play-btn"></span>
     </section>
 
     <div class="nav-link-manu">
@@ -98,7 +98,7 @@
         </div>
 
         <!-- hover 재생 버튼 -->
-        <span></span>
+        <span class="play-btn"></span>
       </section>
 
       <section>
@@ -134,10 +134,10 @@
         </div>
 
         <!-- hover 재생 버튼 -->
-        <span></span>
+        <span class="play-btn"></span>
       </section>
     </div>
-    
+
     <hr />
     <a href="/index.html">메인 페이지로 이동</a>
     <script>
