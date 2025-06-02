@@ -13,7 +13,8 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+  min-height: 800px;
+  height: 100%;
   width: 100%;
   max-width: var(--sidebar-max-width);
   min-width: var(--sidebar-min-width);
@@ -35,20 +36,13 @@
   flex-direction: column;
 }
 
-.sidebar-menu > *,
-.sidebar-footer > * {
+.sidebar-link {
   opacity: 0.7;
 }
 
 .sidebar-item-active,
 .sidebar-logo,
 .sidebar-footer .language-select {
-  opacity: 1;
-}
-
-.sidebar-item-active *,
-.sidebar-logo *,
-.sidebar-footer .language-select * {
   opacity: 1;
 }
 

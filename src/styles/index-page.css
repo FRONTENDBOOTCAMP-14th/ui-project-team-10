@@ -1,6 +1,10 @@
 body {
   line-height: 1.6;
-  background: linear-gradient(to top, var(--spotify-black), #113318);
+  background: linear-gradient(
+    to top,
+    var(--spotify-black),
+    rgba(12, 41, 17, 0.5)
+  );
 }
 
 .index-pages-btn {
@@ -22,7 +26,6 @@ body {
   background-color: var(--spotify-dark-gray);
   color: var(--spotify-white);
   transition: var(--button-transition);
-  box-shadow: var(--button-shadow);
 }
 
 .index-pages-btn:hover {
