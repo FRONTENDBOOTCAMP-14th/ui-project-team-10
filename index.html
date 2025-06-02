@@ -37,7 +37,11 @@
           </a>
         </li>
         <li class="profile-card">
-          <img class="profile-img" src="/image/KakaoTalk_20250402_233422836.jpg" alt="" />
+          <img
+            class="profile-img"
+            src="/image/KakaoTalk_20250402_233422836.jpg"
+            alt=""
+          />
           <p class="name green-text">김동규</p>
           <p class="roll light-gray-text">조원</p>
           <a class="github light-gray-text" href="https://github.com/cit1566">
@@ -213,5 +217,28 @@
         >
       </div>
     </footer>
+    <script>
+      const header = document.querySelector("header");
+
+      function isMaximizedWindow() {
+        return window.innerWidth >= 1650;
+      }
+
+      function updateBackgroundZoom() {
+        if (!isMaximizedWindow()) {
+          header.style.backgroundSize = "cover";
+          return;
+        }
+
+        const scrollY = window.scrollY;
+        const zoom = 100 + scrollY * 0.05;
+        const limitedZoom = Math.min(zoom, 200);
+        header.style.backgroundSize = `${limitedZoom}%`;
+      }
+
+      window.addEventListener("scroll", updateBackgroundZoom);
+      window.addEventListener("resize", updateBackgroundZoom);
+      window.addEventListener("DOMContentLoaded", updateBackgroundZoom);
+    </script>
   </body>
 </html>
