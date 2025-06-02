@@ -1,10 +1,6 @@
 body {
   line-height: 1.6;
-  background: linear-gradient(
-    to top,
-    var(--spotify-black),
-    rgba(12, 41, 17, 0.5)
-  );
+  background: linear-gradient(to top, var(--spotify-black), rgb(15, 30, 15));
 }
 
 .index-pages-btn {
