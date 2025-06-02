@@ -1,22 +1,9 @@
-body {
-  background: var(--spotify-black);
-  color: var(--spotify-white);
-  width: 100vw;
-  height: 100vh;
-}
-
 .preview-container {
   background-image: linear-gradient(90deg, #af2896, #509bf5);
   min-width: 800px;
   min-height: 66.74px;
   padding: 11px 24px 7px 15px;
   cursor: pointer;
-
-  /* 포지션 하단 고정 */
-  position: fixed;
-  left: 8px;
-  right: 8px;
-  bottom: 8px;
 
   /* flex 설정 */
   display: flex;
