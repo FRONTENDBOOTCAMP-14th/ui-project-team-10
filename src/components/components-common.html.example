@@ -25,7 +25,7 @@
         </li>
       </ul>
       <p></p> -->
-      <span><span/>
+      <span class=play-btn><span/>
     </section>
 
     <section>
@@ -34,7 +34,7 @@
       <div>
         <!-- 컴포넌트2 마크업 -->
       </div>
-      <span><span/>
+      <span class=play-btn><span/>
     </section>
 
     <section>
@@ -42,7 +42,7 @@
       <div>
         <!-- 컴포넌트3 마크업 -->
       </div>
-      <span><span/>
+      <span class=play-btn><span/>
     </section>
 
   </body>

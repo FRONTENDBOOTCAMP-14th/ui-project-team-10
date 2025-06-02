@@ -1,8 +1,10 @@
+/* 검색창 */
 .search-box {
   position: relative;
 
+  /* 열린 검색창 */
   .container {
-    background: var(--spotify-black);
+    background: var(--button-bg-color);
     max-width: 474px;
     min-width: var(--button-size);
     height: var(--button-size);
@@ -14,9 +16,12 @@
     justify-content: start;
     align-items: center;
 
+    /* 검색 버튼 */
     .search-button {
       margin: 0;
       padding: 12px;
+
+      /* 검색 버튼 아이콘 */
       .icon-search {
         width: 24px;
         height: 24px;
@@ -24,60 +29,74 @@
       }
     }
 
+    /* 검색박스 */
     input {
       background: none;
       width: 78.6919%;
       border: none;
       appearance: none;
       outline: none;
-      color: var(--spotify-white);
-      font-size: var(--font-size-base);
-      line-height: var(--spacing-lg);
+      color: rgb(255, 255, 255);
+      font-size: 1rem;
+      line-height: 40px;
     }
 
+    /* 중간바(세로선) */
     .icon-break-line {
-      min-height: var(--spacing-md);
+      min-height: 24px;
     }
-    .icon-browse-link {
-      width: var(--svg-size);
-      aspect-ratio: 1;
-      padding: var(--spacing-sm);
 
+    /* 둘러보기 링크 */
+    .icon-browse-link {
+      max-width: 100%;
+      aspect-ratio: 1;
+      padding: 12px;
+
+      /* 둘러보기 아이콘 */
       svg {
         vertical-align: middle;
         path {
-          fill: var(--spotify-light-gray);
+          fill: var(--font-color);
         }
         &:hover path {
-          fill: var(--spotify-white);
+          fill: white;
         }
       }
     }
 
+    /* 전체 박스 호버설정 */
     &:hover {
-      background: var(--spotify-gray);
+      background: var(--button-hover-color);
       .icon-search {
-        fill: var(--spotify-white);
+        fill: white;
       }
     }
 
+    /* 전체 박스 포커스 설정 */
     &:has(input:focus) {
-      outline: 2px solid var(--spotify-white);
+      outline: 2px solid white;
     }
   }
 
+  /* 닫힌상태 검색창 */
   .clossing-search-bar {
-    background: var(--spotify-black);
+    background: var(--button-bg-color);
     width: var(--button-size);
     aspect-ratio: 1;
     text-align: center;
     align-content: center;
     border-radius: var(--button-size);
-    position: absolute;
     border-radius: 50%;
     top: 0;
     left: 0;
+    svg {
+      transform: translateY(0.6px);
+    }
+    &.absolute {
+      position: absolute;
+    }
 
+    /* 검색 토글 버튼 */
     .search-toggle-btn {
       padding: 0px;
       width: 100%;
@@ -85,20 +104,21 @@
       border-radius: var(--button-size);
     }
 
+    /* 검색 토글 버튼 아이콘 */
     .icon-search {
       vertical-align: middle;
     }
+
+    /* 검색창 호버시 전체 배경 및 돋보기 아이콘 색 변경 */
     .search-box:has(&):hover & {
-      background: var(--spotify-gray);
+      background: var(--button-hover-color);
       .icon-search {
-        fill: var(--spotify-white);
+        fill: white;
       }
     }
   }
 
-  transition: var(--button-transition);
-
-  @media (width<850px) {
+  @media (width<1078px) {
     .hidden {
       display: none;
     }
