@@ -74,6 +74,7 @@ function renderArtists(artists) {
   artists.forEach((artist) => {
     const artistCard = document.createElement("li");
     artistCard.className = "list-card";
+    artistCard.setAttribute("aria-label", artist.name);
 
     artistCard.innerHTML = `
       <a href="${artist.external_urls.spotify}" target="_blank">
@@ -119,6 +120,10 @@ function renderAlbums(albums) {
   albums.forEach((album) => {
     const albumCard = document.createElement("li");
     albumCard.className = "list-card";
+    albumCard.setAttribute(
+      "aria-label",
+      `${album.artists.map((a) => a.name).join(", ")} , ${album.name}`
+    );
 
     albumCard.innerHTML = `
       <a href="${album.external_urls.spotify}" target="_blank">
@@ -130,9 +135,7 @@ function renderAlbums(albums) {
             <img src="/icons/play.png" class="play-button"/>
           </div>
           <h3 class="card-title">${album.name}</h3>
-          <p class="card-info">${album.artists
-            .map((a) => a.name)
-            .join(", ")}</p>
+          <p class="card-info"></p>
         </article>
       </a>
     `;
@@ -176,6 +179,7 @@ function renderPlaylists(playlists) {
   playlists.forEach((playlist) => {
     const playlistCard = document.createElement("li");
     playlistCard.className = "list-card";
+    playlistCard.setAttribute("aria-label", playlist.name);
 
     playlistCard.innerHTML = `
       <a href="${playlist.external_urls.spotify}" target="_blank">
