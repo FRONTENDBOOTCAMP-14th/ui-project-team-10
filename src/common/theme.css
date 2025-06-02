@@ -6,11 +6,51 @@
   --spotify-green: #1ed760;
   --spotify-white: #ffffff;
   --spotify-blue: #1d75de;
+  --spotify-card-bg: #282828e2;
 
-  /* Hader */
+  /* font size */
+  --spotify-base-font-size: 14px;
+
+  /* Header */
   --button-bg-color: #1f1f1f;
   --button-hover-color: #2a2a2a;
   --font-color: #b3b3b3;
   --button-size: 48px;
   --svg-size: 24px;
+  --button-border-radius: 500px;
+  --button-transition: all 0.2s ease-in-out;
+  --button-shadow: 0 0.3em 0.3em -0.1em var(--spotify-black);
+
+  --spacing-8xl: 192px;
+  --spacing-7xl: 160px;
+  --spacing-6xl: 144px;
+  --spacing-5xl: 128px;
+  --spacing-4xl: 96px;
+  --spacing-xxl: 80px;
+  --spacing-xl: 64px;
+  --spacing-lg: 40px;
+  --spacing-md: 24px;
+  --spacing-sm: 16px;
+  --spacing-xs: 8px;
+
+  --sidebar-max-width: 26.25rem;
+  --sidebar-min-width: 22.5rem;
+
+  --font-size-lg: 3.5rem;
+  --font-size-base: 1rem;
+  --font-size-small: 0.8rem;
+  --font-size-xs: 13px;
+  --font-weight-normal: 400;
+  --font-weight-bold: 600;
+  --font-weight-bolder: 700;
+  --font-weight-boldest: 900;
+
+  --border-radius-round: 50%;
+  --border-radius-md: 8px;
+
+  --background-gray-200: #1f1f1f;
+  --background-base: #121212;
+  --background-press: #000;
+  --background-elevated-highlight: #2a2a2a;
+  --background-elevated-press: #191919;
 }

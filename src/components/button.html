@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko-KR">
   <head>
     <meta charset="UTF-8" />
@@ -14,13 +14,14 @@
     <link rel="stylesheet" as="style" href="/font/pretendardvariable.css" />
     <link rel="stylesheet" href="/src/common/index.css" />
     <link rel="stylesheet" href="/src/style.css" />
+    <link rel="stylesheet" href="/src/styles/component-view-layout.css" />
   </head>
   <body>
     <main>
       <h1>버튼 컴포넌트</h1>
 
-      <section class="btn-section-no-page">
-        <h2>기본 버튼</h2>
+      <section class="component-section-view">
+        <h2 class="margin-bottom-2rem">기본 버튼</h2>
         <ul>
           <li>
             <button class="rounded-btn btn bg-green black-text">
@@ -67,8 +68,8 @@
         </ul>
       </section>
 
-      <section class="btn-section-no-page">
-        <h2>크기 변형</h2>
+      <section class="component-section-view">
+        <h2 class="margin-bottom-2rem">크기 변형</h2>
         <ul>
           <li>
             <button class="rounded-btn btn btn-large bg-green black-text">
@@ -88,38 +89,77 @@
         </ul>
       </section>
 
-      <section class="btn-section-sidebar">
-        <h2>사이드바 링크버튼</h2>
-        <a href="#" class="sidebar-btn btn white-text">사이드바 버튼</a>
+      <section class="component-section-view">
+        <h2 class="margin-bottom-2rem">사이드바 버튼 요소</h2>
+        <ul class="sidebar-menu">
+          <li class="sidebar-item sidebar-item-active">
+            <a href="/src/pages/home.html" class="sidebar-link home">
+              <span class="sidebar-icon"></span>
+              <span class="sidebar-text">홈</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a href="" class="sidebar-link search">
+              <span class="sidebar-icon"></span>
+              <span class="sidebar-text">검색하기</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a href="/src/pages/library.html" class="sidebar-link library">
+              <span class="sidebar-icon"> </span>
+              <span class="sidebar-text">내 라이브러리</span>
+            </a>
+          </li>
+        </ul>
+        <section class="sidebar-playlist component-section-view">
+          <ul class="sidebar-menu">
+            <li class="sidebar-playlist-item">
+              <a href="#" class="sidebar-playlist-link create-playlist">
+                <div class="sidebar-icon rounded-icon-box">
+                  <img src="/icons/plus.svg" alt="" />
+                </div>
+                <span class="sidebar-text">플레이리스트 만들기</span>
+              </a>
+            </li>
+            <li class="sidebar-playlist-item">
+              <a href="#" class="sidebar-playlist-link favorite-playlist">
+                <div class="sidebar-icon rounded-icon-box">
+                  <img src="/icons/heart.svg" alt="" />
+                </div>
+                <span class="sidebar-text">좋아하는 곡</span>
+              </a>
+            </li>
+          </ul>
+        </section>
       </section>
-
-      <section class="btn-section-sidebar">
-        <h2>아이콘 사이드바 버튼</h2>
-        <button class="sidebar-btn btn bg-black white-text btn-long">
-          <img
-            class="btn-icon svg-img-white"
-            src="/icons/spotify-logo-symbol.svg"
-            alt=""
-          />
-          Spotify
-        </button>
-        <button class="sidebar-btn btn bg-white black-text btn-long">
-          <img
-            class="btn-icon svg-img-black"
-            src="/icons/bookmark.svg"
-            alt=""
-          />
-          내 라이브러리리
-        </button>
-        <button class="sidebar-btn btn bg-gray white-text btn-long">
-          <img class="btn-icon svg-img-white" src="/icons/heart.svg" alt="" />
-          좋아요
-        </button>
+      <hr />
+      <section class="component-section-view">
+        <h2>아이콘 버튼</h2>
+        <ul>
+          <li>
+            <a href="#" class="icon-btn rounded-btn bg-green">
+              <img src="/icons/heart.svg" alt="" />
+            </a>
+          </li>
+          <li>
+            <a href="#" class="icon-btn rounded-btn bg-blue">
+              <img src="/icons/facebook-filed.svg" alt="" />
+            </a>
+          </li>
+          <li>
+            <a href="#" class="icon-btn rounded-btn bg-black">
+              <img src="/icons/spotify-logo-symbol.svg" alt="" />
+            </a>
+          </li>
+        </ul>
       </section>
-
-      <a class="rounded-btn btn bg-green black-text btn-long" href="/index.html"
-        >메인 페이지로 돌아가기</a
+      <hr />
+      <a
+        class="rounded-btn btn bg-green black-text btn-long"
+        href="/index.html"
       >
+        메인 페이지로 돌아가기
+      </a>
     </main>
   </body>
 </html>

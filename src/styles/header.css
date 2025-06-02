@@ -1,10 +1,3 @@
-body{
-  margin-top:70px;
-  height: 100vh;
-  background: rgb(33, 33, 33);
-  color: white;
-}
-
 /* 검색창 */
 .search-box {
   position: relative;
@@ -67,6 +60,7 @@ body{
       max-width: 100%;
       padding: 12px;
       aspect-ratio: 1;
+
       /* 둘러보기 아이콘 */
       svg {
         vertical-align: middle;
@@ -75,6 +69,7 @@ body{
         }
         &:hover path {
           fill: white;
+          scale: 1.05;
         }
       }
     }
@@ -89,7 +84,6 @@ body{
 
     /* 전체 박스 포커스 설정 */
     &:has(input:focus) {
-      /* box-sizing: border-box; */
       outline: 2px solid white;
     }
   }
@@ -169,6 +163,7 @@ body{
 
   &:hover {
     background-color: var(--button-hover-color);
+    scale: 1.05;
   }
 }
 
@@ -178,7 +173,6 @@ body{
   min-width: 208.7px;
   display: flex;
   flex-direction: row;
-  /* flex-flow: row nowrap; */
   justify-content: space-between;
   align-items: center;
   font-size: 0;
@@ -195,7 +189,8 @@ body{
 
     display: flex;
     flex-flow: row nowrap;
-
+    transition: all 0.05s ease-in-out;
+    
     /* 프리미엄 링크 */
     &.premium-link {
       font-size: 15px;
@@ -206,6 +201,7 @@ body{
     /* 링크 모음 호버상태 */
     &:hover {
       color: white;
+      scale: 1.05;
     }
   }
 
@@ -228,8 +224,10 @@ body{
     font-weight: 700;
     color: var(--font-color);
     align-content: center;
+    transition: all 0.05s ease-in-out;
     &:hover {
       color: white;
+      scale: 1.05;
       svg path {
         fill: white;
       }
@@ -262,18 +260,16 @@ body{
 
   div {
     /* 가입하기 링크 */
-    /* display: contents; */
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
+
     .sign-link {
       height: 32px;
-      /* margin-left: 5.5px; */
       padding: 4px 16px 4px 8px;
       flex-shrink: 0;
       line-height: 0;
-      /* background: green; */
     }
 
     /* 로그인버튼 */
@@ -318,6 +314,7 @@ body{
   .wide-screen-box {
     display: contents;
   }
+
   li {
     list-style-type: none;
     row-gap: 8px;
@@ -330,11 +327,9 @@ body{
       padding-inline: 8px;
     }
     &:nth-child(4) {
-      /* flex-grow: 1; */
       justify-content: end;
     }
     &:nth-child(5) {
-      /* flex-grow: 1; */
       justify-content: end;
     }
   }
