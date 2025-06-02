@@ -1,6 +1,5 @@
 .sidebar-component-container-no-page {
   color: var(--spotify-white);
-  font-family: "Pretendard Variable", sans-serif;
   background: var(--spotify-dark-gray);
   display: grid;
   grid-template-areas: "left-sidebar main";
@@ -13,11 +12,11 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  min-height: 800px;
+  min-height: 0;
   height: 100%;
   width: 100%;
-  max-width: var(--sidebar-max-width);
-  min-width: var(--sidebar-min-width);
+  /* margin: 1rem; */
+  border-radius: 0.5rem;
   padding: var(--spacing-lg);
   gap: var(--spacing-lg);
   font-weight: var(--font-weight-bold);
