@@ -21,20 +21,20 @@
   --button-transition: all 0.2s ease-in-out;
   --button-shadow: 0 0.3em 0.3em -0.1em var(--spotify-black);
 
-  --spacing-8xl: 12rem;
-  --spacing-7xl: 10rem;
-  --spacing-6xl: 9rem;
-  --spacing-5xl: 8rem;
-  --spacing-4xl: 6rem;
-  --spacing-xxl: 5rem;
-  --spacing-xl: 4rem;
-  --spacing-lg: 2.5rem;
-  --spacing-md: 1.5rem;
-  --spacing-sm: 1rem;
-  --spacing-xs: 0.5rem;
+  --spacing-8xl: 192px;
+  --spacing-7xl: 160px;
+  --spacing-6xl: 144px;
+  --spacing-5xl: 128px;
+  --spacing-4xl: 96px;
+  --spacing-xxl: 80px;
+  --spacing-xl: 64px;
+  --spacing-lg: 40px;
+  --spacing-md: 24px;
+  --spacing-sm: 16px;
+  --spacing-xs: 8px;
 
-  --sidebar-max-width: 26.25rem;
-  --sidebar-min-width: 22.5rem;
+  --sidebar-max-width: 420px;
+  --sidebar-min-width: 360px;
 
   --font-size-lg: 3.5rem;
   --font-size-base: 1rem;
