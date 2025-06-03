@@ -16,7 +16,7 @@ body {
 }
 
 .main-component {
-  margin: 1rem;
+  /* margin: 1rem; */
   padding: 2rem;
   box-sizing: border-box;
   background: var(--spotify-black);
@@ -234,17 +234,13 @@ body {
   --footer-spacing-xs: 8px;
 }
 
-footer {
+.footer-container {
   background: var(--spotify-black);
   color: var(--white-text);
   padding: var(--footer-spacing-lg) 0 0 0;
   border-top: 1px solid var(--footer-divider);
   font-size: 15px;
-}
-
-.footer-container {
   width: 100%;
-
   margin: 0 auto;
 }
 

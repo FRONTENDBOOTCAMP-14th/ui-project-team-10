@@ -136,7 +136,7 @@
 }
 
 /* spotify 로고 */
-.header .logo {
+.header-logo-box .logo {
   display: inline-block;
   padding: 20px;
   svg {
@@ -190,7 +190,7 @@
     display: flex;
     flex-flow: row nowrap;
     transition: all 0.05s ease-in-out;
-    
+
     /* 프리미엄 링크 */
     &.premium-link {
       font-size: 15px;
@@ -296,7 +296,7 @@
 
 /* 해더 전체 마크업 */
 .header-box {
-  background: black;
+  background: transparent;
   width: 100%;
   min-width: 800px;
   height: 64px;
@@ -306,9 +306,6 @@
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
   z-index: 999;
 
   .wide-screen-box {

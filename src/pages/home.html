@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>UI 프로젝트 - CSS</title>
+    <title>Spotify Clone - 홈</title>
     <link rel="icon" href="/icons/spotify-logo-symbol-green.svg" />
     <link
       rel="preload"
@@ -13,11 +13,579 @@
     />
     <link rel="stylesheet" as="style" href="/font/pretendardvariable.css" />
     <link rel="stylesheet" href="/src/common/index.css" />
+    <link rel="stylesheet" href="/src/styles/main.css" />
     <script type="module" src="/src/main.js"></script>
+    <style>
+      .grid-body {
+        color: var(--spotify-white);
+        display: grid;
+        grid-template-areas:
+          "header header"
+          "sidebar main"
+          "footer footer";
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto 1fr auto;
+        width: 100%;
+        column-gap: 0.5rem;
+        height: 100vh;
+      }
+
+      header {
+        grid-area: header;
+      }
+
+      .sidebar {
+        grid-area: sidebar;
+        margin: 0;
+      }
+
+      main {
+        grid-area: main;
+        display: flex;
+        flex-direction: column;
+        overflow: scroll;
+        min-height: auto;
+        height: 100%;
+        margin: 0;
+      }
+
+      footer {
+        grid-area: footer;
+        margin: 8px;
+      }
+
+      .list-card {
+        min-width: 140px;
+      }
+
+      .scrollable {
+        overflow-y: scroll;
+      }
+    </style>
   </head>
   <body>
-    <header></header>
-    <main></main>
-    <footer></footer>
+    <div class="grid-body">
+      <header>
+        <ul class="header-box">
+          <!-- 로고 -->
+          <li>
+            <div class="header-logo-box">
+              <h1 class="sr-only">Spotify</h1>
+              <a href="https://open.spotify.com/" class="logo">
+                <svg
+                  role="img"
+                  viewBox="0 0 24 24"
+                  aria-label="Spotify"
+                  aria-hidden="false"
+                  height="32"
+                  data-encore-id="logoSpotify"
+                  style="fill: white"
+                >
+                  <title>Spotify</title>
+                  <path
+                    d="M13.427.01C6.805-.253 1.224 4.902.961 11.524.698 18.147 5.853 23.728 12.476 23.99c6.622.263 12.203-4.892 12.466-11.514S20.049.272 13.427.01m5.066 17.579a.717.717 0 0 1-.977.268 14.4 14.4 0 0 0-5.138-1.747 14.4 14.4 0 0 0-5.42.263.717.717 0 0 1-.338-1.392c1.95-.474 3.955-.571 5.958-.29 2.003.282 3.903.928 5.647 1.92a.717.717 0 0 1 .268.978m1.577-3.15a.93.93 0 0 1-1.262.376 17.7 17.7 0 0 0-5.972-1.96 17.7 17.7 0 0 0-6.281.238.93.93 0 0 1-1.11-.71.93.93 0 0 1 .71-1.11 19.5 19.5 0 0 1 6.94-.262 19.5 19.5 0 0 1 6.599 2.165c.452.245.62.81.376 1.263m1.748-3.551a1.147 1.147 0 0 1-1.546.488 21.4 21.4 0 0 0-6.918-2.208 21.4 21.4 0 0 0-7.259.215 1.146 1.146 0 0 1-.456-2.246 23.7 23.7 0 0 1 8.034-.24 23.7 23.7 0 0 1 7.657 2.445c.561.292.78.984.488 1.546m13.612-.036-.832-.247c-1.67-.495-2.14-.681-2.14-1.353 0-.637.708-1.327 2.264-1.327 1.539 0 2.839.752 3.51 1.31.116.096.24.052.24-.098V6.935c0-.097-.027-.15-.098-.203-.83-.62-2.272-1.07-3.723-1.07-2.953 0-4.722 1.68-4.722 3.59 0 2.157 1.371 2.91 3.626 3.546l.973.274c1.689.478 1.998.902 1.998 1.556 0 1.097-.831 1.433-2.07 1.433-1.556 0-3.457-.911-4.35-2.025-.08-.098-.177-.053-.177.062v2.423c0 .097.01.141.08.22.743.814 2.52 1.53 4.59 1.53 2.546 0 4.456-1.485 4.456-3.784 0-1.787-1.052-2.865-3.625-3.635m10.107-1.76c-1.68 0-2.653 1.026-3.219 2.052V9.376c0-.08-.044-.124-.124-.124h-2.22c-.079 0-.123.044-.123.124V20.72c0 .08.044.124.124.124h2.22c.079 0 .123-.044.123-.124v-4.536c.566 1.025 1.521 2.034 3.237 2.034 2.264 0 3.89-1.955 3.89-4.581s-1.644-4.545-3.908-4.545m-.654 6.986c-1.185 0-2.211-1.167-2.618-2.458.407-1.362 1.344-2.405 2.618-2.405 1.211 0 2.051.92 2.051 2.423s-.84 2.44-2.051 2.44m40.633-6.826h-2.264c-.08 0-.115.017-.15.097l-2.282 5.483-2.29-5.483c-.035-.08-.07-.097-.15-.097h-3.661v-.584c0-.955.645-1.397 1.476-1.397.496 0 1.035.256 1.415.486.089.053.15-.008.115-.088l-.796-1.901a.26.26 0 0 0-.124-.133c-.389-.203-1.025-.38-1.644-.38-1.875 0-2.954 1.432-2.954 3.254v.743h-1.503c-.08 0-.124.044-.124.124v1.768c0 .08.044.124.124.124h1.503v6.668c0 .08.044.123.124.123h2.264c.08 0 .124-.044.124-.123v-6.668h1.936l2.812 6.11-1.512 3.325c-.044.098.009.142.097.142h2.414c.08 0 .116-.018.15-.097l4.997-11.355c.035-.08-.009-.141-.097-.141M54.964 9.04c-2.865 0-4.837 2.025-4.837 4.616 0 2.573 1.971 4.616 4.837 4.616 2.856 0 4.846-2.043 4.846-4.616 0-2.591-1.99-4.616-4.846-4.616m.008 7.065c-1.37 0-2.343-1.043-2.343-2.45 0-1.405.973-2.449 2.343-2.449 1.362 0 2.335 1.043 2.335 2.45 0 1.406-.973 2.45-2.335 2.45m33.541-6.334a1.24 1.24 0 0 0-.483-.471 1.4 1.4 0 0 0-.693-.17q-.384 0-.693.17a1.24 1.24 0 0 0-.484.471q-.174.302-.174.681 0 .375.174.677.175.3.484.471t.693.17.693-.17.483-.471.175-.676q0-.38-.175-.682m-.211 1.247a1 1 0 0 1-.394.39 1.15 1.15 0 0 1-.571.14 1.16 1.16 0 0 1-.576-.14 1 1 0 0 1-.391-.39 1.14 1.14 0 0 1-.14-.566q0-.316.14-.562t.391-.388.576-.14q.32 0 .57.14.253.141.395.39t.142.565q0 .312-.142.56m-19.835-5.78c-.85 0-1.468.6-1.468 1.396s.619 1.397 1.468 1.397c.866 0 1.485-.6 1.485-1.397 0-.796-.619-1.397-1.485-1.397m19.329 5.19a.31.31 0 0 0 .134-.262q0-.168-.132-.266-.132-.099-.381-.099h-.588v1.229h.284v-.489h.154l.374.489h.35l-.41-.518a.5.5 0 0 0 .215-.084m-.424-.109h-.26v-.3h.27q.12 0 .184.036a.12.12 0 0 1 .065.116.12.12 0 0 1-.067.111.4.4 0 0 1-.192.037M69.607 9.252h-2.263c-.08 0-.124.044-.124.124v8.56c0 .08.044.123.124.123h2.263c.08 0 .124-.044.124-.123v-8.56c0-.08-.044-.124-.124-.124m-3.333 6.605a2.1 2.1 0 0 1-1.053.257c-.725 0-1.185-.425-1.185-1.362v-3.484h2.211c.08 0 .124-.044.124-.124V9.376c0-.08-.044-.124-.124-.124h-2.21V6.944c0-.097-.063-.15-.15-.08l-3.954 3.113c-.053.044-.07.088-.07.16v1.007c0 .08.044.124.123.124h1.539v3.855c0 2.087 1.203 3.06 2.918 3.06.743 0 1.46-.194 1.884-.442.062-.035.07-.07.07-.133v-1.68c0-.088-.044-.115-.123-.07"
+                    transform="translate(-0.95,0)"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+          </li>
+
+          <!-- home버튼 -->
+          <!-- <div class="wide-screen-box"> -->
+          <li>
+            <div class="home-link">
+              <a href="/">
+                <svg
+                  data-encore-id="icon"
+                  role="img"
+                  aria-hidden="true"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="white"
+                >
+                  <title>홈</title>
+                  <path
+                    d="M13.5 1.515a3 3 0 0 0-3 0L3 5.845a2 2 0 0 0-1 1.732V21a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6h4v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V7.577a2 2 0 0 0-1-1.732l-7.5-4.33z"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+          </li>
+
+          <!-- 검색창 -->
+          <li>
+            <div class="search-box">
+              <div class="container hidden">
+                <button type="button" class="search-button reset-style">
+                  <svg
+                    data-encore-id="icon"
+                    role="img"
+                    aria-hidden="true"
+                    data-testid="search-icon"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    class="icon-search"
+                  >
+                    <title>검색하기</title>
+                    <path
+                      d="M10.533 1.27893C5.35215 1.27893 1.12598 5.41887 1.12598 10.5579C1.12598 15.697 5.35215 19.8369 10.533 19.8369C12.767 19.8369 14.8235 19.0671 16.4402 17.7794L20.7929 22.132C21.1834 22.5226 21.8166 22.5226 22.2071 22.132C22.5976 21.7415 22.5976 21.1083 22.2071 20.7178L17.8634 16.3741C19.1616 14.7849 19.94 12.7634 19.94 10.5579C19.94 5.41887 15.7138 1.27893 10.533 1.27893ZM3.12598 10.5579C3.12598 6.55226 6.42768 3.27893 10.533 3.27893C14.6383 3.27893 17.94 6.55226 17.94 10.5579C17.94 14.5636 14.6383 17.8369 10.533 17.8369C6.42768 17.8369 3.12598 14.5636 3.12598 10.5579Z"
+                    ></path>
+                  </svg>
+                </button>
+                <label for="search-box" class="sr-only">검색창</label>
+                <input
+                  type="search"
+                  placeholder="어떤 콘텐츠를 감상하고 싶으세요?"
+                  id="search-box"
+                  class="reset-style"
+                />
+
+                <!-- 중간 바 -->
+                <svg
+                  width="1"
+                  height="24"
+                  fill="#B3B3B3"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="icon-break-line"
+                >
+                  <rect
+                    width="1"
+                    height="24"
+                    transform="translate(0 0.5)"
+                    fill="#B3B3B3"
+                  />
+                </svg>
+
+                <!-- 둘러보기 아이콘 -->
+                <a href="/" class="icon-browse-link">
+                  <svg width="24" height="24" viewBox="0 0 24 24">
+                    <title>둘러보기</title>
+                    <g clip-path="url(#clip0_29_2587)">
+                      <path
+                        d="M15 16.02C15 17.125 13.657 18.02 12 18.02C10.343 18.02 9 17.125 9 16.02C9 14.915 10.343 14.02 12 14.02C13.657 14.02 15 14.915 15 16.02Z"
+                        fill=""
+                      />
+                      <path
+                        d="M1.51307 9.88996C1.60698 9.7742 1.72558 9.6809 1.86019 9.61688C1.9948 9.55287 2.14202 9.51975 2.29107 9.51996H21.7091C21.8581 9.51983 22.0053 9.55302 22.1399 9.6171C22.2745 9.68118 22.393 9.77454 22.4868 9.89033C22.5807 10.0061 22.6475 10.1414 22.6823 10.2864C22.7171 10.4313 22.7191 10.5822 22.6881 10.728L20.3491 21.728C20.3014 21.952 20.1783 22.1529 20.0003 22.2971C19.8223 22.4413 19.6001 22.5199 19.3711 22.52H4.63007C4.401 22.5199 4.17889 22.4413 4.00087 22.2971C3.82285 22.1529 3.69972 21.952 3.65207 21.728L1.31307 10.728C1.28214 10.5823 1.28413 10.4315 1.3189 10.2867C1.35368 10.1419 1.42036 10.0067 1.51407 9.89096L1.51307 9.88996ZM3.52507 11.52L5.43807 20.52H18.5611L20.4741 11.52H3.52507ZM4.00007 2.51996C4.00007 2.25474 4.10543 2.00039 4.29297 1.81285C4.4805 1.62532 4.73486 1.51996 5.00007 1.51996H19.0001C19.2653 1.51996 19.5196 1.62532 19.7072 1.81285C19.8947 2.00039 20.0001 2.25474 20.0001 2.51996V6.51996H18.0001V3.51996H6.00007V6.51996H4.00007V2.51996Z"
+                        fill=""
+                      />
+                    </g>
+                  </svg>
+                </a>
+              </div>
+
+              <!-- 축소시의 검색창 -->
+              <div class="clossing-search-bar">
+                <button class="reset-style search-toggle-btn">
+                  <svg
+                    data-encore-id="icon"
+                    role="img"
+                    aria-hidden="true"
+                    data-testid="search-icon"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    fill="#b3b3b3"
+                    class="icon-search"
+                  >
+                    <title>검색하기</title>
+                    <path
+                      d="M10.533 1.27893C5.35215 1.27893 1.12598 5.41887 1.12598 10.5579C1.12598 15.697 5.35215 19.8369 10.533 19.8369C12.767 19.8369 14.8235 19.0671 16.4402 17.7794L20.7929 22.132C21.1834 22.5226 21.8166 22.5226 22.2071 22.132C22.5976 21.7415 22.5976 21.1083 22.2071 20.7178L17.8634 16.3741C19.1616 14.7849 19.94 12.7634 19.94 10.5579C19.94 5.41887 15.7138 1.27893 10.533 1.27893ZM3.12598 10.5579C3.12598 6.55226 6.42768 3.27893 10.533 3.27893C14.6383 3.27893 17.94 6.55226 17.94 10.5579C17.94 14.5636 14.6383 17.8369 10.533 17.8369C6.42768 17.8369 3.12598 14.5636 3.12598 10.5579Z"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </li>
+          <!-- </div> -->
+
+          <!-- 추가 메뉴바 -->
+          <li class="remove">
+            <div class="link-more-group">
+              <a href="/" class="premium-link">Premium</a>
+              <a href="/" class="backup-link">지원</a>
+              <a href="/" class="download">다운로드하기</a>
+              <svg
+                width="1"
+                height="25"
+                fill="#B3B3B3"
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon-break-line"
+              >
+                <rect
+                  width="1"
+                  height="25"
+                  transform="translate(0 0.5)"
+                  fill="white"
+                />
+              </svg>
+            </div>
+          </li>
+
+          <!-- 로그인 메뉴바 -->
+          <li>
+            <div class="link-login-group">
+              <a href="/" class="install-link">
+                <svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g clip-path="url(#clip0_29_2486)">
+                    <title>앱 설치하기</title>
+                    <path
+                      d="M4.99497 8.745C5.1356 8.60455 5.32622 8.52566 5.52497 8.52566C5.72373 8.52566 5.91435 8.60455 6.05497 8.745L7.24997 9.939V4C7.24997 3.80109 7.32899 3.61032 7.46964 3.46967C7.6103 3.32902 7.80106 3.25 7.99997 3.25C8.19889 3.25 8.38965 3.32902 8.5303 3.46967C8.67096 3.61032 8.74997 3.80109 8.74997 4V9.94L9.94497 8.745C10.0136 8.67131 10.0964 8.61221 10.1884 8.57122C10.2804 8.53023 10.3797 8.50819 10.4805 8.50641C10.5812 8.50463 10.6812 8.52316 10.7746 8.56088C10.868 8.5986 10.9528 8.65474 11.024 8.72596C11.0952 8.79718 11.1514 8.88201 11.1891 8.9754C11.2268 9.06879 11.2453 9.16882 11.2436 9.26952C11.2418 9.37023 11.2197 9.46954 11.1788 9.56154C11.1378 9.65354 11.0787 9.73634 11.005 9.805L7.99997 12.811L7.47197 12.283C7.4703 12.2813 7.46864 12.2797 7.46697 12.278L4.99497 9.805C4.85452 9.66437 4.77563 9.47375 4.77563 9.275C4.77563 9.07625 4.85452 8.88563 4.99497 8.745Z"
+                      fill="#B3B3B3"
+                    />
+                    <path
+                      d="M0 8C0 5.87827 0.842855 3.84344 2.34315 2.34315C3.84344 0.842855 5.87827 0 8 0C10.1217 0 12.1566 0.842855 13.6569 2.34315C15.1571 3.84344 16 5.87827 16 8C16 10.1217 15.1571 12.1566 13.6569 13.6569C12.1566 15.1571 10.1217 16 8 16C5.87827 16 3.84344 15.1571 2.34315 13.6569C0.842855 12.1566 0 10.1217 0 8ZM8 1.5C6.27609 1.5 4.62279 2.18482 3.40381 3.40381C2.18482 4.62279 1.5 6.27609 1.5 8C1.5 9.72391 2.18482 11.3772 3.40381 12.5962C4.62279 13.8152 6.27609 14.5 8 14.5C9.72391 14.5 11.3772 13.8152 12.5962 12.5962C13.8152 11.3772 14.5 9.72391 14.5 8C14.5 6.27609 13.8152 4.62279 12.5962 3.40381C11.3772 2.18482 9.72391 1.5 8 1.5Z"
+                      fill="#B3B3B3"
+                    />
+                  </g>
+                </svg>
+                앱 설치하기</a
+              >
+              <div>
+                <a href="/" class="sign-link">가입하기</a>
+                <a href="/" class="login-link">로그인하기</a>
+                <button
+                  type="button"
+                  class="hamburger-bar reset-style"
+                ></button>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <script>
+          const extendSearchBar = document.querySelector(".container");
+          const toggleSearchBtn = document.querySelector(".search-toggle-btn");
+          const searchInput = document.getElementById("search-box");
+          const clossingSearchBar = document.querySelector(
+            ".clossing-search-bar"
+          );
+
+          toggleSearchBtn.addEventListener("click", function () {
+            const viewportWidth = window.visualViewport.width;
+            console.log("click");
+            if (viewportWidth < 1078) {
+              extendSearchBar.classList.toggle("hidden");
+              clossingSearchBar.classList.toggle("absolute");
+              searchInput.focus();
+            } else {
+              searchInput.focus();
+            }
+          });
+
+          window.addEventListener("resize", function () {
+            const viewportWidth = window.innerWidth;
+            console.log(viewportWidth);
+            if (viewportWidth >= 1078) {
+              extendSearchBar.classList.remove("hidden");
+              clossingSearchBar.classList.add("absolute");
+            } else if (viewportWidth < 1078) {
+              extendSearchBar.classList.add("hidden");
+              clossingSearchBar.classList.remove("absolute");
+            }
+          });
+
+          window.addEventListener("DOMContentLoaded", function () {
+            const viewportWidth = window.innerWidth;
+
+            if (viewportWidth >= 1078) {
+              extendSearchBar.classList.remove("hidden");
+              clossingSearchBar.classList.add("absolute");
+            }
+          });
+        </script>
+      </header>
+      <nav class="sidebar">
+        <div class="sidebar-logo">
+          <a href="/src/pages/home.html" aria-label="홈으로 이동">
+            <img src="/icons/spotify-logo.svg" alt="" />
+          </a>
+        </div>
+        <div class="scrollable">
+          <ul class="sidebar-menu">
+            <li class="sidebar-item">
+              <a
+                href="/src/pages/home.html"
+                class="sidebar-link home sidebar-item-active hover-grow"
+              >
+                <span class="sidebar-icon"></span>
+                <span class="sidebar-text">홈</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a href="" class="sidebar-link search hover-grow">
+                <span class="sidebar-icon"></span>
+                <span class="sidebar-text">검색하기</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a
+                href="/src/pages/library.html"
+                class="sidebar-link library hover-grow"
+              >
+                <span class="sidebar-icon"> </span>
+                <span class="sidebar-text">내 라이브러리</span>
+              </a>
+            </li>
+          </ul>
+          <div class="sidebar-menu sidebar-playlist">
+            <h2 class="sidebar-title sr-only">플레이리스트</h2>
+            <ul class="sidebar-playlist-list">
+              <li class="sidebar-playlist-item">
+                <a
+                  href="#"
+                  class="sidebar-playlist-link create-playlist hover-grow"
+                >
+                  <div class="sidebar-icon rounded-icon-box">
+                    <img src="/icons/plus.svg" alt="" />
+                  </div>
+                  <span class="sidebar-text">플레이리스트 만들기</span>
+                </a>
+              </li>
+              <li class="sidebar-playlist-item">
+                <a
+                  href="#"
+                  class="sidebar-playlist-link favorite-playlist hover-grow"
+                >
+                  <div class="sidebar-icon rounded-icon-box">
+                    <img src="/icons/heart.svg" alt="" />
+                  </div>
+                  <span class="sidebar-text">좋아하는 곡</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sidebar-footer">
+          <ul class="sidebar-footer-links">
+            <li class="sidebar-footer-link">
+              <a href="#">법적 고지 / 법률</a>
+            </li>
+            <li class="sidebar-footer-link">
+              <a href="#">개인정보 센터</a>
+            </li>
+            <li class="sidebar-footer-link">
+              <a href="#">개인정보 처리방침</a>
+            </li>
+            <li class="sidebar-footer-link">
+              <a href="#">쿠키</a>
+            </li>
+            <li class="sidebar-footer-link">
+              <a href="#">광고 정보</a>
+            </li>
+          </ul>
+          <button
+            type="button"
+            class="btn gray-outline-style rounded-btn language-select"
+          >
+            <img src="/icons/globe.svg" alt="" class="btn-icon" />
+            <span>언어선택</span>
+          </button>
+        </div>
+      </nav>
+      <main class="main-component">
+        <section class="list-component">
+          <div class="list-header">
+            <h2>Album</h2>
+            <button class="album-show-all">Show all</button>
+          </div>
+          <div class="scroll-wrapper">
+            <div class="scroll-btn">
+              <button
+                class="album-scroll-btn-left scroll-btn-left"
+                aria-label="scroll-left"
+              >
+                <img src="/icons/arrow-left.svg" alt="arrow-left" />
+              </button>
+              <button
+                class="album-scroll-btn-right scroll-btn-right"
+                aria-label="scroll-right"
+              >
+                <img src="/icons/arrow-right.svg" alt="arrow-right" />
+              </button>
+            </div>
+            <ul class="album-list" id="list" aria-label="album-list"></ul>
+          </div>
+        </section>
+        <section class="list-component">
+          <div class="list-header">
+            <h2>Artist</h2>
+            <button class="artist-show-all">Show all</button>
+          </div>
+          <div class="scroll-wrapper">
+            <div class="scroll-btn">
+              <button
+                class="artist-scroll-btn-left scroll-btn-left"
+                aria-label="scroll-left"
+              >
+                <img src="/icons/arrow-left.svg" alt="arrow-left" />
+              </button>
+              <button
+                class="artist-scroll-btn-right scroll-btn-right"
+                aria-label="scroll-right"
+              >
+                <img src="/icons/arrow-right.svg" alt="arrow-right" />
+              </button>
+            </div>
+            <ul class="artist-list" aria-label="artist-list"></ul>
+          </div>
+        </section>
+        <section class="list-component">
+          <div class="list-header">
+            <h2>Playlists</h2>
+            <button class="playlist-show-all">Show all</button>
+          </div>
+          <div class="scroll-wrapper">
+            <div class="scroll-btn">
+              <button
+                class="playlist-scroll-btn-left scroll-btn-left"
+                aria-label="scroll-left"
+              >
+                <img src="/icons/arrow-left.svg" alt="arrow-left" />
+              </button>
+              <button
+                class="playlist-scroll-btn-right scroll-btn-right"
+                aria-label="scroll-right"
+              >
+                <img src="/icons/arrow-right.svg" alt="arrow-right" />
+              </button>
+            </div>
+            <ul class="playlist-list" aria-label="playlist-list"></ul>
+          </div>
+        </section>
+        <footer>
+          <div class="footer-container">
+            <div class="footer-columns">
+              <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                  <li><a href="#">About</a></li>
+                  <li><a href="#">Jobs</a></li>
+                  <li><a href="#">For the Record</a></li>
+                </ul>
+              </div>
+              <div class="footer-column">
+                <h4>Communities</h4>
+                <ul>
+                  <li><a href="#">For Artists</a></li>
+                  <li><a href="#">Developers</a></li>
+                  <li><a href="#">Advertising</a></li>
+                  <li><a href="#">Investors</a></li>
+                  <li><a href="#">Vendors</a></li>
+                </ul>
+              </div>
+              <div class="footer-column">
+                <h4>Useful links</h4>
+                <ul>
+                  <li><a href="#">Support</a></li>
+                  <li><a href="#">Free Mobile App</a></li>
+                </ul>
+              </div>
+              <div class="footer-column">
+                <h4>Spotify Plans</h4>
+                <ul>
+                  <li><a href="#">Premium Individual</a></li>
+                  <li><a href="#">Premium Duo</a></li>
+                  <li><a href="#">Premium Family</a></li>
+                  <li><a href="#">Premium Student</a></li>
+                  <li><a href="#">Spotify Free</a></li>
+                  <li><a href="#">Audiobooks Access</a></li>
+                </ul>
+              </div>
+              <div class="footer-social">
+                <a href="https://instagram.com" target="_blank" rel="noopener">
+                  <svg
+                    width="41"
+                    height="41"
+                    viewBox="0 0 41 41"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      x="0.323242"
+                      y="0.140137"
+                      width="40"
+                      height="40"
+                      rx="20"
+                      fill="#292929"
+                    />
+                    <path
+                      d="M20.3232 13.5802C22.4592 13.5802 22.7122 13.5892 23.5562 13.6272C24.3362 13.6632 24.7592 13.7932 25.0412 13.9032C25.3892 14.0312 25.7042 14.2352 25.9622 14.5012C26.2282 14.7592 26.4322 15.0742 26.5612 15.4222C26.6712 15.7042 26.8012 16.1282 26.8362 16.9072C26.8752 17.7512 26.8832 18.0042 26.8832 20.1402C26.8832 22.2762 26.8752 22.5292 26.8362 23.3722C26.8012 24.1522 26.6702 24.5762 26.5612 24.8582C26.4279 25.203 26.224 25.5161 25.9626 25.7775C25.7012 26.0389 25.388 26.2428 25.0432 26.3762C24.7612 26.4862 24.3372 26.6162 23.5572 26.6512C22.7142 26.6902 22.4602 26.6982 20.3242 26.6982C18.1882 26.6982 17.9342 26.6902 17.0922 26.6512C16.3122 26.6162 15.8882 26.4862 15.6062 26.3762C15.2583 26.248 14.9435 26.0433 14.6852 25.7772C14.4193 25.5192 14.2146 25.2048 14.0862 24.8572C13.9762 24.5752 13.8462 24.1512 13.8112 23.3712C13.7732 22.5272 13.7642 22.2752 13.7642 20.1392C13.7642 18.0032 13.7732 17.7492 13.8112 16.9062C13.8472 16.1262 13.9772 15.7032 14.0862 15.4212C14.2152 15.0732 14.4192 14.7582 14.6852 14.5002C14.9435 14.2346 15.2578 14.0299 15.6052 13.9012C15.8882 13.7912 16.3122 13.6612 17.0922 13.6262C17.9352 13.5882 18.1882 13.5792 20.3242 13.5792L20.3232 13.5802ZM20.3242 12.1382C18.1522 12.1382 17.8792 12.1482 17.0262 12.1862C16.1722 12.2262 15.5912 12.3622 15.0832 12.5592C14.5495 12.7603 14.066 13.0753 13.6662 13.4822C13.2592 13.8822 12.9442 14.3652 12.7432 14.8992C12.5452 15.4072 12.4102 15.9892 12.3712 16.8412C12.3332 17.6922 12.3232 17.9662 12.3232 20.1402C12.3232 22.3122 12.3332 22.5852 12.3712 23.4382C12.4112 24.2912 12.5452 24.8712 12.7432 25.3792C12.9432 25.9132 13.2592 26.3962 13.6662 26.7962C14.0662 27.2032 14.5492 27.5182 15.0832 27.7192C15.5912 27.9172 16.1732 28.0522 17.0252 28.0912C17.8772 28.1302 18.1512 28.1392 20.3242 28.1392C22.4962 28.1392 22.7692 28.1292 23.6222 28.0912C24.4752 28.0512 25.0552 27.9172 25.5622 27.7192C26.0939 27.5139 26.5767 27.1996 26.9797 26.7966C27.3827 26.3936 27.6969 25.9108 27.9022 25.3792C28.1012 24.8712 28.2362 24.2892 28.2752 23.4372C28.3142 22.5862 28.3232 22.3122 28.3232 20.1392C28.3232 17.9662 28.3132 17.6942 28.2752 16.8412C28.2352 15.9882 28.1012 15.4082 27.9032 14.9012C27.7023 14.367 27.3874 13.8831 26.9802 13.4832C26.5805 13.0763 26.097 12.7613 25.5632 12.5602C25.0552 12.3632 24.4732 12.2272 23.6212 12.1892C22.7702 12.1482 22.4962 12.1392 20.3232 12.1392L20.3242 12.1382Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M20.3232 16.0322C19.2337 16.0322 18.1888 16.465 17.4184 17.2354C16.648 18.0058 16.2152 19.0507 16.2152 20.1402C16.2152 21.2297 16.648 22.2746 17.4184 23.045C18.1888 23.8154 19.2337 24.2482 20.3232 24.2482C21.4127 24.2482 22.4576 23.8154 23.228 23.045C23.9984 22.2746 24.4312 21.2297 24.4312 20.1402C24.4312 19.0507 23.9984 18.0058 23.228 17.2354C22.4576 16.465 21.4127 16.0322 20.3232 16.0322ZM20.3232 22.8072C19.9686 22.814 19.6161 22.7501 19.2865 22.6192C18.9568 22.4882 18.6566 22.2928 18.4034 22.0444C18.1501 21.796 17.949 21.4996 17.8117 21.1726C17.6743 20.8455 17.6036 20.4944 17.6036 20.1397C17.6036 19.785 17.6743 19.4338 17.8117 19.1068C17.949 18.7797 18.1501 18.4833 18.4034 18.2349C18.6566 17.9866 18.9568 17.7912 19.2865 17.6602C19.6161 17.5292 19.9686 17.4653 20.3232 17.4722C21.0218 17.4857 21.6871 17.7727 22.1763 18.2715C22.6655 18.7702 22.9396 19.441 22.9396 20.1397C22.9396 20.8383 22.6655 21.5091 22.1763 22.0079C21.6871 22.5067 21.0218 22.7937 20.3232 22.8072ZM24.5932 16.8292C24.8478 16.8292 25.092 16.728 25.2721 16.548C25.4521 16.368 25.5532 16.1238 25.5532 15.8692C25.5532 15.6146 25.4521 15.3704 25.2721 15.1904C25.092 15.0103 24.8478 14.9092 24.5932 14.9092C24.3386 14.9092 24.0945 15.0103 23.9144 15.1904C23.7344 15.3704 23.6332 15.6146 23.6332 15.8692C23.6332 16.1238 23.7344 16.368 23.9144 16.548C24.0945 16.728 24.3386 16.8292 24.5932 16.8292Z"
+                      fill="white"
+                    />
+                  </svg>
+                </a>
+
+                <a href="https://twitter.com" target="_blank" rel="noopener">
+                  <svg
+                    width="41"
+                    height="41"
+                    viewBox="0 0 41 41"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      x="0.323242"
+                      y="0.140137"
+                      width="40"
+                      height="40"
+                      rx="20"
+                      fill="#292929"
+                    />
+                    <path
+                      d="M25.8632 16.0291C26.502 15.6541 26.9775 15.0538 27.1962 14.3461C26.6013 14.7029 25.9484 14.9527 25.2672 15.0841C24.9873 14.7828 24.6482 14.5425 24.2712 14.3781C23.8876 14.2087 23.4726 14.1221 23.0532 14.1241C22.6543 14.118 22.2582 14.1937 21.8897 14.3466C21.5211 14.4996 21.1877 14.7264 20.9102 15.0131C20.6231 15.2918 20.396 15.6263 20.2431 15.9961C20.0902 16.3658 20.0147 16.763 20.0212 17.1631C20.0212 17.3751 20.0482 17.6051 20.1012 17.8541C18.8865 17.797 17.6983 17.4792 16.6172 16.9221C15.5493 16.3771 14.6082 15.6131 13.8552 14.6801C13.5838 15.1417 13.4412 15.6677 13.4422 16.2031C13.4422 16.7221 13.5622 17.2031 13.8032 17.6481C14.0432 18.0931 14.3732 18.4531 14.7912 18.7281C14.3095 18.7206 13.8373 18.592 13.4182 18.3541V18.3941C13.4182 19.1191 13.6482 19.7591 14.1082 20.3141C14.5468 20.8569 15.1625 21.2279 15.8472 21.3621C15.403 21.4878 14.9353 21.507 14.4822 21.4181C14.6671 22.0189 15.0397 22.5446 15.5452 22.9181C16.0541 23.3061 16.6754 23.5177 17.3152 23.5211C16.246 24.3764 14.9144 24.8363 13.5452 24.8231C13.3022 24.8231 13.0612 24.8071 12.8232 24.7751C14.2058 25.6763 15.8229 26.151 17.4732 26.1401C18.3782 26.1401 19.2362 26.0201 20.0452 25.7791C20.8552 25.5391 21.5712 25.2091 22.1922 24.7911C22.8113 24.3757 23.3766 23.8853 23.8752 23.3311C24.3752 22.7751 24.7862 22.1761 25.1092 21.5331C25.4284 20.9 25.6759 20.2332 25.8472 19.5451C26.0469 18.7517 26.1297 17.9334 26.0932 17.1161C26.6843 16.6883 27.1948 16.1591 27.6012 15.5531C27.0412 15.8021 26.4612 15.9601 25.8632 16.0291Z"
+                      fill="white"
+                    />
+                  </svg>
+                </a>
+                <a href="https://facebook.com" target="_blank" rel="noopener">
+                  <svg
+                    width="41"
+                    height="41"
+                    viewBox="0 0 41 41"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      x="0.323242"
+                      y="0.140137"
+                      width="40"
+                      height="40"
+                      rx="20"
+                      fill="#292929"
+                    />
+                    <path
+                      d="M28.3232 20.1401C28.323 18.6113 27.8847 17.1146 27.0603 15.8272C26.2359 14.5397 25.0598 13.5155 23.6713 12.8757C22.2829 12.2359 20.7401 12.0073 19.2258 12.217C17.7115 12.4267 16.2889 13.0659 15.1266 14.059C13.9643 15.0521 13.1108 16.3574 12.6673 17.8204C12.2238 19.2835 12.2088 20.843 12.624 22.3143C13.0392 23.7856 13.8674 25.1071 15.0103 26.1224C16.1533 27.1377 17.5632 27.8042 19.0732 28.0431V22.4531H17.0422V20.1401H19.0732V18.3771C19.0732 16.3721 20.2672 15.2651 22.0952 15.2651C22.9702 15.2651 23.8852 15.4211 23.8852 15.4211V17.3901H22.8772C21.8832 17.3901 21.5732 18.0071 21.5732 18.6401V20.1401H23.7922L23.4372 22.4531H21.5732V28.0431C23.455 27.745 25.1686 26.7853 26.4059 25.3366C27.6433 23.8879 28.3231 22.0453 28.3232 20.1401Z"
+                      fill="white"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div class="footer-bottom">
+              <small>&copy;2025 Spotify AB</small>
+            </div>
+          </div>
+        </footer>
+      </main>
+      <footer class="preview-container" aria-label="preview">
+        <div>
+          <h1><span>Spotify</span> 미리 듣기</h1>
+          <p>
+            가끔 표시되는 광고와 함께 무제한 곡 및 팟캐스트를 이용하려면
+            가입하세요. 신용카드는 필요 없습니다.
+          </p>
+        </div>
+        <a href="/">무료로 가입하기</a>
+      </footer>
+    </div>
   </body>
 </html>
