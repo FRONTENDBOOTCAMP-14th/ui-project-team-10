@@ -30,7 +30,7 @@ section {
   transition: all 0.3s ease-in-out;
   margin-bottom: 2rem;
 
-  & > div {
+  & > .component-box {
     background: var(--spotify-black);
     padding: 30px;
     border-radius: 1.5rem;
@@ -44,9 +44,10 @@ section {
     order: 2;
     flex-grow: 1;
     text-align: left;
+    margin-bottom: 20px;
   }
 
-  ul {
+  .description-box {
     order: 3;
     font-size: 13px;
     margin: 20px;
