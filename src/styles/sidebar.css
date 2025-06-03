@@ -34,7 +34,9 @@
   width: 100%;
 }
 
-.sidebar a:hover {
+.sidebar-link:hover,
+.sidebar-footer-link:hover,
+.sidebar-playlist-link:hover {
   opacity: 100%;
 }
 
