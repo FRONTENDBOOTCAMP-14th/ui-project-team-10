@@ -53,7 +53,7 @@ section {
     margin: 20px;
   }
 
-  span.play-btn {
+  .play-btn {
     content: "";
     position: absolute;
     right: 30px;
@@ -71,12 +71,13 @@ section {
     opacity: 0;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
+    border: none;
   }
 
   &:hover {
     background: var(--button-hover-color);
 
-    &:hover span.play-btn {
+    &:hover .play-btn {
       opacity: 1;
       transform: translateY(-10px);
     }
