@@ -1,23 +1,11 @@
-.sidebar-component-container-no-page {
-  color: var(--spotify-white);
-  font-family: "Pretendard Variable", sans-serif;
-  background: var(--spotify-dark-gray);
-  display: grid;
-  grid-template-areas: "left-sidebar main";
-  grid-template-columns: auto 1fr;
-  width: 100%;
-  gap: 0.5rem;
-  height: 100vh;
-}
-
 .sidebar {
   display: flex;
   flex-direction: column;
-  min-height: 800px;
+  min-height: 0;
   height: 100%;
   width: 100%;
-  max-width: var(--sidebar-max-width);
-  min-width: var(--sidebar-min-width);
+  /* margin: 1rem; */
+  border-radius: 0.5rem;
   padding: var(--spacing-lg);
   gap: var(--spacing-lg);
   font-weight: var(--font-weight-bold);
@@ -27,22 +15,19 @@
   box-sizing: border-box;
 }
 
-.sidebar-component-container-no-page .sidebar {
-  grid-area: left-sidebar;
-}
-
 .sidebar-menu {
   display: flex;
   flex-direction: column;
 }
 
-.sidebar-link {
+.sidebar-link,
+.sidebar-footer-link {
   opacity: 0.7;
 }
 
 .sidebar-item-active,
 .sidebar-logo,
-.sidebar-footer .language-select {
+.language-select {
   opacity: 1;
 }
 
@@ -54,12 +39,20 @@
   height: 100%;
 }
 
-.sidebar ul li {
+.sidebar-main li {
+  margin-bottom: var(--spacing-lg);
+}
+
+.sidebar-main ul {
   margin-bottom: var(--spacing-lg);
 }
 
 .sidebar a {
   width: 100%;
+}
+
+.sidebar a:hover {
+  opacity: 100%;
 }
 
 .home .sidebar-icon {
@@ -82,15 +75,10 @@
   color: var(--spotify-white);
 }
 
-.sidebar-playlist > *,
-.sidebar-playlist * {
-  opacity: 1;
-}
-
 .sidebar-icon {
-  width: 24px;
-  height: 24px;
-  margin-right: 1rem;
+  width: var(--svg-size);
+  height: var(--svg-size);
+  margin-right: var(--spacing-sm);
   background-color: var(--spotify-white);
   mask-size: contain;
   mask-position: center;
@@ -125,6 +113,10 @@
   filter: brightness(0);
 }
 
+.sidebar-main {
+  overflow-y: scroll;
+}
+
 .sidebar-footer {
   margin-top: auto;
   width: 100%;
@@ -136,12 +128,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: var(--spacing-xs);
-  font-weight: 300;
-}
-
-.sidebar-component-container-no-page main {
-  grid-area: main;
-  padding: var(--spacing-lg);
+  font-weight: var(--font-weight-normal);
 }
 
 .language-select {

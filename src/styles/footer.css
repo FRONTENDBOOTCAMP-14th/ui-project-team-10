@@ -1,7 +1,6 @@
 :root {
   /* 공통 색상 */
   --bg-dark-gray: #181818;
-  --white-text: #fff;
   --gray-text: #b3b3b3;
   --footer-divider: #232323;
   --bg-green: #6df843;
@@ -9,18 +8,6 @@
   --footer-social-bg: #222;
   --footer-social-hover: #333;
   --footer-radius: 50%;
-  --footer-spacing-lg: 40px;
-  --footer-spacing-md: 24px;
-  --footer-spacing-sm: 16px;
-  --footer-spacing-xs: 8px;
-}
-
-footer {
-  background: var(--bg-dark-gray);
-  color: var(--white-text);
-  padding: var(--footer-spacing-lg) 0 0 0;
-  border-top: 1px solid var(--footer-divider);
-  font-size: 15px;
 }
 
 .footer-container {
@@ -32,10 +19,10 @@ footer {
 .footer-columns {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--footer-spacing-lg);
+  gap: var(--spacing-lg);
   justify-content: space-between;
   align-items: flex-start;
-  padding-bottom: var(--footer-spacing-lg);
+  padding-bottom: var(--spacing-lg);
 }
 
 .footer-column {
@@ -45,8 +32,8 @@ footer {
 
 .footer-column h4 {
   font-size: 15px;
-  color: var(--white-text);
-  margin-bottom: var(--footer-spacing-sm);
+  color: var(--spotify-white);
+  margin-bottom: var(--spacing-sm);
   letter-spacing: 0.5px;
   font-weight: 600;
 }
@@ -58,7 +45,7 @@ footer {
 }
 
 .footer-column li {
-  margin-bottom: var(--footer-spacing-xs);
+  margin-bottom: var(--spacing-xs);
 }
 
 .footer-column a {
@@ -135,21 +122,21 @@ footer {
 
 .code-btn:hover {
   background: var(--gray-text);
-  color: var(--white-text);
+  color: var(--spotify-white);
 }
 
 .code-box {
   width: 100%;
   max-width: 1200px;
   background: #111;
-  color: var(--white-text);
+  color: var(--spotify-white);
   border-radius: 8px;
   padding: 20px;
   font-size: 13px;
   font-family: "Fira Mono", "Consolas", monospace;
   overflow-x: auto;
   margin-top: 8px;
-  border: 1px solid #292929;
+  border: 1px solid var(--spotify-dark-gray);
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
   white-space: pre-wrap;
 }
@@ -160,14 +147,14 @@ footer {
   .footer-columns {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--footer-spacing-md);
+    gap: var(--spacing-md);
   }
   .footer-column {
     min-width: 0;
   }
   .footer-social {
     grid-column: 1 / -1;
-    margin-top: var(--footer-spacing-sm);
+    margin-top: var(--spacing-sm);
     justify-content: flex-start;
   }
 }
@@ -175,7 +162,7 @@ footer {
   .footer-columns {
     display: flex;
     flex-direction: column;
-    gap: var(--footer-spacing-md);
+    gap: var(--spacing-md);
     align-items: stretch;
   }
   .footer-social {
