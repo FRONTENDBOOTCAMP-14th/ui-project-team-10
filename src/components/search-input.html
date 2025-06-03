@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>검색 입력창</title>
+    <title>검색 입력창 컴포넌트</title>
     <link rel="icon" href="/icons/spotify-logo-symbol-green.svg" />
     <link
       rel="preload"
@@ -18,71 +18,12 @@
     <script type="module" src="/src/main.js"></script>
   </head>
   <body>
-    <h1>검색 입력창</h1>
+    <h1>검색 입력창 컴포넌트</h1>
+
+    <br />
     <section>
-      <h2 class="sr-only">검색 바</h2>
-      <div>
+      <div class="component-box">
         <div class="search-box">
-          <div class="container hidden">
-            <button type="button" class="search-button reset-style">
-              <svg
-                data-encore-id="icon"
-                role="img"
-                aria-hidden="true"
-                data-testid="search-icon"
-                viewBox="0 0 24 24"
-                width="24"
-                class="icon-search"
-              >
-                <title>검색하기</title>
-                <path
-                  d="M10.533 1.27893C5.35215 1.27893 1.12598 5.41887 1.12598 10.5579C1.12598 15.697 5.35215 19.8369 10.533 19.8369C12.767 19.8369 14.8235 19.0671 16.4402 17.7794L20.7929 22.132C21.1834 22.5226 21.8166 22.5226 22.2071 22.132C22.5976 21.7415 22.5976 21.1083 22.2071 20.7178L17.8634 16.3741C19.1616 14.7849 19.94 12.7634 19.94 10.5579C19.94 5.41887 15.7138 1.27893 10.533 1.27893ZM3.12598 10.5579C3.12598 6.55226 6.42768 3.27893 10.533 3.27893C14.6383 3.27893 17.94 6.55226 17.94 10.5579C17.94 14.5636 14.6383 17.8369 10.533 17.8369C6.42768 17.8369 3.12598 14.5636 3.12598 10.5579Z"
-                ></path>
-              </svg>
-            </button>
-            <label for="search-box" class="sr-only">검색창</label>
-            <input
-              type="search"
-              placeholder="어떤 콘텐츠를 감상하고 싶으세요?"
-              id="search-box"
-              class="reset-style"
-            />
-
-            <!-- 중간 바 -->
-            <svg
-              width="1"
-              height="24"
-              fill="#B3B3B3"
-              xmlns="http://www.w3.org/2000/svg"
-              class="icon-break-line"
-            >
-              <rect
-                width="1"
-                height="24"
-                transform="translate(0 0.5)"
-                fill="#B3B3B3"
-              />
-            </svg>
-
-            <!-- 둘러보기 아이콘 -->
-            <a href="/" class="icon-browse-link">
-              <svg width="24" height="24" viewBox="0 0 24 24">
-                <title>둘러보기</title>
-                <g clip-path="url(#clip0_29_2587)">
-                  <path
-                    d="M15 16.02C15 17.125 13.657 18.02 12 18.02C10.343 18.02 9 17.125 9 16.02C9 14.915 10.343 14.02 12 14.02C13.657 14.02 15 14.915 15 16.02Z"
-                    fill=""
-                  />
-                  <path
-                    d="M1.51307 9.88996C1.60698 9.7742 1.72558 9.6809 1.86019 9.61688C1.9948 9.55287 2.14202 9.51975 2.29107 9.51996H21.7091C21.8581 9.51983 22.0053 9.55302 22.1399 9.6171C22.2745 9.68118 22.393 9.77454 22.4868 9.89033C22.5807 10.0061 22.6475 10.1414 22.6823 10.2864C22.7171 10.4313 22.7191 10.5822 22.6881 10.728L20.3491 21.728C20.3014 21.952 20.1783 22.1529 20.0003 22.2971C19.8223 22.4413 19.6001 22.5199 19.3711 22.52H4.63007C4.401 22.5199 4.17889 22.4413 4.00087 22.2971C3.82285 22.1529 3.69972 21.952 3.65207 21.728L1.31307 10.728C1.28214 10.5823 1.28413 10.4315 1.3189 10.2867C1.35368 10.1419 1.42036 10.0067 1.51407 9.89096L1.51307 9.88996ZM3.52507 11.52L5.43807 20.52H18.5611L20.4741 11.52H3.52507ZM4.00007 2.51996C4.00007 2.25474 4.10543 2.00039 4.29297 1.81285C4.4805 1.62532 4.73486 1.51996 5.00007 1.51996H19.0001C19.2653 1.51996 19.5196 1.62532 19.7072 1.81285C19.8947 2.00039 20.0001 2.25474 20.0001 2.51996V6.51996H18.0001V3.51996H6.00007V6.51996H4.00007V2.51996Z"
-                    fill=""
-                  />
-                </g>
-              </svg>
-            </a>
-          </div>
-
-          <!-- 축소시의 검색창 -->
           <div class="clossing-search-bar">
             <button class="reset-style search-toggle-btn">
               <svg
@@ -104,66 +45,64 @@
           </div>
         </div>
       </div>
-      <ul>
-        <h2>검색바</h2>
-        <li>
-          돋보기버튼을 통해 토글상태로 검색창을 확장 및 축소가 가능합니다. 단
-          1078px 이하의 상태에서만 가능합니다.
-        </li>
-        <li>
-          브라우저 화면의 크기에따라 자동으로 창이 축소 되거나, 확장됩니다.
-        </li>
-        <li>
-          돋보기버튼을 눌러 창을 확대시에는 자동으로 input에 포커스상태가
-          됩니다.
-        </li>
-      </ul>
-
-      <!-- hover 재생 버튼 -->
-      <span></span>
+      <div class="description-box">
+        <h2>검색 버튼(확장 및 축소 토글버튼)</h2>
+        <p>검색창의 확장 축소 기능을 담당하는 "검색하기" 버튼입니다.</p>
+      </div>
+      <span class="play-btn"></span>
     </section>
 
+    <section>
+      <div class="component-box">
+        <div class="container">
+          <label for="search-box" class="sr-only">검색창</label>
+          <input
+            type="search"
+            placeholder="어떤 콘텐츠를 감상하고 싶으세요?"
+            id="search-box"
+            class="reset-style color-white"
+          />
+        </div>
+      </div>
+      <div class="description-box">
+        <h2>검색바</h2>
+        <p>검색어를 입력할 수 있는 검색바입니다.</p>
+      </div>
+      <span class="play-btn"></span>
+    </section>
+
+    <section>
+      <div class="component-box">
+        <div class="search-box">
+          <div class="container hidden">
+            <a href="/" class="icon-browse-link">
+              <svg width="24" height="24" viewBox="0 0 24 24">
+                <title>둘러보기</title>
+                <g clip-path="url(#clip0_29_2587)">
+                  <path
+                    d="M15 16.02C15 17.125 13.657 18.02 12 18.02C10.343 18.02 9 17.125 9 16.02C9 14.915 10.343 14.02 12 14.02C13.657 14.02 15 14.915 15 16.02Z"
+                    fill=""
+                  />
+                  <path
+                    d="M1.51307 9.88996C1.60698 9.7742 1.72558 9.6809 1.86019 9.61688C1.9948 9.55287 2.14202 9.51975 2.29107 9.51996H21.7091C21.8581 9.51983 22.0053 9.55302 22.1399 9.6171C22.2745 9.68118 22.393 9.77454 22.4868 9.89033C22.5807 10.0061 22.6475 10.1414 22.6823 10.2864C22.7171 10.4313 22.7191 10.5822 22.6881 10.728L20.3491 21.728C20.3014 21.952 20.1783 22.1529 20.0003 22.2971C19.8223 22.4413 19.6001 22.5199 19.3711 22.52H4.63007C4.401 22.5199 4.17889 22.4413 4.00087 22.2971C3.82285 22.1529 3.69972 21.952 3.65207 21.728L1.31307 10.728C1.28214 10.5823 1.28413 10.4315 1.3189 10.2867C1.35368 10.1419 1.42036 10.0067 1.51407 9.89096L1.51307 9.88996ZM3.52507 11.52L5.43807 20.52H18.5611L20.4741 11.52H3.52507ZM4.00007 2.51996C4.00007 2.25474 4.10543 2.00039 4.29297 1.81285C4.4805 1.62532 4.73486 1.51996 5.00007 1.51996H19.0001C19.2653 1.51996 19.5196 1.62532 19.7072 1.81285C19.8947 2.00039 20.0001 2.25474 20.0001 2.51996V6.51996H18.0001V3.51996H6.00007V6.51996H4.00007V2.51996Z"
+                    fill=""
+                  />
+                </g>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="description-box">
+        <h2>둘러보기 버튼</h2>
+        <p>
+          검색바의 우측에 위치하는 둘러보기 버튼입니다. 클릭시 음악의 카테고리
+          페이지로 이동합니다.
+        </p>
+      </div>
+      <span class="play-btn"></span>
+    </section>
     <hr />
     <a href="/index.html">메인 페이지로 이동</a>
-
-    <script>
-      const extendSearchBar = document.querySelector(".container");
-      const toggleSearchBtn = document.querySelector(".search-toggle-btn");
-      const searchInput = document.getElementById("search-box");
-      const clossingSearchBar = document.querySelector(".clossing-search-bar");
-
-      toggleSearchBtn.addEventListener("click", function () {
-        const viewportWidth = window.visualViewport.width;
-        console.log("click");
-        if (viewportWidth < 1078) {
-          extendSearchBar.classList.toggle("hidden");
-          clossingSearchBar.classList.toggle("absolute");
-          searchInput.focus();
-        } else {
-          searchInput.focus();
-        }
-      });
-
-      window.addEventListener("resize", function () {
-        const viewportWidth = window.innerWidth;
-        console.log(viewportWidth);
-        if (viewportWidth >= 1078) {
-          extendSearchBar.classList.remove("hidden");
-          clossingSearchBar.classList.add("absolute");
-        } else if (viewportWidth < 1078) {
-          extendSearchBar.classList.add("hidden");
-          clossingSearchBar.classList.remove("absolute");
-        }
-      });
-
-      window.addEventListener("DOMContentLoaded", function () {
-        const viewportWidth = window.innerWidth;
-
-        if (viewportWidth >= 1078) {
-          extendSearchBar.classList.remove("hidden");
-          clossingSearchBar.classList.add("absolute");
-        }
-      });
-    </script>
   </body>
 </html>
