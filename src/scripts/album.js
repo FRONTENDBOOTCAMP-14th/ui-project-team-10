@@ -2,13 +2,24 @@ const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
 const clientSecret = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET;
 
 const albumIds = [
-  "5NUuj9AlcNI1khPYJJAVtV,6ZG5lRT77aJ3btmArcykra",
+  "5NUuj9AlcNI1khPYJJAVtV",
+  "6ZG5lRT77aJ3btmArcykra",
   "3j7aiYai9ezbvxVCgrd2mb",
   "2oCAY48bhZvQte0l7apmYC",
   "28GiIRNu9nEugqnUci3aIC",
   "3T4tUhGYeRNVUGevb0wThu",
   "7pH8F7IVHTp2ZYKG0xN1CE",
   "32n91KG3YeLMLJ9e64EfXy",
+  "01dPJcwyht77brL4JQiR8R",
+  "5V8n6fqyAPxvFTibPhQVcp",
+  "4TeDL95L9OTCpYnuQwlrwY",
+  "34Q2W5StgW4WC6HhbsNWnv",
+  "1HMLpmZAnNyl9pxvOnTovV",
+  "0VciVDVU6NoqtQ0WAIlTmD",
+  "7CUqeaQmtkBWd6xQTlZ0Sg",
+  "58nrjxdxUZJOVvLU1uyc6b",
+  "0i4V6w1zpf6CFXSS67cyfQ",
+  "68enXe5XcJdciSDAZr0Alr",
 ].join(",");
 
 async function getToken() {
