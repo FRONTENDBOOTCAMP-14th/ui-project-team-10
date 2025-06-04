@@ -14,20 +14,14 @@
     <link rel="stylesheet" href="/font/pretendardvariable.css" />
     <link rel="stylesheet" href="/src/common/index.css" />
     <link rel="stylesheet" href="/src/style.css" />
-    <link rel="stylesheet" href="/src/styles/login-page.css" />
+    <link rel="stylesheet" href="/src/styles/sign-page.css" />
     <style>
       body {
         width: 100vw;
         height: 100vh;
-        background: linear-gradient(rgba(27, 27, 27, 0.889) 5%, rgb(0, 0, 0));
+        background: #121212;
         display: flex;
         justify-content: center;
-        /* align-items: top; */
-
-        @media (width > 767px) {
-          padding: 32px;
-          box-sizing: border-box;
-        }
       }
     </style>
   </head>
@@ -49,35 +43,23 @@
             ></path>
           </svg>
         </a>
-        <h1>Copytify에 로그인하기</h1>
+        <h1>
+          <p>가입하고</p>
+          <p>원하는 콘텐츠를</p>
+          <p>감상하세요</p>
+        </h1>
 
-        <button type="button" aria-label="google login" class="reset-style">
-          <span name="new-google-icon" class="google icon"></span>
-          <span class="button-text">Google로 계속하기</span>
-        </button>
-
-        <button type="button" aria-label="facebook login" class="reset-style">
-          <span name="new-facebook-icon" class="facebook icon"></span>
-          <span class="button-text">Facebook으로 계속하기</span>
-        </button>
-
-        <button type="button" aria-label="Apple login" class="reset-style">
-          <span class="apple icon"></span>
-          <span class="button-text">Apple로 계속하기</span>
-        </button>
-
-        <hr role="none" />
         <form class="login-form" method="post" href="/">
           <div class="input-box">
-            <label for="login-id">이메일 또는 사용자 이름</label>
+            <label for="login-id">이메일 주소</label>
             <input
               type="email"
               id="login-id"
               class="reset-style"
               required
-              placeholder="이메일 또는 사용자 이름"
+              placeholder="name@domain.com"
             />
-            <p class="error-massage">
+            <div class="error-massage">
               <svg
                 data-encore-id="icon"
                 role="img"
@@ -95,14 +77,52 @@
                   d="M7.25 9V4h1.5v5h-1.5zm0 3.026v-1.5h1.5v1.5h-1.5z"
                 ></path>
               </svg>
-              Copytify 사용자 이름 또는 이메일 주소를 입력하세요.
-            </p>
+              <p>
+                잘못된 이메일 주소입니다. example@email.com 형식으로
+                입력되었는지 확인하세요.
+              </p>
+            </div>
           </div>
-          <button type="submit">계속하기</button>
+          <button type="submit" class="sign-btn">다음</button>
         </form>
+
+        <!-- <hr role="none" /> -->
+        <div class="center-line">
+          <span>또는</span>
+        </div>
+
+        <button
+          type="button"
+          aria-label="google login"
+          class="another reset-style"
+        >
+          <span name="new-google-icon" class="google icon"></span>
+          <span class="button-text">Google로 가입하기</span>
+        </button>
+
+        <button
+          type="button"
+          aria-label="facebook login"
+          class="another reset-style"
+        >
+          <span name="new-facebook-icon" class="facebook icon"></span>
+          <span class="button-text">Facebook으로 가입하기</span>
+        </button>
+
+        <button
+          type="button"
+          aria-label="Apple login"
+          class="another reset-style"
+        >
+          <span class="apple icon"></span>
+          <span class="button-text">Apple로 가입</span>
+        </button>
+
+        <div class="line">
+        </div>
         <div class="sign-box">
-          <div class="account-label">계정이 없나요?</div>
-          <a href="/" class="account-link">Spotfiy에 가입하기</a>
+          <div class="account-label">이미 계정이 있나요?</div>
+          <a href="/" class="account-link">여기에서 로그인하세요.</a>
         </div>
       </div>
     </section>

@@ -1,22 +1,24 @@
 /* 로그인 전체 박스 */
 .login-page {
-  background: var(--spotify-black);
-  width: 100%;
+  /* background: red; */
+  max-width: 388px;
   height: 100%;
-
+  padding: 0 32px;
   /* 기본 상태 */
   .login-box {
+    width: 324px;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    padding: 32px;
+    /* padding: 32px; */
     box-sizing: border-box;
 
     .login-logo {
-      width: 24px;
-      height: 24px;
+      /* background: red; */
+      width: 40px;
+      height: 40px;
       display: block;
-      margin: 24px 0 8px 0;
+      margin-block: 32px 24px;
 
       svg {
         width: 100%;
@@ -26,10 +28,130 @@
 
     /* 제목 */
     h1 {
-      font-size: 33px;
-      height: 46.67px;
-      align-content: center;
-      margin-bottom: 32px;
+      font-size: 50px;
+      margin-bottom: 40px;
+      text-align: center;
+      line-height: 1.4;
+      word-spacing: -3px;
+    }
+
+    .login-form {
+      width: 100%;
+
+      .input-box {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: start;
+        justify-content: center;
+        margin-bottom: 20px;
+
+        label {
+          height: 20px;
+          font-size: 15px;
+          font-weight: 700;
+          align-content: center;
+          margin-bottom: 8px;
+        }
+
+        .error-massage {
+          height: 41.9px;
+          color: #f3727f;
+          font-weight: 400;
+          font-size: 15px;
+          margin-block-start: 8px;
+          display: none;
+          line-height: 1.4;
+
+          svg {
+            vertical-align: top;
+            transform: translateY(3px);
+          }
+
+          p {
+            width: 304px;
+            display: inline-block;
+            letter-spacing: -0.3px;
+            /* text-align: center; */
+            align-content: baseline;
+          }
+        }
+
+        input {
+          border: 1px solid var(--spotify-gray);
+          width: 100%;
+          height: 48px;
+          border-radius: 4px;
+          padding: 12px;
+          color: var(--spotify-white);
+
+          &::placeholder {
+            font-weight: 600;
+          }
+
+          &:hover {
+            border-color: white;
+          }
+
+          &:focus {
+            outline: 3px solid white;
+          }
+
+          &:user-invalid:focus {
+            outline: 3px solid rgb(237, 44, 63);
+            border: none;
+          }
+
+          &:user-invalid {
+            outline: 1px solid rgb(237, 44, 63);
+            border: none;
+          }
+
+          &:user-invalid + .error-massage {
+            display: inline-block;
+          }
+        }
+      }
+
+      .sign-btn {
+        display: block;
+        background: var(--spotify-green);
+        color: black;
+        border: none;
+        text-align: center;
+        font-weight: 800;
+        font-size: 1rem;
+        transition: transform 33ms ease-in-out;
+        margin-bottom: 0px;
+        &:hover {
+          transform: scale(1.04);
+          background-color: #3be477;
+        }
+      }
+    }
+
+    .center-line {
+      width: 100%;
+      position: relative;
+      display: flex;
+      -webkit-box-pack: center;
+      justify-content: center;
+      margin-block: 32px;
+      &::before {
+        content: " ";
+        height: 1px;
+        background-color: var(--essential-subdued, #818181);
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 0px;
+        right: 0px;
+      }
+      span {
+        padding: 0px 12px;
+        position: relative;
+        display: inline-block;
+        background: #121212;
+      }
     }
 
     /* 버튼 */
@@ -89,121 +211,22 @@
       }
     }
 
-    hr {
-      all: unset;
-      width: 100%;
-      display: block;
-      margin: 32px 0;
-      border: none;
-      height: 1px;
-      background-color: rgb(41, 41, 41);
-      box-sizing: border-box;
-    }
-
-    .login-form {
-      width: 100%;
-
-      .input-box {
-        display: flex;
-        flex-flow: column nowrap;
-        align-items: start;
-        justify-content: center;
-        margin-bottom: 24px;
-
-        label {
-          height: 20px;
-          font-size: 0.8125rem;
-          font-weight: 700;
-          align-content: center;
-          margin-bottom: 8px;
-        }
-
-        .error-massage {
-          height: 20px;
-          align-content: center;
-          color: #f3727f;
-          font-weight: 400;
-          font-size: 0.8125rem;
-          margin-block-start: 8px;
-          display: none;
-
-          svg {
-            vertical-align: bottom;
-          }
-        }
-
-        input {
-          border: 1px solid var(--spotify-gray);
-          width: 100%;
-          height: 48px;
-          border-radius: 4px;
-          padding: 12px;
-          color: var(--spotify-white);
-
-          &::placeholder {
-            font-weight: 600;
-          }
-
-          &:hover {
-            border-color: white;
-          }
-
-          &:focus {
-            outline: 3px solid white;
-          }
-
-          &:user-invalid:focus {
-            outline: 3px solid rgb(237, 44, 63);
-            border: none;
-          }
-
-          &:user-invalid {
-            outline: 1px solid rgb(237, 44, 63);
-            border: none;
-          }
-
-          &:user-invalid + .error-massage {
-            display: block;
-          }
-        }
-      }
-
-      button {
-        display: block;
-        background: var(--spotify-green);
-        color: black;
-        border: none;
-        text-align: center;
-        font-weight: 800;
-        font-size: 1rem;
-        margin-block-end: 32px;
-        transition: transform 33ms ease-in-out;
-        &:hover {
-          transform: scale(1.04);
-          background-color: #3be477;
-        }
-      }
-    }
-
     .sign-box {
-      /* width: 100%; */
       display: flex;
-      flex-flow: column nowrap;
+      flex-flow: row nowrap;
       align-items: center;
-
+      margin-top: 3px;
       .account-label {
         color: var(--spotify-light-gray);
         font-size: 17px;
-        margin-top: 10px;
         height: 21.9px;
+        margin-right: 3px;
       }
 
       .account-link {
-        /* width: 100%; */
         font-size: 17px;
         display: block;
-        height: 32.38px;
-        align-content: end;
+        height: 23.8px;
         text-decoration: underline;
 
         &:hover {
@@ -211,10 +234,30 @@
         }
       }
     }
+
+    .line {
+      width: 100%;
+      position: relative;
+      display: flex;
+      justify-content: center;
+
+      margin-block: 28px;
+
+      &::before {
+        content: " ";
+        height: 1px;
+        background-color: #81818142;
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 0px;
+        right: 0px;
+      }
+    }
   }
 
   /* 확장시 코드 */
-  @media (width > 767px) {
+  /* @media (width > 767px) {
     width: 734px;
     height: 668.72px;
     border-radius: 8px;
@@ -269,8 +312,7 @@
           font-size: 1rem;
           align-content: center;
         }
-
       }
     }
-  }
+  } */
 }
