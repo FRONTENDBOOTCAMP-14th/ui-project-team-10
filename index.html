@@ -26,7 +26,7 @@
 
       .index-pages-btn {
         font-weight: 400;
-        font-size: 1rem;
+        font-size: var(--font-size-base);
         letter-spacing: 1px;
         display: inline-flex;
         align-items: center;
@@ -127,8 +127,8 @@
       }
 
       .github img {
-        width: 24px;
-        height: 24px;
+        width: var(--svg-size);
+        height: var(--svg-size);
       }
 
       main {
@@ -153,6 +153,10 @@
         margin: 0 0 var(--spacing-lg);
       }
 
+      .text-block-container ul {
+        grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+      }
+
       footer {
         padding: var(--spacing-lg);
         text-align: center;
@@ -163,66 +167,11 @@
         margin: 0 var(--spacing-xs);
       }
 
-      footer button {
-        border: none;
-        background: none;
-        color: inherit;
-      }
-
-      /* 모달창 */
-      .guide-modal {
-        background: rgba(80, 80, 80, 0.8);
-        color: var(--spotify-white);
-        border-radius: 30px;
-        border: none;
-        box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px,
-          rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.4) 0px 4px 8px,
-          rgba(0, 0, 0, 0.4) 0px 8px 16px, rgba(0, 0, 0, 0.4) 0px 16px 32px,
-          rgba(0, 0, 0, 0.4) 0px 32px 64px;
-        backdrop-filter: blur(5px);
-        line-height: 1.5;
-        text-align: center;
-        padding: 50px;
-
-        h1 {
-          color: var(--spotify-green);
-          margin-bottom: 10px;
-          font-size: 40px;
-        }
-
-        .notice {
-          font-size: large;
-        }
-        .copyright {
-          color: rgb(185, 185, 185);
-          font-size: 15px;
-        }
-
-        button {
-          display: block;
-          margin-top: 30px;
-          width: 300px;
-          height: 50px;
-          background: var(--spotify-green);
-          border-radius: 50px;
-          transition: all 0.1s ease-in-out;
-
-          &:hover {
-            transform: translateY(-2px);
-            box-shadow: rgb(23, 23, 23) 0px 20px 30px -10px;
-          }
-
-          &:focus {
-            outline: 2px solid white;
-          }
-        }
-      }
-
       details {
         border-radius: 6px;
         background-color: var(--spotify-gray);
-        padding: 8px;
-        line-height: 1.6;
+        padding: var(--spacing-xs);
+        line-height: 2;
       }
 
       .details-description {
@@ -230,6 +179,7 @@
         background: var(--spotify-dark-gray);
         border-radius: 4px;
         padding: var(--spacing-sm);
+        gap: var(--spacing-md);
       }
     </style>
   </head>
@@ -374,67 +324,110 @@
           >
         </li>
       </ul>
-      <section class="retrospect-container">
+      <section class="text-block-container">
         <h2>회고록</h2>
         <ul class="retrospect-list">
           <li>
             <details>
               <summary>고우현</summary>
-              <p>회고록 내용</p>
+              <div class="details-description">
+                <p>회고록 내용</p>
+              </div>
             </details>
           </li>
           <li>
             <details>
               <summary>김동규</summary>
-              <p>회고록 내용</p>
+              <div class="details-description">
+                <p>회고록 내용</p>
+              </div>
             </details>
           </li>
           <li>
             <details>
               <summary>석정일</summary>
-              <p>회고록 내용</p>
+              <div class="details-description">
+                <p>회고록 내용</p>
+              </div>
             </details>
           </li>
           <li>
             <details>
               <summary>오경태</summary>
-              <p>회고록 내용</p>
+              <div class="details-description">
+                <h3>Spotify UI 클론 프로젝트 회고</h3>
+                <p>
+                  이번 프로젝트에서는 Spotify의 UI를 클론하며 메인 앨범과
+                  플레이리스트 리스트를 구현하는 역할을 맡았다. 단순히
+                  디자인을>따라 만드는 것이 아니라, 실제 서비스에서 사용되는
+                  기능과구조를 최대한 유사하게 구현하는 것을 목표로 삼았습니다.
+                </p>
+                <h3>내가 맡은 일</h3>
+                <p>
+                  메인 화면의 앨범 리스트 및 플레이리스트 구현했습니다. 데이터를
+                  구조화하고 화면에 동적으로 렌더링되도록 구성했습니다.
+                  Spotify의 UI/UX를 참고해 인터랙션과 디자인 디테일까지
+                  반영했습니다. 플레이어 마크업과 스타일링을 추가했습니다.
+                </p>
+                <h3>배운 점 & 느낀 점</h3>
+                <p>
+                  실제 서비스를 벤치마킹해보며 어떤 구조로 콘텐츠가 배열되고,
+                  사용자 경험이 구성되는지를 더 깊이 이해할 수 있었습니다.
+                  단순한 마크업을 넘어서서, 사용자가 어떤 동선으로 콘텐츠를
+                  소비하는지를 고려한 UI 구성의 중요성을 체감했습니다. 완성된
+                  결과물이 Spotify와 꽤 흡사하게 나와서 개인적으로도
+                  뿌듯했습니다.
+                </p>
+                <h3>아쉬운 점 & 다음 도전</h3>
+                <p>
+                  앨범과 플레이리스트를 받아올 때 다소 비효율적인 부분이
+                  있었지만, 리팩토링을 통해 개선할 수 있었습니다. 팀원들과
+                  선생님이 주는 피드백을 통해 접근성을 개선할 수 있었지만
+                  처음부터 고려했으면 좋았을 것 같습니다. 한국은 미리 듣기
+                  파일을 지원해주지 않아 재생을 만들지 못한 부분이 아쉽고 기회가
+                  된다면 그런 부분까지도 구현해보고 싶습니다.
+                </p>
+              </div>
             </details>
           </li>
         </ul>
       </section>
-      <section class="proceedings-container">
+      <section class="text-block-container">
         <h2>스크럼 회의록</h2>
         <ul class="proceedings-list">
           <li>
             <details>
               <summary>05-26</summary>
-              <h3>오늘 할일</h3>
-              <p>조장 정하기 → 석정일</p>
-              <p>클론 사이트 선정 → 스포티파이</p>
-              <h3>내일 할 예정</h3>
-              <p>스포티파이에서 컴포넌트 추출(오경태)</p>
-              <p>컨벤션 및 깃헙 협업 방식 정하기(레포지토리 생성)</p>
-              <p>팀프로젝트 레포지토리 배포하기 컴포넌트 구조 설계</p>
+              <div class="details-description">
+                <h3>오늘 할일</h3>
+                <p>조장 정하기 → 석정일</p>
+                <p>클론 사이트 선정 → 스포티파이</p>
+                <h3>내일 할 예정</h3>
+                <p>스포티파이에서 컴포넌트 추출(오경태)</p>
+                <p>컨벤션 및 깃헙 협업 방식 정하기(레포지토리 생성)</p>
+                <p>팀프로젝트 레포지토리 배포하기 컴포넌트 구조 설계</p>
+              </div>
             </details>
           </li>
           <li>
             <details>
               <summary>05-27</summary>
-              <h3>스크럼 회의</h3>
-              <h3>오늘 할일</h3>
-              <p>컴포넌트 디자인 시안 만들기</p>
-              <p>브랜치 룰셋 정하기</p>
-              <p>netlify 배포</p>
-              <p>디스코드 웹훅 연결</p>
-              <p>아이콘 추출 협업 관련 논의</p>
-              <p>Label 수정</p>
-              <p>프로젝트 파일 구조 규칙 정하기</p>
-              <p>컴포넌트 역할 분담하기</p>
-              <h3>내일 할 예정</h3>
-              <p>index.html에 전체 틀 구성 CSS Grid 또는</p>
-              <p>Flex로 레이아웃 나누기</p>
-              <p>사이드바 구조(Home, Search, Library)</p>
+              <div class="details-description">
+                <h3>스크럼 회의</h3>
+                <h3>오늘 할일</h3>
+                <p>컴포넌트 디자인 시안 만들기</p>
+                <p>브랜치 룰셋 정하기</p>
+                <p>netlify 배포</p>
+                <p>디스코드 웹훅 연결</p>
+                <p>아이콘 추출 협업 관련 논의</p>
+                <p>Label 수정</p>
+                <p>프로젝트 파일 구조 규칙 정하기</p>
+                <p>컴포넌트 역할 분담하기</p>
+                <h3>내일 할 예정</h3>
+                <p>index.html에 전체 틀 구성 CSS Grid 또는</p>
+                <p>Flex로 레이아웃 나누기</p>
+                <p>사이드바 구조(Home, Search, Library)</p>
+              </div>
             </details>
           </li>
           <li>
@@ -455,13 +448,17 @@
           <li>
             <details>
               <summary>05-29</summary>
-              <p>회의록 내용</p>
+              <div class="details-description">
+                <p>회의록 내용</p>
+              </div>
             </details>
           </li>
           <li>
             <details>
               <summary>05-30</summary>
-              <p>회의록 내용</p>
+              <div class="details-description">
+                <p>회의록 내용</p>
+              </div>
             </details>
           </li>
         </ul>
@@ -475,98 +472,7 @@
         <a href="https://www.notion.so/10-1ff73873401a809890ecdc729743dffa"
           >Notion</a
         >
-        <button
-          id="reset-modal"
-          type="button"
-          class="reset-modal-btn footer-links"
-        >
-          모달 설정 초기화
-        </button>
       </div>
     </footer>
-
-    <!-- 모달 -->
-    <dialog class="guide-modal" aria-label="비상업적 용도 알림">
-      <h1>안내문</h1>
-      <p class="notice">
-        위 사이트는 포트폴리오 시안으로 <br />
-        비상업적 목적으로 제작되었음을 명시합니다.
-      </p>
-      <p class="copyright">&copy; 2025 프사친</p>
-      <div class="modal-buttons">
-        <button id="closed" type="button" class="reset-style">닫기</button>
-        <button id="dont-show-today" type="button" class="reset-style">
-          오늘 하루동안 보지 않기
-        </button>
-      </div>
-    </dialog>
-    <script>
-      const header = document.querySelector("header");
-      const guideModal = document.querySelector(".guide-modal");
-      const closedBtn = document.querySelector("#closed");
-      const dontShowTodayBtn = document.querySelector("#dont-show-today");
-      const resetModalBtn = document.querySelector("#reset-modal");
-
-      function isMaximizedWindow() {
-        return window.innerWidth >= 1650;
-      }
-
-      function updateBackgroundZoom() {
-        if (!isMaximizedWindow()) {
-          header.style.backgroundSize = "cover";
-          return;
-        }
-
-        const scrollY = window.scrollY;
-        const zoom = 100 + scrollY * 0.05;
-        const limitedZoom = Math.min(zoom, 200);
-        header.style.backgroundSize = `${limitedZoom}%`;
-      }
-
-      // 모달 표시 여부 확인
-      function shouldShowModal() {
-        const hideUntil = localStorage.getItem("hideModalUntil");
-        if (!hideUntil) return true;
-
-        const hideDate = new Date(hideUntil);
-        const today = new Date();
-
-        // 날짜만 비교 (시간 제외)
-        hideDate.setHours(0, 0, 0, 0);
-        today.setHours(0, 0, 0, 0);
-
-        return today > hideDate;
-      }
-
-      // 오늘 하루동안 숨기기
-      function hideModalForToday() {
-        const tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        localStorage.setItem("hideModalUntil", tomorrow.toISOString());
-        guideModal.close();
-      }
-
-      // 모달 설정 초기화
-      function resetModalSettings() {
-        localStorage.removeItem("hideModalUntil");
-      }
-
-      window.addEventListener("scroll", updateBackgroundZoom);
-      window.addEventListener("resize", updateBackgroundZoom);
-      window.addEventListener("DOMContentLoaded", updateBackgroundZoom);
-
-      // 모달 표시 여부 확인 후 표시
-      if (shouldShowModal()) {
-        guideModal.showModal();
-      }
-
-      // 이벤트 리스너
-      closedBtn.addEventListener("click", () => {
-        guideModal.close();
-      });
-
-      dontShowTodayBtn.addEventListener("click", hideModalForToday);
-      resetModalBtn.addEventListener("click", resetModalSettings);
-    </script>
   </body>
 </html>

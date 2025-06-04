@@ -52,11 +52,65 @@
 
       footer {
         grid-area: footer;
-        margin: 8px;
+        margin: var(--spacing-xs);
       }
 
       .list-card {
         min-width: 140px;
+      }
+
+      /* 모달창 */
+      .guide-modal {
+        background: rgba(80, 80, 80, 0.8);
+        color: var(--spotify-white);
+        border-radius: 30px;
+        border: none;
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px,
+          rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.4) 0px 4px 8px,
+          rgba(0, 0, 0, 0.4) 0px 8px 16px, rgba(0, 0, 0, 0.4) 0px 16px 32px,
+          rgba(0, 0, 0, 0.4) 0px 32px 64px;
+        backdrop-filter: blur(5px);
+        line-height: 1.5;
+        text-align: center;
+        padding: 50px;
+
+        h1 {
+          color: var(--spotify-green);
+          margin-bottom: 10px;
+          font-size: 40px;
+        }
+
+        .notice {
+          font-size: large;
+        }
+        .copyright {
+          color: rgb(185, 185, 185);
+          font-size: 15px;
+        }
+
+        button {
+          display: block;
+          margin-top: 30px;
+          width: 300px;
+          height: 50px;
+          background: var(--spotify-green);
+          border-radius: 50px;
+          transition: all 0.1s ease-in-out;
+
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: rgb(23, 23, 23) 0px 20px 30px -10px;
+          }
+
+          &:focus {
+            outline: 2px solid white;
+          }
+        }
+      }
+      .sidebar-footer-link button {
+        border: none;
+        background: none;
+        color: var(--spotify-white);
       }
     </style>
   </head>
@@ -298,8 +352,8 @@
       </header>
       <nav class="sidebar" aria-label="사이드바 네비게이션">
         <div class="sidebar-logo">
-          <a href="/src/pages/home.html" aria-label="Spotify 홈으로 이동">
-            <img src="/icons/spotify-logo.svg" alt="" />
+          <a href="/src/pages/home.html" aria-label="Copytify 홈으로 이동">
+            <img src="/icons/copytify-logo.svg" alt="" />
           </a>
         </div>
         <section class="sidebar-main">
@@ -312,19 +366,19 @@
                 aria-current="page"
               >
                 <span class="sidebar-icon" aria-hidden="true"></span>
-                <span class="sidebar-text">홈</span>
+                <p class="sidebar-text">홈</p>
               </a>
             </li>
             <li class="sidebar-item">
               <a href="" class="sidebar-link search">
                 <span class="sidebar-icon" aria-hidden="true"></span>
-                <span class="sidebar-text">검색하기</span>
+                <p class="sidebar-text">검색하기</p>
               </a>
             </li>
             <li class="sidebar-item">
               <a href="/src/pages/library.html" class="sidebar-link library">
                 <span class="sidebar-icon" aria-hidden="true"></span>
-                <span class="sidebar-text">내 라이브러리</span>
+                <p class="sidebar-text">내 라이브러리</p>
               </a>
             </li>
           </ul>
@@ -335,7 +389,7 @@
                 <div class="sidebar-icon rounded-icon-box">
                   <img src="/icons/plus.svg" alt="" />
                 </div>
-                <span class="sidebar-text">플레이리스트 만들기</span>
+                <p class="sidebar-text">플레이리스트 만들기</p>
               </a>
             </li>
             <li class="sidebar-playlist-item">
@@ -343,7 +397,7 @@
                 <div class="sidebar-icon rounded-icon-box">
                   <img src="/icons/heart.svg" alt="" />
                 </div>
-                <span class="sidebar-text">좋아하는 곡</span>
+                <p class="sidebar-text">좋아하는 곡</p>
               </a>
             </li>
           </ul>
@@ -366,13 +420,22 @@
             <li class="sidebar-footer-link">
               <a href="#">광고 정보</a>
             </li>
+            <li class="sidebar-footer-link">
+              <button
+                id="reset-modal"
+                type="button"
+                class="reset-modal-btn footer-links"
+              >
+                모달 설정 초기화
+              </button>
+            </li>
           </ul>
           <button
             type="button"
             class="btn gray-outline-style rounded-btn language-select"
           >
             <img src="/icons/globe.svg" alt="" class="btn-icon" />
-            <span>언어선택</span>
+            <p>언어선택</p>
           </button>
         </section>
       </nav>
@@ -576,5 +639,88 @@
         <a href="/">무료로 가입하기</a>
       </footer>
     </div>
+    <!-- 모달 -->
+    <dialog class="guide-modal" aria-label="비상업적 용도 알림">
+      <h1>안내문</h1>
+      <p class="notice">
+        위 사이트는 포트폴리오 시안으로 <br />
+        비상업적 목적으로 제작되었음을 명시합니다.
+      </p>
+      <p class="copyright">&copy; 2025 프사친</p>
+      <div class="modal-buttons">
+        <button id="closed" type="button" class="reset-style">닫기</button>
+        <button id="dont-show-today" type="button" class="reset-style">
+          오늘 하루동안 보지 않기
+        </button>
+      </div>
+    </dialog>
+    <script>
+      const header = document.querySelector("header");
+      const guideModal = document.querySelector(".guide-modal");
+      const closedBtn = document.querySelector("#closed");
+      const dontShowTodayBtn = document.querySelector("#dont-show-today");
+      const resetModalBtn = document.querySelector("#reset-modal");
+
+      function isMaximizedWindow() {
+        return window.innerWidth >= 1650;
+      }
+
+      function updateBackgroundZoom() {
+        if (!isMaximizedWindow()) {
+          header.style.backgroundSize = "cover";
+          return;
+        }
+
+        const scrollY = window.scrollY;
+        const zoom = 100 + scrollY * 0.05;
+        const limitedZoom = Math.min(zoom, 200);
+        header.style.backgroundSize = `${limitedZoom}%`;
+      }
+
+      // 모달 표시 여부 확인
+      function shouldShowModal() {
+        const hideUntil = localStorage.getItem("hideModalUntil");
+        if (!hideUntil) return true;
+
+        const hideDate = new Date(hideUntil);
+        const today = new Date();
+
+        // 날짜만 비교 (시간 제외)
+        hideDate.setHours(0, 0, 0, 0);
+        today.setHours(0, 0, 0, 0);
+
+        return today > hideDate;
+      }
+
+      // 오늘 하루동안 숨기기
+      function hideModalForToday() {
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        localStorage.setItem("hideModalUntil", tomorrow.toISOString());
+        guideModal.close();
+      }
+
+      // 모달 설정 초기화
+      function resetModalSettings() {
+        localStorage.removeItem("hideModalUntil");
+      }
+
+      window.addEventListener("scroll", updateBackgroundZoom);
+      window.addEventListener("resize", updateBackgroundZoom);
+      window.addEventListener("DOMContentLoaded", updateBackgroundZoom);
+
+      // 모달 표시 여부 확인 후 표시
+      if (shouldShowModal()) {
+        guideModal.showModal();
+      }
+
+      // 이벤트 리스너
+      closedBtn.addEventListener("click", () => {
+        guideModal.close();
+      });
+
+      dontShowTodayBtn.addEventListener("click", hideModalForToday);
+      resetModalBtn.addEventListener("click", resetModalSettings);
+    </script>
   </body>
 </html>
