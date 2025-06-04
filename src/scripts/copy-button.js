@@ -57,19 +57,10 @@ async function copyToClipboard(elementId, buttonId, copyType = "text") {
 
     try {
       await navigator.clipboard.writeText(contentToCopy);
-
-      const originalButtonText = button.textContent;
-      button.textContent = "복사 완료!";
-      setTimeout(() => {
-        button.textContent = originalButtonText;
-      }, 2000);
+      alert("복사 성공!");
     } catch (err) {
       console.error("Failed to copy:", err);
-      const originalButtonText = button.textContent;
-      button.textContent = "복사 실패";
-      setTimeout(() => {
-        button.textContent = originalButtonText;
-      }, 2000);
+      alert("복사 실패!");
     }
   });
 }
