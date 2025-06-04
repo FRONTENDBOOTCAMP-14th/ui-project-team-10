@@ -23,8 +23,8 @@
 
       /* 검색 버튼 아이콘 */
       .icon-search {
-        width: 24px;
-        height: 24px;
+        width: var(--svg-size);
+        height: var(--svg-size);
         vertical-align: middle;
       }
     }
@@ -38,12 +38,12 @@
       outline: none;
       color: rgb(255, 255, 255);
       font-size: 1rem;
-      line-height: 40px;
+      line-height: var(--spacing-lg);
     }
 
     /* 중간바(세로선) */
     .icon-break-line {
-      min-height: 24px;
+      min-height: var(--svg-size);
     }
 
     /* 둘러보기 링크 */

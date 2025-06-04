@@ -53,7 +53,7 @@
         <h2>spotify 로고</h2>
       </div>
       <!-- hover 재생 버튼 -->
-      <span class="play-btn"></span>
+      <button class="copy-btn"></button>
     </section>
 
     <section>
@@ -80,7 +80,7 @@
       <div class="description-box">
         <h2>홈버튼</h2>
       </div>
-      <span class="play-btn"></span>
+      <button class="copy-btn"></button>
     </section>
 
     <section>
@@ -108,7 +108,7 @@
       <div class="description-box">
         <h2>추가 링크 모음</h2>
       </div>
-      <button class="play-btn"></button>
+      <button class="copy-btn"></button>
     </section>
 
     <section>
@@ -144,15 +144,36 @@
       <div class="description-box">
         <h2>헤더 - 로그인</h2>
       </div>
-      <button class="play-btn"></button>
+      <button class="copy-btn"></button>
     </section>
     <section>
       <a
-        class="rounded-btn btn gray-outline-style white-text hover-grow"
+        class="rounded-btn btn bg-green black-text hover-grow"
         href="/index.html"
       >
         메인 페이지로 이동
       </a>
     </section>
+    <script type="module">
+      import { copyToClipboard } from "../scripts/copy-button.js";
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // 각 컴포넌트 박스와 복사 버튼에 ID 부여
+        const componentBoxes = document.querySelectorAll(".component-box");
+        const copyButtons = document.querySelectorAll(".copy-btn");
+
+        // ID 부여 및 복사 기능 설정
+        for (let i = 0; i < componentBoxes.length; i++) {
+          const boxId = `component-to-copy-${i + 1}`;
+          const btnId = `copy-trigger-${i + 1}`;
+
+          componentBoxes[i].id = boxId;
+          copyButtons[i].id = btnId;
+
+          // 복사 기능 설정
+          copyToClipboard(boxId, btnId, "html");
+        }
+      });
+    </script>
   </body>
 </html>

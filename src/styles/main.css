@@ -134,7 +134,7 @@
   pointer-events: none;
   transition: opacity 0.3s ease;
   position: absolute;
-  color: #fff;
+  color: var(--spotify-white);
   width: 32px;
   height: 32px;
   background-color: var(--button-bg-color);
@@ -176,7 +176,7 @@
   margin: 0;
   padding: 0;
   font-size: 1rem;
-  color: #fff;
+  color: var(--spotify-white);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -219,25 +219,18 @@
 
 :root {
   /* 공통 색상 */
-  --bg-dark-gray: #181818;
-  --white-text: #fff;
-  --gray-text: #b3b3b3;
   --footer-divider: #232323;
   --bg-green: #6df843;
   /* 푸터 전용 색상 */
   --footer-social-bg: #222;
   --footer-social-hover: #333;
   --footer-radius: 50%;
-  --footer-spacing-lg: 40px;
-  --footer-spacing-md: 24px;
-  --footer-spacing-sm: 16px;
-  --footer-spacing-xs: 8px;
 }
 
 .footer-container {
   background: var(--spotify-black);
-  color: var(--white-text);
-  padding: var(--footer-spacing-lg) 0 0 0;
+  color: var(----spotify-white);
+  padding: var(--spacing-lg) 0 0 0;
   border-top: 1px solid var(--footer-divider);
   font-size: 15px;
   width: 100%;
@@ -247,10 +240,10 @@
 .footer-columns {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--footer-spacing-lg);
+  gap: var(--spacing-lg);
   justify-content: space-evenly;
   align-items: flex-start;
-  padding-bottom: var(--footer-spacing-lg);
+  padding-bottom: var(--spacing-lg);
 }
 
 .footer-column {
@@ -260,8 +253,8 @@
 
 .footer-column h4 {
   font-size: 15px;
-  color: var(--white-text);
-  margin-bottom: var(--footer-spacing-sm);
+  color: var(----spotify-white);
+  margin-bottom: var(--spacing-sm);
   letter-spacing: 0.5px;
   font-weight: 600;
 }
@@ -273,14 +266,14 @@
 }
 
 .footer-column li {
-  margin-bottom: var(--footer-spacing-xs);
+  margin-bottom: var(--spacing-xs);
 }
 
 .footer-column a {
-  color: var(--gray-text);
+  color: var(--spotify-light-gray);
   text-decoration: none;
   transition: color;
-  font-size: 14px;
+  font-size: var(--spotify-base-font-size);
 }
 
 .footer-column a:hover {
@@ -303,7 +296,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--gray-text);
+  color: var(--spotify-light-gray);
   transition: background 0.2s;
 }
 
@@ -315,14 +308,14 @@
 .footer-social svg {
   width: auto;
   height: auto;
-  fill: var(--gray-text);
+  fill: var(--spotify-light-gray);
 }
 
 .footer-bottom {
   border-top: 1px solid var(--footer-divider);
   padding: 20px 0;
   text-align: left;
-  color: var(--gray-text);
+  color: var(--spotify-light-gray);
   font-size: 13px;
 }
 
@@ -337,33 +330,33 @@
 }
 
 .code-btn {
-  padding: 8px 20px;
+  padding--spacing-xs 20px;
   background: #232323;
-  color: #fff;
+  color: var(--spotify-white);
   border: none;
   border-radius: 8px;
   font-size: 15px;
-  margin-right: 8px;
+  margin-right--spacing-xs;
   cursor: pointer;
   transition: background 0.1s;
 }
 
 .code-btn:hover {
-  background: var(--gray-text);
-  color: var(--white-text);
+  background: var(--spotify-light-gray);
+  color: var(----spotify-white);
 }
 
 .code-box {
   width: 100%;
   max-width: 1200px;
   background: #111;
-  color: var(--white-text);
+  color: var(----spotify-white);
   border-radius: 8px;
   padding: 20px;
   font-size: 13px;
   font-family: "Fira Mono", "Consolas", monospace;
   overflow-x: auto;
-  margin-top: 8px;
+  margin-top--spacing-xs;
   border: 1px solid #292929;
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
   white-space: pre-wrap;
@@ -375,14 +368,14 @@
   .footer-columns {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--footer-spacing-md);
+    gap: var(--spacing-md);
   }
   .footer-column {
     min-width: 0;
   }
   .footer-social {
     grid-column: 1 / -1;
-    margin-top: var(--footer-spacing-sm);
+    margin-top: var(--spacing-sm);
     justify-content: flex-start;
   }
 }
@@ -390,7 +383,7 @@
   .footer-columns {
     display: flex;
     flex-direction: column;
-    gap: var(--footer-spacing-md);
+    gap: var(--spacing-md);
     align-items: stretch;
   }
   .footer-social {

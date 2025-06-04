@@ -16,7 +16,7 @@
   gap: 0.625rem;
 }
 
-.album-img {
+.player-album-img {
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 0.5rem;
@@ -122,7 +122,6 @@
 }
 
 input[type="range"] {
-  -webkit-appearance: none;
   background: transparent;
   background-image: linear-gradient(
     to right,
