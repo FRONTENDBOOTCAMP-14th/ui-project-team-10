@@ -1,6 +1,6 @@
 :root {
   /* 공통 색상 */
-  --bg-dark-gray: #181818;
+
   --gray-text: #b3b3b3;
   --footer-divider: #232323;
   --bg-green: #6df843;
@@ -49,10 +49,10 @@
 }
 
 .footer-column a {
-  color: var(--gray-text);
+  color: var(--spotify-light-gray);
   text-decoration: none;
   transition: color;
-  font-size: 14px;
+  font-size: var(--spotify-base-font-size);
 }
 
 .footer-column a:hover {
@@ -75,7 +75,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--gray-text);
+  color: var(--spotify-light-gray);
   transition: background 0.2s;
 }
 
@@ -87,20 +87,20 @@
 .footer-social svg {
   width: auto;
   height: auto;
-  fill: var(--gray-text);
+  fill: var(--spotify-light-gray);
 }
 
 .footer-bottom {
   border-top: 1px solid var(--footer-divider);
   padding: 20px 0;
   text-align: left;
-  color: var(--gray-text);
+  color: var(--spotify-light-gray);
   font-size: 13px;
 }
 
 /* 클릭시 코드 볼수 있게 처리한 부분 */
 .code-viewer {
-  margin: 40px auto 0 auto;
+  margin: var(--spacing-lg) auto 0 auto;
   max-width: 1200px;
   display: flex;
   flex-direction: column;
@@ -109,19 +109,19 @@
 }
 
 .code-btn {
-  padding: 8px 20px;
+  padding: var(--spacing-xs) 20px;
   background: #232323;
-  color: #fff;
+  color: var(--spotify-white);
   border: none;
   border-radius: 8px;
   font-size: 15px;
-  margin-right: 8px;
+  margin-right: var(--spacing-xs);
   cursor: pointer;
   transition: background 0.1s;
 }
 
 .code-btn:hover {
-  background: var(--gray-text);
+  background: var(--spotify-light-gray);
   color: var(--spotify-white);
 }
 
@@ -135,7 +135,7 @@
   font-size: 13px;
   font-family: "Fira Mono", "Consolas", monospace;
   overflow-x: auto;
-  margin-top: 8px;
+  margin-top: var(--spacing-xs);
   border: 1px solid var(--spotify-dark-gray);
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
   white-space: pre-wrap;

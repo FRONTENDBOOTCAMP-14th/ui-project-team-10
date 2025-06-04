@@ -23,8 +23,8 @@
 
       /* 검색 버튼 아이콘 */
       .icon-search {
-        width: 24px;
-        height: 24px;
+        width: var(--svg-size);
+        height: var(--svg-size);
         vertical-align: middle;
       }
     }
@@ -38,12 +38,12 @@
       outline: none;
       color: rgb(255, 255, 255);
       font-size: 1rem;
-      line-height: 40px;
+      line-height: var(--spacing-lg);
     }
 
     /* 중간바(세로선) */
     .icon-break-line {
-      min-height: 24px;
+      min-height: var(--svg-size);
     }
 
     /* 둘러보기 링크 */
@@ -144,7 +144,7 @@
   align-content: center;
   border-radius: var(--button-size);
   a {
-    height: 24px;
+    height: var(--svg-size);
     display: inline-block;
     svg {
       vertical-align: text-bottom;
@@ -169,10 +169,10 @@
   font-size: 0;
 
   a {
-    margin-right: 8px;
+    margin-right: var(--spacing-xs);
     text-decoration: none;
     color: currentColor;
-    font-size: 16px;
+    font-size: var(--font-size-base);
     font-weight: bold;
 
     &:hover {
@@ -184,7 +184,7 @@
 /* 로그인, 회원가입, 앱설치 메뉴 */
 .link-login-group {
   height: 48px;
-  font-size: 14px;
+  font-size: var(--spotify-base-font-size);
   display: flex;
   row-gap: 30px;
   align-items: center;
@@ -201,7 +201,7 @@
     }
 
     &:nth-child(1) {
-      margin-inline-end: 8px;
+      margin-inline-end: var(--spacing-xs);
       text-align: center;
       position: relative;
       padding: 4px 16px 4px 32px;
