@@ -90,6 +90,7 @@ async function getArtists(token) {
 
 function renderArtists(artists) {
   const artistList = document.querySelector(".artist-list");
+  const fragment = document.createDocumentFragment();
   artistList.innerHTML = "";
 
   artists.forEach((artist) => {
@@ -101,18 +102,20 @@ function renderArtists(artists) {
       <a href="${artist.external_urls.spotify}" target="_blank">
         <article>
           <div class="artist-cover">
-            <img src="${artist.images[0]?.url || ""}" alt="${
+            <img loading="lazy" src="${artist.images[0]?.url || ""}" alt="${
       artist.name
     }" class="artist-profile" />
-            <img src="/icons/play.png" class="play-button"/>
+            <img src="/icons/play.png" class="play-button" alt="play"/>
           </div>
           <h3 class="card-title">${artist.name}</h3>
           <p class="card-info">Artist</p>
         </article>
       </a>
     `;
-    artistList.appendChild(artistCard);
+    fragment.appendChild(artistCard);
   });
+
+  artistList.appendChild(fragment);
 }
 
 // ✅ 앨범 API
@@ -136,6 +139,7 @@ async function getAlbums(token) {
 
 function renderAlbums(albums) {
   const albumList = document.querySelector(".album-list");
+  const fragment = document.createDocumentFragment();
   albumList.innerHTML = "";
 
   albums.forEach((album) => {
@@ -145,23 +149,27 @@ function renderAlbums(albums) {
       "aria-label",
       `${album.artists.map((a) => a.name).join(", ")} , ${album.name}`
     );
-
+    console.log(album);
     albumCard.innerHTML = `
       <a href="${album.external_urls.spotify}" target="_blank">
         <article>
           <div class="album-cover">
-            <img src="${album.images[0]?.url || "default.jpg"}" alt="${
-      album.name
-    }" class="album-img" />
-            <img src="/icons/play.png" class="play-button"/>
+            <img loading="lazy" src="${
+              album.images[0]?.url || "default.jpg"
+            }" alt="${album.name}" class="album-img" />
+            <img src="/icons/play.png" class="play-button" alt="play"/>
           </div>
           <h3 class="card-title">${album.name}</h3>
-          <p class="card-info"></p>
+          <p class="card-info">${album.artists
+            .map((a) => a.name)
+            .join(", ")}</p>
         </article>
       </a>
     `;
-    albumList.appendChild(albumCard);
+    fragment.appendChild(albumCard);
   });
+
+  albumList.appendChild(fragment);
 }
 
 async function getPlaylistById(id, token) {
@@ -181,20 +189,15 @@ async function getPlaylistById(id, token) {
 }
 
 async function getPlaylists(token) {
-  const playlists = [];
+  const playlistPromises = playListIds.map((id) => getPlaylistById(id, token));
+  const results = await Promise.all(playlistPromises);
 
-  for (const id of playListIds) {
-    const playlist = await getPlaylistById(id, token);
-    if (playlist) {
-      playlists.push(playlist);
-    }
-  }
-
-  return playlists;
+  return results.filter(Boolean);
 }
 
 function renderPlaylists(playlists) {
   const playlistList = document.querySelector(".playlist-list");
+  const fragment = document.createDocumentFragment();
   playlistList.innerHTML = "";
 
   playlists.forEach((playlist) => {
@@ -206,18 +209,19 @@ function renderPlaylists(playlists) {
       <a href="${playlist.external_urls.spotify}" target="_blank">
         <article>
           <div class="album-cover">
-            <img src="${playlist.images[0]?.url || "default.jpg"}" alt="${
-      playlist.name
-    }" class="album-img" />
-            <img src="/icons/play.png" class="play-button"/>
+            <img loading="lazy" src="${
+              playlist.images[0]?.url || "default.jpg"
+            }" alt="${playlist.name}" class="album-img" />
+            <img src="/icons/play.png" class="play-button" alt="play"/>
           </div>
           <h3 class="card-title">${playlist.name}</h3>
           <p class="card-info">By ${playlist.owner.display_name}</p>
         </article>
       </a>
     `;
-    playlistList.appendChild(playlistCard);
+    fragment.appendChild(playlistCard);
   });
+  playlistList.appendChild(fragment);
 }
 
 // ✅ 공통 초기화 함수
@@ -225,15 +229,14 @@ async function init() {
   try {
     const token = await getToken();
 
-    // Fetch and render artists
-    const artists = await getArtists(token);
+    const [artists, albums, playlists] = await Promise.all([
+      getArtists(token),
+      getAlbums(token),
+      getPlaylists(token),
+    ]);
+
     renderArtists(artists);
-
-    // Fetch and render albums
-    const albums = await getAlbums(token);
     renderAlbums(albums);
-
-    const playlists = await getPlaylists(token);
     renderPlaylists(playlists);
   } catch (e) {
     console.error("데이터를 불러오는 데 실패했습니다.", e);
