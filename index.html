@@ -165,19 +165,21 @@
 
       /* 모달창 */
       .guide-modal {
-        background: rgba(80, 82, 82, 0.814);
+        background: rgba(80, 80, 80, 0.8);
         color: var(--spotify-white);
         border-radius: 30px;
         border: none;
-        box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px,
-          rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px,
-          rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px,
-          rgba(0, 0, 0, 0.07) 0px 32px 64px;
-        backdrop-filter: blur(3px);
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px,
+          rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.4) 0px 4px 8px,
+          rgba(0, 0, 0, 0.4) 0px 8px 16px, rgba(0, 0, 0, 0.4) 0px 16px 32px,
+          rgba(0, 0, 0, 0.4) 0px 32px 64px;
+        backdrop-filter: blur(5px);
+        line-height: 1.5;
         text-align: center;
         padding: 50px;
 
         h1 {
+          color: var(--spotify-green);
           margin-bottom: 10px;
           font-size: 40px;
         }
@@ -356,7 +358,7 @@
         <ul class="retrospect-list">
           <li>
             <details>
-              <summary>석정일</summary>
+              <summary>고우현</summary>
               <p>회고록 내용</p>
             </details>
           </li>
@@ -368,13 +370,13 @@
           </li>
           <li>
             <details>
-              <summary>오경태</summary>
+              <summary>석정일</summary>
               <p>회고록 내용</p>
             </details>
           </li>
           <li>
             <details>
-              <summary>고우현</summary>
+              <summary>오경태</summary>
               <p>회고록 내용</p>
             </details>
           </li>
@@ -407,6 +409,12 @@
               <p>회의록 내용</p>
             </details>
           </li>
+          <li>
+            <details>
+              <summary>05-30</summary>
+              <p>회의록 내용</p>
+            </details>
+          </li>
         </ul>
       </section>
     </main>
@@ -425,7 +433,7 @@
     <dialog class="guide-modal">
       <h1>안내문</h1>
       <p class="notice">
-        위 사이트는 가시안으로, <br />
+        위 사이트는 포트폴리오 시안으로 <br />
         비상업적 목적으로 제작되었음을 명시합니다.
       </p>
       <p class="copyright">&copy; 2025 프사친</p>
