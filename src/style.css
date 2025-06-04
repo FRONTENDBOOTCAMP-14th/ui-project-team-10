@@ -5,6 +5,7 @@
 @import "/src/styles/main.css";
 @import "/src/styles/preview.css";
 @import "/src/styles/footer.css";
+@import "/src/styles/player.css";
 
 .full-width {
   width: 100%;

@@ -59,7 +59,7 @@ function renderArtists(artists) {
             <img src="${artist.images[0]?.url || ""}" alt="${
       artist.name
     }" class="artist-profile" />
-            <img src="/icons/play.png" class="play-button"/>
+            <img src="/icons/play.png" class="play-button" alt="play"/>
           </div>
           <h3 class="card-title">${artist.name}</h3>
           <p class="card-info">Artist</p>
