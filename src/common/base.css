@@ -6,6 +6,6 @@ a {
 
 body {
   font-family: "Pretendard Variable", sans-serif;
-  background-color: var(--spotify-dark-gray);
+  background-color: black;
   color: var(--spotify-white);
 }

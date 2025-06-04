@@ -1,10 +1,3 @@
-body {
-  background: var(--spotify-black);
-  color: var(--spotify-white);
-  width: 100vw;
-  height: 100vh;
-}
-
 .preview-container {
   background-image: linear-gradient(90deg, #af2896, #509bf5);
   min-width: 800px;
@@ -12,22 +5,16 @@ body {
   padding: 11px 24px 7px 15px;
   cursor: pointer;
 
-  /* 포지션 하단 고정 */
-  position: fixed;
-  left: 8px;
-  right: 8px;
-  bottom: 8px;
-
   /* flex 설정 */
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
-  column-gap: 24px;
+  column-gap: var(--spacing-md);
   div {
     word-spacing: -1px;
     h1 {
-      font-size: 14px;
+      font-size: var(--spotify-base-font-size);
       font-weight: 700;
       height: 21px;
       align-content: center;
@@ -38,7 +25,7 @@ body {
     }
     p {
       min-height: 23.81px;
-      font-size: 16px;
+      font-size: var();
       font-weight: 400;
       line-height: 1.5;
       align-content: end;
@@ -58,7 +45,7 @@ body {
     align-content: center;
     border-radius: var(--button-size);
 
-    font-size: 1rem;
+    font-size: var(--font-size-base);
     font-weight: 800;
     word-spacing: -1px;
     flex-shrink: 0;

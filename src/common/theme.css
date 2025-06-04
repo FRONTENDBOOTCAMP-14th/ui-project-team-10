@@ -1,5 +1,6 @@
 :root {
   --spotify-black: #121212;
+  --spotify-black-gray: #181818;
   --spotify-gray: #535353;
   --spotify-dark-gray: #282828;
   --spotify-light-gray: #b3b3b3;
@@ -17,6 +18,7 @@
   --font-color: #b3b3b3;
   --button-size: 48px;
   --svg-size: 24px;
+  --button-border: #7c7c7c;
   --button-border-radius: 500px;
   --button-transition: all 0.2s ease-in-out;
   --button-shadow: 0 0.3em 0.3em -0.1em var(--spotify-black);
@@ -33,13 +35,13 @@
   --spacing-sm: 16px;
   --spacing-xs: 8px;
 
-  --sidebar-max-width: 26.25rem;
-  --sidebar-min-width: 22.5rem;
+  --sidebar-max-width: 420px;
+  --sidebar-min-width: 360px;
 
   --font-size-lg: 3.5rem;
   --font-size-base: 1rem;
   --font-size-small: 0.8rem;
-  --font-size-xs: 13px;
+  --font-size-xs: 0.8125rem;
   --font-weight-normal: 400;
   --font-weight-bold: 600;
   --font-weight-bolder: 700;

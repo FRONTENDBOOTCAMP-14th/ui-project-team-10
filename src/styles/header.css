@@ -21,8 +21,8 @@
 
       /* 검색 버튼 아이콘 */
       .icon-search {
-        width: 24px;
-        height: 24px;
+        width: var(--svg-size);
+        height: var(--svg-size);
         vertical-align: middle;
       }
     }
@@ -34,7 +34,7 @@
       line-height: 2;
       color: rgb(255, 255, 255);
       font-size: 1rem;
-      line-height: 40px;
+      line-height: var(--spacing-lg);
       flex-shrink: 1;
       flex-grow: 1;
 
@@ -52,7 +52,7 @@
 
     /* 중간바(세로선) */
     .icon-break-line {
-      min-height: 24px;
+      min-height: var(--svg-size);
     }
 
     /* 둘러보기 링크 */
@@ -136,7 +136,7 @@
 }
 
 /* spotify 로고 */
-.header .logo {
+.header-logo-box .logo {
   display: inline-block;
   padding: 20px;
   svg {
@@ -154,7 +154,7 @@
   align-content: center;
   border-radius: var(--button-size);
   a {
-    height: 24px;
+    height: var(--svg-size);
     display: inline-block;
     svg {
       vertical-align: text-bottom;
@@ -177,20 +177,20 @@
   align-items: center;
   font-size: 0;
   flex-shrink: 0;
-  column-gap: 8px;
+  column-gap: var(--spacing-xs);
 
   /* 앵커태그 전체 선택자 */
   a {
     text-decoration: none;
     color: currentColor;
-    font-size: 16px;
+    font-size: var(--font-size-base);
     font-weight: bold;
     line-height: 1;
 
     display: flex;
     flex-flow: row nowrap;
     transition: all 0.05s ease-in-out;
-    
+
     /* 프리미엄 링크 */
     &.premium-link {
       font-size: 15px;
@@ -206,17 +206,18 @@
   }
 
   .icon-break-line {
-    margin: 16px 24px 16px 16px;
+    margin: var(--spacing-sm) var(--spacing-md) var(--spacing-sm)
+      var(--spacing-sm);
   }
 }
 
 /* 로그인, 회원가입, 앱설치 메뉴 */
 .link-login-group {
   height: 48px;
-  font-size: 14px;
+  font-size: var(--spotify-base-font-size);
   display: flex;
   flex-flow: row nowrap;
-  column-gap: 8px;
+  column-gap: var(--spacing-xs);
   align-items: center;
 
   a {
@@ -241,7 +242,7 @@
       padding: 4px 16px 4px 32px;
       text-align: center;
       position: relative;
-      font-size: 14px;
+      font-size: var(--spotify-base-font-size);
       flex-shrink: 0;
       word-spacing: -1px;
       transform: translateX(1.5px);
@@ -250,7 +251,7 @@
         width: 16px;
         height: 16px;
         left: 10px;
-        top: 8px;
+        top: var(--spacing-xs);
         position: absolute;
         vertical-align: sub;
         scale: 0.95;
@@ -282,7 +283,7 @@
       text-align: center;
       align-content: center;
       border-radius: var(--button-size);
-      font-size: 16px;
+      font-size: var(--font-size-base);
     }
   }
 
@@ -296,19 +297,16 @@
 
 /* 해더 전체 마크업 */
 .header-box {
-  background: black;
+  background: transparent;
   width: 100%;
   min-width: 800px;
   height: 64px;
-  padding: 8px;
+  padding: var(--spacing-xs);
   margin: 0;
 
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
   z-index: 999;
 
   .wide-screen-box {
@@ -317,14 +315,14 @@
 
   li {
     list-style-type: none;
-    row-gap: 8px;
+    row-gap: var(--spacing-xs);
 
     &:nth-child(2) {
-      margin-left: 8px;
+      margin-left: var(--spacing-xs);
     }
     &:nth-child(3) {
       flex-grow: 1;
-      padding-inline: 8px;
+      padding-inline: var(--spacing-xs);
     }
     &:nth-child(4) {
       justify-content: end;
@@ -339,7 +337,7 @@
   @media (width<850px) {
     li {
       &:nth-child(2) {
-        margin-left: 8px;
+        margin-left: var(--spacing-xs);
       }
 
       /* 850px 이하 햄버거바 보이기 */
@@ -350,7 +348,7 @@
         background-size: 16px;
         background-repeat: no-repeat;
         background-position: center;
-        margin-inline-start: 8px;
+        margin-inline-start: var(--spacing-xs);
       }
     }
 

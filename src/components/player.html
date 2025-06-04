@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/icons/spotify-logo-symbol-green.svg" />
+    <link
+      rel="preload"
+      as="font"
+      href="/font/woff2/PretendardVariable.woff2"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/font/pretendardvariable.css" />
+    <link rel="stylesheet" href="/src/common/index.css" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="stylesheet" href="/src/styles/common/components-common.css" />
+    <title>player</title>
+    <script>
+      function updateRangeGradient(input) {
+        const min = parseFloat(input.min) || 0;
+        const max = parseFloat(input.max) || 100;
+        const val = parseFloat(input.value);
+        const percent = ((val - min) / (max - min)) * 100;
+        input.style.setProperty("--progress", `${percent}%`);
+      }
+
+      function formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const ranges = document.querySelectorAll('input[type="range"]');
+        ranges.forEach((range) => {
+          updateRangeGradient(range);
+          range.addEventListener("input", () => {
+            updateRangeGradient(range);
+
+            if (range.classList.contains("progress-bar")) {
+              const totalTimeText =
+                document.querySelector(".total-time").textContent;
+              const [totalMins, totalSecs] = totalTimeText
+                .split(":")
+                .map(Number);
+              const totalSeconds = totalMins * 60 + totalSecs;
+
+              const currentSeconds = (range.value / 100) * totalSeconds;
+              const formattedTime = formatTime(currentSeconds);
+
+              document.querySelector(".current-time").textContent =
+                formattedTime;
+            }
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="spotify-player">
+      <div class="track-info">
+        <img
+          src="/image/player-album-cover.jpg"
+          alt="album-cover"
+          class="player-album-img"
+        />
+        <div class="track-text">
+          <p class="track-title">놀이터</p>
+          <p class="artist-name">HANRORO</p>
+        </div>
+        <div class="player-user">
+          <button class="user-btn add-btn">
+            <img src="/icons/add.svg" alt="add" />
+          </button>
+          <button class="user-btn view-btn">
+            <img src="/icons/view.svg" alt="view" />
+          </button>
+        </div>
+      </div>
+
+      <div class="player-controls">
+        <div class="control-buttons">
+          <button class="control-btn before-15-seconds-btn">
+            <img src="/icons/before-15.svg" alt="before-15-seconds" />
+          </button>
+          <button class="control-btn prev-btn">
+            <img src="/icons/prev.svg" alt="prev" />
+          </button>
+          <button class="control-btn play-btn">
+            <img src="/icons/play.svg" alt="play" />
+          </button>
+          <button class="control-btn next-btn">
+            <img src="/icons/next.svg" alt="next" />
+          </button>
+          <button class="control-btn after-15-seconds-btn">
+            <img src="/icons/after-15.svg" alt="after-15-seconds" />
+          </button>
+        </div>
+        <div class="progress-container">
+          <span class="current-time">1:47</span>
+          <div class="player-progress">
+            <input
+              type="range"
+              class="progress-bar"
+              min="0"
+              max="100"
+              value="25"
+            />
+          </div>
+          <span class="total-time">4:04</span>
+        </div>
+      </div>
+
+      <div class="player-options">
+        <button class="option-btn queue-btn">
+          <img src="/icons/queue.svg" alt="queue" />
+        </button>
+        <button class="option-btn device-btn">
+          <img src="/icons/device.svg" alt="device" />
+        </button>
+        <button class="option-btn volume-icon">
+          <img src="/icons/volume.svg" alt="volume" />
+        </button>
+        <input type="range" class="volume-bar" value="80" />
+        <button class="option-btn fullscreen-btn">
+          <img src="/icons/fullscreen.svg" alt="fullscreen" />
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

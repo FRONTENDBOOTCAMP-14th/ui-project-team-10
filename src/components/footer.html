@@ -4,16 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>footer</title>
+    <link rel="icon" href="/icons/spotify-logo-symbol-green.svg" />
     <link
       rel="preload"
       as="font"
-      href="../../public/font/woff2/PretendardVariable.woff2"
+      href="/font/woff2/PretendardVariable.woff2"
+      crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="/font/pretendardvariable.css" />
     <!-- css 파일 연동필요시 연동 할 것 -->
-    <link rel="stylesheet" href="../styles/footer.css" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="stylesheet" href="/src/common/index.css" />
     <style>
-      body {
-        font-family: "SUIT Variable", sans-serif;
+      footer {
+        background: var(--spotify-black-gray);
+        color: var(--spotify-white);
+        padding: var(--spacing-lg) 0 0 0;
+        border-top: 1px solid var(--footer-divider);
+        font-size: 15px;
       }
     </style>
   </head>
@@ -22,39 +30,35 @@
       <div class="footer-container">
         <div class="footer-columns">
           <div class="footer-column">
-            <h4>Company</h4>
+            <h4>회사</h4>
             <ul>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Jobs</a></li>
+              <li><a href="#">상세정보</a></li>
+              <li><a href="#">채용정보</a></li>
               <li><a href="#">For the Record</a></li>
             </ul>
           </div>
           <div class="footer-column">
-            <h4>Communities</h4>
+            <h4>커뮤니티</h4>
             <ul>
-              <li><a href="#">For Artists</a></li>
-              <li><a href="#">Developers</a></li>
-              <li><a href="#">Advertising</a></li>
-              <li><a href="#">Investors</a></li>
-              <li><a href="#">Vendors</a></li>
+              <li><a href="#">아티스트</a></li>
+              <li><a href="#">개발자</a></li>
+              <li><a href="#">광고</a></li>
+              <li><a href="#">투자자</a></li>
+              <li><a href="#">공급업체</a></li>
             </ul>
           </div>
           <div class="footer-column">
-            <h4>Useful links</h4>
+            <h4>유용한 링크</h4>
             <ul>
-              <li><a href="#">Support</a></li>
-              <li><a href="#">Free Mobile App</a></li>
+              <li><a href="#">지원</a></li>
+              <li><a href="#">무료 모바일 앱</a></li>
             </ul>
           </div>
           <div class="footer-column">
-            <h4>Spotify Plans</h4>
+            <h4>Copytify 요금제</h4>
             <ul>
-              <li><a href="#">Premium Individual</a></li>
-              <li><a href="#">Premium Duo</a></li>
-              <li><a href="#">Premium Family</a></li>
-              <li><a href="#">Premium Student</a></li>
-              <li><a href="#">Spotify Free</a></li>
-              <li><a href="#">Audiobooks Access</a></li>
+              <li><a href="#">Premium 개인</a></li>
+              <li><a href="#">Premium 듀오</a></li>
             </ul>
           </div>
           <div class="footer-social">
@@ -132,7 +136,7 @@
           </div>
         </div>
         <div class="footer-bottom">
-          <small>&copy;2025 Spotify AB</small>
+          <small>&copy;2025 Copytify AB</small>
         </div>
       </div>
     </footer>
@@ -177,13 +181,13 @@
               </ul>
             </div>
             <div class="footer-column">
-              <h4>Spotify Plans</h4>
+              <h4>Copytify Plans</h4>
               <ul>
                 <li><a href="#">Premium Individual</a></li>
                 <li><a href="#">Premium Duo</a></li>
                 <li><a href="#">Premium Family</a></li>
                 <li><a href="#">Premium Student</a></li>
-                <li><a href="#">Spotify Free</a></li>
+                <li><a href="#">Copytify Free</a></li>
                 <li><a href="#">Audiobooks Access</a></li>
               </ul>
             </div>
@@ -210,7 +214,7 @@
             </div>
           </div>
           <div class="footer-bottom">
-            <small>&copy;2025 Spotify AB</small>
+            <small>&copy;2025 Copytify AB</small>
           </div>
         </div>
       </footer>
@@ -219,9 +223,6 @@
       // CSS 코드 (footer.css의 주요 내용)
       const cssCode = `
       :root {
-        --bg-dark-gray: #181818;
-        --white-text: #fff;
-        --gray-text: #b3b3b3;
         --footer-divider: #232323;
         --bg-green: #6df843;
         --footer-social-bg: #222;
@@ -235,7 +236,7 @@
       
       footer {
         background: var(--bg-dark-gray);
-        color: var(--white-text);
+        color: var(----spotify-white);
         padding: var(--footer-spacing-lg) 0 0 0;
         border-top: 1px solid var(--footer-divider);
         font-size: 15px;
@@ -263,7 +264,7 @@
       
       .footer-column h4 {
         font-size: 15px;
-        color: var(--white-text);
+        color: var(----spotify-white);
         margin-bottom: var(--footer-spacing-sm);
         letter-spacing: 0.5px;
         font-weight: 600;
@@ -280,10 +281,10 @@
       }
       
       .footer-column a {
-        color: var(--gray-text);
+        color: var(--spotify-light-gray);
         text-decoration: none;
         transition: color;
-        font-size: 14px;
+        font-size: var(--spotify-base-font-size);
       }
       
       .footer-column a:hover {
@@ -305,7 +306,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: var(--gray-text);
+        color: var(--spotify-light-gray);
         transition: background 0.2s;
       }
       
@@ -317,14 +318,14 @@
       .footer-social svg {
         width: auto;
         height: auto;
-        fill: var(--gray-text);
+        fill: var(--spotify-light-gray);
       }
       
       .footer-bottom {
         border-top: 1px solid var(--footer-divider);
         padding: 20px 0;
         text-align: left;
-        color: var(--gray-text);
+        color: var(--spotify-light-gray);
         font-size: 13px;
       }
       

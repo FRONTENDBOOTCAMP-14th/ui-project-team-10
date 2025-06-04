@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko-KR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Main</title>
-    <link rel="stylesheet" href="/src/styles/main.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>메인</title>
+    <link rel="icon" href="/icons/spotify-logo-symbol-green.svg" />
+    <link
+      rel="preload"
+      as="font"
+      href="/font/woff2/PretendardVariable.woff2"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/font/pretendardvariable.css" />
+    <link rel="stylesheet" href="/src/common/index.css" />
+    <link rel="stylesheet" href="/src/style.css" />
     <script type="module" src="/src/scripts/main.js"></script>
   </head>
   <body>
@@ -18,21 +27,18 @@
           <div class="scroll-btn">
             <button
               class="album-scroll-btn-left scroll-btn-left"
-              aria-label="왼쪽으로 스크롤"
+              aria-label="scroll-left"
             >
-              <img src="../../public/icons/arrow-left.svg" alt="왼쪽 화살표" />
+              <img src="/icons/arrow-left.svg" alt="arrow-left" />
             </button>
             <button
               class="album-scroll-btn-right scroll-btn-right"
-              aria-label="오른쪽으로 스크롤"
+              aria-label="scroll-right"
             >
-              <img
-                src="../../public/icons/arrow-right.svg"
-                alt="오른쪽 화살표"
-              />
+              <img src="/icons/arrow-right.svg" alt="arrow-right" />
             </button>
           </div>
-          <ul class="album-list" id="list"></ul>
+          <ul class="album-list" id="list" aria-label="album-list"></ul>
         </div>
       </section>
       <section class="list-component">
@@ -44,21 +50,18 @@
           <div class="scroll-btn">
             <button
               class="artist-scroll-btn-left scroll-btn-left"
-              aria-label="왼쪽으로 스크롤"
+              aria-label="scroll-left"
             >
-              <img src="../../public/icons/arrow-left.svg" alt="왼쪽 화살표" />
+              <img src="/icons/arrow-left.svg" alt="arrow-left" />
             </button>
             <button
               class="artist-scroll-btn-right scroll-btn-right"
-              aria-label="오른쪽으로 스크롤"
+              aria-label="scroll-right"
             >
-              <img
-                src="../../public/icons/arrow-right.svg"
-                alt="오른쪽 화살표"
-              />
+              <img src="/icons/arrow-right.svg" alt="arrow-right" />
             </button>
           </div>
-          <ul class="artist-list"></ul>
+          <ul class="artist-list" aria-label="artist-list"></ul>
         </div>
       </section>
       <section class="list-component">
@@ -70,60 +73,53 @@
           <div class="scroll-btn">
             <button
               class="playlist-scroll-btn-left scroll-btn-left"
-              aria-label="왼쪽으로 스크롤"
+              aria-label="scroll-left"
             >
-              <img src="../../public/icons/arrow-left.svg" alt="왼쪽 화살표" />
+              <img src="/icons/arrow-left.svg" alt="arrow-left" />
             </button>
             <button
               class="playlist-scroll-btn-right scroll-btn-right"
-              aria-label="오른쪽으로 스크롤"
+              aria-label="scroll-right"
             >
-              <img
-                src="../../public/icons/arrow-right.svg"
-                alt="오른쪽 화살표"
-              />
+              <img src="/icons/arrow-right.svg" alt="arrow-right" />
             </button>
           </div>
-          <ul class="playlist-list"></ul>
+          <ul class="playlist-list" aria-label="playlist-list"></ul>
         </div>
       </section>
       <footer>
         <div class="footer-container">
           <div class="footer-columns">
             <div class="footer-column">
-              <h4>Company</h4>
+              <h4>회사</h4>
               <ul>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Jobs</a></li>
+                <li><a href="#">상세정보</a></li>
+                <li><a href="#">채용정보</a></li>
                 <li><a href="#">For the Record</a></li>
               </ul>
             </div>
             <div class="footer-column">
-              <h4>Communities</h4>
+              <h4>커뮤니티</h4>
               <ul>
-                <li><a href="#">For Artists</a></li>
-                <li><a href="#">Developers</a></li>
-                <li><a href="#">Advertising</a></li>
-                <li><a href="#">Investors</a></li>
-                <li><a href="#">Vendors</a></li>
+                <li><a href="#">아티스트</a></li>
+                <li><a href="#">개발자</a></li>
+                <li><a href="#">광고</a></li>
+                <li><a href="#">투자자</a></li>
+                <li><a href="#">공급업체</a></li>
               </ul>
             </div>
             <div class="footer-column">
-              <h4>Useful links</h4>
+              <h4>유용한 링크</h4>
               <ul>
-                <li><a href="#">Support</a></li>
-                <li><a href="#">Free Mobile App</a></li>
+                <li><a href="#">지원</a></li>
+                <li><a href="#">무료 모바일 앱</a></li>
               </ul>
             </div>
             <div class="footer-column">
-              <h4>Spotify Plans</h4>
+              <h4>Copytify 요금제</h4>
               <ul>
-                <li><a href="#">Premium Individual</a></li>
-                <li><a href="#">Premium Duo</a></li>
-                <li><a href="#">Premium Family</a></li>
-                <li><a href="#">Premium Student</a></li>
-                <li><a href="#">Spotify Free</a></li>
-                <li><a href="#">Audiobooks Access</a></li>
+                <li><a href="#">Premium 개인</a></li>
+                <li><a href="#">Premium 듀오</a></li>
               </ul>
             </div>
             <div class="footer-social">
@@ -201,7 +197,7 @@
             </div>
           </div>
           <div class="footer-bottom">
-            <small>&copy;2025 Spotify AB</small>
+            <small>&copy;2025 Copytify AB</small>
           </div>
         </div>
       </footer>

@@ -4,17 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>footer-components</title>
+    <link rel="icon" href="/icons/spotify-logo-symbol-green.svg" />
+    <link
+      rel="preload"
+      as="font"
+      href="/font/woff2/PretendardVariable.woff2"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/font/pretendardvariable.css" />
+    <link rel="stylesheet" href="/src/common/index.css" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <script type="module" src="/src/main.js"></script>
     <style>
       body {
         background: #000;
       }
       p {
-        color: #fff;
+        color: var(--spotify-white);
       }
       /* 리스트 대 제목 */
       h4 {
-        background: #181818;
-        color: #fff;
+        background: var(--spotify-black-gray);
+        color: var(--spotify-white);
         display: inline-block;
       }
       /* 리스트 소 제목(링크) */
@@ -25,12 +36,12 @@
       li {
         list-style: none;
         background: #181818;
-        color: #b3b3b3;
+        color: var(--spotify-light-gray);
         display: inline-block;
       }
 
       a {
-        color: #b3b3b3;
+        color: var(--spotify-light-gray);
         text-decoration: none;
         transition: color 0.2s;
       }
@@ -77,7 +88,7 @@
       </a>
       <hr />
       <p>카피라이트</p>
-      <p><small>&copy;2025 Spotify AB</small></p>
+      <p><small>&copy;2025 Copytify</small></p>
     </section>
   </body>
 </html>
