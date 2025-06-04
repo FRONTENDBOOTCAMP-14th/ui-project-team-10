@@ -163,6 +163,12 @@
         margin: 0 var(--spacing-xs);
       }
 
+      footer button {
+        border: none;
+        background: none;
+        color: inherit;
+      }
+
       /* 모달창 */
       .guide-modal {
         background: rgba(80, 80, 80, 0.8);
@@ -193,6 +199,7 @@
         }
 
         button {
+          display: block;
           margin-top: 30px;
           width: 300px;
           height: 50px;
@@ -209,6 +216,13 @@
             outline: 2px solid white;
           }
         }
+      }
+
+      details {
+        border-radius: 6px;
+        background-color: var(--spotify-gray);
+        padding: 8px;
+        line-height: 1.6;
       }
     </style>
   </head>
@@ -343,11 +357,6 @@
           <a class="index-pages-btn" href="/src/components/search.html">검색</a>
         </li>
         <li>
-          <a class="index-pages-btn" href="/src/components/user-profile.html"
-            >사용자 프로필</a
-          >
-        </li>
-        <li>
           <a class="index-pages-btn" href="/src/components/preview.html"
             >무료 가입</a
           >
@@ -388,19 +397,45 @@
           <li>
             <details>
               <summary>05-26</summary>
-              <p>회의록 내용</p>
+              <h3>오늘 할일</h3>
+              <p>조장 정하기 → 석정일</p>
+              <p>클론 사이트 선정 → 스포티파이</p>
+              <h3>내일 할 예정</h3>
+              <p>스포티파이에서 컴포넌트 추출(오경태)</p>
+              <p>컨벤션 및 깃헙 협업 방식 정하기(레포지토리 생성)</p>
+              <p>팀프로젝트 레포지토리 배포하기 컴포넌트 구조 설계</p>
             </details>
           </li>
           <li>
             <details>
               <summary>05-27</summary>
-              <p>회의록 내용</p>
+              <h3>스크럼 회의</h3>
+              <h3>오늘 할일</h3>
+              <p>컴포넌트 디자인 시안 만들기</p>
+              <p>브랜치 룰셋 정하기</p>
+              <p>netlify 배포</p>
+              <p>디스코드 웹훅 연결</p>
+              <p>아이콘 추출 협업 관련 논의</p>
+              <p>Label 수정</p>
+              <p>프로젝트 파일 구조 규칙 정하기</p>
+              <p>컴포넌트 역할 분담하기</p>
+              <h3>내일 할 예정</h3>
+              <p>index.html에 전체 틀 구성 CSS Grid 또는</p>
+              <p>Flex로 레이아웃 나누기</p>
+              <p>사이드바 구조(Home, Search, Library)</p>
             </details>
           </li>
           <li>
             <details>
               <summary>05-28</summary>
-              <p>회의록 내용</p>
+              <h3>스크럼 회의</h3>
+              <h3>오늘 할일</h3>
+              <p>index.html에 링크 텍스트 만들기</p>
+              <p>요구사항 명세서 구체화 및 문서화</p>
+              <p>사이드바 컴포넌트 완성</p>
+              <p>시안 페이지의 골격(rough) html 완성</p>
+              <h3>내일 할 예정</h3>
+              <p>헤더, 푸터, 메인 페이지 컴포넌트 완성</p>
             </details>
           </li>
           <li>
@@ -426,23 +461,38 @@
         <a href="https://www.notion.so/10-1ff73873401a809890ecdc729743dffa"
           >Notion</a
         >
+        <button
+          id="reset-modal"
+          type="button"
+          class="reset-modal-btn footer-links"
+        >
+          모달 설정 초기화
+        </button>
       </div>
     </footer>
 
     <!-- 모달 -->
-    <dialog class="guide-modal">
+    <dialog class="guide-modal" aria-label="비상업적 용도 알림">
       <h1>안내문</h1>
       <p class="notice">
         위 사이트는 포트폴리오 시안으로 <br />
         비상업적 목적으로 제작되었음을 명시합니다.
       </p>
       <p class="copyright">&copy; 2025 프사친</p>
-      <button id="closed" type="button" class="reset-style">닫기</button>
+      <div class="modal-buttons">
+        <button id="closed" type="button" class="reset-style">닫기</button>
+        <button id="dont-show-today" type="button" class="reset-style">
+          오늘 하루동안 보지 않기
+        </button>
+      </div>
     </dialog>
     <script>
       const header = document.querySelector("header");
       const guideModal = document.querySelector(".guide-modal");
       const closedBtn = document.querySelector("#closed");
+      const dontShowTodayBtn = document.querySelector("#dont-show-today");
+      const resetModalBtn = document.querySelector("#reset-modal");
+
       function isMaximizedWindow() {
         return window.innerWidth >= 1650;
       }
@@ -459,14 +509,50 @@
         header.style.backgroundSize = `${limitedZoom}%`;
       }
 
+      // 모달 표시 여부 확인
+      function shouldShowModal() {
+        const hideUntil = localStorage.getItem("hideModalUntil");
+        if (!hideUntil) return true;
+
+        const hideDate = new Date(hideUntil);
+        const today = new Date();
+
+        // 날짜만 비교 (시간 제외)
+        hideDate.setHours(0, 0, 0, 0);
+        today.setHours(0, 0, 0, 0);
+
+        return today > hideDate;
+      }
+
+      // 오늘 하루동안 숨기기
+      function hideModalForToday() {
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        localStorage.setItem("hideModalUntil", tomorrow.toISOString());
+        guideModal.close();
+      }
+
+      // 모달 설정 초기화
+      function resetModalSettings() {
+        localStorage.removeItem("hideModalUntil");
+      }
+
       window.addEventListener("scroll", updateBackgroundZoom);
       window.addEventListener("resize", updateBackgroundZoom);
       window.addEventListener("DOMContentLoaded", updateBackgroundZoom);
 
-      guideModal.showModal();
+      // 모달 표시 여부 확인 후 표시
+      if (shouldShowModal()) {
+        guideModal.showModal();
+      }
+
+      // 이벤트 리스너
       closedBtn.addEventListener("click", () => {
         guideModal.close();
       });
+
+      dontShowTodayBtn.addEventListener("click", hideModalForToday);
+      resetModalBtn.addEventListener("click", resetModalSettings);
     </script>
   </body>
 </html>
