@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="멋쟁이 사자처럼 프론트엔드 부트캠프 14기 UI 프로젝트 10조 프론드엔드 사자 친구" />
+    <meta
+      name="description"
+      content="멋쟁이 사자처럼 프론트엔드 부트캠프 14기 UI 프로젝트 10조 프론드엔드 사자 친구"
+    />
     <title>UI 프로젝트 - CSS</title>
     <link rel="icon" href="/icons/spotify-logo-symbol-green.svg" />
     <link
@@ -41,7 +44,7 @@
         box-sizing: border-box;
         border-radius: 8px;
         /* border: 2px solid var(--spotify-gray); */
-        background-color: var(--spotify-dark-gray);
+        background-color: transparent;
         color: var(--spotify-white);
         transition: var(--button-transition);
       }
@@ -140,10 +143,25 @@
 
       main h2 {
         color: var(--spotify-white);
-        font-size: var(--font-size-base);
+        font-size: var(--font-size-md);
         margin: var(--spacing-lg) 0 var(--spacing-md);
         padding-bottom: var(--spacing-xs);
+      }
+
+      main .section-header {
+        display: flex;
+        align-items: baseline;
         border-bottom: 1px solid var(--spotify-gray);
+        gap: var(--spacing-xs);
+        margin-top: var(--spacing-xl);
+        margin-bottom: var(--spacing-lg);
+        justify-content: space-between;
+      }
+
+      main .section-header p {
+        color: var(--spotify-light-gray);
+        font-size: var(--font-size-base);
+        margin: 0 0 var(--spacing-lg);
       }
 
       main ul {
@@ -161,7 +179,7 @@
       footer {
         padding: var(--spacing-lg);
         text-align: center;
-        font-size: var(--font-size-xs);
+        font-size: var(--font-size-base);
       }
 
       footer a {
@@ -170,7 +188,7 @@
 
       details {
         border-radius: 6px;
-        background-color: var(--spotify-gray);
+        background-color: transparent;
         padding: var(--spacing-xs);
         line-height: 2;
       }
@@ -185,16 +203,21 @@
     </style>
   </head>
   <body>
-    <!-- 스킵 네비게이션 -->  
-    <a href="#main-content" aria-label="본문 바로가기" class="skip-link visually-hidden visually-shown-on-focus">본문 바로가기</a>
-    
+    <!-- 스킵 네비게이션 -->
+    <a
+      href="#main-content"
+      aria-label="본문 바로가기"
+      class="skip-link visually-hidden visually-shown-on-focus"
+      >본문 바로가기</a
+    >
+
     <header class="bg-black">
       <h1 class="green-text">프사친 - 프론트엔드 사자 친구</h1>
       <p>
         멋쟁이 사자처럼 프론트엔드 부트캠프 14기 UI 프로젝트 10조 프론드엔드
         사자 친구입니다!
       </p>
-      
+
       <nav aria-label="주요 네비게이션">
         <a
           href="/src/pages/home.html"
@@ -204,152 +227,182 @@
       </nav>
       <section aria-labelledby="team-members">
         <h2 id="team-members" class="visually-hidden">프로젝트 구성원</h2>
-        <ul class="profile-list" role="list">
-        <li class="profile-card">
-          <article>
-            <img class="profile-img" src="/image/sji.webp" alt="석정일 프로필 사진" />
+        <ul class="profile-list" role="none">
+          <li class="profile-card" role="none">
+            <img
+              class="profile-img"
+              src="/image/sji.webp"
+              alt="석정일 프로필 사진"
+            />
             <h3 class="name green-text">석정일</h3>
-          <p class="roll light-gray-text">조장</p>
-          <a class="github light-gray-text" href="https://github.com/but212">
-            <img src="/icons/github-white.svg" alt="깃헙 링크" />but212
-          </a>
-        </li>
-        <li class="profile-card">
-          <img
-            class="profile-img"
-            src="/image/KakaoTalk_20250402_233422836.jpg"
-            alt=""
-          />
-          <p class="name green-text">김동규</p>
-          <p class="roll light-gray-text">조원</p>
-          <a class="github light-gray-text" href="https://github.com/cit1566">
-            <img src="/icons/github-white.svg" alt="깃헙 링크" />cit1566
-          </a>
-        </li>
-        <li class="profile-card">
-          <img class="profile-img" src="/image/ohgyeongtae.jpg" alt="" />
-          <p class="name green-text">오경태</p>
-          <p class="roll light-gray-text">조원</p>
-          <a class="github light-gray-text" href="https://github.com/Dowap2">
-            <img src="/icons/github-white.svg" alt="깃헙 링크" />Dowap2
-          </a>
-        </li>
-        <li class="profile-card">
-          <img
-            class="profile-img"
-            src="/image/kwh-profile.PNG"
-            alt="고우현 프로필"
-          />
-          <h3 class="name green-text">고우현</h3>
-          <p class="roll light-gray-text">조원</p>
-          <a
-            class="github light-gray-text"
-            href="https://github.com/woohyeun15"
-          >
-            <img src="/icons/github-white.svg" alt="깃헙 링크" />woohyeun15
-          </a>
-        </li>
-      </ul>
+            <p class="roll light-gray-text">조장</p>
+            <a class="github light-gray-text" href="https://github.com/but212">
+              <img src="/icons/github-white.svg" alt="깃헙 링크" />but212
+            </a>
+          </li>
+          <li class="profile-card" role="none">
+            <img
+              class="profile-img"
+              src="/image/KakaoTalk_20250402_233422836.jpg"
+              alt=""
+            />
+            <h3 class="name green-text">김동규</h3>
+            <p class="roll light-gray-text">조원</p>
+            <a class="github light-gray-text" href="https://github.com/cit1566">
+              <img src="/icons/github-white.svg" alt="깃헙 링크" />cit1566
+            </a>
+          </li>
+          <li class="profile-card" role="none">
+            <img class="profile-img" src="/image/ohgyeongtae.jpg" alt="" />
+            <h3 class="name green-text">오경태</h3>
+            <p class="roll light-gray-text">조원</p>
+            <a class="github light-gray-text" href="https://github.com/Dowap2">
+              <img src="/icons/github-white.svg" alt="깃헙 링크" />Dowap2
+            </a>
+          </li>
+          <li class="profile-card" role="none">
+            <img
+              class="profile-img"
+              src="/image/kwh-profile.PNG"
+              alt="고우현 프로필"
+            />
+            <h3 class="name green-text">고우현</h3>
+            <p class="roll light-gray-text">조원</p>
+            <a
+              class="github light-gray-text"
+              href="https://github.com/woohyeun15"
+            >
+              <img src="/icons/github-white.svg" alt="깃헙 링크" />woohyeun15
+            </a>
+          </li>
+        </ul>
+      </section>
     </header>
     <main id="main-content" class="index-main">
       <section aria-labelledby="atomic-components">
-        <h2 id="atomic-components">원자 컴포넌트</h2>
-        <ul role="list">
-        <li>
-          <a class="index-pages-btn" href="/src/components/button.html">버튼</a>
-        </li>
-        <li>
-          <a class="index-pages-btn" href="/src/components/header-com.html"
-            >헤더 내부 요소 컴포넌트</a
-          >
-        </li>
-        <li>
-          <a class="index-pages-btn" href="/src/components/album-card.html">
-            앨범 카드
-          </a>
-        </li>
-        <!-- <li>
+        <div class="section-header">
+          <h2 id="atomic-components">원자 컴포넌트</h2>
+          <p>원자 컴포넌트는 재사용 가능한 컴포넌트를 의미합니다.</p>
+        </div>
+        <ul>
+          <li>
+            <a class="index-pages-btn" href="/src/components/button.html"
+              >버튼</a
+            >
+          </li>
+          <li>
+            <a class="index-pages-btn" href="/src/components/header-com.html"
+              >헤더 내부 요소 컴포넌트</a
+            >
+          </li>
+          <li>
+            <a class="index-pages-btn" href="/src/components/album-card.html">
+              앨범 카드
+            </a>
+          </li>
+          <!-- <li>
           <a class="index-pages-btn" href="/src/components/player-control.html">
             플레이어 컨트롤
           </a>
         </li> -->
-        <li>
-          <a class="index-pages-btn" href="/src/components/search-input.html">
-            검색 입력창
-          </a>
-        </li>
-        <!-- <li>
+          <li>
+            <a class="index-pages-btn" href="/src/components/search-input.html">
+              검색 입력창
+            </a>
+          </li>
+          <!-- <li>
           <a class="index-pages-btn" href="/src/components/playlist-item.html">
             플레이리스트 아이템
           </a>
         </li> -->
-      </ul>
-      <h2>페이지 컴포넌트</h2>
-      <ul>
-        <li>
-          <a class="index-pages-btn" href="/src/components/header.html">헤더</a>
-        </li>
-        <li>
-          <a class="index-pages-btn" href="/src/components/main.html">메인</a>
-        </li>
-        <li>
-          <a class="index-pages-btn" href="/src/components/sidebar.html">
-            사이드바
-          </a>
-        </li>
-        <li>
-          <a class="index-pages-btn" href="/src/components/footer.html">푸터</a>
-        </li>
-        <li>
-          <a class="index-pages-btn" href="/src/pages/login-page.html"
-            >로그인</a
-          >
-        </li>
-        <li>
-          <a class="index-pages-btn" href="/src/pages/sign-page.html"
-            >회원가입</a
-          >
-        </li>
-      </ul>
-      <h2>기능 컴포넌트</h2>
-      <ul>
-        <li>
-          <a class="index-pages-btn" href="/src/components/album.html">앨범</a>
-        </li>
-        <li>
-          <a class="index-pages-btn" href="/src/components/artist.html"
-            >아티스트</a
-          >
-        </li>
-        <li>
-          <a class="index-pages-btn" href="/src/components/player.html"
-            >플레이어</a
-          >
-        </li>
-        <li>
-          <a class="index-pages-btn" href="/src/components/playlist.html"
-            >플레이리스트</a
-          >
-        </li>
-        <li>
-          <a class="index-pages-btn" href="/src/components/search.html">검색</a>
-        </li>
-        <!-- <li>
+        </ul>
+      </section>
+      <div class="section-header">
+        <h2 id="page-components">페이지 컴포넌트</h2>
+        <p>페이지 컴포넌트는 페이지 전체를 구성하는 컴포넌트를 의미합니다.</p>
+      </div>
+      <section aria-labelledby="page-components">
+        <ul aria-labelledby="page-components">
+          <li>
+            <a class="index-pages-btn" href="/src/components/header.html"
+              >헤더</a
+            >
+          </li>
+          <li>
+            <a class="index-pages-btn" href="/src/components/main.html">메인</a>
+          </li>
+          <li>
+            <a class="index-pages-btn" href="/src/components/sidebar.html">
+              사이드바
+            </a>
+          </li>
+          <li>
+            <a class="index-pages-btn" href="/src/components/footer.html"
+              >푸터</a
+            >
+          </li>
+          <li>
+            <a class="index-pages-btn" href="/src/pages/login-page.html"
+              >로그인</a
+            >
+          </li>
+          <li>
+            <a class="index-pages-btn" href="/src/pages/sign-page.html"
+              >회원가입</a
+            >
+          </li>
+        </ul>
+      </section>
+      <section aria-labelledby="functional-components">
+        <div class="section-header">
+          <h2 id="functional-components">기능 컴포넌트</h2>
+          <p>기능 컴포넌트는 기능별 컴포넌트 집합입니다.</p>
+        </div>
+        <ul>
+          <li>
+            <a class="index-pages-btn" href="/src/components/album.html"
+              >앨범</a
+            >
+          </li>
+          <li>
+            <a class="index-pages-btn" href="/src/components/artist.html"
+              >아티스트</a
+            >
+          </li>
+          <li>
+            <a class="index-pages-btn" href="/src/components/player.html"
+              >플레이어</a
+            >
+          </li>
+          <li>
+            <a class="index-pages-btn" href="/src/components/playlist.html"
+              >플레이리스트</a
+            >
+          </li>
+          <li>
+            <a class="index-pages-btn" href="/src/components/search.html"
+              >검색</a
+            >
+          </li>
+          <!-- <li>
           <a class="index-pages-btn" href="/src/components/user-profile.html"
             >사용자 프로필</a
           >
         </li> -->
-        <li>
-          <a class="index-pages-btn" href="/src/components/preview.html"
-            >무료 가입</a
-          >
-        </li>
-      </ul>
-      <section class="text-block-container">
-        <h2>회고록</h2>
+          <li>
+            <a class="index-pages-btn" href="/src/components/preview.html"
+              >무료 가입</a
+            >
+          </li>
+        </ul>
+      </section>
+      <section class="text-block-container" role="none">
+        <div class="section-header">
+          <h2>회고록</h2>
+        </div>
         <ul class="retrospect-list">
           <li>
-            <details>
+            <details role="none">
               <summary aria-label="고우현 회고록">고우현</summary>
               <div class="details-description">
                 <p>회고록 내용</p>
@@ -357,8 +410,8 @@
             </details>
           </li>
           <li>
-            <details>
-              <summary>김동규</summary>
+            <details role="none">
+              <summary aria-label="김동규 회고록">김동규</summary>
               <div class="details-description">
                 <p>
                   멋쟁이사자처럼 부트캠프를 시작하고 한달 즈음 됐을 때 첫
@@ -394,7 +447,7 @@
             </details>
           </li>
           <li>
-            <details>
+            <details role="none">
               <summary aria-label="석정일 회고록">석정일</summary>
               <div class="details-description">
                 <p>
@@ -433,8 +486,8 @@
             </details>
           </li>
           <li>
-            <details>
-              <summary>오경태</summary>
+            <details role="none">
+              <summary aria-label="오경태 회고록">오경태</summary>
               <div class="details-description">
                 <p>
                   이번 프로젝트에서는 Spotify의 UI를 클론하며 메인 앨범과
@@ -473,10 +526,12 @@
         </ul>
       </section>
       <section class="text-block-container" aria-labelledby="meetings">
-        <h2 id="meetings">스크럼 회의록</h2>
-        <ul class="proceedings-list" role="list">
+        <div class="section-header">
+          <h2 id="meetings">스크럼 회의록</h2>
+        </div>
+        <ul class="proceedings-list">
           <li>
-            <details>
+            <details role="none">
               <summary aria-label="5월 26일 회의록">05-26</summary>
               <div class="details-description">
                 <h3>오늘 할일</h3>
@@ -490,7 +545,7 @@
             </details>
           </li>
           <li>
-            <details>
+            <details role="none">
               <summary aria-label="5월 27일 회의록">05-27</summary>
               <div class="details-description">
                 <h3>오늘 할일</h3>
@@ -504,15 +559,14 @@
                 <p>컴포넌트 역할 분담하기</p>
                 <h3>내일 할 예정</h3>
                 <p>
-                  index.html에 전체 틀 구성 CSS Grid 또는
-                  Flex로 레이아웃 나누기
+                  index.html에 전체 틀 구성 CSS Grid 또는 Flex로 레이아웃 나누기
                 </p>
                 <p>사이드바 구조(Home, Search, Library)</p>
               </div>
             </details>
           </li>
           <li>
-            <details>
+            <details role="none">
               <summary aria-label="5월 28일 회의록">05-28</summary>
               <div class="details-description">
                 <h3>오늘 할일</h3>
@@ -526,7 +580,7 @@
             </details>
           </li>
           <li>
-            <details>
+            <details role="none">
               <summary aria-label="5월 29일 회의록">05-29</summary>
               <div class="details-description">
                 <h3>오늘 할일</h3>
@@ -543,7 +597,7 @@
             </details>
           </li>
           <li>
-            <details>
+            <details role="none">
               <summary aria-label="5월 30일 회의록">05-30</summary>
               <div class="details-description">
                 <h3>오늘 할일</h3>
@@ -566,8 +620,8 @@
             </details>
           </li>
           <li>
-            <details>
-              <summary>06-02</summary>
+            <details role="none">
+              <summary aria-label="6월 2일 회의록">06-02</summary>
               <div class="details-description">
                 <h3>오늘 할 일</h3>
                 <p>중간점검 요청사항 오전까지 정하기</p>
@@ -582,7 +636,7 @@
             </details>
           </li>
           <li>
-            <details>
+            <details role="none">
               <summary aria-label="6월 4일 회의록">06-04</summary>
               <div class="details-description">
                 <h3>오늘 할 일</h3>
@@ -603,10 +657,10 @@
         </ul>
       </section>
     </main>
-    <footer class="light-gray-text" role="contentinfo">
+    <footer class="light-gray-text">
       <p>이 프로젝트는 교육용 시안입니다.</p>
       <p>&copy; 2025 프사친</p>
-      <div class="footer-links" aria-label="외부 링크">
+      <div class="footer-links">
         <a href="https://github.com/but212/ui-project-team-10">GitHub</a>
         <a href="https://www.notion.so/10-1ff73873401a809890ecdc729743dffa"
           >Notion</a
