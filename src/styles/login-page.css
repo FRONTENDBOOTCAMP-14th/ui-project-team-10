@@ -1,0 +1,220 @@
+/* 로그인 전체 박스 */
+.login-page {
+  background: var(--spotify-black);
+  width: 100%;
+  height: 100%;
+
+  /* 기본 상태 */
+  .login-box {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    padding: 32px;
+    box-sizing: border-box;
+
+    .login-logo {
+      width: 24px;
+      height: 24px;
+      display: block;
+      margin: 24px 0 8px 0;
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    /* 제목 */
+    h1 {
+      font-size: 33px;
+      height: 46.67px;
+      align-content: center;
+      margin-bottom: 32px;
+    }
+
+    /* 버튼 */
+    button {
+      width: 100%;
+      height: 48px;
+      color: var(--spotify-white);
+      border: 1px solid var(--button-border);
+      border-radius: 48px;
+      padding: 7px 23px;
+      margin-bottom: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+
+      .icon {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+
+        svg {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .button-text {
+        flex-grow: 1;
+      }
+      &:nth-of-type(1) {
+        .google {
+          background: url(https://accounts.scdn.co/sso/images/new-google-icon.72fd940a229bc94cf9484a3320b3dccb.svg)
+            center center no-repeat;
+        }
+      }
+      &:nth-of-type(2) {
+        .facebook {
+          background: url(https://accounts.scdn.co/sso/images/new-facebook-icon.eae8e1b6256f7ccf01cf81913254e70b.svg)
+            center center no-repeat;
+        }
+      }
+      &:nth-of-type(3) {
+        .apple {
+          background: url(https://accounts.scdn.co/sso/images/new-apple-icon.e356139ea90852da2e60f1ff738f3cbb.svg)
+            center center no-repeat;
+        }
+      }
+      &:hover {
+        border-color: var(--spotify-white);
+      }
+    }
+
+    hr {
+      all: unset;
+      width: 100%;
+      display: block;
+      margin: 32px 0;
+      border: none;
+      height: 1px;
+      background-color: rgb(41, 41, 41);
+    }
+
+    .login-form {
+      width: 100%;
+
+      .input-box {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: start;
+        justify-content: center;
+        margin-bottom: 24px;
+
+        label {
+          height: 20px;
+          font-size: 0.8125rem;
+          font-weight: 700;
+          align-content: center;
+          margin-bottom: 8px;
+        }
+
+        .error-massage {
+          height: 20px;
+          /* align-items: center; */
+          align-content: center;
+          color: #f3727f;
+          font-weight: 400;
+          font-size: 0.8125rem;
+          margin-block-start: 8px;
+          display: none;
+
+          svg {
+            vertical-align: bottom;
+          }
+        }
+
+        input {
+          border: 1px solid var(--spotify-gray);
+          width: 100%;
+          height: 48px;
+          border-radius: 4px;
+          padding: 12px;
+          /* margin-bottom: 16px; */
+          color: var(--spotify-white);
+
+          &::placeholder {
+            font-weight: 600;
+          }
+
+          &:hover {
+            border-color: white;
+          }
+
+          &:focus {
+            outline: 3px solid white;
+          }
+
+          &:user-invalid:focus {
+            outline: 3px solid rgb(237, 44, 63);
+            border: none;
+          }
+
+          &:user-invalid {
+            outline: 1px solid rgb(237, 44, 63);
+            border: none;
+          }
+
+          &:user-invalid + .error-massage {
+            display: block;
+          }
+        }
+      }
+
+      button {
+        display: block;
+        background: var(--spotify-green);
+        color: black;
+        border: none;
+        text-align: center;
+        font-weight: 800;
+        font-size: 1rem;
+        margin-block-end: 32px;
+        transition: transform 33ms ease-in-out;
+        &:hover {
+          transform: scale(1.04);
+          background-color: #3be477;
+        }
+      }
+    }
+
+    .account-label {
+      color: var(--spotify-light-gray);
+      font-size: 17px;
+      margin-top: 10px;
+      height: 21.9px;
+    }
+
+    .account-link {
+      width: 100%;
+      text-align: center;
+      font-size: 17px;
+      display: block;
+      height: 32.38px;
+      align-content: end;
+      text-decoration: underline;
+
+      &:hover{
+        color: #1ed760;
+      }
+    }
+  }
+
+  /* 확장시 코드 */
+  @media (width > 767px) {
+    width: 734px;
+    height: 668.72px;
+    border-radius: 8px;
+
+    & .login-box {
+      a {
+        width: 36px;
+        height: 36px;
+        margin: 32px;
+      }
+    }
+  }
+}
