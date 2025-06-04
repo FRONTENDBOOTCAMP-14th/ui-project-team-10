@@ -224,6 +224,13 @@
         padding: 8px;
         line-height: 1.6;
       }
+
+      .details-description {
+        margin: var(--spacing-sm);
+        background: var(--spotify-dark-gray);
+        border-radius: 4px;
+        padding: var(--spacing-sm);
+      }
     </style>
   </head>
   <body>
@@ -356,6 +363,11 @@
         <li>
           <a class="index-pages-btn" href="/src/components/search.html">검색</a>
         </li>
+        <!-- <li>
+          <a class="index-pages-btn" href="/src/components/user-profile.html"
+            >사용자 프로필</a
+          >
+        </li> -->
         <li>
           <a class="index-pages-btn" href="/src/components/preview.html"
             >무료 가입</a
@@ -428,14 +440,16 @@
           <li>
             <details>
               <summary>05-28</summary>
-              <h3>스크럼 회의</h3>
-              <h3>오늘 할일</h3>
-              <p>index.html에 링크 텍스트 만들기</p>
-              <p>요구사항 명세서 구체화 및 문서화</p>
-              <p>사이드바 컴포넌트 완성</p>
-              <p>시안 페이지의 골격(rough) html 완성</p>
-              <h3>내일 할 예정</h3>
-              <p>헤더, 푸터, 메인 페이지 컴포넌트 완성</p>
+              <div class="details-description">
+                <h3>스크럼 회의</h3>
+                <h3>오늘 할일</h3>
+                <p>index.html에 링크 텍스트 만들기</p>
+                <p>요구사항 명세서 구체화 및 문서화</p>
+                <p>사이드바 컴포넌트 완성</p>
+                <p>시안 페이지의 골격(rough) html 완성</p>
+                <h3>내일 할 예정</h3>
+                <p>헤더, 푸터, 메인 페이지 컴포넌트 완성</p>
+              </div>
             </details>
           </li>
           <li>
