@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/src/style.css" />
     <link rel="stylesheet" href="/src/common/index.css" />
     <link rel="stylesheet" href="/src/style.css" />
-    <script type="module" src="/src/scripts/main.js"></script>
+    <script type="module" src="/src/main.js"></script>
     <style>
       .grid-body {
         color: var(--spotify-white);
@@ -277,7 +277,7 @@
           <!-- 로그인 메뉴바 -->
           <li>
             <div class="link-login-group">
-              <a href="/" class="install-link">
+              <a href="#install-page" class="install-link">
                 <svg
                   viewBox="0 0 16 16"
                   fill="none"
@@ -403,75 +403,80 @@
         </section>
       </nav>
       <main class="main-component">
-        <section class="list-component">
-          <div class="list-header">
-            <h2>Album</h2>
-            <button class="album-show-all">Show all</button>
+        <div id="main-content">
+          <div class="padding-box">
+            <section class="list-component">
+              <div class="list-header">
+                <h2>Album</h2>
+                <button class="album-show-all">Show all</button>
+              </div>
+              <div class="scroll-wrapper">
+                <div class="scroll-btn">
+                  <button
+                    class="album-scroll-btn-left scroll-btn-left"
+                    aria-label="scroll-left"
+                  >
+                    <img src="/icons/arrow-left.svg" alt="arrow-left" />
+                  </button>
+                  <button
+                    class="album-scroll-btn-right scroll-btn-right"
+                    aria-label="scroll-right"
+                  >
+                    <img src="/icons/arrow-right.svg" alt="arrow-right" />
+                  </button>
+                </div>
+                <ul class="album-list" id="list" aria-label="album-list"></ul>
+              </div>
+            </section>
+            <section class="list-component">
+              <div class="list-header">
+                <h2>Artist</h2>
+                <button class="artist-show-all">Show all</button>
+              </div>
+              <div class="scroll-wrapper">
+                <div class="scroll-btn">
+                  <button
+                    class="artist-scroll-btn-left scroll-btn-left"
+                    aria-label="scroll-left"
+                  >
+                    <img src="/icons/arrow-left.svg" alt="arrow-left" />
+                  </button>
+                  <button
+                    class="artist-scroll-btn-right scroll-btn-right"
+                    aria-label="scroll-right"
+                  >
+                    <img src="/icons/arrow-right.svg" alt="arrow-right" />
+                  </button>
+                </div>
+                <ul class="artist-list" aria-label="artist-list"></ul>
+              </div>
+            </section>
+
+            <section class="list-component">
+              <div class="list-header">
+                <h2>Playlists</h2>
+                <button class="playlist-show-all">Show all</button>
+              </div>
+              <div class="scroll-wrapper">
+                <div class="scroll-btn">
+                  <button
+                    class="playlist-scroll-btn-left scroll-btn-left"
+                    aria-label="scroll-left"
+                  >
+                    <img src="/icons/arrow-left.svg" alt="arrow-left" />
+                  </button>
+                  <button
+                    class="playlist-scroll-btn-right scroll-btn-right"
+                    aria-label="scroll-right"
+                  >
+                    <img src="/icons/arrow-right.svg" alt="arrow-right" />
+                  </button>
+                </div>
+                <ul class="playlist-list" aria-label="playlist-list"></ul>
+              </div>
+            </section>
           </div>
-          <div class="scroll-wrapper">
-            <div class="scroll-btn">
-              <button
-                class="album-scroll-btn-left scroll-btn-left"
-                aria-label="scroll-left"
-              >
-                <img src="/icons/arrow-left.svg" alt="arrow-left" />
-              </button>
-              <button
-                class="album-scroll-btn-right scroll-btn-right"
-                aria-label="scroll-right"
-              >
-                <img src="/icons/arrow-right.svg" alt="arrow-right" />
-              </button>
-            </div>
-            <ul class="album-list" id="list" aria-label="album-list"></ul>
-          </div>
-        </section>
-        <section class="list-component">
-          <div class="list-header">
-            <h2>Artist</h2>
-            <button class="artist-show-all">Show all</button>
-          </div>
-          <div class="scroll-wrapper">
-            <div class="scroll-btn">
-              <button
-                class="artist-scroll-btn-left scroll-btn-left"
-                aria-label="scroll-left"
-              >
-                <img src="/icons/arrow-left.svg" alt="arrow-left" />
-              </button>
-              <button
-                class="artist-scroll-btn-right scroll-btn-right"
-                aria-label="scroll-right"
-              >
-                <img src="/icons/arrow-right.svg" alt="arrow-right" />
-              </button>
-            </div>
-            <ul class="artist-list" aria-label="artist-list"></ul>
-          </div>
-        </section>
-        <section class="list-component">
-          <div class="list-header">
-            <h2>Playlists</h2>
-            <button class="playlist-show-all">Show all</button>
-          </div>
-          <div class="scroll-wrapper">
-            <div class="scroll-btn">
-              <button
-                class="playlist-scroll-btn-left scroll-btn-left"
-                aria-label="scroll-left"
-              >
-                <img src="/icons/arrow-left.svg" alt="arrow-left" />
-              </button>
-              <button
-                class="playlist-scroll-btn-right scroll-btn-right"
-                aria-label="scroll-right"
-              >
-                <img src="/icons/arrow-right.svg" alt="arrow-right" />
-              </button>
-            </div>
-            <ul class="playlist-list" aria-label="playlist-list"></ul>
-          </div>
-        </section>
+        </div>
         <footer>
           <div class="footer-container">
             <div class="footer-columns">
@@ -621,7 +626,7 @@
 
       toggleSearchBtn.addEventListener("click", function () {
         const viewportWidth = window.visualViewport.width;
-        console.log("click");
+        // console.log("click");
         if (viewportWidth < 1078) {
           extendSearchBar.classList.toggle("hidden");
           clossingSearchBar.classList.toggle("absolute");
@@ -633,7 +638,7 @@
 
       window.addEventListener("resize", function () {
         const viewportWidth = window.innerWidth;
-        console.log(viewportWidth);
+        // console.log(viewportWidth);
         if (viewportWidth >= 1078) {
           extendSearchBar.classList.remove("hidden");
           clossingSearchBar.classList.add("absolute");
@@ -720,5 +725,6 @@
       dontShowTodayBtn.addEventListener("click", hideModalForToday);
       resetModalBtn.addEventListener("click", resetModalSettings);
     </script>
+    <!-- <script src="/src/scripts/page.js"></script> -->
   </body>
 </html>
