@@ -176,6 +176,13 @@
         grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
       }
 
+      .paragraph-container ul {
+        grid-template-columns: 1fr;
+        li {
+          line-height: 1.6;
+        }
+      }
+
       footer {
         padding: var(--spacing-lg);
         text-align: center;
@@ -199,6 +206,10 @@
         border-radius: 4px;
         padding: var(--spacing-sm);
         gap: var(--spacing-md);
+      }
+
+      footer {
+        line-height: 2;
       }
     </style>
   </head>
@@ -279,6 +290,34 @@
       </section>
     </header>
     <main id="main-content" class="index-main">
+      <section class="paragraph-container">
+        <div class="section-header">
+          <h2>프로젝트 소개</h2>
+          <p>Copytify</p>
+        </div>
+        <ul>
+          <li class="text-lg">
+            <p>
+              스포티파이 페이지를 클론한 프로젝트
+              <span class="text-bold green-text">Copytify</span>를 제작했습니다.
+            </p>
+            <p>
+              이 프로젝트는 멋쟁이사자처럼 부트캠프 Team 10의 협업 과제로, 실제
+              Spotify의 UI/UX를 최대한 비슷하게 구현하면서 모듈화된 설계를
+              적용했습니다.
+            </p>
+            <p>
+              주요 특징으로는 재사용 가능한 웹 컴포넌트(앨범 카드, 버튼, 링크
+              등), Spotify API 연동을 통한 실제 데이터 렌더링, 접근성을 고려한
+              UI 설계,
+            </p>
+            <p>
+              그리고 반응형 디자인이 있습니다. 팀원 각자가 담당한 컴포넌트를
+              개발하여 하나의 완성된 서비스로 통합했습니다.
+            </p>
+          </li>
+        </ul>
+      </section>
       <section aria-labelledby="atomic-components">
         <div class="section-header">
           <h2 id="atomic-components">원자 컴포넌트</h2>
@@ -297,7 +336,7 @@
           </li>
           <li>
             <a class="index-pages-btn" href="/src/components/album-card.html">
-              앨범 카드
+              카드 컴포넌트
             </a>
           </li>
           <!-- <li>
@@ -372,11 +411,6 @@
           <li>
             <a class="index-pages-btn" href="/src/components/player.html"
               >플레이어</a
-            >
-          </li>
-          <li>
-            <a class="index-pages-btn" href="/src/components/playlist.html"
-              >플레이리스트</a
             >
           </li>
           <li>
