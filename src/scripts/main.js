@@ -26,6 +26,16 @@ const albumIds = [
   "3T4tUhGYeRNVUGevb0wThu",
   "7pH8F7IVHTp2ZYKG0xN1CE",
   "32n91KG3YeLMLJ9e64EfXy",
+  "01dPJcwyht77brL4JQiR8R",
+  "5V8n6fqyAPxvFTibPhQVcp",
+  "4TeDL95L9OTCpYnuQwlrwY",
+  "34Q2W5StgW4WC6HhbsNWnv",
+  "1HMLpmZAnNyl9pxvOnTovV",
+  "0VciVDVU6NoqtQ0WAIlTmD",
+  "7CUqeaQmtkBWd6xQTlZ0Sg",
+  "58nrjxdxUZJOVvLU1uyc6b",
+  "0i4V6w1zpf6CFXSS67cyfQ",
+  "68enXe5XcJdciSDAZr0Alr",
 ].join(",");
 
 const playListIds = [
@@ -36,6 +46,17 @@ const playListIds = [
   "2Q1ZRB9qy5uKFLirHGDgn6",
   "7JfeMWiAZ1MBktHRtD2Jy2",
   "6fuI3AxjJWgqJtZwkV7wIR",
+  "6wmGWoKWOjSBFjugPl6Fz8",
+  "2Vi2H4BhJVG0PFnzYB8sgb",
+  "0t4oUhIb9iDGz9oWhzBFfc",
+  "5b6vbelZurLI3M8vm084z4",
+  "0b9D75TIV46vPqEPCXxHx7",
+  "0Y5touMvca0Eo2IU31rEbD",
+  "5kdNkkasrsN9jVIuciXwma",
+  "1rUKksNlvTXLQh6UNaMlnq",
+  "6cbZvcmscZjPr9vvYwgDiF",
+  "0qOUg1VuszvoMXChYvgXUs",
+  "1iEp1GemYL5Hn1FqmVZIz9",
 ];
 
 // ✅ 공통 토큰 요청
