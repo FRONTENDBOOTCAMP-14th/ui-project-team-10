@@ -83,5 +83,26 @@
       </div>
       <button type="button" class="copy-btn"></button>
     </section>
+    <script type="module">
+      import { copyToClipboard } from "../scripts/copy-button.js";
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // 각 컴포넌트 박스와 복사 버튼에 ID 부여
+        const componentBoxes = document.querySelectorAll(".component-box");
+        const copyButtons = document.querySelectorAll(".copy-btn");
+
+        // ID 부여 및 복사 기능 설정
+        for (let i = 0; i < componentBoxes.length; i++) {
+          const boxId = `component-to-copy-${i + 1}`;
+          const btnId = `copy-trigger-${i + 1}`;
+
+          componentBoxes[i].id = boxId;
+          copyButtons[i].id = btnId;
+
+          // 복사 기능 설정
+          copyToClipboard(boxId, btnId, "html");
+        }
+      });
+    </script>
   </body>
 </html>
