@@ -402,7 +402,7 @@
         </div>
         <ul class="retrospect-list">
           <li>
-            <details role="none">
+            <details>
               <summary aria-label="고우현 회고록">고우현</summary>
               <div class="details-description">
                 <p>회고록 내용</p>
@@ -410,7 +410,7 @@
             </details>
           </li>
           <li>
-            <details role="none">
+            <details>
               <summary aria-label="김동규 회고록">김동규</summary>
               <div class="details-description">
                 <p>
@@ -447,7 +447,7 @@
             </details>
           </li>
           <li>
-            <details role="none">
+            <details>
               <summary aria-label="석정일 회고록">석정일</summary>
               <div class="details-description">
                 <p>
@@ -486,7 +486,7 @@
             </details>
           </li>
           <li>
-            <details role="none">
+            <details>
               <summary aria-label="오경태 회고록">오경태</summary>
               <div class="details-description">
                 <p>
@@ -531,7 +531,7 @@
         </div>
         <ul class="proceedings-list">
           <li>
-            <details role="none">
+            <details>
               <summary aria-label="5월 26일 회의록">05-26</summary>
               <div class="details-description">
                 <h3>오늘 할일</h3>
@@ -545,7 +545,7 @@
             </details>
           </li>
           <li>
-            <details role="none">
+            <details>
               <summary aria-label="5월 27일 회의록">05-27</summary>
               <div class="details-description">
                 <h3>오늘 할일</h3>
@@ -566,7 +566,7 @@
             </details>
           </li>
           <li>
-            <details role="none">
+            <details>
               <summary aria-label="5월 28일 회의록">05-28</summary>
               <div class="details-description">
                 <h3>오늘 할일</h3>
@@ -580,7 +580,7 @@
             </details>
           </li>
           <li>
-            <details role="none">
+            <details>
               <summary aria-label="5월 29일 회의록">05-29</summary>
               <div class="details-description">
                 <h3>오늘 할일</h3>
@@ -597,7 +597,7 @@
             </details>
           </li>
           <li>
-            <details role="none">
+            <details>
               <summary aria-label="5월 30일 회의록">05-30</summary>
               <div class="details-description">
                 <h3>오늘 할일</h3>
@@ -620,7 +620,7 @@
             </details>
           </li>
           <li>
-            <details role="none">
+            <details>
               <summary aria-label="6월 2일 회의록">06-02</summary>
               <div class="details-description">
                 <h3>오늘 할 일</h3>
@@ -636,7 +636,7 @@
             </details>
           </li>
           <li>
-            <details role="none">
+            <details>
               <summary aria-label="6월 4일 회의록">06-04</summary>
               <div class="details-description">
                 <h3>오늘 할 일</h3>
@@ -669,8 +669,6 @@
     </footer>
     <script>
       const header = document.querySelector("header");
-      const guideModal = document.querySelector(".guide-modal");
-      const closedBtn = document.querySelector("#closed");
       function isMaximizedWindow() {
         return window.innerWidth >= 1650;
       }
@@ -690,11 +688,6 @@
       window.addEventListener("scroll", updateBackgroundZoom);
       window.addEventListener("resize", updateBackgroundZoom);
       window.addEventListener("DOMContentLoaded", updateBackgroundZoom);
-
-      guideModal.showModal();
-      closedBtn.addEventListener("click", () => {
-        guideModal.close();
-      });
     </script>
   </body>
 </html>
