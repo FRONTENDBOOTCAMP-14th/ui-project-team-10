@@ -10,11 +10,11 @@
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
-  column-gap: 24px;
+  column-gap: var(--spacing-md);
   div {
     word-spacing: -1px;
     h1 {
-      font-size: 14px;
+      font-size: var(--spotify-base-font-size);
       font-weight: 700;
       height: 21px;
       align-content: center;
@@ -25,7 +25,7 @@
     }
     p {
       min-height: 23.81px;
-      font-size: 16px;
+      font-size: var();
       font-weight: 400;
       line-height: 1.5;
       align-content: end;
@@ -45,7 +45,7 @@
     align-content: center;
     border-radius: var(--button-size);
 
-    font-size: 1rem;
+    font-size: var(--font-size-base);
     font-weight: 800;
     word-spacing: -1px;
     flex-shrink: 0;

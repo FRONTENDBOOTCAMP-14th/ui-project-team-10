@@ -78,6 +78,11 @@
   color: var(--spotify-white);
 }
 
+.sidebar-link:focus,
+.sidebar-playlist-link:focus {
+  opacity: 100%;
+}
+
 .sidebar-icon {
   width: var(--svg-size);
   height: var(--svg-size);
@@ -118,6 +123,7 @@
 
 .sidebar-main {
   overflow-y: scroll;
+  padding: 3px;
 }
 
 .sidebar-footer {
