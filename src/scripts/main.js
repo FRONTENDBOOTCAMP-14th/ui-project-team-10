@@ -153,7 +153,7 @@ function renderAlbums(albums) {
             <img src="${album.images[0]?.url || "default.jpg"}" alt="${
       album.name
     }" class="album-img" />
-            <img src="/icons/play.png" class="play-button"/>
+            <img src="/icons/play.png" class="play-button" alt="play"/>
           </div>
           <h3 class="card-title">${album.name}</h3>
           <p class="card-info"></p>
@@ -209,7 +209,7 @@ function renderPlaylists(playlists) {
             <img src="${playlist.images[0]?.url || "default.jpg"}" alt="${
       playlist.name
     }" class="album-img" />
-            <img src="/icons/play.png" class="play-button"/>
+            <img src="/icons/play.png" class="play-button" alt="play"/>
           </div>
           <h3 class="card-title">${playlist.name}</h3>
           <p class="card-info">By ${playlist.owner.display_name}</p>
