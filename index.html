@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="멋쟁이 사자처럼 프론트엔드 부트캠프 14기 UI 프로젝트 10조 프론드엔드 사자 친구" />
     <title>UI 프로젝트 - CSS</title>
     <link rel="icon" href="/icons/spotify-logo-symbol-green.svg" />
     <link
@@ -184,21 +185,30 @@
     </style>
   </head>
   <body>
+    <!-- 스킵 네비게이션 -->  
+    <a href="#main-content" aria-label="본문 바로가기" class="skip-link visually-hidden visually-shown-on-focus">본문 바로가기</a>
+    
     <header class="bg-black">
       <h1 class="green-text">프사친 - 프론트엔드 사자 친구</h1>
       <p>
         멋쟁이 사자처럼 프론트엔드 부트캠프 14기 UI 프로젝트 10조 프론드엔드
         사자 친구입니다!
       </p>
-      <a
-        href="/src/pages/home.html"
-        class="btn rounded-btn bg-green black-text hover-grow"
-        >시안 페이지로</a
-      >
-      <ul class="profile-list" aria-label="프로젝트 구성원">
+      
+      <nav aria-label="주요 네비게이션">
+        <a
+          href="/src/pages/home.html"
+          class="btn rounded-btn bg-green black-text hover-grow"
+          >시안 페이지로</a
+        >
+      </nav>
+      <section aria-labelledby="team-members">
+        <h2 id="team-members" class="visually-hidden">프로젝트 구성원</h2>
+        <ul class="profile-list" role="list">
         <li class="profile-card">
-          <img class="profile-img" src="/image/sji.webp" alt="" />
-          <p class="name green-text">석정일</p>
+          <article>
+            <img class="profile-img" src="/image/sji.webp" alt="석정일 프로필 사진" />
+            <h3 class="name green-text">석정일</h3>
           <p class="roll light-gray-text">조장</p>
           <a class="github light-gray-text" href="https://github.com/but212">
             <img src="/icons/github-white.svg" alt="깃헙 링크" />but212
@@ -230,7 +240,7 @@
             src="/image/kwh-profile.PNG"
             alt="고우현 프로필"
           />
-          <p class="name green-text">고우현</p>
+          <h3 class="name green-text">고우현</h3>
           <p class="roll light-gray-text">조원</p>
           <a
             class="github light-gray-text"
@@ -241,9 +251,10 @@
         </li>
       </ul>
     </header>
-    <main class="index-main">
-      <h2>원자 컴포넌트</h2>
-      <ul>
+    <main id="main-content" class="index-main">
+      <section aria-labelledby="atomic-components">
+        <h2 id="atomic-components">원자 컴포넌트</h2>
+        <ul role="list">
         <li>
           <a class="index-pages-btn" href="/src/components/button.html">버튼</a>
         </li>
@@ -329,7 +340,7 @@
         <ul class="retrospect-list">
           <li>
             <details>
-              <summary>고우현</summary>
+              <summary aria-label="고우현 회고록">고우현</summary>
               <div class="details-description">
                 <p>회고록 내용</p>
               </div>
@@ -374,7 +385,7 @@
           </li>
           <li>
             <details>
-              <summary>석정일</summary>
+              <summary aria-label="석정일 회고록">석정일</summary>
               <div class="details-description">
                 <p>
                   이번 프로젝트는 제가 프론트엔드 부트캠프를 시작하고 처음 맡는
@@ -451,12 +462,12 @@
           </li>
         </ul>
       </section>
-      <section class="text-block-container">
-        <h2>스크럼 회의록</h2>
-        <ul class="proceedings-list">
+      <section class="text-block-container" aria-labelledby="meetings">
+        <h2 id="meetings">스크럼 회의록</h2>
+        <ul class="proceedings-list" role="list">
           <li>
             <details>
-              <summary>05-26</summary>
+              <summary aria-label="5월 26일 회의록">05-26</summary>
               <div class="details-description">
                 <h3>오늘 할일</h3>
                 <p>조장 정하기 → 석정일</p>
@@ -470,7 +481,7 @@
           </li>
           <li>
             <details>
-              <summary>05-27</summary>
+              <summary aria-label="5월 27일 회의록">05-27</summary>
               <div class="details-description">
                 <h3>오늘 할일</h3>
                 <p>컴포넌트 디자인 시안 만들기</p>
@@ -482,15 +493,17 @@
                 <p>프로젝트 파일 구조 규칙 정하기</p>
                 <p>컴포넌트 역할 분담하기</p>
                 <h3>내일 할 예정</h3>
-                <p>index.html에 전체 틀 구성 CSS Grid 또는</p>
-                <p>Flex로 레이아웃 나누기</p>
+                <p>
+                  index.html에 전체 틀 구성 CSS Grid 또는
+                  Flex로 레이아웃 나누기
+                </p>
                 <p>사이드바 구조(Home, Search, Library)</p>
               </div>
             </details>
           </li>
           <li>
             <details>
-              <summary>05-28</summary>
+              <summary aria-label="5월 28일 회의록">05-28</summary>
               <div class="details-description">
                 <h3>오늘 할일</h3>
                 <p>index.html에 링크 텍스트 만들기</p>
@@ -504,7 +517,7 @@
           </li>
           <li>
             <details>
-              <summary>05-29</summary>
+              <summary aria-label="5월 29일 회의록">05-29</summary>
               <div class="details-description">
                 <h3>오늘 할일</h3>
                 <p>반응형 기준 정하기 (px)</p>
@@ -521,7 +534,7 @@
           </li>
           <li>
             <details>
-              <summary>05-30</summary>
+              <summary aria-label="5월 30일 회의록">05-30</summary>
               <div class="details-description">
                 <h3>오늘 할일</h3>
                 <p>소스 안에 /public/ ← 지워버리기</p>
@@ -560,7 +573,7 @@
           </li>
           <li>
             <details>
-              <summary>06-04</summary>
+              <summary aria-label="6월 4일 회의록">06-04</summary>
               <div class="details-description">
                 <h3>오늘 할 일</h3>
                 <p>코드 카피버튼 만들기</p>
@@ -580,10 +593,10 @@
         </ul>
       </section>
     </main>
-    <footer class="light-gray-text">
+    <footer class="light-gray-text" role="contentinfo">
       <p>이 프로젝트는 교육용 시안입니다.</p>
       <p>&copy; 2025 프사친</p>
-      <div class="footer-links">
+      <div class="footer-links" aria-label="외부 링크">
         <a href="https://github.com/but212/ui-project-team-10">GitHub</a>
         <a href="https://www.notion.so/10-1ff73873401a809890ecdc729743dffa"
           >Notion</a
