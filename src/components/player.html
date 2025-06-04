@@ -15,6 +15,46 @@
     <link rel="stylesheet" href="/src/style.css" />
     <link rel="stylesheet" href="/src/styles/common/components-common.css" />
     <title>player</title>
+    <script>
+      function updateRangeGradient(input) {
+        const min = parseFloat(input.min) || 0;
+        const max = parseFloat(input.max) || 100;
+        const val = parseFloat(input.value);
+        const percent = ((val - min) / (max - min)) * 100;
+        input.style.setProperty("--progress", `${percent}%`);
+      }
+
+      function formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const ranges = document.querySelectorAll('input[type="range"]');
+        ranges.forEach((range) => {
+          updateRangeGradient(range);
+          range.addEventListener("input", () => {
+            updateRangeGradient(range);
+
+            if (range.classList.contains("progress-bar")) {
+              const totalTimeText =
+                document.querySelector(".total-time").textContent;
+              const [totalMins, totalSecs] = totalTimeText
+                .split(":")
+                .map(Number);
+              const totalSeconds = totalMins * 60 + totalSecs;
+
+              const currentSeconds = (range.value / 100) * totalSeconds;
+              const formattedTime = formatTime(currentSeconds);
+
+              document.querySelector(".current-time").textContent =
+                formattedTime;
+            }
+          });
+        });
+      });
+    </script>
   </head>
   <body>
     <div class="spotify-player">
@@ -29,10 +69,10 @@
           <p class="artist-name">HANRORO</p>
         </div>
         <div class="player-user">
-          <button class="control-btn add-btn">
+          <button class="user-btn add-btn">
             <img src="/icons/add.svg" alt="add" />
           </button>
-          <button class="control-btn view-btn">
+          <button class="user-btn view-btn">
             <img src="/icons/view.svg" alt="view" />
           </button>
         </div>
@@ -58,7 +98,15 @@
         </div>
         <div class="progress-container">
           <span class="current-time">1:47</span>
-          <input type="range" class="progress-bar" value="26" />
+          <div class="player-progress">
+            <input
+              type="range"
+              class="progress-bar"
+              min="0"
+              max="100"
+              value="25"
+            />
+          </div>
           <span class="total-time">4:04</span>
         </div>
       </div>
