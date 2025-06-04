@@ -21,14 +21,23 @@
 }
 
 .sidebar-link,
-.sidebar-footer-link {
-  opacity: 0.7;
+.sidebar-footer-link,
+.sidebar-playlist-link {
+  opacity: 70%;
 }
 
-.sidebar-item-active,
-.sidebar-logo,
-.language-select {
-  opacity: 1;
+[aria-current="page"] {
+  opacity: 100%;
+}
+
+.sidebar a {
+  width: 100%;
+}
+
+.sidebar-link:hover,
+.sidebar-footer-link:hover,
+.sidebar-playlist-link:hover {
+  opacity: 100%;
 }
 
 .sidebar-logo {
@@ -45,14 +54,6 @@
 
 .sidebar-main ul {
   margin-bottom: var(--spacing-lg);
-}
-
-.sidebar a {
-  width: 100%;
-}
-
-.sidebar a:hover {
-  opacity: 100%;
 }
 
 .home .sidebar-icon {
