@@ -17,6 +17,7 @@
       height: 24px;
       display: block;
       margin: 24px 0 8px 0;
+
       svg {
         width: 100%;
         height: 100%;
@@ -61,24 +62,28 @@
       .button-text {
         flex-grow: 1;
       }
+
       &:nth-of-type(1) {
         .google {
           background: url(https://accounts.scdn.co/sso/images/new-google-icon.72fd940a229bc94cf9484a3320b3dccb.svg)
             center center no-repeat;
         }
       }
+
       &:nth-of-type(2) {
         .facebook {
           background: url(https://accounts.scdn.co/sso/images/new-facebook-icon.eae8e1b6256f7ccf01cf81913254e70b.svg)
             center center no-repeat;
         }
       }
+
       &:nth-of-type(3) {
         .apple {
           background: url(https://accounts.scdn.co/sso/images/new-apple-icon.e356139ea90852da2e60f1ff738f3cbb.svg)
             center center no-repeat;
         }
       }
+
       &:hover {
         border-color: var(--spotify-white);
       }
@@ -92,6 +97,7 @@
       border: none;
       height: 1px;
       background-color: rgb(41, 41, 41);
+      box-sizing: border-box;
     }
 
     .login-form {
@@ -114,7 +120,6 @@
 
         .error-massage {
           height: 20px;
-          /* align-items: center; */
           align-content: center;
           color: #f3727f;
           font-weight: 400;
@@ -133,7 +138,6 @@
           height: 48px;
           border-radius: 4px;
           padding: 12px;
-          /* margin-bottom: 16px; */
           color: var(--spotify-white);
 
           &::placeholder {
@@ -181,24 +185,30 @@
       }
     }
 
-    .account-label {
-      color: var(--spotify-light-gray);
-      font-size: 17px;
-      margin-top: 10px;
-      height: 21.9px;
-    }
+    .sign-box {
+      /* width: 100%; */
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
 
-    .account-link {
-      width: 100%;
-      text-align: center;
-      font-size: 17px;
-      display: block;
-      height: 32.38px;
-      align-content: end;
-      text-decoration: underline;
+      .account-label {
+        color: var(--spotify-light-gray);
+        font-size: 17px;
+        margin-top: 10px;
+        height: 21.9px;
+      }
 
-      &:hover{
-        color: #1ed760;
+      .account-link {
+        /* width: 100%; */
+        font-size: 17px;
+        display: block;
+        height: 32.38px;
+        align-content: end;
+        text-decoration: underline;
+
+        &:hover {
+          color: #1ed760;
+        }
       }
     }
   }
@@ -209,11 +219,57 @@
     height: 668.72px;
     border-radius: 8px;
 
-    & .login-box {
-      a {
+    .login-box {
+      padding: 0 0 32px 0;
+
+      .login-logo {
+        display: block;
         width: 36px;
         height: 36px;
-        margin: 32px;
+        margin: 32px 0 8px;
+      }
+
+      button {
+        width: 324px;
+      }
+
+      hr {
+        width: 73%;
+      }
+
+      .login-form {
+        width: 324px;
+        .input-box {
+          label {
+            font-size: 15px;
+          }
+
+          .error-massage {
+            font-size: 14.5px;
+            height: 21px;
+            margin-top: 8px;
+            align-content: end;
+
+            svg {
+              vertical-align: text-top;
+            }
+          }
+        }
+      }
+
+      .sign-box {
+        width: 100%;
+        flex-direction: row;
+        align-items: baseline;
+        justify-content: center;
+
+        .account-label {
+          width: 99.5px;
+          margin: 0px;
+          font-size: 1rem;
+          align-content: center;
+        }
+
       }
     }
   }
