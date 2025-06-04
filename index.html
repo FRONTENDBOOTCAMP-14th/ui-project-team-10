@@ -164,6 +164,52 @@
       footer a {
         margin: 0 var(--spacing-xs);
       }
+
+      /* 모달창 */
+      .guide-modal {
+        background: rgba(80, 82, 82, 0.814);
+        color: var(--spotify-white);
+        border-radius: 30px;
+        border: none;
+        box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px,
+          rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px,
+          rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px,
+          rgba(0, 0, 0, 0.07) 0px 32px 64px;
+        backdrop-filter: blur(3px);
+        text-align: center;
+        padding: 50px;
+
+        h1 {
+          margin-bottom: 10px;
+          font-size: 40px;
+        }
+
+        .notice {
+          font-size: large;
+        }
+        .copyright {
+          color: rgb(185, 185, 185);
+          font-size: 15px;
+        }
+
+        button {
+          margin-top: 30px;
+          width: 300px;
+          height: 50px;
+          background: var(--spotify-green);
+          border-radius: 50px;
+          transition: all 0.1s ease-in-out;
+
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: rgb(23, 23, 23) 0px 20px 30px -10px;
+          }
+
+          &:focus {
+            outline: 2px solid white;
+          }
+        }
+      }
     </style>
   </head>
   <body>
@@ -368,9 +414,21 @@
         >
       </div>
     </footer>
+
+    <!-- 모달 -->
+    <dialog class="guide-modal">
+      <h1>안내문</h1>
+      <p class="notice">
+        위 사이트는 가시안으로, <br />
+        비상업적 목적으로 제작되었음을 명시합니다.
+      </p>
+      <p class="copyright">&copy; 2025 프사친</p>
+      <button id="closed" type="button" class="reset-style">닫기</button>
+    </dialog>
     <script>
       const header = document.querySelector("header");
-
+      const guideModal = document.querySelector(".guide-modal");
+      const closedBtn = document.querySelector("#closed");
       function isMaximizedWindow() {
         return window.innerWidth >= 1650;
       }
@@ -390,6 +448,11 @@
       window.addEventListener("scroll", updateBackgroundZoom);
       window.addEventListener("resize", updateBackgroundZoom);
       window.addEventListener("DOMContentLoaded", updateBackgroundZoom);
+
+      guideModal.showModal();
+      closedBtn.addEventListener("click", () => {
+        guideModal.close();
+      });
     </script>
   </body>
 </html>
