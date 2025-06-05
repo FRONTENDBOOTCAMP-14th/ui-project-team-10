@@ -690,6 +690,133 @@
           </li>
         </ul>
       </section>
+      <section class="text-block-container" aria-labelledby="conventions">
+        <div class="section-header">
+          <h2>컨벤션</h2>
+        </div>
+        <ul class="proceedings-list">
+          <li>
+            <details>
+              <summary aria-label="커밋 컨벤션">커밋 컨벤션</summary>
+              <div class="details-description">
+                <p>init: 프로젝트 초기 설정 및 첫 커밋</p>
+                <p>
+                  feat(specification): 새로운 기능 추가, 기존 기능 변경,
+                  spectification에 어떤 기능 관련인지 넣는다. 혹은
+                  specification을 특정할 수 없으면 생략해도 된다.
+                </p>
+                <p>remove : 파일이나 코드 삭제</p>
+                <p>fix: 버그 수정, 오류 개선</p>
+                <p>
+                  docs: README.md, .json 파일 등 문서파일 수정, 라이브러리 설치
+                  관련 문서(문서 관련, 코드 수정 없음)
+                </p>
+                <p>quality: 코드 형식, 정렬, 주석 등의 변경</p>
+                <p>style: CSS 등 사용자 UI 디자인 변경(제품 코드 수정 발생)</p>
+                <p>refactor: 코드 리팩토링(변수 이름 변경)</p>
+                <p>
+                  test: 테스트 코드 추가, 삭제, 변경 등 (코드 수정 없음, 테스트
+                  코드에 관련된 모든 변경에 해당)
+                </p>
+                <p>
+                  ci: npm 모듈 설치, 빌드 관련 프로세스 변경 .github에 있는 파일
+                  생성 및 변경 등
+                </p>
+                <p>chore: 패키지 매니저 설정할 경우, etc 등</p>
+                <p>rename: 이름 변경</p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details>
+              <summary aria-label="깃 브랜치 컨벤션">Git Branch</summary>
+              <div class="details-description">
+                <p>feature/기능/ 해당 개발자 이름</p>
+                <p>
+                  ex: 석정일이 로그인페이지를 만드는 브랜치 : feature/login/sji
+                </p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details>
+              <summary aria-label="네이밍 컨벤션">HTML/CSS 네이밍</summary>
+              <div class="details-description">
+                <p>소문자 사용: 모든 태그와 속성은 소문자</p>
+                <p>kebap-case: 클래스 네이밍에서 문자를 이을 때 “-” 사용</p>
+                <p>속성에 붙이는 따옴표: 쌍따옴표로 통일</p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details>
+              <summary aria-label="포매팅 컨벤션">
+                HTML/CSS 포매팅 컨벤션
+              </summary>
+              <div class="details-description">
+                <p>2칸 스페이스 사용 (탭 문자 사용 금지)</p>
+                <p>중첩된 요소는 부모 요소보다 한 단계 들여쓰기</p>
+                <p>닫는 태그는 여는 태그와 같은 레벨로 정렬</p>
+                <p>속성과 값 사이의 콜론 뒤에 한 칸 공백</p>
+                <p>각 속성은 새 줄에 작성</p>
+                <p>마지막 속성 뒤에도 세미콜론 추가</p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details>
+              <summary aria-label="포매팅 컨벤션">
+                HTML/CSS 포매팅 컨벤션
+              </summary>
+              <div class="details-description">
+                <p>2칸 스페이스 사용 (탭 문자 사용 금지)</p>
+                <p>중첩된 요소는 부모 요소보다 한 단계 들여쓰기</p>
+                <p>닫는 태그는 여는 태그와 같은 레벨로 정렬</p>
+                <p>속성과 값 사이의 콜론 뒤에 한 칸 공백</p>
+                <p>각 속성은 새 줄에 작성</p>
+                <p>마지막 속성 뒤에도 세미콜론 추가</p>
+                <p>절대경로 사용</p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details>
+              <summary aria-label="파일 컨벤션">파일 컨벤션</summary>
+              <div class="details-description">
+                <p>src/components: UI 컴포넌트 시안이 위치</p>
+                <p>src/scripts: JS파일이 위치</p>
+                <p>src/styles: 스타일 관련 CSS파일이 위치</p>
+                <p>
+                  src/assets: 정적 에셋들이 위치하는데 Vite로 번들링 시 필요한
+                  위치에서 로딩됨. 안쓰는건 번들링에 포함이 안됨
+                </p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details>
+              <summary aria-label="파일 컨벤션">파일 컨벤션</summary>
+              <div class="details-description">
+                <p>
+                  public/images: 웹사이트에서 사용되는 이미지 파일을 저장. 주로
+                  로고, 배경 이미지, 버튼 아이콘 등을 포함
+                </p>
+                <p>
+                  public/fonts: 웹사이트에서 사용하는 폰트 파일들이 위치하는
+                  폴더
+                </p>
+                <p>
+                  public/icon: 사이트에서 활용되는 아이콘 파일들을 포함하는 폴더
+                </p>
+                <p>
+                  파일네이밍: 모두 소문자로 작명 kebap 케이스 활용 (예:
+                  music-component.html)
+                </p>
+              </div>
+            </details>
+          </li>
+        </ul>
+      </section>
     </main>
     <footer class="light-gray-text">
       <p>이 프로젝트는 교육용 시안입니다.</p>
