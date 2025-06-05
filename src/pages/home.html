@@ -73,40 +73,42 @@
         line-height: 1.5;
         text-align: center;
         padding: 50px;
-
-        h1 {
-          color: var(--spotify-green);
-          margin-bottom: 10px;
-          font-size: 40px;
-        }
-
-        .notice {
-          font-size: large;
-        }
-        .copyright {
-          color: rgb(185, 185, 185);
-          font-size: 15px;
-        }
-
-        button {
-          display: block;
-          margin-top: 30px;
-          width: 300px;
-          height: 50px;
-          background: var(--spotify-green);
-          border-radius: 50px;
-          transition: all 0.1s ease-in-out;
-
-          &:hover {
-            transform: translateY(-2px);
-            box-shadow: rgb(23, 23, 23) 0px 20px 30px -10px;
-          }
-
-          &:focus {
-            outline: 2px solid white;
-          }
-        }
       }
+
+      .guide-modal h1 {
+        color: var(--spotify-green);
+        margin-bottom: 10px;
+        font-size: 40px;
+      }
+
+      .guide-modal .notice {
+        font-size: large;
+      }
+
+      .guide-modal .copyright {
+        color: rgb(185, 185, 185);
+        font-size: 15px;
+      }
+
+      .guide-modal button {
+        display: block;
+        margin-top: 30px;
+        width: 300px;
+        height: 50px;
+        background: var(--spotify-green);
+        border-radius: 50px;
+        transition: all 0.1s ease-in-out;
+      }
+
+      .guide-modal button:hover {
+        transform: translateY(-2px);
+        box-shadow: rgb(23, 23, 23) 0px 20px 30px -10px;
+      }
+
+      .guide-modal button:focus {
+        outline: 2px solid white;
+      }
+
       .sidebar-footer-link button {
         border: none;
         background: none;
@@ -115,9 +117,15 @@
     </style>
   </head>
   <body>
-    <div class="grid-body">
+    <a
+      href="#main-content"
+      aria-label="본문 바로가기"
+      class="skip-link visually-hidden visually-shown-on-focus"
+      >본문 바로가기</a
+    >
+    <div class="grid-body" role="none">
       <header>
-        <ul class="header-box">
+        <ul class="header-box" role="none">
           <!-- 로고 -->
           <li>
             <div class="header-logo-box">
@@ -398,11 +406,11 @@
             class="btn gray-outline-style rounded-btn language-select"
           >
             <img src="/icons/globe.svg" alt="" class="btn-icon" />
-            <p>언어선택</p>
+            <span>언어선택</span>
           </button>
         </section>
       </nav>
-      <main class="main-component">
+      <main id="main-content" class="main-component">
         <section class="list-component">
           <div class="list-header">
             <h2>Album</h2>
