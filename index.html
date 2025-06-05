@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/font/pretendardvariable.css" />
     <link rel="stylesheet" href="/src/common/index.css" />
     <link rel="stylesheet" href="/src/style.css" />
+    <script type="module" src="/src/scripts/indexBackground.js"></script>
     <style>
       body {
         line-height: 1.6;
@@ -339,11 +340,6 @@
               카드 컴포넌트
             </a>
           </li>
-          <!-- <li>
-          <a class="index-pages-btn" href="/src/components/player-control.html">
-            플레이어 컨트롤
-          </a>
-        </li> -->
           <li>
             <a class="index-pages-btn" href="/src/components/search-input.html">
               검색 입력창
@@ -355,13 +351,11 @@
           </a>
         </li> -->
         </ul>
-      </section>
-      <div class="section-header">
-        <h2 id="page-components">페이지 컴포넌트</h2>
-        <p>페이지 컴포넌트는 페이지 전체를 구성하는 컴포넌트를 의미합니다.</p>
-      </div>
-      <section aria-labelledby="page-components">
-        <ul aria-labelledby="page-components">
+        <div class="section-header">
+          <h2 id="page-components">페이지 컴포넌트</h2>
+          <p>페이지 컴포넌트는 메인 페이지를 구성요소와 추가 페이지입니다.</p>
+        </div>
+        <ul>
           <li>
             <a class="index-pages-btn" href="/src/components/header.html"
               >헤더</a
@@ -390,9 +384,12 @@
               >회원가입</a
             >
           </li>
+          <li>
+            <a class="index-pages-btn" href="/src/pages/install-page.html"
+              >앱 설치</a
+            >
+          </li>
         </ul>
-      </section>
-      <section aria-labelledby="functional-components">
         <div class="section-header">
           <h2 id="functional-components">기능 컴포넌트</h2>
           <p>기능 컴포넌트는 기능별 컴포넌트 집합입니다.</p>
@@ -411,6 +408,11 @@
           <li>
             <a class="index-pages-btn" href="/src/components/player.html"
               >플레이어</a
+            >
+          </li>
+          <li>
+            <a class="index-pages-btn" href="/src/components/playlist.html"
+              >플레이리스트</a
             >
           </li>
           <li>
@@ -454,11 +456,15 @@
                   통해 많은 것을 배우고 성장하는 기회가 되었습니다.
                 </p>
                 <h3>내가 맡은 일</h3>
+
                 <p>
                   Header 컴포넌트 제작 및 조립을 했으며 index.html와
-                  메인페이지를 조장과 같이 만들었습니다. 로그인 페이지
-                  제작했습니다.
+                  메인페이지를 조장과 같이 만들었습니다. <br />
+                  로그인 페이지를 제작했습니다. <br />
+                  회원가입 페이지를 제작했습니다. <br />
+                  앱 설치 페이지를 제작했습니다.
                 </p>
+
                 <h3>배운 점 & 느낀 점</h3>
                 <p>
                   실제 서비스를 벤치마킹해보며 어떤 구조로 콘텐츠가 배열되고,
@@ -828,7 +834,7 @@
         >
       </div>
     </footer>
-    <script>
+    <!-- <script>
       const header = document.querySelector("header");
       function isMaximizedWindow() {
         return window.innerWidth >= 1650;
@@ -849,6 +855,11 @@
       window.addEventListener("scroll", updateBackgroundZoom);
       window.addEventListener("resize", updateBackgroundZoom);
       window.addEventListener("DOMContentLoaded", updateBackgroundZoom);
-    </script>
+
+      guideModal.showModal();
+      closedBtn.addEventListener("click", () => {
+        guideModal.close();
+      });
+    </script> -->
   </body>
 </html>
