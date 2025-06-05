@@ -120,7 +120,6 @@
 .volume-bar {
   width: 5rem;
 }
-
 input[type="range"] {
   background: transparent;
   background-image: linear-gradient(
@@ -130,11 +129,13 @@ input[type="range"] {
     var(--spotify-gray) var(--progress, 50%),
     var(--spotify-gray) 100%
   );
-  border-radius: 0.125rem;
   height: 0.25rem;
+  border-radius: 0.125rem;
   outline: none;
+  appearance: none;
 }
 
+/* WebKit (Chrome, Safari) */
 input[type="range"]::-webkit-slider-runnable-track {
   height: 0.25rem;
   background: transparent;
@@ -147,10 +148,12 @@ input[type="range"]::-webkit-slider-thumb {
   height: 0.75rem;
   background: var(--spotify-white);
   border-radius: 50%;
-  margin-top: -0.25rem;
+  margin-top: -0.25rem; /* Center the thumb vertically */
   cursor: pointer;
+  border: none;
 }
 
+/* Firefox */
 input[type="range"]::-moz-range-track {
   height: 0.25rem;
   background: var(--spotify-gray);
@@ -172,6 +175,7 @@ input[type="range"]::-moz-range-thumb {
   cursor: pointer;
 }
 
+/* Internet Explorer & Edge (구버전) */
 input[type="range"]::-ms-track {
   height: 0.25rem;
   background: transparent;
@@ -195,4 +199,5 @@ input[type="range"]::-ms-thumb {
   background: var(--spotify-white);
   border-radius: 50%;
   cursor: pointer;
+  border: none;
 }
