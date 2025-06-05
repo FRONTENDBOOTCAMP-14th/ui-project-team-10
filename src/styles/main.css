@@ -16,7 +16,7 @@
 }
 
 .main-component {
-  /* margin: 1rem; */
+  margin-top: 1rem;
   padding: 2rem;
   box-sizing: border-box;
   background: var(--spotify-black);
