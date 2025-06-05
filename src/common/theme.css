@@ -7,7 +7,7 @@
   --spotify-green: #1ed760;
   --spotify-white: #ffffff;
   --spotify-blue: #1d75de;
-  --spotify-card-bg: #282828e2;
+  --spotify-card-bg: #2828289f;
 
   /* font size */
   --spotify-base-font-size: 14px;
@@ -39,6 +39,7 @@
   --sidebar-min-width: 360px;
 
   --font-size-lg: 3.5rem;
+  --font-size-md: 1.5rem;
   --font-size-base: 1rem;
   --font-size-small: 0.8rem;
   --font-size-xs: 0.8125rem;

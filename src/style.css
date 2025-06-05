@@ -9,4 +9,6 @@
 
 .full-width {
   width: 100%;
+  min-width: none;
+  max-width: none;
 }

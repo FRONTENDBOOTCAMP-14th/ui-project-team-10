@@ -1,6 +1,7 @@
 # 프론트엔드 사자 친구 UI 프로젝트
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/5b81bd62-35ce-402c-80b8-651cec7b76d2/deploy-status)](https://app.netlify.com/projects/frontend-lion-friends/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/5b81bd62-35ce-402c-80b8-651cec7b76d2/deploy-status)](https://frontend-lion-friends.netlify.app/)
+**배지를 누르면 앱으로 들어가집니다.**
 
 멋쟁이 사자처럼 프론트엔드 부트캠프 14기 UI 프로젝트 10조 프론드엔드 사자 친구입니다!
 

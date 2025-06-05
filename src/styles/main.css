@@ -17,12 +17,15 @@
 
 .main-component {
   /* margin: 1rem; */
-  padding: 2rem;
+  /* padding: 2rem; */
   box-sizing: border-box;
   background: var(--spotify-black);
   border-radius: 0.5rem;
 }
 
+.padding-box {
+  padding: 2rem;
+}
 .list-component {
   margin-bottom: 5rem;
   display: flex;

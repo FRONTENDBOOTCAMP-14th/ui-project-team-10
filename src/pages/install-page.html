@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Copytify - 로그인</title>
+    <link rel="icon" href="/icons/spotify-logo-symbol-green.svg" />
+    <link
+      rel="preload"
+      as="font"
+      href="/font/woff2/PretendardVariable.woff2"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/font/pretendardvariable.css" />
+    <link rel="stylesheet" href="/src/common/index.css" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <!-- <link rel="stylesheet" href="/src/styles/login-page.css" /> -->
+    <style>
+      /* body {
+        width: 100vw;
+        height: 100vh;
+        align-content: center;
+      } */
+
+      .install-box {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(#5eac96, #f79bd2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px;
+        border-radius: 8px;
+
+        /* 콘텐츠 상자 */
+        .content-box {
+          background: linear-gradient(#f79bd2, #5eac96);
+          width: 100%;
+          height: 100%;
+          padding: 40px;
+          color: black;
+          display: flex;
+          flex-flow: column nowrap;
+          row-gap: 32px;
+
+          .item {
+            min-width: 336px;
+            display: flex;
+            flex-flow: column nowrap;
+            gap: 32px;
+          }
+
+          /* 제목 */
+          h1 {
+            img {
+              filter: invert(100%);
+              width: 98.68px;
+              height: 27px;
+            }
+          }
+
+          h2 {
+            font-size: 2rem;
+            font-weight: 800;
+          }
+
+          p {
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 1.5;
+          }
+
+          .link-box {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 182.89px;
+            height: 87.89px;
+          }
+          img.store-img {
+            width: 182.89px;
+            height: 50px;
+            cursor: pointer;
+          }
+
+          .laptop-img {
+            max-width: 100%;
+            /* height: 100%; */
+          }
+
+          @media (width >1387px) {
+            flex-direction: row;
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="install-box">
+      <div class="content-box">
+        <div class="item">
+          <h1>
+            <img src="/public/icons/copytify-logo.svg" alt="copytify" />
+          </h1>
+          <h2>Windows용 Copytify 다운로드</h2>
+          <p>
+            고품질 오디오 및 오프라인 재생, Windows Game Bar 통합, 친구들이
+            무엇을 듣고 있는지 실시간으로 확인할 수 있는 친구 활동 피드를
+            즐기세요.
+          </p>
+          <div class="link-box">
+            <img
+              part="img"
+              src="https://get.microsoft.com/images/ko dark.svg"
+              alt="Microsoft Store app badge"
+              class="store-img"
+            />
+            <a
+              draggable="false"
+              target="_blank"
+              href="https://download.scdn.co/SpotifySetup.exe"
+              rel="noopener"
+              ><span data-encore-id="text">Spotify에서 바로 다운로드</span></a
+            >
+          </div>
+        </div>
+        <img
+          class="laptop-img"
+          alt=""
+          src="https://open.spotifycdn.com/cdn/images/download-page-image.781553a2.png"
+        />
+      </div>
+    </div>
+  </body>
+</html>
