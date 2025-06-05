@@ -15,6 +15,7 @@
     <!-- css 파일 연동필요시 연동 할 것 -->
     <link rel="stylesheet" href="/src/style.css" />
     <link rel="stylesheet" href="/src/common/index.css" />
+    <link rel="stylesheet" href="/src/styles/common/components-common.css" />
     <style>
       footer {
         background: var(--spotify-black-gray);
@@ -26,6 +27,14 @@
     </style>
   </head>
   <body>
+    <div class="component-header">
+      <h1>푸터</h1>
+      <a
+        href="/index.html"
+        class="rounded-btn btn bg-green black-text hover-grow"
+        >메인 페이지 이동</a
+      >
+    </div>
     <footer>
       <div class="footer-container">
         <div class="footer-columns">
@@ -140,12 +149,12 @@
         </div>
       </div>
     </footer>
-    <div class="code-viewer">
+    <!-- <div class="code-viewer">
       <button id="show-html-btn" class="code-btn">HTML 코드 확인</button>
       <button id="show-css-btn" class="code-btn">CSS 코드 확인</button>
       <pre id="html-code-box" class="code-box" style="display: none"></pre>
       <pre id="css-code-box" class="code-box" style="display: none"></pre>
-    </div>
+    </div> -->
   </body>
 </html>
 
