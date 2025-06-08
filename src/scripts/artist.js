@@ -111,14 +111,14 @@ function setupEventListeners() {
     });
 
   // Show all toggle (for artist)
-  const artistShowAllBtn = document.querySelector(".artist-show-all");
-  if (artistShowAllBtn) {
-    artistShowAllBtn.addEventListener("click", () => {
-      const isGrid = artistList.classList.toggle("grid-mode");
-      artistShowAllBtn.textContent = isGrid ? "Hide" : "Show All";
-      toggleScrollButtons("artist", !isGrid);
-    });
-  }
+  // const artistShowAllBtn = document.querySelector(".artist-show-all");
+  // if (artistShowAllBtn) {
+  //   artistShowAllBtn.addEventListener("click", () => {
+  //     const isGrid = artistList.classList.toggle("grid-mode");
+  //     artistShowAllBtn.textContent = isGrid ? "Hide" : "Show All";
+  //     toggleScrollButtons("artist", !isGrid);
+  //   });
+  // }
 
   function toggleScrollButtons(type, show) {
     const selectors = {
