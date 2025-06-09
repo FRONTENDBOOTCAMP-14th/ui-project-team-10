@@ -120,14 +120,14 @@ function setupEventListeners() {
     });
 
   // Show all toggle (for album)
-  const albumShowAllBtn = document.querySelector(".album-show-all");
-  if (albumShowAllBtn) {
-    albumShowAllBtn.addEventListener("click", () => {
-      const isGrid = albumList.classList.toggle("grid-mode");
-      albumShowAllBtn.textContent = isGrid ? "Hide" : "Show All";
-      toggleScrollButtons("album", !isGrid);
-    });
-  }
+  // const albumShowAllBtn = document.querySelector(".album-show-all");
+  // if (albumShowAllBtn) {
+  //   albumShowAllBtn.addEventListener("click", () => {
+  //     const isGrid = albumList.classList.toggle("grid-mode");
+  //     albumShowAllBtn.textContent = isGrid ? "Hide" : "Show All";
+  //     toggleScrollButtons("album", !isGrid);
+  //   });
+  // }
 }
 
 function toggleScrollButtons(type, show) {
