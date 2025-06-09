@@ -10,9 +10,9 @@ async function loadPage() {
   try {
     const response = await fetch(`./${pageName}.html`);
     const html = await response.text();
-    document.querySelector("#main-content").innerHTML = html;
+    document.querySelector(".main-component").innerHTML = html;
   } catch (error) {
-    document.querySelector("#main-content").innerHTML =
+    document.querySelector(".main-component").innerHTML =
       "<p>페이지를 불러올 수 없습니다.</p>";
   }
 }
