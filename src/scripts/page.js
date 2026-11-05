@@ -1,28 +1,28 @@
+const ALLOWED_PAGES = ["install-page"];
+
 async function loadPage() {
   // 현재 주소창에서 해시값을 가져옴. 예: #install-page
-  const hash = location.hash;
+  const pageName = location.hash.substring(1);
 
-  // 해시가 없으면 → 기본 페이지 (index.html의 <main>) 그대로 둠
-  if (!hash) return;
+  // 해시가 없거나 허용 목록에 없으면 index의 <main> 그대로 둠
+  if (!ALLOWED_PAGES.includes(pageName)) return;
 
-  const pageName = hash.substring(1); // '#' 제거: "install-page"
-
+  const main = document.querySelector(".main-component");
   try {
     const response = await fetch(`./${pageName}.html`);
-    const html = await response.text();
-    document.querySelector(".main-component").innerHTML = html;
+    if (!response.ok) throw new Error(`페이지 요청 실패: ${response.status}`);
+    const doc = new DOMParser().parseFromString(await response.text(), "text/html");
+    main.replaceChildren(...doc.head.querySelectorAll("style"), ...doc.body.childNodes);
   } catch (error) {
-    document.querySelector(".main-component").innerHTML =
-      "<p>페이지를 불러올 수 없습니다.</p>";
+    main.innerHTML = "<p>페이지를 불러올 수 없습니다.</p>";
   }
 }
 
+// 해시 변경 시 새로고침하여 초기 <main>과 main.js가 붙인 이벤트 리스너를 복원한다.
+// innerHTML 교체만으로는 해시 제거(#install-page -> 없음) 시 원래 <main>을 되돌릴 수 없다.
+// 로드는 새로고침 후 DOMContentLoaded에서 수행한다.
 window.addEventListener("hashchange", () => {
   location.reload();
 });
 
-// 해시가 바뀌었을 때만 실행 (ex. #about, #contact 클릭)
-window.addEventListener("hashchange", loadPage);
-
-// 페이지 처음 열었을 때 실행
 window.addEventListener("DOMContentLoaded", loadPage);

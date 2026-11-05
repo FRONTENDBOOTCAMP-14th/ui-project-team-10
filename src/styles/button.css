@@ -37,8 +37,8 @@
   width: var(--button-size);
   aspect-ratio: 1;
   border-radius: var(--button-size);
-  img,
-  svg {
+  & img,
+  & svg {
     max-width: var(--svg-size);
     max-height: var(--svg-size);
     vertical-align: middle;
