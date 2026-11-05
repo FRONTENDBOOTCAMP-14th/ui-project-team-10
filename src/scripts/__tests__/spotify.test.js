@@ -6,8 +6,12 @@ import {
   getAlbums,
   getArtists,
   getPlaylists,
+  escapeHtml,
   getToken,
+  loadSection,
   renderAlbums,
+  renderArtists,
+  renderPlaylists,
 } from "../spotify.js";
 
 const ok = (body) => Promise.resolve(Response.json(body));
@@ -96,5 +100,93 @@ describe("renderAlbums", () => {
     expect(list.querySelector(".card-title").textContent).toBe("A");
     expect(list.querySelector(".card-info").textContent).toBe("X, Y");
     expect(list.firstElementChild.getAttribute("aria-label")).toBe("X, Y , A");
+  });
+});
+
+describe("escapeHtml", () => {
+  it("escapes & < > \" and '", () => {
+    expect(escapeHtml(`&<>"'`)).toBe("&amp;&lt;&gt;&quot;&#39;");
+  });
+  it("stringifies non-strings", () => {
+    expect(escapeHtml(5)).toBe("5");
+  });
+});
+
+describe("render escaping", () => {
+  const evil = `x"><img src=x onerror=alert(1)>`;
+
+  it("renderPlaylists neutralizes markup in name and owner", () => {
+    const list = document.createElement("ul");
+    renderPlaylists(list, [
+      {
+        name: evil,
+        external_urls: { spotify: "https://s/p" },
+        images: [],
+        owner: { display_name: "<b>o</b>" },
+      },
+    ]);
+    expect(list.querySelector("[onerror]")).toBeNull();
+    expect(list.querySelector("b")).toBeNull();
+    expect(list.querySelector(".card-title").textContent).toBe(evil);
+    expect(list.querySelector(".card-info").textContent).toBe("By <b>o</b>");
+  });
+
+  it("renderAlbums and renderArtists neutralize markup", () => {
+    const albums = document.createElement("ul");
+    renderAlbums(albums, [
+      {
+        name: evil,
+        external_urls: { spotify: "https://s/a" },
+        images: [],
+        artists: [{ name: "<i>X</i>" }],
+      },
+    ]);
+    expect(albums.querySelector("[onerror]")).toBeNull();
+    expect(albums.querySelector("i")).toBeNull();
+    expect(albums.querySelector(".card-info").textContent).toBe("<i>X</i>");
+
+    const artists = document.createElement("ul");
+    renderArtists(artists, [
+      { name: evil, external_urls: { spotify: "https://s/r" }, images: [] },
+    ]);
+    expect(artists.querySelector("[onerror]")).toBeNull();
+    expect(artists.querySelector(".card-title").textContent).toBe(evil);
+  });
+});
+
+describe("image fallbacks", () => {
+  const firstSrc = (list) => list.querySelector("img").getAttribute("src");
+  const base = { name: "n", external_urls: { spotify: "https://s/" }, images: [] };
+
+  it("uses an existing default image per kind", () => {
+    const a = document.createElement("ul");
+    renderArtists(a, [base]);
+    expect(firstSrc(a)).toBe("/image/default-artist.jpg");
+
+    const b = document.createElement("ul");
+    renderAlbums(b, [{ ...base, artists: [] }]);
+    expect(firstSrc(b)).toBe("/image/default-album-cover.png");
+
+    const c = document.createElement("ul");
+    renderPlaylists(c, [{ ...base, owner: { display_name: "o" } }]);
+    expect(firstSrc(c)).toBe("/image/default-playlist-cover.png");
+  });
+});
+
+describe("loadSection", () => {
+  it("renders loaded items", async () => {
+    const list = document.createElement("ul");
+    const render = vi.fn();
+    await loadSection(list, () => Promise.resolve([1]), render, "err");
+    expect(render).toHaveBeenCalledWith(list, [1]);
+  });
+
+  it("writes the error message and does not reject on failure", async () => {
+    vi.spyOn(console, "error").mockImplementation(() => {});
+    const list = document.createElement("ul");
+    await expect(
+      loadSection(list, () => Promise.reject(new Error("x")), vi.fn(), "err")
+    ).resolves.toBeUndefined();
+    expect(list.innerHTML).toBe("<li>err</li>");
   });
 });

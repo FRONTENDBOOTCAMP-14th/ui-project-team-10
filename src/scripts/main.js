@@ -4,6 +4,7 @@ import {
   getArtists,
   getPlaylists,
   getToken,
+  loadSection,
   renderAlbums,
   renderArtists,
   renderPlaylists,
@@ -14,24 +15,12 @@ const albumList = document.querySelector(".album-list");
 const playlistList = document.querySelector(".playlist-list");
 
 async function init() {
-  try {
-    const token = await getToken();
-
-    const [artists, albums, playlists] = await Promise.all([
-      getArtists(token),
-      getAlbums(token),
-      getPlaylists(token),
-    ]);
-
-    renderArtists(artistList, artists);
-    renderAlbums(albumList, albums);
-    renderPlaylists(playlistList, playlists);
-  } catch (e) {
-    console.error("데이터를 불러오는 데 실패했습니다.", e);
-    artistList.innerHTML = "<li>아티스트 정보를 불러오지 못했습니다.</li>";
-    albumList.innerHTML = "<li>앨범 정보를 불러오지 못했습니다.</li>";
-    playlistList.innerHTML = "<li>플레이리스트 정보를 불러오지 못했습니다.</li>";
-  }
+  const token = getToken();
+  await Promise.all([
+    loadSection(artistList, () => token.then(getArtists), renderArtists, "아티스트 정보를 불러오지 못했습니다."),
+    loadSection(albumList, () => token.then(getAlbums), renderAlbums, "앨범 정보를 불러오지 못했습니다."),
+    loadSection(playlistList, () => token.then(getPlaylists), renderPlaylists, "플레이리스트 정보를 불러오지 못했습니다."),
+  ]);
 }
 
 function toggleScrollButtons(name, show) {

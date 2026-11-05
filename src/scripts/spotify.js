@@ -100,6 +100,16 @@ export async function getPlaylists(token) {
   return results.filter(Boolean);
 }
 
+const HTML_ESCAPES = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+
+export function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, (c) => HTML_ESCAPES[c]);
+}
+
+const DEFAULT_ARTIST_IMG = "/image/default-artist.jpg";
+const DEFAULT_ALBUM_IMG = "/image/default-album-cover.png";
+const DEFAULT_PLAYLIST_IMG = "/image/default-playlist-cover.png";
+
 function renderCards(list, items, toCard) {
   const fragment = document.createDocumentFragment();
   for (const item of items) {
@@ -114,38 +124,51 @@ function renderCards(list, items, toCard) {
   list.appendChild(fragment);
 }
 
+export async function loadSection(list, load, render, errorMessage) {
+  try {
+    render(list, await load());
+  } catch (e) {
+    console.error("데이터를 불러오는 데 실패했습니다.", e);
+    list.innerHTML = `<li>${errorMessage}</li>`;
+  }
+}
+
 export function renderArtists(list, artists) {
-  renderCards(list, artists, (artist) => ({
-    label: artist.name,
-    html: `
-      <a href="${artist.external_urls.spotify}" target="_blank">
+  renderCards(list, artists, (artist) => {
+    const name = escapeHtml(artist.name);
+    return {
+      label: artist.name,
+      html: `
+      <a href="${escapeHtml(artist.external_urls.spotify)}" target="_blank">
         <article>
           <div class="artist-cover">
-            <img loading="lazy" src="${artist.images[0]?.url || ""}" alt="${artist.name}" class="artist-profile" />
+            <img loading="lazy" src="${escapeHtml(artist.images[0]?.url || DEFAULT_ARTIST_IMG)}" alt="${name}" class="artist-profile" />
             <img src="/icons/play.png" class="play-button" alt="play"/>
           </div>
-          <h3 class="card-title">${artist.name}</h3>
+          <h3 class="card-title">${name}</h3>
           <p class="card-info">Artist</p>
         </article>
       </a>
     `,
-  }));
+    };
+  });
 }
 
 export function renderAlbums(list, albums) {
   renderCards(list, albums, (album) => {
     const artistNames = album.artists.map((a) => a.name).join(", ");
+    const name = escapeHtml(album.name);
     return {
       label: `${artistNames} , ${album.name}`,
       html: `
-      <a href="${album.external_urls.spotify}" target="_blank">
+      <a href="${escapeHtml(album.external_urls.spotify)}" target="_blank">
         <article>
           <div class="album-cover">
-            <img loading="lazy" src="${album.images[0]?.url || "default.jpg"}" alt="${album.name}" class="album-img" />
+            <img loading="lazy" src="${escapeHtml(album.images[0]?.url || DEFAULT_ALBUM_IMG)}" alt="${name}" class="album-img" />
             <img src="/icons/play.png" class="play-button" alt="play"/>
           </div>
-          <h3 class="card-title">${album.name}</h3>
-          <p class="card-info">${artistNames}</p>
+          <h3 class="card-title">${name}</h3>
+          <p class="card-info">${escapeHtml(artistNames)}</p>
         </article>
       </a>
     `,
@@ -154,21 +177,24 @@ export function renderAlbums(list, albums) {
 }
 
 export function renderPlaylists(list, playlists) {
-  renderCards(list, playlists, (playlist) => ({
-    label: playlist.name,
-    html: `
-      <a href="${playlist.external_urls.spotify}" target="_blank">
+  renderCards(list, playlists, (playlist) => {
+    const name = escapeHtml(playlist.name);
+    return {
+      label: playlist.name,
+      html: `
+      <a href="${escapeHtml(playlist.external_urls.spotify)}" target="_blank">
         <article>
           <div class="album-cover">
-            <img loading="lazy" src="${playlist.images[0]?.url || "default.jpg"}" alt="${playlist.name}" class="album-img" />
+            <img loading="lazy" src="${escapeHtml(playlist.images[0]?.url || DEFAULT_PLAYLIST_IMG)}" alt="${name}" class="album-img" />
             <img src="/icons/play.png" class="play-button" alt="play"/>
           </div>
-          <h3 class="card-title">${playlist.name}</h3>
-          <p class="card-info">By ${playlist.owner.display_name}</p>
+          <h3 class="card-title">${name}</h3>
+          <p class="card-info">By ${escapeHtml(playlist.owner.display_name)}</p>
         </article>
       </a>
     `,
-  }));
+    };
+  });
 }
 
 export function bindScrollButtons(list, leftSelector, rightSelector) {

@@ -6,7 +6,7 @@ const spotify = (path) => ({
   name: path,
 });
 
-function stubFetch({ tokenOk = true } = {}) {
+function stubFetch({ tokenOk = true, albumsOk = true } = {}) {
   const fetchMock = vi.fn((url) => {
     const u = String(url);
     if (u.includes("spotify-token")) {
@@ -18,6 +18,7 @@ function stubFetch({ tokenOk = true } = {}) {
       return Promise.resolve(Response.json({ artists: [spotify("artist")] }));
     }
     if (u.includes("/albums?")) {
+      if (!albumsOk) return Promise.resolve(new Response("{}", { status: 404 }));
       return Promise.resolve(
         Response.json({ albums: [{ ...spotify("album"), artists: [{ name: "X" }] }] })
       );
@@ -86,6 +87,21 @@ describe("scripts/main.js", () => {
     expect(document.querySelector(".playlist-list").textContent).toContain(
       "플레이리스트 정보를 불러오지 못했습니다."
     );
+  });
+
+  it("isolates a failing section from the others", async () => {
+    vi.spyOn(console, "error").mockImplementation(() => {});
+    stubFetch({ albumsOk: false });
+    await boot();
+    await vi.waitFor(() =>
+      expect(document.querySelector(".album-list").textContent).toContain(
+        "앨범 정보를 불러오지 못했습니다."
+      )
+    );
+    await vi.waitFor(() =>
+      expect(document.querySelectorAll(".playlist-list .list-card").length).toBeGreaterThan(0)
+    );
+    expect(document.querySelectorAll(".artist-list .list-card")).toHaveLength(1);
   });
 
   it("show-all toggles grid-mode and hides the scroll buttons", async () => {

@@ -45,18 +45,9 @@ export default defineConfig({
     // 2. Vite 8의 기본 타겟은 'baseline-widely-available'입니다. 
     // 필요 시 oxc 설정을 통해 트랜스파일을 세부 제어할 수 있습니다.
   },
-  // 3. Vite 8 최신 모듈 리졸버 지원 환경 설정
-  resolve: {
-    // 만약 tsconfig.json의 paths 설정을 사용 중이라면, 
-    // 외부 플러그인 없이 아래 내장 옵션만 켜주면 동작합니다.
-    // tsconfigPaths: true 
-  },
   test: {
     environment: "jsdom",
     include: ["src/**/*.test.js", "netlify/**/*.test.{js,mjs}"],
   },
   appType: "mpa", // MPA(Multi-Page Application) 구조 유지
-  server: {
-    // open: 'src/pages/main/index.html',
-  },
 });
