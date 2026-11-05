@@ -64,11 +64,21 @@ describe("home.js guide modal", () => {
     expect(modal.showModal).toHaveBeenCalledTimes(1);
   });
 
-  it("'don't show today' stores tomorrow and closes the modal", async () => {
+  it("'don't show today' stores today and closes the modal", async () => {
     await loadHome();
     document.querySelector("#dont-show-today").click();
-    expect(localStorage.getItem("hideModalUntil")).toBe(dayOffsetISO(1));
+    expect(localStorage.getItem("hideModalUntil")).toBe(dayOffsetISO(0));
     expect(modal.close).toHaveBeenCalledTimes(1);
+  });
+
+  it("'don't show today' shows the modal again the next day", async () => {
+    await loadHome();
+    document.querySelector("#dont-show-today").click();
+    modal.showModal.mockClear();
+
+    vi.setSystemTime(new Date(2026, 10, 7, 12, 0, 0));
+    await loadHome();
+    expect(modal.showModal).toHaveBeenCalledTimes(1);
   });
 
   it("close button closes the modal without storing anything", async () => {

@@ -25,9 +25,7 @@ function shouldShowModal() {
 
 // 오늘 하루동안 숨기기
 function hideModalForToday() {
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  localStorage.setItem("hideModalUntil", tomorrow.toISOString());
+  localStorage.setItem("hideModalUntil", new Date().toISOString());
   guideModal.close();
 }
 

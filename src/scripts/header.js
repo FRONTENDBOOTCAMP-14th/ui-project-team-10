@@ -12,7 +12,7 @@ export function initSearchToggle() {
   }
 
   toggleSearchBtn.addEventListener("click", function () {
-    if (window.visualViewport.width < DESKTOP_MIN_WIDTH) {
+    if (window.innerWidth < DESKTOP_MIN_WIDTH) {
       extendSearchBar.classList.toggle("hidden");
       clossingSearchBar.classList.toggle("absolute");
     }

@@ -98,6 +98,7 @@
    ```
 
 5. **프리뷰**
+
    ```bash
    npm run preview
    ```
@@ -110,19 +111,25 @@ Spotify 토큰은 Netlify Function(`netlify/functions/spotify-token.mjs`)이 발
 
 1. **Spotify 앱 준비**: [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)에서 앱을 만들어 Client ID/Secret을 발급받습니다. client credentials 방식이라 Redirect URI는 필요 없습니다.
 2. **환경변수 설정**: `.env.example`을 `.env`로 복사하고 값을 채웁니다. `.env`는 `.gitignore`에 포함되어 있으므로 커밋하지 않습니다.
+
    ```bash
    cp .env.example .env
    ```
+
    ```
    SPOTIFY_CLIENT_ID=<발급받은 Client ID>
    SPOTIFY_CLIENT_SECRET=<발급받은 Client Secret>
    ```
+
 3. **실행**: Node 18 이상에서 실행합니다. 첫 실행 시 `npx`가 Netlify CLI를 내려받습니다.
+
    ```bash
    npm run dev:netlify   # = npx netlify dev
    ```
+
 4. **접속**: `http://localhost:8888`로 접속합니다. 이 주소에서만 `/.netlify/functions/spotify-token`이 동작하며, Vite 단독 포트(5173)에서는 동작하지 않습니다.
 5. **함수 확인**: 아래 요청이 `access_token`이 담긴 JSON을 반환하면 정상입니다.
+
    ```bash
    curl http://localhost:8888/.netlify/functions/spotify-token
    ```
@@ -301,7 +308,7 @@ chore: 기타 변경사항
 
 이 프로젝트는 [Netlify](https://netlify.com)를 통해 자동 배포됩니다.
 
-- **배포 URL**: https://frontend-lion-friends.netlify.app/
+- **배포 URL**: <https://frontend-lion-friends.netlify.app/>
 - **배포 상태**: 상단 배지 확인
 - **자동 배포**: main 브랜치 푸시 시 자동 배포
 
