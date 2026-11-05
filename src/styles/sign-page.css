@@ -5,7 +5,7 @@
   height: 100%;
   padding: 0 32px;
   /* 기본 상태 */
-  .login-box {
+  & .login-box {
     width: 324px;
     display: flex;
     flex-flow: column nowrap;
@@ -13,21 +13,21 @@
     /* padding: 32px; */
     box-sizing: border-box;
 
-    .login-logo {
+    & .login-logo {
       /* background: red; */
       width: 40px;
       height: 40px;
       display: block;
       margin-block: 32px 24px;
 
-      svg {
+      & svg {
         width: 100%;
         height: 100%;
       }
     }
 
     /* 제목 */
-    h1 {
+    & h1 {
       font-size: 50px;
       margin-bottom: 40px;
       text-align: center;
@@ -35,17 +35,17 @@
       word-spacing: -3px;
     }
 
-    .login-form {
+    & .login-form {
       width: 100%;
 
-      .input-box {
+      & .input-box {
         display: flex;
         flex-flow: column nowrap;
         align-items: start;
         justify-content: center;
         margin-bottom: 20px;
 
-        label {
+        & label {
           height: 20px;
           font-size: 15px;
           font-weight: 700;
@@ -53,7 +53,7 @@
           margin-bottom: 8px;
         }
 
-        .error-massage {
+        & .error-massage {
           height: 41.9px;
           color: #f3727f;
           font-weight: 400;
@@ -62,12 +62,12 @@
           display: none;
           line-height: 1.4;
 
-          svg {
+          & svg {
             vertical-align: top;
             transform: translateY(3px);
           }
 
-          p {
+          & p {
             width: 304px;
             display: inline-block;
             letter-spacing: -0.3px;
@@ -76,7 +76,7 @@
           }
         }
 
-        input {
+        & input {
           border: 1px solid var(--spotify-gray);
           width: 100%;
           height: 48px;
@@ -112,7 +112,7 @@
         }
       }
 
-      .sign-btn {
+      & .sign-btn {
         display: block;
         background: var(--spotify-green);
         color: black;
@@ -129,7 +129,7 @@
       }
     }
 
-    .center-line {
+    & .center-line {
       width: 100%;
       position: relative;
       display: flex;
@@ -146,7 +146,7 @@
         left: 0px;
         right: 0px;
       }
-      span {
+      & span {
         padding: 0px 12px;
         position: relative;
         display: inline-block;
@@ -155,7 +155,7 @@
     }
 
     /* 버튼 */
-    button {
+    & button {
       width: 100%;
       height: 48px;
       color: var(--spotify-white);
@@ -170,37 +170,37 @@
       flex-flow: row nowrap;
       align-items: center;
 
-      .icon {
+      & .icon {
         display: inline-block;
         width: 24px;
         height: 24px;
 
-        svg {
+        & svg {
           width: 100%;
           height: 100%;
         }
       }
 
-      .button-text {
+      & .button-text {
         flex-grow: 1;
       }
 
       &:nth-of-type(1) {
-        .google {
+        & .google {
           background: url(https://accounts.scdn.co/sso/images/new-google-icon.72fd940a229bc94cf9484a3320b3dccb.svg)
             center center no-repeat;
         }
       }
 
       &:nth-of-type(2) {
-        .facebook {
+        & .facebook {
           background: url(https://accounts.scdn.co/sso/images/new-facebook-icon.eae8e1b6256f7ccf01cf81913254e70b.svg)
             center center no-repeat;
         }
       }
 
       &:nth-of-type(3) {
-        .apple {
+        & .apple {
           background: url(https://accounts.scdn.co/sso/images/new-apple-icon.e356139ea90852da2e60f1ff738f3cbb.svg)
             center center no-repeat;
         }
@@ -211,19 +211,19 @@
       }
     }
 
-    .sign-box {
+    & .sign-box {
       display: flex;
       flex-flow: row nowrap;
       align-items: center;
       margin-top: 3px;
-      .account-label {
+      & .account-label {
         color: var(--spotify-light-gray);
         font-size: 17px;
         height: 21.9px;
         margin-right: 3px;
       }
 
-      .account-link {
+      & .account-link {
         font-size: 17px;
         display: block;
         height: 23.8px;
@@ -235,7 +235,7 @@
       }
     }
 
-    .line {
+    & .line {
       width: 100%;
       position: relative;
       display: flex;

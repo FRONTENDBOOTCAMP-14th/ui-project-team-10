@@ -1,37 +1,32 @@
-const extendSearchBar = document.querySelector(".container");
-const toggleSearchBtn = document.querySelector(".search-toggle-btn");
-const searchInput = document.getElementById("search-box");
-const clossingSearchBar = document.querySelector(".clossing-search-bar");
+const DESKTOP_MIN_WIDTH = 1078;
 
-toggleSearchBtn.addEventListener("click", function () {
-  const viewportWidth = window.visualViewport.width;
-  console.log("click");
-  if (viewportWidth < 1078) {
-    extendSearchBar.classList.toggle("hidden");
-    clossingSearchBar.classList.toggle("absolute");
-    searchInput.focus();
-  } else {
-    searchInput.focus();
-  }
-});
+export function initSearchToggle() {
+  const extendSearchBar = document.querySelector(".container");
+  const toggleSearchBtn = document.querySelector(".search-toggle-btn");
+  const searchInput = document.getElementById("search-box");
+  const clossingSearchBar = document.querySelector(".clossing-search-bar");
 
-window.addEventListener("resize", function () {
-  const viewportWidth = window.innerWidth;
-  console.log(viewportWidth);
-  if (viewportWidth >= 1078) {
-    extendSearchBar.classList.remove("hidden");
-    clossingSearchBar.classList.add("absolute");
-  } else if (viewportWidth < 1078) {
-    extendSearchBar.classList.add("hidden");
-    clossingSearchBar.classList.remove("absolute");
-  }
-});
-
-window.addEventListener("DOMContentLoaded", function () {
-  const viewportWidth = window.innerWidth;
-
-  if (viewportWidth >= 1078) {
+  function showDesktopLayout() {
     extendSearchBar.classList.remove("hidden");
     clossingSearchBar.classList.add("absolute");
   }
-});
+
+  toggleSearchBtn.addEventListener("click", function () {
+    if (window.innerWidth < DESKTOP_MIN_WIDTH) {
+      extendSearchBar.classList.toggle("hidden");
+      clossingSearchBar.classList.toggle("absolute");
+    }
+    searchInput.focus();
+  });
+
+  window.addEventListener("resize", function () {
+    if (window.innerWidth >= DESKTOP_MIN_WIDTH) {
+      showDesktopLayout();
+    } else {
+      extendSearchBar.classList.add("hidden");
+      clossingSearchBar.classList.remove("absolute");
+    }
+  });
+
+  if (window.innerWidth >= DESKTOP_MIN_WIDTH) showDesktopLayout();
+}

@@ -5,27 +5,27 @@
   height: 100%;
 
   /* 기본 상태 */
-  .login-box {
+  & .login-box {
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
     padding: 32px;
     box-sizing: border-box;
 
-    .login-logo {
+    & .login-logo {
       width: 24px;
       height: 24px;
       display: block;
       margin: 24px 0 8px 0;
 
-      svg {
+      & svg {
         width: 100%;
         height: 100%;
       }
     }
 
     /* 제목 */
-    h1 {
+    & h1 {
       font-size: 33px;
       height: 46.67px;
       align-content: center;
@@ -33,7 +33,7 @@
     }
 
     /* 버튼 */
-    button {
+    & button {
       width: 100%;
       height: 48px;
       color: var(--spotify-white);
@@ -48,37 +48,37 @@
       flex-flow: row nowrap;
       align-items: center;
 
-      .icon {
+      & .icon {
         display: inline-block;
         width: 24px;
         height: 24px;
 
-        svg {
+        & svg {
           width: 100%;
           height: 100%;
         }
       }
 
-      .button-text {
+      & .button-text {
         flex-grow: 1;
       }
 
       &:nth-of-type(1) {
-        .google {
+        & .google {
           background: url(https://accounts.scdn.co/sso/images/new-google-icon.72fd940a229bc94cf9484a3320b3dccb.svg)
             center center no-repeat;
         }
       }
 
       &:nth-of-type(2) {
-        .facebook {
+        & .facebook {
           background: url(https://accounts.scdn.co/sso/images/new-facebook-icon.eae8e1b6256f7ccf01cf81913254e70b.svg)
             center center no-repeat;
         }
       }
 
       &:nth-of-type(3) {
-        .apple {
+        & .apple {
           background: url(https://accounts.scdn.co/sso/images/new-apple-icon.e356139ea90852da2e60f1ff738f3cbb.svg)
             center center no-repeat;
         }
@@ -89,7 +89,7 @@
       }
     }
 
-    hr {
+    & hr {
       all: unset;
       width: 100%;
       display: block;
@@ -100,17 +100,17 @@
       box-sizing: border-box;
     }
 
-    .login-form {
+    & .login-form {
       width: 100%;
 
-      .input-box {
+      & .input-box {
         display: flex;
         flex-flow: column nowrap;
         align-items: start;
         justify-content: center;
         margin-bottom: 24px;
 
-        label {
+        & label {
           height: 20px;
           font-size: 0.8125rem;
           font-weight: 700;
@@ -118,7 +118,7 @@
           margin-bottom: 8px;
         }
 
-        .error-massage {
+        & .error-massage {
           height: 20px;
           align-content: center;
           color: #f3727f;
@@ -127,12 +127,12 @@
           margin-block-start: 8px;
           display: none;
 
-          svg {
+          & svg {
             vertical-align: bottom;
           }
         }
 
-        input {
+        & input {
           border: 1px solid var(--spotify-gray);
           width: 100%;
           height: 48px;
@@ -168,7 +168,7 @@
         }
       }
 
-      button {
+      & button {
         display: block;
         background: var(--spotify-green);
         color: black;
@@ -185,20 +185,20 @@
       }
     }
 
-    .sign-box {
+    & .sign-box {
       /* width: 100%; */
       display: flex;
       flex-flow: column nowrap;
       align-items: center;
 
-      .account-label {
+      & .account-label {
         color: var(--spotify-light-gray);
         font-size: 17px;
         margin-top: 10px;
         height: 21.9px;
       }
 
-      .account-link {
+      & .account-link {
         /* width: 100%; */
         font-size: 17px;
         display: block;
@@ -219,51 +219,51 @@
     height: 668.72px;
     border-radius: 8px;
 
-    .login-box {
+    & .login-box {
       padding: 0 0 32px 0;
 
-      .login-logo {
+      & .login-logo {
         display: block;
         width: 36px;
         height: 36px;
         margin: 32px 0 8px;
       }
 
-      button {
+      & button {
         width: 324px;
       }
 
-      hr {
+      & hr {
         width: 73%;
       }
 
-      .login-form {
+      & .login-form {
         width: 324px;
-        .input-box {
-          label {
+        & .input-box {
+          & label {
             font-size: 15px;
           }
 
-          .error-massage {
+          & .error-massage {
             font-size: 14.5px;
             height: 21px;
             margin-top: 8px;
             align-content: end;
 
-            svg {
+            & svg {
               vertical-align: text-top;
             }
           }
         }
       }
 
-      .sign-box {
+      & .sign-box {
         width: 100%;
         flex-direction: row;
         align-items: baseline;
         justify-content: center;
 
-        .account-label {
+        & .account-label {
           width: 99.5px;
           margin: 0px;
           font-size: 1rem;

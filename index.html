@@ -574,8 +574,8 @@
               <summary aria-label="5월 26일 회의록">05-26</summary>
               <div class="details-description">
                 <h3>오늘 할일</h3>
-                <p>조장 정하기 → 석정일</p>
-                <p>클론 사이트 선정 → 스포티파이</p>
+                <p>조장 정하기 -> 석정일</p>
+                <p>클론 사이트 선정 -> 스포티파이</p>
                 <h3>내일 할 예정</h3>
                 <p>스포티파이에서 컴포넌트 추출(오경태)</p>
                 <p>컨벤션 및 깃헙 협업 방식 정하기(레포지토리 생성)</p>
@@ -666,7 +666,7 @@
                 <p>중간점검 요청사항 오전까지 정하기</p>
                 <p>메인, 사이드바, 푸터, 헤더 합쳐보기 시도(완료)</p>
                 <h3>내일 할 일</h3>
-                <p>내일은 선거일 → 시간 있으면 모이기로?</p>
+                <p>내일은 선거일 -> 시간 있으면 모이기로?</p>
                 <p>
                   메인, 사이드바, 푸터, 헤더 합쳐본 결과물에서 에러가 발생할
                   경우 해결
@@ -765,21 +765,6 @@
                 <p>속성과 값 사이의 콜론 뒤에 한 칸 공백</p>
                 <p>각 속성은 새 줄에 작성</p>
                 <p>마지막 속성 뒤에도 세미콜론 추가</p>
-              </div>
-            </details>
-          </li>
-          <li>
-            <details>
-              <summary aria-label="포매팅 컨벤션">
-                HTML/CSS 포매팅 컨벤션
-              </summary>
-              <div class="details-description">
-                <p>2칸 스페이스 사용 (탭 문자 사용 금지)</p>
-                <p>중첩된 요소는 부모 요소보다 한 단계 들여쓰기</p>
-                <p>닫는 태그는 여는 태그와 같은 레벨로 정렬</p>
-                <p>속성과 값 사이의 콜론 뒤에 한 칸 공백</p>
-                <p>각 속성은 새 줄에 작성</p>
-                <p>마지막 속성 뒤에도 세미콜론 추가</p>
                 <p>절대경로 사용</p>
               </div>
             </details>
@@ -795,13 +780,6 @@
                   src/assets: 정적 에셋들이 위치하는데 Vite로 번들링 시 필요한
                   위치에서 로딩됨. 안쓰는건 번들링에 포함이 안됨
                 </p>
-              </div>
-            </details>
-          </li>
-          <li>
-            <details>
-              <summary aria-label="파일 컨벤션">파일 컨벤션</summary>
-              <div class="details-description">
                 <p>
                   public/images: 웹사이트에서 사용되는 이미지 파일을 저장. 주로
                   로고, 배경 이미지, 버튼 아이콘 등을 포함
@@ -833,32 +811,5 @@
         >
       </div>
     </footer>
-    <!-- <script>
-      const header = document.querySelector("header");
-      function isMaximizedWindow() {
-        return window.innerWidth >= 1650;
-      }
-
-      function updateBackgroundZoom() {
-        if (!isMaximizedWindow()) {
-          header.style.backgroundSize = "cover";
-          return;
-        }
-
-        const scrollY = window.scrollY;
-        const zoom = 100 + scrollY * 0.05;
-        const limitedZoom = Math.min(zoom, 200);
-        header.style.backgroundSize = `${limitedZoom}%`;
-      }
-
-      window.addEventListener("scroll", updateBackgroundZoom);
-      window.addEventListener("resize", updateBackgroundZoom);
-      window.addEventListener("DOMContentLoaded", updateBackgroundZoom);
-
-      guideModal.showModal();
-      closedBtn.addEventListener("click", () => {
-        guideModal.close();
-      });
-    </script> -->
   </body>
 </html>

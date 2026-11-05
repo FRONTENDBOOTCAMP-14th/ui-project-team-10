@@ -7,14 +7,12 @@
 
 ## 프로젝트 개요
 
-이 프로젝트는 Spotify를 재구현한 팀 프로젝트입니다.
-
 ### 주요 목표
 
-- Spotify UI의 핵심 컴포넌트 구현
-- 반응형 웹 디자인 적용
+- Spotify UI 핵심 컴포넌트 구현
+- 반응형 웹 디자인
 - 웹 접근성(ARIA) 준수
-- 컴포넌트 기반 개발 경험
+- 컴포넌트 기반 개발
 - 팀 협업 및 코드 컨벤션 학습
 
 ## 주요 기능
@@ -22,7 +20,7 @@
 ### 메인 페이지
 
 - **홈 화면**: 프로젝트 소개 및 팀 정보
-- **회고록**: 각 팀원의 프로젝트 회고
+- **회고록**: 팀원별 프로젝트 회고
 - **스크럼 회의록**: 개발 과정 기록
 - **컨벤션**: 팀 코딩 규칙 및 가이드라인
 
@@ -32,40 +30,25 @@
 - **헤더**: 검색바, 로고, 사용자 메뉴
 - **메인 콘텐츠**: 앨범/아티스트 카드, 플레이어
 - **푸터**: 링크 및 저작권 정보
-- **버튼 시스템**: 일관된 디자인의 재사용 가능한 버튼
+- **버튼 시스템**: 재사용 가능한 버튼
 
 ### 추가 페이지
 
 - **로그인 페이지**: 사용자 인증 UI
-- **회원가입 페이지**: 계정 생성 인터페이스
+- **회원가입 페이지**: 계정 생성 UI
 - **앱 설치 페이지**: 모바일 앱 다운로드 안내
 
 ## 기술 스택
 
-### Frontend
-
-- **HTML5**: 시맨틱 마크업
-- **CSS3**: Flexbox, Grid, CSS Variables
-- **JavaScript (ES6+)**: 모듈 시스템, DOM 조작
-- **Vite**: 개발 서버 및 빌드 도구
-
-### 개발 도구
-
-- **Git**: 버전 관리
-- **Prettier**: 코드 포맷팅
-- **Netlify**: 배포 및 호스팅
-
-### 디자인 시스템
-
-- **Pretendard Variable**: 한글 웹폰트
-- **Spotify Color Palette**: 브랜드 컬러 적용
-- **ARIA**: 웹 접근성 준수
+- **Frontend**: HTML5(시맨틱 마크업), CSS3(Flexbox, Grid, CSS Variables), JavaScript(ES6+, 모듈 시스템, DOM 조작), Vite(개발 서버·빌드)
+- **개발 도구**: Git, Prettier, Netlify(배포·호스팅)
+- **디자인 시스템**: Pretendard Variable(한글 웹폰트), Spotify Color Palette, ARIA
 
 ## 시작하기
 
 ### 필수 요구사항
 
-- Node.js (v16 이상)
+- Node.js (v22 이상)
 - npm 또는 yarn
 
 ### 설치 및 실행
@@ -98,18 +81,65 @@
    ```
 
 5. **프리뷰**
+
    ```bash
    npm run preview
    ```
 
+### Spotify API 설정
+
+Spotify 토큰은 Netlify Function(`netlify/functions/spotify-token.mjs`)이 발급합니다. 클라이언트 번들에는 시크릿이 포함되지 않습니다.
+
+#### 로컬 개발 (Netlify Function 포함)
+
+1. **Spotify 앱 준비**: [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)에서 앱을 만들어 Client ID/Secret을 발급받습니다. client credentials 방식이라 Redirect URI는 필요 없습니다.
+2. **환경변수 설정**: `.env.example`을 `.env`로 복사하고 값을 채웁니다. `.env`는 `.gitignore`에 포함되어 있으므로 커밋하지 않습니다.
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   ```
+   SPOTIFY_CLIENT_ID=<발급받은 Client ID>
+   SPOTIFY_CLIENT_SECRET=<발급받은 Client Secret>
+   ```
+
+3. **실행**: Node 18 이상에서 실행합니다. 첫 실행 시 `npx`가 Netlify CLI를 내려받습니다.
+
+   ```bash
+   npm run dev:netlify   # = npx netlify dev
+   ```
+
+4. **접속**: `http://localhost:8888`로 접속합니다. 이 주소에서만 `/.netlify/functions/spotify-token`이 동작하며, Vite 단독 포트(5173)에서는 동작하지 않습니다.
+5. **함수 확인**: 아래 요청이 `access_token`이 담긴 JSON을 반환하면 정상입니다.
+
+   ```bash
+   curl http://localhost:8888/.netlify/functions/spotify-token
+   ```
+
+| 증상 | 원인 |
+| --- | --- |
+| 목록 영역에 "불러오지 못했습니다" 문구 | `npm run dev`로 실행해 함수 엔드포인트가 없음 |
+| 함수가 500 `missing_credentials` | `.env`의 `SPOTIFY_CLIENT_ID`/`SPOTIFY_CLIENT_SECRET` 누락 |
+| 함수가 502 `token_request_failed` | Client ID/Secret 오류 또는 Spotify 응답 실패 |
+| 콘솔에 특정 플레이리스트 404 | 삭제·비공개 등으로 해당 ID 사용 불가. `src/scripts/spotify.js`의 `PLAYLIST_IDS`에서 제거 |
+| `DEP0060 util._extend` 경고 | Netlify CLI 내부 경고이며 무시 가능 |
+
+#### 배포 (Netlify)
+
+- 저장소를 Netlify 사이트에 연결하고 Site settings -> Environment variables에 `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`을 등록합니다. `VITE_` 접두사는 번들에 노출되므로 사용하지 않습니다.
+- 함수 디렉터리는 기본값 `netlify/functions`를 사용하며 `netlify.toml`은 필요 없습니다. 빌드 명령은 `npm run build`, publish 디렉터리는 `dist`입니다.
+- 함수는 `export default` 핸들러와 `Request`/`Response` API를 사용하므로 Node 18 이상이 필요합니다.
+
 ### 사용 가능한 스크립트
 
 ```bash
-npm run dev      # 개발 서버 시작
+npm run dev      # 개발 서버 시작 (Netlify Function 미포함)
+npm run dev:netlify  # Netlify Function 포함 개발 서버 (localhost:8888)
 npm run build    # 프로덕션 빌드
 npm run preview  # 빌드된 파일 프리뷰
 npm run clean    # dist 폴더 정리
-npm run all      # 정리 → 빌드 → 프리뷰 순차 실행
+npm run all      # 정리 -> 빌드 -> 프리뷰 순차 실행
 ```
 
 ## 프로젝트 구조
@@ -156,36 +186,25 @@ ui-project-team-10/
 
 - **컴포넌트**: `sidebar.html`, `button.html`
 - **스타일**: `sidebar.css`, `button.css`
-- **주요 기여**:
-  - 재사용 가능한 버튼 컴포넌트 설계
-  - 사이드바 네비게이션 구현
+- **주요 기여**: 재사용 가능한 버튼 컴포넌트 설계, 사이드바 네비게이션 구현
 
 #### 김동규
 
 - **컴포넌트**: `header.html`, `header-com.html`
 - **스타일**: `header.css`
-- **주요 기여**:
-  - 검색바 및 검색 기능 구현
-  - 로고 및 브랜딩 요소
-  - 사용자 메뉴 인터페이스
+- **주요 기여**: 검색바 및 검색 기능, 로고 및 브랜딩 요소, 사용자 메뉴 인터페이스
 
 #### 오경태
 
 - **컴포넌트**: `main.html`, `album-card.html`, `artist.html`
 - **스타일**: `main.css`, `album.css`
-- **주요 기여**:
-  - 메인 콘텐츠 레이아웃
-  - 앨범/아티스트 카드 컴포넌트
-  - 그리드 시스템 구현
+- **주요 기여**: 메인 콘텐츠 레이아웃, 앨범/아티스트 카드 컴포넌트, 그리드 시스템
 
 #### 고우현
 
 - **컴포넌트**: `footer.html`, `footer-component.html`
 - **스타일**: `footer.css`
-- **주요 기여**:
-  - 푸터 링크 시스템
-  - 저작권 및 법적 정보
-  - 반응형 푸터 디자인
+- **주요 기여**: 푸터 링크 시스템, 저작권 및 법적 정보, 반응형 푸터 디자인
 
 ## 디자인 시스템
 
@@ -205,13 +224,13 @@ ui-project-team-10/
 
 - **버튼**: 일관된 패딩, 보더, 호버 효과
 - **카드**: 그림자, 둥근 모서리, 호버 애니메이션
-- **레이아웃**: Flexbox 및 Grid 활용
+- **레이아웃**: Flexbox 및 Grid
 
 ## 웹 접근성 (Accessibility)
 
 - **ARIA 속성**: 스크린 리더 지원
 - **키보드 네비게이션**: 모든 인터랙티브 요소 접근 가능
-- **시맨틱 HTML**: 의미있는 마크업 구조
+- **시맨틱 HTML**: 의미 있는 마크업 구조
 - **색상 대비**: WCAG 가이드라인 준수
 
 ## 개발 컨벤션
@@ -259,12 +278,12 @@ chore: 기타 변경사항
 
 ## 배포
 
-이 프로젝트는 [Netlify](https://netlify.com)를 통해 자동 배포됩니다.
+[Netlify](https://netlify.com)를 통해 자동 배포됩니다.
 
-- **배포 URL**: https://frontend-lion-friends.netlify.app/
+- **배포 URL**: <https://frontend-lion-friends.netlify.app/>
 - **배포 상태**: 상단 배지 확인
 - **자동 배포**: main 브랜치 푸시 시 자동 배포
 
 ## 라이선스
 
-이 프로젝트는 교육용 목적으로 제작되었습니다.
+교육용 목적으로 제작되었습니다.
