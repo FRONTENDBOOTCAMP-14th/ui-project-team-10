@@ -97,7 +97,9 @@ export async function getPlaylists(token) {
   const results = await Promise.all(
     PLAYLIST_IDS.map((id) => getPlaylistById(id, token))
   );
-  return results.filter(Boolean);
+  const loaded = results.filter(Boolean);
+  if (loaded.length === 0) throw new Error("플레이리스트를 불러오지 못했습니다.");
+  return loaded;
 }
 
 const HTML_ESCAPES = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };

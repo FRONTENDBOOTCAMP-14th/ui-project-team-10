@@ -42,6 +42,16 @@ describe("page.js hash loader", () => {
     expect(fetchMock).toHaveBeenCalledWith("./install-page.html");
   });
 
+  it("injects only style elements and body content from a full document", async () => {
+    const doc =
+      '<!DOCTYPE html><html><head><title>T</title><link rel="stylesheet" href="/x.css"><style>.a{}</style></head><body><p>install</p></body></html>';
+    vi.stubGlobal("fetch", vi.fn(() => Promise.resolve(new Response(doc))));
+    await boot("#install-page");
+    await vi.waitFor(() => expect(main.textContent).toContain("install"));
+    expect(main.querySelector("style")).not.toBeNull();
+    expect(main.querySelector("title, link")).toBeNull();
+  });
+
   it("never fetches a hash that is not allow-listed", async () => {
     const fetchMock = vi.fn();
     vi.stubGlobal("fetch", fetchMock);

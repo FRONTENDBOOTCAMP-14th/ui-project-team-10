@@ -82,6 +82,12 @@ describe("data fetchers", () => {
     expect(result).toHaveLength(PLAYLIST_IDS.length - 1);
     expect(result.every(Boolean)).toBe(true);
   });
+
+  it("getPlaylists rejects when every playlist fails", async () => {
+    vi.spyOn(console, "error").mockImplementation(() => {});
+    vi.stubGlobal("fetch", vi.fn(() => fail(404)));
+    await expect(getPlaylists("t")).rejects.toThrow();
+  });
 });
 
 describe("renderAlbums", () => {

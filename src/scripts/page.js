@@ -11,7 +11,8 @@ async function loadPage() {
   try {
     const response = await fetch(`./${pageName}.html`);
     if (!response.ok) throw new Error(`페이지 요청 실패: ${response.status}`);
-    main.innerHTML = await response.text();
+    const doc = new DOMParser().parseFromString(await response.text(), "text/html");
+    main.replaceChildren(...doc.head.querySelectorAll("style"), ...doc.body.childNodes);
   } catch (error) {
     main.innerHTML = "<p>페이지를 불러올 수 없습니다.</p>";
   }
