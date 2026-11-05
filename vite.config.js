@@ -53,7 +53,7 @@ export default defineConfig({
   },
   test: {
     environment: "jsdom",
-    include: ["src/**/*.test.js"],
+    include: ["src/**/*.test.js", "netlify/**/*.test.{js,mjs}"],
   },
   appType: "mpa", // MPA(Multi-Page Application) 구조 유지
   server: {

@@ -1,6 +1,4 @@
 const header = document.querySelector("header");
-const guideModal = document.querySelector(".guide-modal");
-const closedBtn = document.querySelector("#closed");
 function isMaximizedWindow() {
   return window.innerWidth >= 1650;
 }
@@ -20,8 +18,3 @@ function updateBackgroundZoom() {
 window.addEventListener("scroll", updateBackgroundZoom);
 window.addEventListener("resize", updateBackgroundZoom);
 window.addEventListener("DOMContentLoaded", updateBackgroundZoom);
-
-guideModal.showModal();
-closedBtn.addEventListener("click", () => {
-  guideModal.close();
-});

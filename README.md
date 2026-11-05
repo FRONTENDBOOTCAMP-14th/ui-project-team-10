@@ -102,10 +102,50 @@
    npm run preview
    ```
 
+### Spotify API 설정
+
+Spotify 토큰은 Netlify Function(`netlify/functions/spotify-token.mjs`)이 발급합니다. 클라이언트 번들에는 시크릿이 포함되지 않습니다.
+
+#### 로컬 개발 (Netlify Function 포함)
+
+1. **Spotify 앱 준비**: [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)에서 앱을 만들어 Client ID/Secret을 발급받습니다. client credentials 방식이라 Redirect URI는 필요 없습니다.
+2. **환경변수 설정**: `.env.example`을 `.env`로 복사하고 값을 채웁니다. `.env`는 `.gitignore`에 포함되어 있으므로 커밋하지 않습니다.
+   ```bash
+   cp .env.example .env
+   ```
+   ```
+   SPOTIFY_CLIENT_ID=<발급받은 Client ID>
+   SPOTIFY_CLIENT_SECRET=<발급받은 Client Secret>
+   ```
+3. **실행**: Node 18 이상에서 실행합니다. 첫 실행 시 `npx`가 Netlify CLI를 내려받습니다.
+   ```bash
+   npm run dev:netlify   # = npx netlify dev
+   ```
+4. **접속**: `http://localhost:8888`로 접속합니다. 이 주소에서만 `/.netlify/functions/spotify-token`이 동작하며, Vite 단독 포트(5173)에서는 동작하지 않습니다.
+5. **함수 확인**: 아래 요청이 `access_token`이 담긴 JSON을 반환하면 정상입니다.
+   ```bash
+   curl http://localhost:8888/.netlify/functions/spotify-token
+   ```
+
+| 증상 | 원인 |
+| --- | --- |
+| 목록 영역에 "불러오지 못했습니다" 문구 | `npm run dev`로 실행해 함수 엔드포인트가 없음 |
+| 함수가 500 `missing_credentials` | `.env`의 `SPOTIFY_CLIENT_ID`/`SPOTIFY_CLIENT_SECRET` 누락 |
+| 함수가 502 `token_request_failed` | Client ID/Secret 오류 또는 Spotify 응답 실패 |
+| 콘솔에 특정 플레이리스트 404 | 삭제·비공개 등으로 해당 ID 사용 불가. `src/scripts/spotify.js`의 `PLAYLIST_IDS`에서 제거 |
+| `DEP0060 util._extend` 경고 | Netlify CLI 내부 경고이며 무시 가능 |
+
+#### 배포 (Netlify)
+
+- Netlify 사이트에 저장소를 연결하고, Site settings → Environment variables에 `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`을 등록합니다. `VITE_` 접두사는 번들에 노출되므로 사용하지 않습니다.
+- 함수 디렉터리는 기본값 `netlify/functions`를 사용하며 별도 `netlify.toml`은 필요 없습니다. 빌드 명령은 `npm run build`, publish 디렉터리는 `dist`입니다.
+- 함수는 `export default` 핸들러와 `Request`/`Response` API를 사용하므로 Node 18 이상이 필요합니다.
+
 ### 사용 가능한 스크립트
 
 ```bash
-npm run dev      # 개발 서버 시작
+npm run dev      # 개발 서버 시작 (Netlify Function 미포함)
+npm run dev:netlify  # Netlify Function 포함 개발 서버 (localhost:8888)
 npm run build    # 프로덕션 빌드
 npm run preview  # 빌드된 파일 프리뷰
 npm run clean    # dist 폴더 정리
