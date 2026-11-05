@@ -74,14 +74,20 @@ async function getJson(path, token) {
   return res.json();
 }
 
+function nonEmpty(items, message) {
+  const loaded = items.filter(Boolean);
+  if (loaded.length === 0) throw new Error(message);
+  return loaded;
+}
+
 export async function getArtists(token) {
   const data = await getJson(`/artists?ids=${ARTIST_IDS.join(",")}&market=KR`, token);
-  return data.artists;
+  return nonEmpty(data.artists, "아티스트를 불러오지 못했습니다.");
 }
 
 export async function getAlbums(token) {
   const data = await getJson(`/albums?ids=${ALBUM_IDS.join(",")}&market=KR`, token);
-  return data.albums;
+  return nonEmpty(data.albums, "앨범을 불러오지 못했습니다.");
 }
 
 async function getPlaylistById(id, token) {
@@ -97,9 +103,7 @@ export async function getPlaylists(token) {
   const results = await Promise.all(
     PLAYLIST_IDS.map((id) => getPlaylistById(id, token))
   );
-  const loaded = results.filter(Boolean);
-  if (loaded.length === 0) throw new Error("플레이리스트를 불러오지 못했습니다.");
-  return loaded;
+  return nonEmpty(results, "플레이리스트를 불러오지 못했습니다.");
 }
 
 const HTML_ESCAPES = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
@@ -205,5 +209,22 @@ export function bindScrollButtons(list, leftSelector, rightSelector) {
   });
   document.querySelector(rightSelector).addEventListener("click", () => {
     list.scrollTo({ left: list.scrollWidth, behavior: "smooth" });
+  });
+}
+
+function toggleScrollButtons(name, show) {
+  for (const side of ["left", "right"]) {
+    const btn = document.querySelector(`.${name}-scroll-btn-${side}`);
+    if (btn) btn.style.display = show ? "block" : "none";
+  }
+}
+
+export function bindShowAll(name, list) {
+  const btn = document.querySelector(`.${name}-show-all`);
+  if (!btn) return;
+  btn.addEventListener("click", () => {
+    const isGrid = list.classList.toggle("grid-mode");
+    btn.textContent = isGrid ? "Hide" : "Show All";
+    toggleScrollButtons(name, !isGrid);
   });
 }

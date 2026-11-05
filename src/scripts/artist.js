@@ -1,4 +1,4 @@
-import { bindScrollButtons, getArtists, getToken, loadSection, renderArtists } from "./spotify.js";
+import { bindScrollButtons, bindShowAll, getArtists, getToken, loadSection, renderArtists } from "./spotify.js";
 
 const artistList = document.querySelector(".artist-list");
 const artistWrapper = document.querySelector(".artist-section");
@@ -18,4 +18,5 @@ document.addEventListener("DOMContentLoaded", () => {
     artistWrapper.classList.toggle("scrolled", artistList.scrollLeft > 10);
   });
   bindScrollButtons(artistList, ".artist-scroll-btn-left", ".artist-scroll-btn-right");
+  bindShowAll("artist", artistList);
 });

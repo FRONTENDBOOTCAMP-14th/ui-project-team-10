@@ -1,5 +1,6 @@
 import {
   bindScrollButtons,
+  bindShowAll,
   getAlbums,
   getArtists,
   getPlaylists,
@@ -21,23 +22,6 @@ async function init() {
     loadSection(albumList, () => token.then(getAlbums), renderAlbums, "앨범 정보를 불러오지 못했습니다."),
     loadSection(playlistList, () => token.then(getPlaylists), renderPlaylists, "플레이리스트 정보를 불러오지 못했습니다."),
   ]);
-}
-
-function toggleScrollButtons(name, show) {
-  for (const side of ["left", "right"]) {
-    const btn = document.querySelector(`.${name}-scroll-btn-${side}`);
-    if (btn) btn.style.display = show ? "block" : "none";
-  }
-}
-
-function bindShowAll(name, list) {
-  const btn = document.querySelector(`.${name}-show-all`);
-  if (!btn) return;
-  btn.addEventListener("click", () => {
-    const isGrid = list.classList.toggle("grid-mode");
-    btn.textContent = isGrid ? "Hide" : "Show All";
-    toggleScrollButtons(name, !isGrid);
-  });
 }
 
 function setupEventListeners() {

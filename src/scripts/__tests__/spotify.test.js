@@ -7,6 +7,7 @@ import {
   getArtists,
   getPlaylists,
   escapeHtml,
+  bindShowAll,
   getToken,
   loadSection,
   renderAlbums,
@@ -69,6 +70,17 @@ describe("data fetchers", () => {
   it("getArtists returns data.artists", async () => {
     vi.stubGlobal("fetch", vi.fn(() => ok({ artists: [{ id: "a" }] })));
     await expect(getArtists("t")).resolves.toEqual([{ id: "a" }]);
+  });
+
+  it("getAlbums drops null entries", async () => {
+    vi.stubGlobal("fetch", vi.fn(() => ok({ albums: [null, { id: 1 }] })));
+    await expect(getAlbums("t")).resolves.toEqual([{ id: 1 }]);
+  });
+
+  it("getAlbums and getArtists reject when every entry is null", async () => {
+    vi.stubGlobal("fetch", vi.fn(() => ok({ albums: [null], artists: [null] })));
+    await expect(getAlbums("t")).rejects.toThrow();
+    await expect(getArtists("t")).rejects.toThrow();
   });
 
   it("getPlaylists drops failed playlists and keeps the rest", async () => {
@@ -194,5 +206,34 @@ describe("loadSection", () => {
       loadSection(list, () => Promise.reject(new Error("x")), vi.fn(), "err")
     ).resolves.toBeUndefined();
     expect(list.innerHTML).toBe("<li>err</li>");
+  });
+});
+
+describe("bindShowAll", () => {
+  it("toggles grid-mode, button text and scroll buttons", () => {
+    document.body.innerHTML = `
+      <ul class="album-list"></ul>
+      <button class="album-show-all">Show all</button>
+      <button class="album-scroll-btn-left"></button>
+      <button class="album-scroll-btn-right"></button>`;
+    const list = document.querySelector(".album-list");
+    const btn = document.querySelector(".album-show-all");
+    const left = document.querySelector(".album-scroll-btn-left");
+    bindShowAll("album", list);
+
+    btn.click();
+    expect(list.classList.contains("grid-mode")).toBe(true);
+    expect(btn.textContent).toBe("Hide");
+    expect(left.style.display).toBe("none");
+
+    btn.click();
+    expect(list.classList.contains("grid-mode")).toBe(false);
+    expect(btn.textContent).toBe("Show All");
+    expect(left.style.display).toBe("block");
+  });
+
+  it("does nothing when the button is absent", () => {
+    document.body.innerHTML = `<ul class="album-list"></ul>`;
+    expect(() => bindShowAll("album", document.querySelector(".album-list"))).not.toThrow();
   });
 });

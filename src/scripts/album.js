@@ -1,4 +1,4 @@
-import { bindScrollButtons, getAlbums, getToken, loadSection, renderAlbums } from "./spotify.js";
+import { bindScrollButtons, bindShowAll, getAlbums, getToken, loadSection, renderAlbums } from "./spotify.js";
 
 const albumList = document.querySelector(".album-list");
 
@@ -14,4 +14,5 @@ function init() {
 document.addEventListener("DOMContentLoaded", () => {
   init();
   bindScrollButtons(albumList, ".album-scroll-btn-left", ".album-scroll-btn-right");
+  bindShowAll("album", albumList);
 });
