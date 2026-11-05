@@ -45,9 +45,9 @@ section {
     align-content: center;
     box-shadow: 0 0.3em 0.3em -0.1em rgb(21, 21, 21);
   }
-  h2,
-  h3,
-  h4 {
+  & h2,
+  & h3,
+  & h4 {
     color: var(--spotify-white);
     order: 2;
     flex-grow: 1;
@@ -55,13 +55,13 @@ section {
     margin-bottom: 20px;
   }
 
-  .description-box {
+  & .description-box {
     order: 3;
     font-size: 13px;
     margin: 20px;
   }
 
-  .copy-btn {
+  & .copy-btn {
     content: "";
     position: absolute;
     right: 30px;
@@ -82,7 +82,7 @@ section {
     border: none;
   }
 
-  .copy-btn:hover {
+  & .copy-btn:hover {
     scale: 1.05;
   }
 

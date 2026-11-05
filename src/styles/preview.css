@@ -11,28 +11,28 @@
   justify-content: space-between;
   align-items: center;
   column-gap: var(--spacing-md);
-  div {
+  & div {
     word-spacing: -1px;
-    h1 {
+    & h1 {
       font-size: var(--spotify-base-font-size);
       font-weight: 700;
       height: 21px;
       align-content: center;
 
-      span {
+      & span {
         font-size: 13.3px;
       }
     }
-    p {
+    & p {
       min-height: 23.81px;
-      font-size: var();
+      font-size: var(--spotify-base-font-size);
       font-weight: 400;
       line-height: 1.5;
       align-content: end;
     }
   }
 
-  a {
+  & a {
     background: var(--spotify-white);
     color: rgb(45, 45, 45);
     max-width: 169.78px;
